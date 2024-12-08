@@ -60,17 +60,17 @@ namespace University_Dasboard
         private void LoadComboboxFacultyData(DatabaseContext ctx, ComboBox cb)
         {
             var faculties = ctx.Student
-                .Select(s => s.Direction.Department.Faculty)
+                .Select(s => s.Direction!.Department!.Faculty) // Восклицательный знак означает, что этот элемент точно не null
                 .Distinct() // Уникальные факультеты. У многих студентов может быть один и тот же факультет,
                             // из-за чего в списке могут быть дубликаты, а нам этого не нужно
                 .ToList();
-            if (faculties?.Count == 0)
+            if (faculties == null || faculties.Count == 0)
             {
                 return;
             }
 
-            DataGridViewHelper.LoadCombobox(
-                faculties,
+            DataGridViewHelper.LoadCombobox<Faculty>(
+                faculties!,
                 comboBox: cb,
                 comboBoxDisplayMember: "Name",
                 comboBoxValueMember: "Id");
@@ -79,11 +79,16 @@ namespace University_Dasboard
         private void LoadComboboxDepartmentData(DatabaseContext ctx, ComboBox cb)
         {
             var departments = ctx.Student
-                .Select(s => s.Direction.Department)
+                .Select(s => s.Direction!.Department)
                 .Distinct()
                 .ToList();
-            DataGridViewHelper.LoadCombobox(
-                departments,
+
+            if (departments == null || departments.Count == 0)
+            {
+                return;
+            }
+            DataGridViewHelper.LoadCombobox<Department>(
+                departments!,
                 comboBox: cb,
                 comboBoxDisplayMember: "Name",
                 comboBoxValueMember: "Id");
