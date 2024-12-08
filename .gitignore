@@ -2,5 +2,6 @@ bin/
 Migrations/
 obj/
 Properties/
+.vs/
 
 .env
