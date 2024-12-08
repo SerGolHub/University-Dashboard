@@ -52,43 +52,29 @@ namespace University_Dasboard
             DataGridViewHelper.HideColumns(dgvStudentList,
                 ["Id", "DirectionId", "GroupId", "Marks"]);
 
-            LoadComboboxFacultyData(ctx, cbFaculty);
-            LoadComboboxDepartmentData(ctx, cbDepartment);
+            LoadComboboxData(ctx, cbFaculty, s => s.Direction!.Department!.Faculty!);
+            LoadComboboxData(ctx, cbDepartment, s => s.Direction!.Department!);
+            LoadComboboxData(ctx, cbDirection, s => s.Direction!);
 
         }
 
-        private void LoadComboboxFacultyData(DatabaseContext ctx, ComboBox cb)
+        private void LoadComboboxData<T>(
+            DatabaseContext ctx,
+            ComboBox cb,
+            Func<Student, T> selector) where T : class
         {
-            var faculties = ctx.Student
-                .Select(s => s.Direction!.Department!.Faculty) // Восклицательный знак означает, что этот элемент точно не null
-                .Distinct() // Уникальные факультеты. У многих студентов может быть один и тот же факультет,
-                            // из-за чего в списке могут быть дубликаты, а нам этого не нужно
-                .ToList();
-            if (faculties == null || faculties.Count == 0)
-            {
-                return;
-            }
-
-            DataGridViewHelper.LoadCombobox<Faculty>(
-                faculties!,
-                comboBox: cb,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
-        }
-
-        private void LoadComboboxDepartmentData(DatabaseContext ctx, ComboBox cb)
-        {
-            var departments = ctx.Student
-                .Select(s => s.Direction!.Department)
+            var items = ctx.Student
+                .Select(selector)
                 .Distinct()
                 .ToList();
 
-            if (departments == null || departments.Count == 0)
+            if (items == null || items.Count == 0)
             {
                 return;
             }
-            DataGridViewHelper.LoadCombobox<Department>(
-                departments!,
+
+            DataGridViewHelper.LoadCombobox<T>(
+                items!,
                 comboBox: cb,
                 comboBoxDisplayMember: "Name",
                 comboBoxValueMember: "Id");
