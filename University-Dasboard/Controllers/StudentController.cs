@@ -15,8 +15,8 @@ namespace University_Dasboard.Controllers
             using var ctx = new DatabaseContext();
             var students = ctx.Student
             .Include(s => s.Direction)
-            .ThenInclude(dir => dir.Department)
-            .ThenInclude(dep => dep.Faculty)
+            .ThenInclude(dir => dir!.Department) // dir! означает, что dir не может быть null
+            .ThenInclude(dep => dep!.Faculty)
             .Select(s => new StudentViewModel
             {
                 Id = s.Id,
@@ -25,15 +25,15 @@ namespace University_Dasboard.Controllers
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
                 CourseNumber = s.CourseNumber,
-                FacultyId = s.Direction.FacultyId,
-                FacultyName = s.Direction.Faculty.Name,
+                FacultyId = s.Direction!.FacultyId, // s.Direction! означает, что s.Direction не может быть null
+                FacultyName = s.Direction.Faculty!.Name,
                 DepartmentId = s.Direction.DepartmentId,
-                DepartmentName = s.Direction.Department.Name,
+                DepartmentName = s.Direction.Department!.Name,
                 GroupId = s.GroupId,
-                GroupName = s.Group.Name
+                GroupName = s.Group!.Name
             })
             .ToList();
-
+            
             bindingList = new BindingList<StudentViewModel>(students);
             dgv.DataSource = bindingList;
         }
