@@ -63,7 +63,7 @@
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-            btnAdd.Location = new Point(418, 161);
+            btnAdd.Location = new Point(418, 148);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(116, 49);
             btnAdd.TabIndex = 21;
@@ -76,7 +76,7 @@
             tbFullName.BorderStyle = BorderStyle.FixedSingle;
             tbFullName.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             tbFullName.ForeColor = Color.FromArgb(24, 30, 54);
-            tbFullName.Location = new Point(73, 41);
+            tbFullName.Location = new Point(73, 25);
             tbFullName.Name = "tbFullName";
             tbFullName.Size = new Size(282, 24);
             tbFullName.TabIndex = 20;
@@ -86,7 +86,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(158, 161, 178);
-            label2.Location = new Point(12, 45);
+            label2.Location = new Point(12, 29);
             label2.Name = "label2";
             label2.Size = new Size(55, 20);
             label2.TabIndex = 19;
@@ -97,7 +97,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(158, 161, 178);
-            label1.Location = new Point(15, 161);
+            label1.Location = new Point(15, 145);
             label1.Name = "label1";
             label1.Size = new Size(52, 20);
             label1.TabIndex = 19;
@@ -108,7 +108,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(158, 161, 178);
-            label3.Location = new Point(15, 190);
+            label3.Location = new Point(15, 174);
             label3.Name = "label3";
             label3.Size = new Size(72, 20);
             label3.TabIndex = 19;
@@ -119,7 +119,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(158, 161, 178);
-            label4.Location = new Point(12, 74);
+            label4.Location = new Point(12, 58);
             label4.Name = "label4";
             label4.Size = new Size(108, 20);
             label4.TabIndex = 19;
@@ -130,7 +130,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.FromArgb(158, 161, 178);
-            label5.Location = new Point(12, 103);
+            label5.Location = new Point(12, 87);
             label5.Name = "label5";
             label5.Size = new Size(93, 20);
             label5.TabIndex = 19;
@@ -176,7 +176,7 @@
             cbCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbCourse.ForeColor = Color.FromArgb(24, 30, 54);
             cbCourse.FormattingEnabled = true;
-            cbCourse.Location = new Point(285, 158);
+            cbCourse.Location = new Point(285, 142);
             cbCourse.Name = "cbCourse";
             cbCourse.Size = new Size(70, 26);
             cbCourse.TabIndex = 22;
@@ -188,7 +188,7 @@
             cbGroup.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbGroup.ForeColor = Color.FromArgb(24, 30, 54);
             cbGroup.FormattingEnabled = true;
-            cbGroup.Location = new Point(146, 187);
+            cbGroup.Location = new Point(146, 171);
             cbGroup.Name = "cbGroup";
             cbGroup.Size = new Size(209, 26);
             cbGroup.TabIndex = 22;
@@ -200,7 +200,7 @@
             cbFaculty.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbFaculty.ForeColor = Color.FromArgb(24, 30, 54);
             cbFaculty.FormattingEnabled = true;
-            cbFaculty.Location = new Point(146, 71);
+            cbFaculty.Location = new Point(146, 55);
             cbFaculty.Name = "cbFaculty";
             cbFaculty.Size = new Size(209, 26);
             cbFaculty.TabIndex = 22;
@@ -212,7 +212,7 @@
             cbDepartment.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbDepartment.ForeColor = Color.FromArgb(24, 30, 54);
             cbDepartment.FormattingEnabled = true;
-            cbDepartment.Location = new Point(146, 100);
+            cbDepartment.Location = new Point(146, 84);
             cbDepartment.Name = "cbDepartment";
             cbDepartment.Size = new Size(209, 26);
             cbDepartment.TabIndex = 22;
@@ -333,7 +333,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.FromArgb(158, 161, 178);
-            label10.Location = new Point(12, 132);
+            label10.Location = new Point(12, 116);
             label10.Name = "label10";
             label10.Size = new Size(128, 20);
             label10.TabIndex = 19;
@@ -346,7 +346,7 @@
             cbDirection.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbDirection.ForeColor = Color.FromArgb(24, 30, 54);
             cbDirection.FormattingEnabled = true;
-            cbDirection.Location = new Point(146, 129);
+            cbDirection.Location = new Point(146, 113);
             cbDirection.Name = "cbDirection";
             cbDirection.Size = new Size(209, 26);
             cbDirection.TabIndex = 22;
