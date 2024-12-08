@@ -52,32 +52,13 @@ namespace University_Dasboard
             DataGridViewHelper.HideColumns(dgvStudentList,
                 ["Id", "DirectionId", "GroupId", "Marks"]);
 
-            LoadComboboxData(ctx, cbFaculty, s => s.Direction!.Department!.Faculty!);
-            LoadComboboxData(ctx, cbDepartment, s => s.Direction!.Department!);
-            LoadComboboxData(ctx, cbDirection, s => s.Direction!);
+            DataGridViewHelper.LoadComboboxWithSelector(ctx, cbFaculty, s => s.Direction!.Department!.Faculty!);
+            DataGridViewHelper.LoadComboboxWithSelector(ctx, cbDepartment, s => s.Direction!.Department!);
+            DataGridViewHelper.LoadComboboxWithSelector(ctx, cbDirection, s => s.Direction!);
+            DataGridViewHelper.LoadComboboxWithSelector(ctx, cbGroup, s => s.Group!);
 
         }
 
-        private void LoadComboboxData<T>(
-            DatabaseContext ctx,
-            ComboBox cb,
-            Func<Student, T> selector) where T : class
-        {
-            var items = ctx.Student
-                .Select(selector)
-                .Distinct()
-                .ToList();
-
-            if (items == null || items.Count == 0)
-            {
-                return;
-            }
-
-            DataGridViewHelper.LoadCombobox<T>(
-                items!,
-                comboBox: cb,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
-        }
+        
     }
 }
