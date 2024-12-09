@@ -39,14 +39,15 @@
             pnlGradeRecordSubMenu = new Panel();
             pnlNavigationSubmenu = new Panel();
             btnGrades = new Button();
-            btnDisciplines = new Button();
-            btnStudents = new Button();
             btnGradeRecord = new Button();
-            pnlOtherSubMenu = new Panel();
+            pnlManageDataSubMenu = new Panel();
+            btnStudents = new Button();
+            btnGroups = new Button();
+            btnDisciplines = new Button();
             btnDirections = new Button();
             btnDepartments = new Button();
             btnFaculties = new Button();
-            btnOther = new Button();
+            btnManageData = new Button();
             panel2 = new Panel();
             picProfile = new PictureBox();
             panel4 = new Panel();
@@ -59,7 +60,7 @@
             panel1.SuspendLayout();
             pnlSchedulingSubMenu.SuspendLayout();
             pnlGradeRecordSubMenu.SuspendLayout();
-            pnlOtherSubMenu.SuspendLayout();
+            pnlManageDataSubMenu.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picProfile).BeginInit();
             panel3.SuspendLayout();
@@ -74,8 +75,8 @@
             panel1.Controls.Add(btnScheduling);
             panel1.Controls.Add(pnlGradeRecordSubMenu);
             panel1.Controls.Add(btnGradeRecord);
-            panel1.Controls.Add(pnlOtherSubMenu);
-            panel1.Controls.Add(btnOther);
+            panel1.Controls.Add(pnlManageDataSubMenu);
+            panel1.Controls.Add(btnManageData);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -98,7 +99,7 @@
             pnlSchedulingSubMenu.Controls.Add(button4);
             pnlSchedulingSubMenu.Controls.Add(button3);
             pnlSchedulingSubMenu.Dock = DockStyle.Top;
-            pnlSchedulingSubMenu.Location = new Point(0, 751);
+            pnlSchedulingSubMenu.Location = new Point(0, 835);
             pnlSchedulingSubMenu.Name = "pnlSchedulingSubMenu";
             pnlSchedulingSubMenu.Size = new Size(170, 208);
             pnlSchedulingSubMenu.TabIndex = 4;
@@ -173,7 +174,7 @@
             btnScheduling.ForeColor = Color.FromArgb(0, 126, 249);
             btnScheduling.Image = Properties.Resources.calendar;
             btnScheduling.ImageAlign = ContentAlignment.MiddleRight;
-            btnScheduling.Location = new Point(0, 687);
+            btnScheduling.Location = new Point(0, 771);
             btnScheduling.Name = "btnScheduling";
             btnScheduling.Padding = new Padding(5, 0, 15, 0);
             btnScheduling.Size = new Size(170, 64);
@@ -189,12 +190,10 @@
             pnlGradeRecordSubMenu.BackColor = Color.FromArgb(24, 30, 54);
             pnlGradeRecordSubMenu.Controls.Add(pnlNavigationSubmenu);
             pnlGradeRecordSubMenu.Controls.Add(btnGrades);
-            pnlGradeRecordSubMenu.Controls.Add(btnDisciplines);
-            pnlGradeRecordSubMenu.Controls.Add(btnStudents);
             pnlGradeRecordSubMenu.Dock = DockStyle.Top;
-            pnlGradeRecordSubMenu.Location = new Point(0, 482);
+            pnlGradeRecordSubMenu.Location = new Point(0, 688);
             pnlGradeRecordSubMenu.Name = "pnlGradeRecordSubMenu";
-            pnlGradeRecordSubMenu.Size = new Size(170, 205);
+            pnlGradeRecordSubMenu.Size = new Size(170, 83);
             pnlGradeRecordSubMenu.TabIndex = 3;
             pnlGradeRecordSubMenu.Visible = false;
             // 
@@ -217,7 +216,7 @@
             btnGrades.ForeColor = Color.FromArgb(0, 126, 249);
             btnGrades.Image = Properties.Resources.diagram;
             btnGrades.ImageAlign = ContentAlignment.MiddleRight;
-            btnGrades.Location = new Point(0, 128);
+            btnGrades.Location = new Point(0, 0);
             btnGrades.Name = "btnGrades";
             btnGrades.Padding = new Padding(30, 0, 15, 0);
             btnGrades.Size = new Size(170, 64);
@@ -228,26 +227,40 @@
             btnGrades.UseVisualStyleBackColor = false;
             btnGrades.Click += btGrades_Click;
             // 
-            // btnDisciplines
+            // btnGradeRecord
             // 
-            btnDisciplines.BackColor = Color.FromArgb(24, 30, 54);
-            btnDisciplines.Dock = DockStyle.Top;
-            btnDisciplines.FlatAppearance.BorderSize = 0;
-            btnDisciplines.FlatStyle = FlatStyle.Flat;
-            btnDisciplines.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDisciplines.ForeColor = Color.FromArgb(0, 126, 249);
-            btnDisciplines.Image = Properties.Resources.diagram;
-            btnDisciplines.ImageAlign = ContentAlignment.MiddleRight;
-            btnDisciplines.Location = new Point(0, 64);
-            btnDisciplines.Name = "btnDisciplines";
-            btnDisciplines.Padding = new Padding(30, 0, 15, 0);
-            btnDisciplines.Size = new Size(170, 64);
-            btnDisciplines.TabIndex = 4;
-            btnDisciplines.Text = "Дисциплины";
-            btnDisciplines.TextAlign = ContentAlignment.MiddleLeft;
-            btnDisciplines.TextImageRelation = TextImageRelation.TextBeforeImage;
-            btnDisciplines.UseVisualStyleBackColor = false;
-            btnDisciplines.Click += btnDisciplines_Click;
+            btnGradeRecord.Dock = DockStyle.Top;
+            btnGradeRecord.FlatAppearance.BorderSize = 0;
+            btnGradeRecord.FlatStyle = FlatStyle.Flat;
+            btnGradeRecord.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGradeRecord.ForeColor = Color.FromArgb(0, 126, 249);
+            btnGradeRecord.Image = Properties.Resources.diagram;
+            btnGradeRecord.ImageAlign = ContentAlignment.MiddleRight;
+            btnGradeRecord.Location = new Point(0, 624);
+            btnGradeRecord.Name = "btnGradeRecord";
+            btnGradeRecord.Padding = new Padding(5, 0, 15, 0);
+            btnGradeRecord.Size = new Size(170, 64);
+            btnGradeRecord.TabIndex = 1;
+            btnGradeRecord.Text = "Учёт\r\nуспеваемости";
+            btnGradeRecord.TextAlign = ContentAlignment.MiddleLeft;
+            btnGradeRecord.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnGradeRecord.UseVisualStyleBackColor = true;
+            btnGradeRecord.Click += btnGradeRecord_Click;
+            // 
+            // pnlManageDataSubMenu
+            // 
+            pnlManageDataSubMenu.Controls.Add(btnStudents);
+            pnlManageDataSubMenu.Controls.Add(btnGroups);
+            pnlManageDataSubMenu.Controls.Add(btnDisciplines);
+            pnlManageDataSubMenu.Controls.Add(btnDirections);
+            pnlManageDataSubMenu.Controls.Add(btnDepartments);
+            pnlManageDataSubMenu.Controls.Add(btnFaculties);
+            pnlManageDataSubMenu.Dock = DockStyle.Top;
+            pnlManageDataSubMenu.Location = new Point(0, 208);
+            pnlManageDataSubMenu.Name = "pnlManageDataSubMenu";
+            pnlManageDataSubMenu.Size = new Size(170, 416);
+            pnlManageDataSubMenu.TabIndex = 5;
+            pnlManageDataSubMenu.Visible = false;
             // 
             // btnStudents
             // 
@@ -259,48 +272,58 @@
             btnStudents.ForeColor = Color.FromArgb(0, 126, 249);
             btnStudents.Image = Properties.Resources.diagram;
             btnStudents.ImageAlign = ContentAlignment.MiddleRight;
-            btnStudents.Location = new Point(0, 0);
+            btnStudents.Location = new Point(0, 320);
             btnStudents.Name = "btnStudents";
             btnStudents.Padding = new Padding(30, 0, 15, 0);
             btnStudents.Size = new Size(170, 64);
-            btnStudents.TabIndex = 3;
+            btnStudents.TabIndex = 13;
             btnStudents.Text = "Студенты";
             btnStudents.TextAlign = ContentAlignment.MiddleLeft;
             btnStudents.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnStudents.UseVisualStyleBackColor = false;
             btnStudents.Click += btnStudents_Click;
             // 
-            // btnGradeRecord
+            // btnGroups
             // 
-            btnGradeRecord.Dock = DockStyle.Top;
-            btnGradeRecord.FlatAppearance.BorderSize = 0;
-            btnGradeRecord.FlatStyle = FlatStyle.Flat;
-            btnGradeRecord.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGradeRecord.ForeColor = Color.FromArgb(0, 126, 249);
-            btnGradeRecord.Image = Properties.Resources.diagram;
-            btnGradeRecord.ImageAlign = ContentAlignment.MiddleRight;
-            btnGradeRecord.Location = new Point(0, 418);
-            btnGradeRecord.Name = "btnGradeRecord";
-            btnGradeRecord.Padding = new Padding(5, 0, 15, 0);
-            btnGradeRecord.Size = new Size(170, 64);
-            btnGradeRecord.TabIndex = 1;
-            btnGradeRecord.Text = "Учёт\r\nуспеваемости";
-            btnGradeRecord.TextAlign = ContentAlignment.MiddleLeft;
-            btnGradeRecord.TextImageRelation = TextImageRelation.TextBeforeImage;
-            btnGradeRecord.UseVisualStyleBackColor = true;
-            btnGradeRecord.Click += btnGradeRecord_Click;
+            btnGroups.BackColor = Color.FromArgb(24, 30, 54);
+            btnGroups.Dock = DockStyle.Top;
+            btnGroups.FlatAppearance.BorderSize = 0;
+            btnGroups.FlatStyle = FlatStyle.Flat;
+            btnGroups.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGroups.ForeColor = Color.FromArgb(0, 126, 249);
+            btnGroups.Image = Properties.Resources.diagram;
+            btnGroups.ImageAlign = ContentAlignment.MiddleRight;
+            btnGroups.Location = new Point(0, 256);
+            btnGroups.Name = "btnGroups";
+            btnGroups.Padding = new Padding(30, 0, 15, 0);
+            btnGroups.Size = new Size(170, 64);
+            btnGroups.TabIndex = 12;
+            btnGroups.Text = "Группы";
+            btnGroups.TextAlign = ContentAlignment.MiddleLeft;
+            btnGroups.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnGroups.UseVisualStyleBackColor = false;
+            btnGroups.Click += btnGroups_Click;
             // 
-            // pnlOtherSubMenu
+            // btnDisciplines
             // 
-            pnlOtherSubMenu.Controls.Add(btnDirections);
-            pnlOtherSubMenu.Controls.Add(btnDepartments);
-            pnlOtherSubMenu.Controls.Add(btnFaculties);
-            pnlOtherSubMenu.Dock = DockStyle.Top;
-            pnlOtherSubMenu.Location = new Point(0, 208);
-            pnlOtherSubMenu.Name = "pnlOtherSubMenu";
-            pnlOtherSubMenu.Size = new Size(170, 210);
-            pnlOtherSubMenu.TabIndex = 5;
-            pnlOtherSubMenu.Visible = false;
+            btnDisciplines.BackColor = Color.FromArgb(24, 30, 54);
+            btnDisciplines.Dock = DockStyle.Top;
+            btnDisciplines.FlatAppearance.BorderSize = 0;
+            btnDisciplines.FlatStyle = FlatStyle.Flat;
+            btnDisciplines.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDisciplines.ForeColor = Color.FromArgb(0, 126, 249);
+            btnDisciplines.Image = Properties.Resources.diagram;
+            btnDisciplines.ImageAlign = ContentAlignment.MiddleRight;
+            btnDisciplines.Location = new Point(0, 192);
+            btnDisciplines.Name = "btnDisciplines";
+            btnDisciplines.Padding = new Padding(30, 0, 15, 0);
+            btnDisciplines.Size = new Size(170, 64);
+            btnDisciplines.TabIndex = 10;
+            btnDisciplines.Text = "Дисциплины";
+            btnDisciplines.TextAlign = ContentAlignment.MiddleLeft;
+            btnDisciplines.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnDisciplines.UseVisualStyleBackColor = false;
+            btnDisciplines.Click += btnDisciplines_Click;
             // 
             // btnDirections
             // 
@@ -365,25 +388,25 @@
             btnFaculties.UseVisualStyleBackColor = false;
             btnFaculties.Click += btnFaculties_Click;
             // 
-            // btnOther
+            // btnManageData
             // 
-            btnOther.Dock = DockStyle.Top;
-            btnOther.FlatAppearance.BorderSize = 0;
-            btnOther.FlatStyle = FlatStyle.Flat;
-            btnOther.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnOther.ForeColor = Color.FromArgb(0, 126, 249);
-            btnOther.Image = Properties.Resources.diagram;
-            btnOther.ImageAlign = ContentAlignment.MiddleRight;
-            btnOther.Location = new Point(0, 144);
-            btnOther.Name = "btnOther";
-            btnOther.Padding = new Padding(5, 0, 15, 0);
-            btnOther.Size = new Size(170, 64);
-            btnOther.TabIndex = 6;
-            btnOther.Text = "Другое";
-            btnOther.TextAlign = ContentAlignment.MiddleLeft;
-            btnOther.TextImageRelation = TextImageRelation.TextBeforeImage;
-            btnOther.UseVisualStyleBackColor = true;
-            btnOther.Click += btnOther_Click;
+            btnManageData.Dock = DockStyle.Top;
+            btnManageData.FlatAppearance.BorderSize = 0;
+            btnManageData.FlatStyle = FlatStyle.Flat;
+            btnManageData.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnManageData.ForeColor = Color.FromArgb(0, 126, 249);
+            btnManageData.Image = Properties.Resources.diagram;
+            btnManageData.ImageAlign = ContentAlignment.MiddleRight;
+            btnManageData.Location = new Point(0, 144);
+            btnManageData.Name = "btnManageData";
+            btnManageData.Padding = new Padding(5, 0, 15, 0);
+            btnManageData.Size = new Size(170, 64);
+            btnManageData.TabIndex = 6;
+            btnManageData.Text = "Управление данными";
+            btnManageData.TextAlign = ContentAlignment.MiddleLeft;
+            btnManageData.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnManageData.UseVisualStyleBackColor = true;
+            btnManageData.Click += btnManageData_Click;
             // 
             // panel2
             // 
@@ -506,7 +529,7 @@
             panel1.ResumeLayout(false);
             pnlSchedulingSubMenu.ResumeLayout(false);
             pnlGradeRecordSubMenu.ResumeLayout(false);
-            pnlOtherSubMenu.ResumeLayout(false);
+            pnlManageDataSubMenu.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picProfile).EndInit();
@@ -529,19 +552,20 @@
         private Panel panel3;
         private Panel panel4;
         private Panel pnlFormLoader;
-        private Panel pnlOtherSubMenu;
+        private Panel pnlManageDataSubMenu;
         private Panel pnlGradeRecordSubMenu;
         private Panel pnlSchedulingSubMenu;
         private Button button5;
         private Button button4;
         private Button button3;
-        private Button btnDisciplines;
-        private Button btnStudents;
         private Panel pnlNavigationSubmenu;
         private Button btnGrades;
-        private Button btnOther;
+        private Button btnManageData;
         private Button btnDirections;
         private Button btnFaculties;
         private Button btnDepartments;
+        private Button btnDisciplines;
+        private Button btnStudents;
+        private Button btnGroups;
     }
 }

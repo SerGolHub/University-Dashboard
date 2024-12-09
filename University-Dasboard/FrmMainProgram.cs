@@ -75,9 +75,10 @@ namespace University_Dasboard
             btnFaculties.BackColor = color;
             btnDepartments.BackColor = color;
             btnDirections.BackColor = color;
-
-            btnStudents.BackColor = color;
             btnDisciplines.BackColor = color;
+            btnGroups.BackColor = color;
+            btnStudents.BackColor = color;
+            
             btnGrades.BackColor = color;
 
             button3.BackColor = color;
@@ -87,7 +88,7 @@ namespace University_Dasboard
 
         private void hideSubMenu()
         {
-            pnlOtherSubMenu.Visible = false;
+            pnlManageDataSubMenu.Visible = false;
             pnlGradeRecordSubMenu.Visible = false;
             pnlSchedulingSubMenu.Visible = false;
         }
@@ -105,13 +106,56 @@ namespace University_Dasboard
             }
         }
 
-        private void btnOther_Click(object sender, EventArgs e)
+        private void btnManageData_Click(object sender, EventArgs e)
         {
             //FormLoader.loadForm(pnlFormLoader, new FrmFaculties());
-            changeSubMenuVisibility(pnlOtherSubMenu);
+            changeSubMenuVisibility(pnlManageDataSubMenu);
             restoreButtonsBackColor();
-            moveNavigationPanel(btnOther);
+            moveNavigationPanel(btnManageData);
         }
+        #region button ManageData sub buttons
+        private void btnFaculties_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmFaculties());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnFaculties, pnlManageDataSubMenu);
+        }
+
+        private void btnDepartments_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmDepartments());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnDepartments, pnlManageDataSubMenu);
+        }
+
+        private void btnDirections_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmDirections());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnDirections, pnlManageDataSubMenu);
+        }
+
+        private void btnDisciplines_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmDisciplines());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnDisciplines, pnlManageDataSubMenu);
+        }
+
+        private void btnGroups_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmGroups());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnGroups, pnlManageDataSubMenu);
+        }
+
+        private void btnStudents_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmStudents());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnStudents, pnlManageDataSubMenu);
+        }
+        #endregion
 
         private void btnGradeRecord_Click(object sender, EventArgs e)
         {
@@ -166,40 +210,6 @@ namespace University_Dasboard
             pnlNavigation.Hide();
         }
 
-        private void btnFaculties_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmFaculties());
-            restoreButtonsBackColor();
-            moveNavigationSubPanel(btnFaculties, pnlOtherSubMenu);
-        }
-
-        private void btnDepartments_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmDepartments());
-            restoreButtonsBackColor();
-            moveNavigationSubPanel(btnDepartments, pnlOtherSubMenu);
-        }
-
-        private void btnDirections_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmDirections());
-            restoreButtonsBackColor();
-            moveNavigationSubPanel(btnDirections, pnlOtherSubMenu);
-        }
-
-        private void btnStudents_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmStudents());
-            restoreButtonsBackColor();
-            moveNavigationSubPanel(btnStudents, pnlGradeRecordSubMenu);
-        }
-
-        private void btnDisciplines_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmDisciplines());
-            restoreButtonsBackColor();
-            moveNavigationSubPanel(btnDisciplines, pnlGradeRecordSubMenu);
-        }
         private void btGrades_Click(object sender, EventArgs e)
         {
             FormLoader.loadForm(pnlFormLoader, new FrmGrades());
@@ -224,5 +234,6 @@ namespace University_Dasboard
             restoreButtonsBackColor();
             moveNavigationSubPanel(button5, pnlSchedulingSubMenu);
         }
+
     }
 }
