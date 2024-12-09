@@ -14,7 +14,8 @@ namespace University_Dasboard.Controllers
         {
             using var ctx = new DatabaseContext();
             var students = ctx.Student
-            .Include(s => s.Direction)
+            .Include(s => s.Group!)
+            .ThenInclude(g => g.Direction)
             .ThenInclude(dir => dir!.Department) // dir! означает, что dir не может быть null
             .ThenInclude(dep => dep!.Faculty)
             .Select(s => new StudentViewModel
@@ -25,10 +26,6 @@ namespace University_Dasboard.Controllers
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
                 CourseNumber = s.CourseNumber,
-                FacultyId = s.Direction!.FacultyId, // s.Direction! означает, что s.Direction не может быть null
-                FacultyName = s.Direction.Faculty!.Name,
-                DepartmentId = s.Direction.DepartmentId,
-                DepartmentName = s.Direction.Department!.Name,
                 GroupId = s.GroupId,
                 GroupName = s.Group!.Name
             })
@@ -68,7 +65,6 @@ namespace University_Dasboard.Controllers
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
                 CourseNumber = s.CourseNumber,
-                DirectionId = s.DirectionId,
                 GroupId = s.GroupId
             }).ToList();
 
@@ -94,7 +90,6 @@ namespace University_Dasboard.Controllers
                 existingStudent.Name = updatedStudent.Name;
                 existingStudent.EnrollmentDate = updatedStudent.EnrollmentDate;
                 existingStudent.EnrollmentNumber = updatedStudent.EnrollmentNumber;
-                existingStudent.DirectionId = updatedStudent.DirectionId;
                 existingStudent.GroupId = updatedStudent.GroupId;
             }
         }

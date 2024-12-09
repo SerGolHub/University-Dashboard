@@ -16,10 +16,5 @@ public class StudentCfg : IEntityTypeConfiguration<Student>
             HasMany(st => st.Marks)
             .WithOne(m => m.Student)
             .HasForeignKey(m => m.StudentId);
-
-        builder.
-            HasOne(st => st.Faculty)
-            .WithMany(f => f.Students)
-            .HasForeignKey(st => st.FacultyId);
     }
 }

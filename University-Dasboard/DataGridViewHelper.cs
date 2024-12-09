@@ -24,28 +24,6 @@ namespace University_Dasboard
             comboBox.DisplayMember = "Name";
             comboBox.ValueMember = "Id";
         }
-
-        public static void LoadComboboxWithSelector<T>(
-            DatabaseContext ctx,
-            ComboBox cb,
-            Func<Student, T> selector) where T : class
-        {
-            var items = ctx.Student
-                .Select(selector)
-                .Distinct()
-                .ToList();
-
-            if (items == null || items.Count == 0)
-            {
-                return;
-            }
-
-            LoadCombobox<T>(
-                items!,
-                comboBox: cb,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
-        }
     }
 }
 

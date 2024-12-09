@@ -18,15 +18,6 @@ namespace University_Dasboard
             public bool IsExcellentStudent { get; set; }
             public int CourseNumber { get; set; }
 
-            public Guid FacultyId { get; set; }
-            public string FacultyName { get; set; } = String.Empty;
-
-            public Guid DepartmentId { get; set; }
-            public string DepartmentName { get; set; } = String.Empty;
-
-            public Guid DirectionId { get; set; }
-            public string DirectionName { get; set; } = String.Empty;
-
             public Guid GroupId { get; set; }
             public string GroupName { get; set; } = String.Empty;
         }
@@ -53,27 +44,11 @@ namespace University_Dasboard
             using var ctx = new DatabaseContext();
             StudentController.LoadStudents(dgvStudentList, ref students);
             DataGridViewHelper.HideColumns(dgvStudentList,
-                ["Id", "DirectionId", "GroupId", "Marks"]);
+                ["Id", "GroupId", "Marks"]);
             var faculties = ctx.Faculty.ToList();
             DataGridViewHelper.LoadCombobox(
                 faculties,
-                comboBox: cbFaculty
-            //DataGridViewHelper.LoadComboboxWithSelector(ctx, cbDepartment, s => s.Direction!.Department!);
-            //DataGridViewHelper.LoadComboboxWithSelector(ctx, cbDirection, s => s.Direction!);
-            //DataGridViewHelper.LoadComboboxWithSelector(ctx, cbGroup, s => s.Group!);
-        }
-
-
-        private void LoadComboboxDepartmentsData(DatabaseContext ctx)
-        {
-            var department = ctx.Department
-                .ToList();
-
-            DataGridViewHelper.LoadCombobox(
-                department,
-                comboBox: cbFaculty,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
+                comboBox: cbFaculty);
         }
 
         private void ClearTempLists()
@@ -150,31 +125,45 @@ namespace University_Dasboard
             Drawer.DrawNumbers(sender, e);
         }
 
+        private void LoadComboboxData<T>(ComboBox cb) where T : class
+        {
+            using var ctx = new DatabaseContext();
+            var entityList = ctx.Set<T>().ToList();
+            DataGridViewHelper.LoadCombobox(
+                entityList,
+                comboBox: cb);
+        }
         private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFaculty = (Faculty?)cbFaculty.SelectedItem;
-            
-
+            LoadComboboxData<Department>(cbDepartment);
         }
 
         private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDepartment = (Department?)cbDepartment.SelectedItem;
+            LoadComboboxData<Direction>(cbDirection);
         }
 
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDirection = (Direction?)cbDirection.SelectedItem;
-        }
-
-        private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedCourse = (int?)cbCourse.SelectedItem;
+            LoadComboboxData<Group>(cbGroup);
         }
 
         private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedGroup = (Group?)cbGroup.SelectedItem;
+            cbCourse.Items.Clear();
+            for (int i = 1;  i <= selectedGroup!.MaxCourse; i++)
+            {
+                cbCourse.Items.Add(i);
+            }
+        }
+
+        private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedCourse = (int?)cbCourse.SelectedItem;
         }
 
         private void cbExcellentStudent_SelectedIndexChanged(object sender, EventArgs e)
