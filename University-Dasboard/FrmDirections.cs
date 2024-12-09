@@ -50,9 +50,7 @@ namespace University_Dasboard
 
             DataGridViewHelper.LoadCombobox(
                 departments,
-                comboBox: cbDepartments,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
+                comboBox: cbDepartments);
         }
 
         private void ClearTempLists()
