@@ -28,9 +28,7 @@ namespace University_Dasboard
             var faculties = ctx.Faculty.ToList();
             DataGridViewHelper.LoadCombobox(
                 faculties,
-                comboBox: cbFaculties,
-                comboBoxDisplayMember: "Name",
-                comboBoxValueMember: "Id");
+                comboBox: cbFaculties);
         }
 
         private void ClearTempLists()
