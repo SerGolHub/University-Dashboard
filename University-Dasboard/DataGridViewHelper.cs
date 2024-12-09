@@ -1,4 +1,7 @@
-﻿namespace University_Dasboard
+﻿using Database;
+using University_Dasboard.Database.Models;
+
+namespace University_Dasboard
 {
     public class DataGridViewHelper
     {

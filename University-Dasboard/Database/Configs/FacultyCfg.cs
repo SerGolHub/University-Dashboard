@@ -13,11 +13,6 @@ namespace University_Dasboard.Database.Configs
                 HasMany(f => f.Departments)
                 .WithOne(d => d.Faculty)
                 .HasForeignKey(d => d.FacultyId);
-
-            builder.
-                HasMany(f => f.Students)
-                .WithOne(st => st.Faculty)
-                .HasForeignKey(st => st.FacultyId);
         }
     }
 }
