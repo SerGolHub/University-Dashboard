@@ -17,14 +17,12 @@ namespace University_Dasboard
         }
         public static void LoadCombobox<T>(
             List<T> comboboxData,
-            ComboBox comboBox,
-            string comboBoxDisplayMember,
-            string comboBoxValueMember)
+            ComboBox comboBox)
             where T : class
         {
             comboBox.DataSource = comboboxData;
-            comboBox.DisplayMember = comboBoxDisplayMember;
-            comboBox.ValueMember = comboBoxValueMember;
+            comboBox.DisplayMember = "Name";
+            comboBox.ValueMember = "Id";
         }
 
         public static void LoadComboboxWithSelector<T>(
