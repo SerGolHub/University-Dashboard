@@ -21,7 +21,7 @@ namespace University_Dasboard
             var ctx = new DatabaseContext();
             faculties = DatabaseController.FillBindingList<Faculty>();
             dgvFaculties.DataSource = faculties;
-            DataGridViewHelper.HideColumns(dgvFaculties, ["Id", "Departments", "Directions", "Students", "ScheduleDisciplines"]);
+            DataGridViewHelper.HideColumns(dgvFaculties, ["Id", "Departments", "Directions", "Students"]);
         }
 
         private void ClearTempLists()

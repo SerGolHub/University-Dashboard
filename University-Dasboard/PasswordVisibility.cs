@@ -5,8 +5,8 @@ namespace University_Dasboard
 {
     internal class PasswordVisibility
     {
-        //private static Image shownPasswordIcon = Resources.ShownPassword.ToBitmap();
-        //private static Image hiddenPasswordIcon = Resources.HiddenPassword.ToBitmap();
+        private static Image shownPasswordIcon = Resources.ShownPassword.ToBitmap();
+        private static Image hiddenPasswordIcon = Resources.HiddenPassword.ToBitmap();
         private const char passwordChar = '*';
         private const char nonePasswordChar = '\0';
 
@@ -14,12 +14,12 @@ namespace University_Dasboard
         {
             if (textBox.PasswordChar != nonePasswordChar)
             {
-                //button.Image = shownPasswordIcon;
+                button.Image = shownPasswordIcon;
                 textBox.PasswordChar = nonePasswordChar;
             }
             else
             {
-                //button.Image = hiddenPasswordIcon;
+                button.Image = hiddenPasswordIcon;
                 textBox.PasswordChar = passwordChar;
             }
         }
