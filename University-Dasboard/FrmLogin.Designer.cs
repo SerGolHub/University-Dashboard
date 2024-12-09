@@ -69,7 +69,7 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.user_profile2;
+            //pictureBox2.Image = Properties.Resources.user_profile2;
             pictureBox2.Location = new Point(43, 231);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(23, 23);
@@ -79,7 +79,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.lock_icon;
+            //pictureBox3.Image = Properties.Resources.lock_icon;
             pictureBox3.Location = new Point(43, 300);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(23, 23);
@@ -181,7 +181,7 @@
             btnChangePasswordVisibility.FlatStyle = FlatStyle.Flat;
             btnChangePasswordVisibility.Font = new Font("Microsoft Sans Serif", 11.25F);
             btnChangePasswordVisibility.ForeColor = Color.FromArgb(24, 30, 54);
-            btnChangePasswordVisibility.Image = Properties.Resources.Shown;
+            //btnChangePasswordVisibility.Image = Properties.Resources.Shown;
             btnChangePasswordVisibility.Location = new Point(327, 300);
             btnChangePasswordVisibility.Name = "btnChangePasswordVisibility";
             btnChangePasswordVisibility.Size = new Size(32, 24);

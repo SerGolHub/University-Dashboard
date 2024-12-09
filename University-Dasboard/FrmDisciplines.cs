@@ -24,7 +24,8 @@ namespace University_Dasboard
             disciplines = new BindingList<Discipline>(disciplineList);
             dgvDisciplines.DataSource = disciplines;
             dgvDisciplines.Columns["Id"].Visible = false;
-        }
+			dgvDisciplines.Columns["ScheduleDisciplines"].Visible = false;
+		}
 
         private void ClearTempLists()
         {

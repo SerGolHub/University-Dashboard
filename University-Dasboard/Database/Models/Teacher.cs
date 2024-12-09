@@ -14,5 +14,8 @@ namespace University_Dasboard.Database.Models
         public ICollection<Discipline> Subjects { get; set; } = [];
         public Guid DeparatmentId { get; set; }
         public Department? Department { get; set; }
-    }
+
+		// Для составления расписания
+		public ICollection<ScheduleWeek> Schedules { get; set; }
+	}
 }

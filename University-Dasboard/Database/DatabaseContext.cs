@@ -15,8 +15,10 @@ namespace Database
         public DbSet<Discipline> Discipline { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet<User> User { get; set; }
+		public DbSet<ScheduleWeek> ScheduleWeek { get; set; }
+		public DbSet<ScheduleDiscipline> ScheduleDisciplines { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new DepartmentCfg());
             modelBuilder.ApplyConfiguration(new DirectionCfg());
@@ -26,13 +28,15 @@ namespace Database
             modelBuilder.ApplyConfiguration(new StudentCfg());
             modelBuilder.ApplyConfiguration(new DisciplineCfg());
             modelBuilder.ApplyConfiguration(new TeacherCfg());
+			modelBuilder.ApplyConfiguration(new TeacherCfg());
+			modelBuilder.ApplyConfiguration(new ScheduleWeekCfg());
 
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=zorg;Password=zorg");
+            optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=postgres;Password=postgres");
         }
     }
 }

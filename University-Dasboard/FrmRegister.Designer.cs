@@ -112,7 +112,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.lock_icon;
+            //pictureBox3.Image = Properties.Resources.lock_icon;
             pictureBox3.Location = new Point(43, 301);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(23, 23);
@@ -122,7 +122,7 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.user_profile2;
+            //pictureBox2.Image = Properties.Resources.user_profile2;
             pictureBox2.Location = new Point(43, 247);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(23, 23);
@@ -143,7 +143,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.Untitled_11;
+            //pictureBox1.Image = Properties.Resources.Untitled_11;
             pictureBox1.Location = new Point(146, 10);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
@@ -153,7 +153,7 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Image = Properties.Resources.lock_icon;
+            //pictureBox4.Image = Properties.Resources.lock_icon;
             pictureBox4.Location = new Point(43, 355);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(23, 23);
@@ -206,7 +206,7 @@
             btnChangePasswordVisibility.FlatStyle = FlatStyle.Flat;
             btnChangePasswordVisibility.Font = new Font("Microsoft Sans Serif", 11.25F);
             btnChangePasswordVisibility.ForeColor = Color.FromArgb(24, 30, 54);
-            btnChangePasswordVisibility.Image = Properties.Resources.Shown;
+            //btnChangePasswordVisibility.Image = Properties.Resources.Shown;
             btnChangePasswordVisibility.Location = new Point(327, 301);
             btnChangePasswordVisibility.Name = "btnChangePasswordVisibility";
             btnChangePasswordVisibility.Size = new Size(32, 24);

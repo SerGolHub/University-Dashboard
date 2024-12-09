@@ -13,5 +13,5 @@ namespace University_Dasboard.Database.Models
         public Guid DepartmentId { get; set; }
         public Department? Department { get; set; }
         public ICollection<Group> Groups { get; set; } = [];
-    }
+	}
 }

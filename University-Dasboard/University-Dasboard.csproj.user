@@ -34,7 +34,7 @@
     <Compile Update="FrmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmScheduling.cs">
+    <Compile Update="FrmSchedulingDiscipline.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FrmSettings.cs">
