@@ -69,6 +69,7 @@
             btnAdd.TabIndex = 21;
             btnAdd.Text = "Добавить";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // tbFullName
             // 
@@ -97,7 +98,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(158, 161, 178);
-            label1.Location = new Point(15, 145);
+            label1.Location = new Point(12, 189);
             label1.Name = "label1";
             label1.Size = new Size(52, 20);
             label1.TabIndex = 19;
@@ -108,7 +109,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(158, 161, 178);
-            label3.Location = new Point(15, 174);
+            label3.Location = new Point(12, 157);
             label3.Name = "label3";
             label3.Size = new Size(72, 20);
             label3.TabIndex = 19;
@@ -119,7 +120,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(158, 161, 178);
-            label4.Location = new Point(12, 58);
+            label4.Location = new Point(12, 61);
             label4.Name = "label4";
             label4.Size = new Size(108, 20);
             label4.TabIndex = 19;
@@ -130,7 +131,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.FromArgb(158, 161, 178);
-            label5.Location = new Point(12, 87);
+            label5.Location = new Point(12, 93);
             label5.Name = "label5";
             label5.Size = new Size(93, 20);
             label5.TabIndex = 19;
@@ -171,30 +172,39 @@
             // 
             // cbCourse
             // 
+            cbCourse.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbCourse.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbCourse.BackColor = Color.FromArgb(158, 161, 178);
             cbCourse.FlatStyle = FlatStyle.Flat;
             cbCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbCourse.ForeColor = Color.FromArgb(24, 30, 54);
             cbCourse.FormattingEnabled = true;
-            cbCourse.Location = new Point(285, 142);
+            cbCourse.Location = new Point(285, 183);
             cbCourse.Name = "cbCourse";
             cbCourse.Size = new Size(70, 26);
             cbCourse.TabIndex = 22;
+            cbCourse.SelectedIndexChanged += cbCourse_SelectedIndexChanged;
             // 
             // cbGroup
             // 
+            cbGroup.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbGroup.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbGroup.BackColor = Color.FromArgb(158, 161, 178);
             cbGroup.FlatStyle = FlatStyle.Flat;
             cbGroup.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbGroup.ForeColor = Color.FromArgb(24, 30, 54);
             cbGroup.FormattingEnabled = true;
-            cbGroup.Location = new Point(146, 171);
+            cbGroup.Location = new Point(146, 151);
             cbGroup.Name = "cbGroup";
             cbGroup.Size = new Size(209, 26);
             cbGroup.TabIndex = 22;
+            cbGroup.Text = "Выберите направление";
+            cbGroup.SelectedIndexChanged += cbGroup_SelectedIndexChanged;
             // 
             // cbFaculty
             // 
+            cbFaculty.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbFaculty.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbFaculty.BackColor = Color.FromArgb(158, 161, 178);
             cbFaculty.FlatStyle = FlatStyle.Flat;
             cbFaculty.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
@@ -204,18 +214,23 @@
             cbFaculty.Name = "cbFaculty";
             cbFaculty.Size = new Size(209, 26);
             cbFaculty.TabIndex = 22;
+            cbFaculty.SelectedIndexChanged += cbFaculty_SelectedIndexChanged;
             // 
             // cbDepartment
             // 
+            cbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbDepartment.BackColor = Color.FromArgb(158, 161, 178);
             cbDepartment.FlatStyle = FlatStyle.Flat;
             cbDepartment.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbDepartment.ForeColor = Color.FromArgb(24, 30, 54);
             cbDepartment.FormattingEnabled = true;
-            cbDepartment.Location = new Point(146, 84);
+            cbDepartment.Location = new Point(146, 87);
             cbDepartment.Name = "cbDepartment";
             cbDepartment.Size = new Size(209, 26);
             cbDepartment.TabIndex = 22;
+            cbDepartment.Text = "Выберите факультет";
+            cbDepartment.SelectedIndexChanged += cbDepartment_SelectedIndexChanged;
             // 
             // tbEnrollmentNumber
             // 
@@ -241,6 +256,8 @@
             // 
             // cbExcellentStudent
             // 
+            cbExcellentStudent.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbExcellentStudent.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbExcellentStudent.BackColor = Color.FromArgb(158, 161, 178);
             cbExcellentStudent.FlatStyle = FlatStyle.Flat;
             cbExcellentStudent.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
@@ -251,6 +268,7 @@
             cbExcellentStudent.Name = "cbExcellentStudent";
             cbExcellentStudent.Size = new Size(70, 26);
             cbExcellentStudent.TabIndex = 22;
+            cbExcellentStudent.SelectedIndexChanged += cbExcellentStudent_SelectedIndexChanged;
             // 
             // dgvStudentList
             // 
@@ -262,6 +280,8 @@
             dgvStudentList.Name = "dgvStudentList";
             dgvStudentList.Size = new Size(820, 319);
             dgvStudentList.TabIndex = 28;
+            dgvStudentList.CellValueChanged += dgvStudentList_CellValueChanged;
+            dgvStudentList.RowPostPaint += dgvStudentList_RowPostPaint;
             // 
             // btnDelete
             // 
@@ -276,6 +296,7 @@
             btnDelete.TabIndex = 25;
             btnDelete.Text = "Удалить";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnReset
             // 
@@ -290,6 +311,7 @@
             btnReset.TabIndex = 26;
             btnReset.Text = "Сбросить изменения";
             btnReset.UseVisualStyleBackColor = false;
+            btnReset.Click += btnReset_Click;
             // 
             // btnSave
             // 
@@ -304,6 +326,7 @@
             btnSave.TabIndex = 27;
             btnSave.Text = "Сохранить";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // lbDbSaveResult
             // 
@@ -333,7 +356,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.FromArgb(158, 161, 178);
-            label10.Location = new Point(12, 116);
+            label10.Location = new Point(12, 125);
             label10.Name = "label10";
             label10.Size = new Size(128, 20);
             label10.TabIndex = 19;
@@ -341,15 +364,19 @@
             // 
             // cbDirection
             // 
+            cbDirection.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbDirection.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbDirection.BackColor = Color.FromArgb(158, 161, 178);
             cbDirection.FlatStyle = FlatStyle.Flat;
             cbDirection.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             cbDirection.ForeColor = Color.FromArgb(24, 30, 54);
             cbDirection.FormattingEnabled = true;
-            cbDirection.Location = new Point(146, 113);
+            cbDirection.Location = new Point(146, 119);
             cbDirection.Name = "cbDirection";
             cbDirection.Size = new Size(209, 26);
             cbDirection.TabIndex = 22;
+            cbDirection.Text = "Выберите кафедру";
+            cbDirection.SelectedIndexChanged += cbDirection_SelectedIndexChanged;
             // 
             // FrmStudents
             // 
