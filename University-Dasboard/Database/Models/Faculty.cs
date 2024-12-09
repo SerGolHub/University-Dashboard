@@ -9,5 +9,5 @@ namespace University_Dasboard.Database.Models
         public ICollection<Department> Departments { get; set; } = [];
         public ICollection<Direction> Directions { get; set; } = [];
         public ICollection<Student> Students{ get; set; } = []; // ?
-    }
+	}
 }

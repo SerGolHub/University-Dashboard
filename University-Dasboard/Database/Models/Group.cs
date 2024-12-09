@@ -13,5 +13,7 @@ namespace University_Dasboard.Database.Models
         public Department? Department { get; set; }
         public ICollection<Student> Students { get; set; } = [];
         public ICollection<Discipline> Disciplines { get; set; } = [];
-    }
+
+		public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; }
+	}
 }

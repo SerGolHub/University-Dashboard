@@ -1,13 +1,17 @@
 using Database;
+using NLog;
 
 namespace University_Dasboard
 {
     public partial class FrmMainProgram : Form
     {
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public FrmMainProgram(string fullName = "", string login = "")
         {
             InitializeComponent();
+            logger.Info("Главная форма запущена");
+
             //checkAuthorisation(fullName, login);
 
         }
@@ -23,7 +27,7 @@ namespace University_Dasboard
                 if (login == "")
                 {
                     MessageBox.Show("Что-то пошло не так :(");
-                    return;
+					return;
                 }
                 try
                 {
@@ -39,6 +43,8 @@ namespace University_Dasboard
             }
             int labelCenterPositionX = picProfile.Left + (picProfile.Width - lbUserName.Width) / 2;
             lbUserName.Location = new Point(labelCenterPositionX, lbUserName.Location.Y);
+
+            logger.Info("Пользователь авторизован");
         }
         private void moveNavigationPanel(Button button)
         {
@@ -165,16 +171,24 @@ namespace University_Dasboard
             moveNavigationPanel(btnGradeRecord);
         }
 
-        private void btnScheduling_Click(object sender, EventArgs e)
-        {
-            FormLoader.loadForm(pnlFormLoader, new FrmScheduling());
-            changeSubMenuVisibility(pnlSchedulingSubMenu);
-            restoreButtonsBackColor();
-            moveNavigationPanel(btnScheduling);
-        }
+		private void btnSchedulingWeek_Click(object sender, EventArgs e)
+		{
+			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingWeek());
+			changeSubMenuVisibility(pnlSchedulingSubMenu);
+			restoreButtonsBackColor();
+			moveNavigationPanel(btnScheduling);
+		}
+
+		private void buttonSchedulingDisciplines_Click(object sender, EventArgs e)
+		{
+			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDiscipline());
+			changeSubMenuVisibility(pnlSchedulingSubMenu);
+			restoreButtonsBackColor();
+			moveNavigationPanel(btnScheduling);
+		}
 
 
-        private void button1_Click(object sender, EventArgs e)
+		private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
