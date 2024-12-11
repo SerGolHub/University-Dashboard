@@ -17,6 +17,6 @@ namespace University_Dasboard.Database.Models
 		public int PracticalHours { get; set; }
 		public int LaboratoryHours { get; set; }
 
-		public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; }
+		public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; } = null!;
 	}
 }

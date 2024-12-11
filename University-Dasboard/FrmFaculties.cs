@@ -1,4 +1,5 @@
 ﻿using Database;
+using NLog;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
 
@@ -6,30 +7,38 @@ namespace University_Dasboard
 {
     public partial class FrmFaculties : Form
     {
-        private BindingList<Faculty> faculties = [];
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		private BindingList<Faculty> faculties = [];
         private List<Faculty> newFacultiesList = [];
         private List<Faculty> updatedFacultiesList = [];
         private List<Faculty> removedFacultiesList = [];
+
         public FrmFaculties()
         {
             InitializeComponent();
             LoadData();
             
         }
+
         private void LoadData()
         {
             var ctx = new DatabaseContext();
             faculties = DatabaseController.FillBindingList<Faculty>();
             dgvFaculties.DataSource = faculties;
             DataGridViewHelper.HideColumns(dgvFaculties, ["Id", "Departments", "Directions", "Students"]);
-        }
+
+			logger.Info("Загрузка списка факультетов");
+		}
 
         private void ClearTempLists()
         {
             newFacultiesList.Clear();
             updatedFacultiesList.Clear();
             removedFacultiesList.Clear();
-        }
+
+			logger.Info("Очистка списка факультетов");
+		}
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -37,7 +46,8 @@ namespace University_Dasboard
             if (string.IsNullOrEmpty(newFacultyName))
             {
                 MessageBox.Show("Введите название нового факультета");
-                return;
+				logger.Warn("Пользователь не ввёл название нового факультета");
+				return;
             }
 
             Faculty faculty = new Faculty
@@ -45,15 +55,20 @@ namespace University_Dasboard
                 Id = Guid.NewGuid(),
                 Name = newFacultyName
             };
+
             faculties.Add(faculty);
             newFacultiesList.Add(faculty);
-        }
+
+			logger.Info("Загрузка списка факультетов");
+		}
 
         async private void btnSave_Click(object sender, EventArgs e)
         {
             lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
             lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
-            lbDbSaveResult.Visible = true;
+			logger.Info("Сохранение данных...");
+			lbDbSaveResult.Visible = true;
+
             if (newFacultiesList.Count > 0)
             {
                 try
@@ -63,7 +78,8 @@ namespace University_Dasboard
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Во время добавления факультета(ов) произошла ошибка: {ex.Message}");
-                }
+					logger.Error($"Во время добавления факультета(ов) произошла ошибка: {ex.Message}");
+				}
             }
 
             if (updatedFacultiesList.Count > 0)
@@ -75,7 +91,8 @@ namespace University_Dasboard
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Во время обновления факультета(ов) произошла ошибка: {ex.Message}");
-                }
+					logger.Error($"Во время обновления факультета(ов) произошла ошибка: {ex.Message}");
+				}
             }
 
             if (removedFacultiesList.Count > 0)
@@ -87,15 +104,17 @@ namespace University_Dasboard
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Во время удаления факультета(ов) произошла ошибка: {ex.Message}");
-                }
+					logger.Error($"Во время удаления факультета(ов) произошла ошибка: {ex.Message}");
+				}
             }
+
             ClearTempLists();
             lbDbSaveResult.ForeColor = Color.FromArgb(118, 241, 178);
             lbDbSaveResult.Text = "Данные успешно сохранены.";
             await Task.Delay(3000);
             lbDbSaveResult.Visible = false;
-            
 
+            logger.Info("Данные успешно сохранены.");
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -114,15 +133,19 @@ namespace University_Dasboard
             if (dgvFaculties.CurrentRow == null)
             {
                 MessageBox.Show("Выделите строку для удаления");
-                return;
+				logger.Warn("Пользователь не выделил строчку для удаления.");
+				return;
             }
+
             var id = (Guid)dgvFaculties.CurrentRow.Cells["Id"].Value;
             Faculty deletedFaculty = GetFacultyId(id);
             faculties.Remove(deletedFaculty);
             newFacultiesList.Remove(deletedFaculty);
             updatedFacultiesList.Remove(deletedFaculty);
             removedFacultiesList.Add(deletedFaculty);
-        }
+
+			logger.Info("Пользователь успешно удалил факультет из базы данных.");
+		}
 
         private void dgvFaculties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {

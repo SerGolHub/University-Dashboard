@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace University_Dasboard.Controllers
 {
-    internal class TeacherController
+    public class TeacherController
     {
     }
 }

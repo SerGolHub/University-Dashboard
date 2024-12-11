@@ -1,5 +1,6 @@
 ﻿using Database;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using System.ComponentModel;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Models;
@@ -8,7 +9,9 @@ namespace University_Dasboard
 {
     public partial class FrmDirections : Form
     {
-        public class DirectionViewModel
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		public class DirectionViewModel
         {
             public Guid Id { get; set; }
             public string Name { get; set; } = string.Empty;
@@ -41,6 +44,8 @@ namespace University_Dasboard
             DataGridViewHelper.HideColumns(dgvDirections,
                 ["Id", "DepartmentId", "FacultyId", "Groups"]);
             LoadComboboxData(ctx);
+
+            logger.Info("Направления были успешно загружены");
         }
         private void LoadComboboxData(DatabaseContext ctx)
         {
@@ -58,7 +63,9 @@ namespace University_Dasboard
             newDirectionList.Clear();
             updatedDirectionList.Clear();
             removedDirectionList.Clear();
-        }
+
+			logger.Info("Очистка списка направлений");
+		}
 
         private void tbMaxCourse_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -74,22 +81,26 @@ namespace University_Dasboard
             if (string.IsNullOrEmpty(newDirectionName))
             {
                 MessageBox.Show("Введите название нового направления");
-                return;
+				logger.Warn("Пользователь не ввёл название нового направления");
+				return;
             }
             if (selectedDepartment == null)
             {
                 MessageBox.Show("Для добавления направления нужно выбрать существующую кафедру");
-                return;
+				logger.Warn("Пользователь не выбрал существующую кафедру для нового направления");
+				return;
             }
             if (tbDirectionCode.Text.Length == 0)
             {
                 MessageBox.Show("Для добавления направления нужно ввести код направления");
-                return;
+				logger.Warn("Пользователь не ввёл нужный код направления для нового направления");
+				return;
             }
             if (tbMaxCourse.Text.Length == 0)
             {
                 MessageBox.Show("Для добавления направления нужно ввести цифру последнего курса");
-                return;
+				logger.Warn("Пользователь не ввёл последний курс для нового направления");
+				return;
             }
 
             var direction = new DirectionViewModel()
@@ -99,19 +110,23 @@ namespace University_Dasboard
                 Code = tbDirectionCode.Text,
                 MaxCourse = Convert.ToInt32(tbMaxCourse.Text),
                 FacultyId = selectedDepartment.FacultyId,
-                FacultyName = selectedDepartment.Faculty.Name,
+                FacultyName = selectedDepartment.Faculty!.Name,
                 DepartmentId = selectedDepartment.Id,
                 DepartmentName = selectedDepartment.Name
             };
+
             directions.Add(direction);
             newDirectionList.Add(direction);
+
+            logger.Info("Данные успешно загружены.");
         }
 
         async private void btnSave_Click(object sender, EventArgs e)
         {
             lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
             lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
-            lbDbSaveResult.Visible = true;
+			logger.Info("Данные сохраняются...");
+			lbDbSaveResult.Visible = true;
 
             await DirectionController.SaveDirectionsAsync(
                 newDirectionList,
@@ -123,30 +138,37 @@ namespace University_Dasboard
             lbDbSaveResult.Text = "Данные успешно сохранены.";
             await Task.Delay(3000);
             lbDbSaveResult.Visible = false;
-        }
+			logger.Info("Данные загружены и успешно сохранены в базе данных.");
+		}
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             ClearTempLists();
             LoadData();
         }
+
         private DirectionViewModel GetDirection(Guid id)
         {
             return directions.First(d => d.Id == id);
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvDirections.CurrentRow == null)
             {
                 MessageBox.Show("Выделите строку для удаления");
+                logger.Warn("Пользователь не выделил строчку для удаления.");
                 return;
             }
+
             var id = (Guid)dgvDirections.CurrentRow.Cells["Id"].Value;
             DirectionViewModel deletedDirection = GetDirection(id);
             directions.Remove(deletedDirection);
             newDirectionList.Remove(deletedDirection);
             updatedDirectionList.Remove(deletedDirection);
             removedDirectionList.Add(deletedDirection);
+
+            logger.Info("Пользователь успешно удалил направление из базы данных.");
         }
 
         private void dgvDirections_CellValueChanged(object sender, DataGridViewCellEventArgs e)
