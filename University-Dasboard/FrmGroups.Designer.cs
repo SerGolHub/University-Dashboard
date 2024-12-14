@@ -72,6 +72,7 @@
             btnDelete.TabIndex = 50;
             btnDelete.Text = "Удалить";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnReset
             // 
@@ -86,6 +87,7 @@
             btnReset.TabIndex = 51;
             btnReset.Text = "Сбросить изменения";
             btnReset.UseVisualStyleBackColor = false;
+            btnReset.Click += btnReset_Click;
             // 
             // btnSave
             // 
@@ -100,6 +102,7 @@
             btnSave.TabIndex = 52;
             btnSave.Text = "Сохранить";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // lbDbSaveResult
             // 
@@ -173,6 +176,7 @@
             btnAdd.TabIndex = 41;
             btnAdd.Text = "Добавить";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // tbGroupName
             // 
