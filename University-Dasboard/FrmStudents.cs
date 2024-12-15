@@ -1,5 +1,6 @@
 ﻿using Database;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
 using University_Dasboard.Controllers;
@@ -9,7 +10,9 @@ namespace University_Dasboard
 {
     public partial class FrmStudents : Form
     {
-        public class StudentViewModel
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		public class StudentViewModel
         {
             public Guid Id { get; set; }
             public string Name { get; set; } = string.Empty;
@@ -49,6 +52,8 @@ namespace University_Dasboard
             DataGridViewHelper.LoadCombobox(
                 faculties,
                 comboBox: cbFaculty);
+
+            logger.Info("Список студентов успешно загружен.");
         }
 
         private void ClearTempLists()
@@ -56,6 +61,8 @@ namespace University_Dasboard
             newStudentList.Clear();
             updatedStudentList.Clear();
             removedStudentList.Clear();
+
+            logger.Info("Список студентов очищен.");
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -64,15 +71,19 @@ namespace University_Dasboard
             if (fullName == string.Empty)
             {
                 MessageBox.Show("Введите ФИО студента.");
+                logger.Warn("Пользователь не ввёл ФИО студента.");
                 return;
             }
 
+
+            logger.Info("Студент успешно добавлен в базу данных.");
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
             lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
             lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
+            logger.Info("Данные сохраняются....");
             lbDbSaveResult.Visible = true;
 
             await StudentController.SaveStudentsAsync(
@@ -85,6 +96,8 @@ namespace University_Dasboard
             lbDbSaveResult.Text = "Данные успешно сохранены.";
             await Task.Delay(3000);
             lbDbSaveResult.Visible = false;
+
+            logger.Info("Студент успешно сохранён. Данные загружены и сохранены.");
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -98,14 +111,18 @@ namespace University_Dasboard
             if (dgvStudentList.CurrentRow == null)
             {
                 MessageBox.Show("Выделите строку для удаления");
-                return;
+				logger.Info("Пользователь не выделил строку для удаления");
+				return;
             }
+
             var id = (Guid)dgvStudentList.CurrentRow.Cells["Id"].Value;
             StudentViewModel deletedStudent = GetStudent(id);
             students.Remove(deletedStudent);
             newStudentList.Remove(deletedStudent);
             updatedStudentList.Remove(deletedStudent);
             removedStudentList.Add(deletedStudent);
+
+            logger.Info("Студент удалён из базы данных.");
         }
 
         private StudentViewModel GetStudent(Guid id)

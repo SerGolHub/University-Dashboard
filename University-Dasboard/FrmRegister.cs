@@ -1,12 +1,15 @@
 ﻿using Database;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using University_Dasboard.Controllers;
 
 namespace University_Dasboard
 {
     public partial class FrmRegister : Form
     {
-        private Panel panelLoader;
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		private Panel panelLoader;
         private Form frmAuthorization;
         public FrmRegister(Panel panelLoader, Form frmAuthorization)
         {
@@ -31,11 +34,13 @@ namespace University_Dasboard
             if (tbPassword.Text != tbRepeatPassword.Text)
             {
                 MessageBox.Show("Пароли не совпадают.");
+                logger.Warn("Пароли не совпадают.");
                 return;
             }
             if (await UserController.IsUserExistsAsync(tbLogin.Text))
             {
                 MessageBox.Show("Данный логин уже занят.");
+                logger.Warn("Пользователь ввёл существующий логин.");
             }
             try
             {
@@ -44,11 +49,13 @@ namespace University_Dasboard
             catch (Exception ex)
             {
                 MessageBox.Show($"При добавлении пользователя произошла ошибка: {ex.Message}");
+                logger.Error($"При добавлении пользователя произошла ошибка: {ex.Message}");
             }
 
             frmAuthorization.Hide();
             Form mainProgram = new FrmMainProgram(fullName: tbFullName.Text);
             mainProgram.Show();
+            logger.Info("Пользователь успешно добавлен в базу данных.");
         }
     }
 }

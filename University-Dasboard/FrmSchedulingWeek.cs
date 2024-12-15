@@ -59,6 +59,8 @@ namespace University_Dasboard
 			newScheduleList.Clear();
 			updatedScheduleList.Clear();
 			removedScheduleList.Clear();
+
+			logger.Info("Очистка списка расписаний");
 		}
 
 		private void tbHours_KeyPress(object sender, KeyPressEventArgs e)

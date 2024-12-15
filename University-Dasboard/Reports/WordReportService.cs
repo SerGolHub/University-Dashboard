@@ -10,118 +10,54 @@ using University_Dasboard.Reports.Models;
 
 namespace University_Dasboard.Reports
 {
-	public class WordReportService
+	// Implementation class for reports with tables
+	public class WordWithTableReport : WordReportBase
 	{
-		private Document _document = null;
+		private readonly WordWithTableConfig _tableConfig;
 
-		private Body _body = null;
-
-		private DocumentFormat.OpenXml.Wordprocessing.Table _table = null;
-
-		// Свойство для создания или получения документа
-		private Document Document
+		public WordWithTableReport(WordWithTableConfig config) : base(config)
 		{
-			get
-			{
-				if (_document == null)
-				{
-					_document = new Document();
-				}
-
-				return _document;
-			}
+			_tableConfig = config;
 		}
 
-		// Свойство для создания или получения содержимого (Body) документа
-		private Body Body
+		public override void GenerateReport(string filePath)
 		{
-			get
-			{
-				if (_body == null)
-				{
-					_body = Document.AppendChild(new Body());
-				}
+			if (string.IsNullOrWhiteSpace(filePath))
+				throw new ArgumentException("File path cannot be null or empty.", nameof(filePath));
 
-				return _body;
-			}
-		}
-
-		// Свойство для создания или получения таблицы
-		private DocumentFormat.OpenXml.Wordprocessing.Table Table
-		{
-			get
-			{
-				if (_table == null)
-				{
-					_table = new DocumentFormat.OpenXml.Wordprocessing.Table();
-				}
-
-				return _table;
-			}
-		}
-
-		public void CreateWordReport<T>(WordWithTableDataConfig<T> config, string filePath)
-		{
 			using (var wordDocument = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
 			{
-				// Создать главный документ
 				var mainPart = wordDocument.AddMainDocumentPart();
 				mainPart.Document = new Document(new Body());
-
 				var body = mainPart.Document.Body;
 
-				// Настройка ориентации страницы
-				SetLandscapeOrientation(mainPart);
+				// Настраиваем ориентацию страницы и поля
+				SetPageOrientation(mainPart);
 
-				// Добавить заголовок
-				AddTitle(config.Header);
-
-				// Добавить таблицы
-				//foreach (var tableConfig in config.Tables)
-				//{
-				//	AddTableSection(body, tableConfig);
-				//}
-
-				// Добавить пожелания
-				//AddFooter(config.Footer);
-			}
-		}
-
-		private static void SetLandscapeOrientation(MainDocumentPart mainPart)
-		{
-			SectionProperties sectionProps = new SectionProperties(
-				new PageSize { Orient = PageOrientationValues.Landscape });
-			mainPart.Document.Body.Append(sectionProps);
-		}
-
-		private void AddTitle(string header)
-		{
-			DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = Body.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Paragraph());
-			DocumentFormat.OpenXml.Wordprocessing.Run run = paragraph.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Run());
-
-			run.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.RunProperties(new Bold()));
-			run.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Text(header));
-		}
-
-		private void AddTableSection<T>(Body body, WordWithTableDataConfig<T> tableConfig)
-		{
-			// Добавить подзаголовок
-			if (!string.IsNullOrEmpty(tableConfig.Header))
-			{
-				var paragraph = new Paragraph(new Run(new Text(tableConfig.Header)))
+				// Заголовок
+				if (!string.IsNullOrEmpty(_tableConfig.Header))
 				{
-					ParagraphProperties = new ParagraphProperties
-					{
-						Justification = new Justification { Val = JustificationValues.Left },
-						SpacingBetweenLines = new SpacingBetweenLines { Before = "200", After = "100" },
-						//RunProperties = new RunProperties(new Bold())
-					}
-				};
-				body.AppendChild(paragraph);
-			}
+					AddTextElement(body!, _tableConfig.Header, justification: JustificationValues.Center);
+				}
 
-			// Создать таблицу
+				// Таблица
+				var table = CreateTable();
+
+				body!.AppendChild(table);
+
+				// Нижний колонтитул
+				if (!string.IsNullOrEmpty(_tableConfig.Footer))
+				{
+					AddTextElement(body, _tableConfig.Footer, justification: JustificationValues.Left);
+				}
+			}
+		}
+
+		private Table CreateTable()
+		{
 			var table = new Table();
+
+			// Apply table properties
 			table.AppendChild(new TableProperties(new TableBorders
 			{
 				TopBorder = new TopBorder { Val = BorderValues.Single, Size = 12 },
@@ -129,139 +65,85 @@ namespace University_Dasboard.Reports
 				LeftBorder = new LeftBorder { Val = BorderValues.Single, Size = 12 },
 				RightBorder = new RightBorder { Val = BorderValues.Single, Size = 12 },
 				InsideHorizontalBorder = new InsideHorizontalBorder { Val = BorderValues.Single, Size = 12 },
-				InsideVerticalBorder = new InsideVerticalBorder { Val = BorderValues.Single, Size = 12 }
+				InsideVerticalBorder = new InsideVerticalBorder { Val = BorderValues.Single, Size = 12 },
 			}));
 
-			// Добавить строки заголовков
+			// Заголовок таблицы
 			var headerRow = new TableRow();
-			foreach (var header in tableConfig.Headers)
+
+			foreach (var header in _tableConfig.Headers)
 			{
-				//headerRow.AppendChild(CreateCell(header, bold: true));
+				headerRow.AppendChild(CreateCell(header.Header, bold: true, isHeader: true));
 			}
+
 			table.AppendChild(headerRow);
 
-			// Добавить данные
-			foreach (var item in tableConfig.Data)
+			// Add data rows
+			for (int i = 0; i < _tableConfig.ColumnsRowsDataCount.Rows; i++)
 			{
 				var dataRow = new TableRow();
-				foreach (var header in tableConfig.Headers)
+
+				foreach (var header in _tableConfig.Headers)
 				{
-					//var value = item.GetType().GetProperty(header)?.GetValue(item)?.ToString() ?? "";
-					//dataRow.AppendChild(CreateCell(value));
+
+					// Для "Форма занятий" (первый столбец)
+					if (header.ColumnIndex == 0 && header.RowIndex == i)
+					{
+						dataRow.AppendChild(CreateCell("1. ЛЕКЦИИ"));
+					}
+					// Для "Лекции" (вторая строка)
+					if (header.RowIndex == i && header.ColumnIndex == 0)
+					{
+						dataRow.AppendChild(CreateCell("аудит."));
+					}
+
+					if (header.ColumnIndex == 0 && header.RowIndex == 5)
+					{
+						dataRow.AppendChild(CreateCell("2. ЛАБОРАТОРНЫЕ"));
+					}
+
+					// Для "Лекции" (вторая строка)
+					if (header.RowIndex == 5 && header.ColumnIndex == 0)
+					{
+						dataRow.AppendChild(CreateCell("аудит."));
+					}
+					
+					dataRow.AppendChild(CreateCell($"{header.PropertyName} (Row {i})"));
 				}
+
 				table.AppendChild(dataRow);
 			}
 
-			body.AppendChild(table);
+			return table;
 		}
 
-		private void AddFooter(Body body, string footer)
-		{
-			if (!string.IsNullOrEmpty(footer))
-			{
-				var paragraph = new Paragraph(new Run(new Text(footer)))
-				{
-					ParagraphProperties = new ParagraphProperties
-					{
-						Justification = new Justification { Val = JustificationValues.Left },
-						SpacingBetweenLines = new SpacingBetweenLines { Before = "200" },
-						//RunProperties = new RunProperties(new Italic())
-					}
-				};
-				body.AppendChild(paragraph);
-			}
-		}
-
-		private void AddTitle(Body body, string title)
-		{
-			var paragraph = new Paragraph(new Run(new Text(title)))
-			{
-				ParagraphProperties = new ParagraphProperties
-				{
-					Justification = new Justification { Val = JustificationValues.Center },
-					SpacingBetweenLines = new SpacingBetweenLines { After = "200" }
-				}
-			};
-			body.AppendChild(paragraph);
-		}
-
-		//private void AddTableSection<T>(Body body, WordWithTableDataConfig<T> tableConfig)
-		//{
-		//	// Добавить подзаголовок
-		//	if (!string.IsNullOrEmpty(tableConfig.Header))
-		//	{
-		//		var paragraph = new Paragraph(new Run(new Text(tableConfig.Header)))
-		//		{
-		//			ParagraphProperties = new ParagraphProperties
-		//			{
-		//				Justification = new Justification { Val = JustificationValues.Left },
-		//				SpacingBetweenLines = new SpacingBetweenLines { Before = "200", After = "100" },
-		//									RunProperties = new RunProperties(new Bold())
-		//			}
-		//		};
-		//		body.AppendChild(paragraph);
-		//	}
-
-		//	// Создать таблицу
-		//	var table = new Table();
-		//	table.AppendChild(new TableProperties(new TableBorders
-		//	{
-		//		TopBorder = new TopBorder { Val = BorderValues.Single, Size = 12 },
-		//		BottomBorder = new BottomBorder { Val = BorderValues.Single, Size = 12 },
-		//		LeftBorder = new LeftBorder { Val = BorderValues.Single, Size = 12 },
-		//		RightBorder = new RightBorder { Val = BorderValues.Single, Size = 12 },
-		//		InsideHorizontalBorder = new InsideHorizontalBorder { Val = BorderValues.Single, Size = 12 },
-		//		InsideVerticalBorder = new InsideVerticalBorder { Val = BorderValues.Single, Size = 12 }
-		//	}));
-
-		//	// Добавить строки заголовков
-		//	var headerRow = new TableRow();
-		//	foreach (var header in tableConfig.Headers)
-		//	{
-		//		headerRow.AppendChild(CreateCell(header, bold: true));
-		//	}
-		//	table.AppendChild(headerRow);
-
-		//	// Добавить данные
-		//	foreach (var item in tableConfig.Data)
-		//	{
-		//		var dataRow = new TableRow();
-		//		foreach (var header in tableConfig.Headers)
-		//		{
-		//			var value = item.GetType().GetProperty(header)?.GetValue(item)?.ToString() ?? "";
-		//			dataRow.AppendChild(CreateCell(value));
-		//		}
-		//		table.AppendChild(dataRow);
-		//	}
-
-		//	body.AppendChild(table);
-		//}
-
-		//private void AddFooter(string footer)
-		//{
-		//	if (!string.IsNullOrEmpty(footer))
-		//	{
-		//		var paragraph = new Paragraph(new Run(new Text(footer)))
-		//		{
-		//			ParagraphProperties = new ParagraphProperties
-		//			{
-		//				Justification = new Justification { Val = JustificationValues.Left },
-		//				SpacingBetweenLines = new SpacingBetweenLines { Before = "200" },
-		//				RunProperties = new RunProperties(new Italic())
-		//			}
-		//		};
-
-		//		body.AppendChild(paragraph);
-		//	}
-		//}
-
-		private TableCell CreateCell(string text, bool bold = false)
+		private TableCell CreateCell(string text, bool bold = false, bool isHeader = false)
 		{
 			var run = new Run(new Text(text));
+
 			if (bold)
 				run.RunProperties = new RunProperties(new Bold());
 
-			return new TableCell(new Paragraph(run));
+			// Создаём новый параграф для каждой ячейки
+			var paragraph = new Paragraph(run);
+
+			// Если это ячейка заголовка, выравниваем текст по центру
+			if (isHeader)
+			{
+				paragraph.ParagraphProperties = new ParagraphProperties(
+					new Justification { Val = JustificationValues.Center }
+				);
+			}
+
+			// Создаём TableCell и устанавливаем вертикальное выравнивание
+			var tableCell = new TableCell(paragraph);
+
+			// Вертикальное выравнивание по центру для ячеек
+			tableCell.TableCellProperties = new TableCellProperties(
+				new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Center }
+			);
+
+			return tableCell;
 		}
 	}
 }
