@@ -53,7 +53,7 @@ namespace University_Dasboard
                 .Include(d => d.Faculty)
                 .ToList();
 
-            DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
                 departments,
                 comboBox: cbDepartments);
         }

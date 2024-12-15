@@ -1,7 +1,4 @@
-﻿using Database;
-using University_Dasboard.Database.Models;
-
-namespace University_Dasboard
+﻿namespace University_Dasboard
 {
     public class DataGridViewHelper
     {
@@ -14,15 +11,6 @@ namespace University_Dasboard
                     dgv.Columns[columnName].Visible = false;
                 }
             }
-        }
-        public static void LoadCombobox<T>(
-            List<T> comboboxData,
-            ComboBox comboBox)
-            where T : class
-        {
-            comboBox.DataSource = comboboxData;
-            comboBox.DisplayMember = "Name";
-            comboBox.ValueMember = "Id";
         }
     }
 }

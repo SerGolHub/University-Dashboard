@@ -58,6 +58,8 @@
             dgvGroupList.Name = "dgvGroupList";
             dgvGroupList.Size = new Size(862, 350);
             dgvGroupList.TabIndex = 53;
+            dgvGroupList.CellValueChanged += dgvGroupList_CellValueChanged;
+            dgvGroupList.RowPostPaint += dgvGroupList_RowPostPaint;
             // 
             // btnDelete
             // 
@@ -72,6 +74,7 @@
             btnDelete.TabIndex = 50;
             btnDelete.Text = "Удалить";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnReset
             // 
@@ -86,6 +89,7 @@
             btnReset.TabIndex = 51;
             btnReset.Text = "Сбросить изменения";
             btnReset.UseVisualStyleBackColor = false;
+            btnReset.Click += btnReset_Click;
             // 
             // btnSave
             // 
@@ -100,6 +104,7 @@
             btnSave.TabIndex = 52;
             btnSave.Text = "Сохранить";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // lbDbSaveResult
             // 
@@ -135,6 +140,8 @@
             cbDirection.Name = "cbDirection";
             cbDirection.Size = new Size(209, 26);
             cbDirection.TabIndex = 46;
+            cbDirection.Text = "Выберите кафедру ↑";
+            cbDirection.SelectedIndexChanged += cbDirection_SelectedIndexChanged;
             // 
             // cbDepartment
             // 
@@ -147,6 +154,8 @@
             cbDepartment.Name = "cbDepartment";
             cbDepartment.Size = new Size(209, 26);
             cbDepartment.TabIndex = 45;
+            cbDepartment.Text = "Выберите факультет ↑";
+            cbDepartment.SelectedIndexChanged += cbDepartment_SelectedIndexChanged;
             // 
             // cbFaculty
             // 
@@ -159,6 +168,7 @@
             cbFaculty.Name = "cbFaculty";
             cbFaculty.Size = new Size(209, 26);
             cbFaculty.TabIndex = 44;
+            cbFaculty.SelectedIndexChanged += cbFaculty_SelectedIndexChanged;
             // 
             // btnAdd
             // 
@@ -173,6 +183,7 @@
             btnAdd.TabIndex = 41;
             btnAdd.Text = "Добавить";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // tbGroupName
             // 
@@ -250,6 +261,7 @@
             tbMaxCourse.Name = "tbMaxCourse";
             tbMaxCourse.Size = new Size(59, 24);
             tbMaxCourse.TabIndex = 54;
+            tbMaxCourse.KeyPress += tbMaxCourse_KeyPress;
             // 
             // FrmGroups
             // 

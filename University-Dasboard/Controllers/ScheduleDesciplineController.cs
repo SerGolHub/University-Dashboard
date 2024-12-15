@@ -15,7 +15,7 @@ namespace University_Dasboard.Controllers
 {
 	public class ScheduleDesciplineController
 	{
-		public static void LoadSchedulesAsync(DataGridView dgv,	ref BindingList<ScheduleDisciplineViewModel> bindingList)
+		public static void LoadSchedules(DataGridView dgv,	ref BindingList<ScheduleDisciplineViewModel> bindingList)
 		{
 			using var ctx = new DatabaseContext();
 			var schedules = ctx.ScheduleDisciplines.Include(s => s.Discipline).Include(s => s.Group!)
