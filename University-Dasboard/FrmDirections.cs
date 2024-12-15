@@ -9,7 +9,6 @@ namespace University_Dasboard
 {
     public partial class FrmDirections : Form
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public class DirectionViewModel
         {
             public Guid Id { get; set; }
@@ -81,7 +80,6 @@ namespace University_Dasboard
             if (selectedDepartment == null)
             {
                 MessageBox.Show("Для добавления направления нужно выбрать существующую кафедру");
-                logger.Warn("Пользователь не выбрал существующую кафедру");
                 return;
             }
             if (tbDirectionCode.Text.Length == 0)
