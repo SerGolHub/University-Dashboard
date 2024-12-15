@@ -46,7 +46,7 @@ namespace University_Dasboard
             DataGridViewHelper.HideColumns(dgvStudentList,
                 ["Id", "GroupId", "Marks"]);
             var faculties = ctx.Faculty.ToList();
-            DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
                 faculties,
                 comboBox: cbFaculty);
         }
@@ -125,30 +125,26 @@ namespace University_Dasboard
             Drawer.DrawNumbers(sender, e);
         }
 
-        private void LoadComboboxData<T>(ComboBox cb) where T : class
-        {
-            using var ctx = new DatabaseContext();
-            var entityList = ctx.Set<T>().ToList();
-            DataGridViewHelper.LoadCombobox(
-                entityList,
-                comboBox: cb);
-        }
         private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedFaculty = (Faculty?)cbFaculty.SelectedItem;
-            LoadComboboxData<Department>(cbDepartment);
-        }
+			selectedFaculty = (Faculty?)cbFaculty.SelectedItem;
+			ComboboxHelper.LoadComboboxData<Department>(
+				cbDepartment,
+				dep => dep.FacultyId == selectedFaculty!.Id);
+		}
 
         private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDepartment = (Department?)cbDepartment.SelectedItem;
-            LoadComboboxData<Direction>(cbDirection);
-        }
+			selectedDepartment = (Department?)cbDepartment.SelectedItem;
+			ComboboxHelper.LoadComboboxData<Direction>(
+				cbDirection,
+				dir => dir.DepartmentId == selectedDepartment!.Id);
+		}
 
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDirection = (Direction?)cbDirection.SelectedItem;
-            LoadComboboxData<Group>(cbGroup);
+            ComboboxHelper.LoadComboboxData<Group>(cbGroup);
         }
 
         private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)

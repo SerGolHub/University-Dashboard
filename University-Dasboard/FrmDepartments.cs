@@ -26,7 +26,7 @@ namespace University_Dasboard
                 ["Id", "FacultyId", "Faculty", "Directions", "Disciplines", "Teachers"]);
 
             var faculties = ctx.Faculty.ToList();
-            DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
                 faculties,
                 comboBox: cbFaculties);
         }
