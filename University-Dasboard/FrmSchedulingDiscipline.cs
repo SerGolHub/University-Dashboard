@@ -62,7 +62,7 @@ namespace University_Dasboard
 		{
 			using var ctx = new DatabaseContext();
 
-			ScheduleDesciplineController.LoadSchedulesAsync(dgvSchedules, ref schedules);
+			ScheduleDesciplineController.LoadSchedules(dgvSchedules, ref schedules);
 			DataGridViewHelper.HideColumns(dgvSchedules,
 				["Id", "FacultyId", "DisciplineId", "DirectionId", "GroupId", "ScheduleWeekId"]);
 			LoadComboboxData(ctx);
@@ -77,7 +77,7 @@ namespace University_Dasboard
 				.Select(f => new { f.Id, f.Name })
 				.ToList();
 
-			DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
 				faculties,
 				comboBox: comboBoxFaculties);
 
@@ -86,7 +86,7 @@ namespace University_Dasboard
 				.Select(d => new { d.Id, d.Name })
 				.ToList();
 
-			DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
 				directions,
 				comboBox: comboBoxDirection);
 
@@ -95,7 +95,7 @@ namespace University_Dasboard
 				.Select(g => new { g.Id, g.Name })
 				.ToList();
 
-			DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
 				groups,
 				comboBox: comboBoxGroup);
 
@@ -104,7 +104,7 @@ namespace University_Dasboard
 				.Select(sw => new { sw.Id, sw.Name })
 				.ToList();
 
-			DataGridViewHelper.LoadCombobox(
+            ComboboxHelper.LoadCombobox(
 				scheduleWeeks,
 				comboBox: comboBoxScheduleWeek);
 		}
