@@ -1,4 +1,5 @@
 ﻿using Database;
+using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
 {
@@ -45,6 +46,44 @@ namespace University_Dasboard
 			else
 			{
 				return true;
+			}
+		}
+
+		public static void LoadFacultyDepartments(
+			ComboBox cbDepartment,
+			ComboBox cbDirection,
+			Guid selectedFacultyId,
+			Department? selectedDepartment,
+			Direction? selectedDirection)
+		{
+			bool isDepartmentLoaded = LoadComboboxData<Department>(
+					cbDepartment,
+					dep => dep.FacultyId == selectedFacultyId);
+			if (!isDepartmentLoaded)
+			{
+				selectedDepartment = null;
+				cbDepartment.Text = string.Empty;
+				cbDepartment.DataSource = null;
+
+				selectedDirection = null;
+				cbDirection.Text = string.Empty;
+				cbDirection.DataSource = null;
+			}
+		}
+
+		public static void LoadDepartmentDirections(
+			ComboBox cbDirection,
+			Guid selectedDepartmentId,
+			Direction? selectedDirection)
+		{
+			bool isDirectionLoaded = LoadComboboxData<Direction>(
+				cbDirection,
+				dir => dir.DepartmentId == selectedDepartmentId);
+			if (!isDirectionLoaded)
+			{
+				selectedDirection = null;
+				cbDirection.Text = string.Empty;
+				cbDirection.DataSource = null;
 			}
 		}
 	}
