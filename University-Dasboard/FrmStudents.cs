@@ -14,14 +14,14 @@ namespace University_Dasboard
 			public Guid Id { get; set; }
 			public string Name { get; set; } = string.Empty;
 			public DateTime EnrollmentDate { get; set; }
-			public required string EnrollmentNumber { get; set; }
+			public string EnrollmentNumber { get; set; } = string.Empty;
 			public bool IsExcellentStudent { get; set; }
 			public int CourseNumber { get; set; }
 
 			public Guid GroupId { get; set; }
 			public string GroupName { get; set; } = String.Empty;
 		}
-
+		
 		public FrmStudents()
 		{
 			InitializeComponent();
@@ -115,7 +115,19 @@ namespace University_Dasboard
 				isExcelent = false;
 			}
 
+			var newStudent = new StudentViewModel()
+			{
+				Id = Guid.NewGuid(),
+				Name = tbFullName.Text,
+				EnrollmentDate = DateTime.ParseExact(tbEnrollmentDate.Text, "dd.mm.yyyy", new System.Globalization.CultureInfo("ru-RU")),
+				EnrollmentNumber = tbEnrollmentNumber.Text,
+				CourseNumber = (int)selectedCourse,
+				GroupId = selectedGroup.Id,
+				GroupName = selectedGroup.Name
+			};
 			
+			students.Add(newStudent);
+			newStudentList.Add(newStudent);
 		}
 
 		private async void btnSave_Click(object sender, EventArgs e)
@@ -180,17 +192,27 @@ namespace University_Dasboard
 		private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedFaculty = (Faculty?)cbFaculty.SelectedItem;
-			ComboboxHelper.LoadComboboxData<Department>(
-				cbDepartment,
-				dep => dep.FacultyId == selectedFaculty!.Id);
+			if (selectedFaculty != null)
+			{
+				ComboboxHelper.LoadFacultyDepartments(
+					cbDepartment,
+					cbDirection,
+					selectedFaculty.Id,
+					selectedDepartment,
+					selectedDirection);
+			}
 		}
 
 		private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedDepartment = (Department?)cbDepartment.SelectedItem;
-			ComboboxHelper.LoadComboboxData<Direction>(
-				cbDirection,
-				dir => dir.DepartmentId == selectedDepartment!.Id);
+			if (selectedDepartment != null)
+			{
+				ComboboxHelper.LoadDepartmentDirections(
+					cbDirection,
+					selectedDepartment.Id,
+					selectedDirection);
+			}
 		}
 
 		private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
