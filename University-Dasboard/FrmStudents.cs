@@ -68,6 +68,7 @@ namespace University_Dasboard
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string fullName = tbFullName.Text;
+
             if (fullName == string.Empty)
             {
                 MessageBox.Show("Введите ФИО студента.");

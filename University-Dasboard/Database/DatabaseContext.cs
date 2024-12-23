@@ -14,6 +14,7 @@ namespace Database
 		public DbSet<Student> Student { get; set; }
 		public DbSet<Discipline> Discipline { get; set; }
 		public DbSet<Teacher> Teacher { get; set; }
+		public DbSet<TeacherConstraint> TeacherConstraints { get; set; }
 		public DbSet<User> User { get; set; }
 		public DbSet<ScheduleWeek> ScheduleWeek { get; set; }
 		public DbSet<ScheduleDiscipline> ScheduleDisciplines { get; set; }

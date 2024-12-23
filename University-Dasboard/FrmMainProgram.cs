@@ -5,7 +5,7 @@ namespace University_Dasboard
 {
     public partial class FrmMainProgram : Form
     {
-		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public FrmMainProgram(string fullName = "", string login = "")
         {
@@ -27,7 +27,7 @@ namespace University_Dasboard
                 if (login == "")
                 {
                     MessageBox.Show("Что-то пошло не так :(");
-					return;
+                    return;
                 }
                 try
                 {
@@ -84,7 +84,7 @@ namespace University_Dasboard
             btnDisciplines.BackColor = color;
             btnGroups.BackColor = color;
             btnStudents.BackColor = color;
-            
+
             btnGrades.BackColor = color;
 
             button3.BackColor = color;
@@ -161,6 +161,13 @@ namespace University_Dasboard
             restoreButtonsBackColor();
             moveNavigationSubPanel(btnStudents, pnlManageDataSubMenu);
         }
+
+        private void btnTeachers_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmTeachers());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnTeachers, pnlManageDataSubMenu);
+        }
         #endregion
 
         private void btnGradeRecord_Click(object sender, EventArgs e)
@@ -171,24 +178,24 @@ namespace University_Dasboard
             moveNavigationPanel(btnGradeRecord);
         }
 
-		private void btnSchedulingWeek_Click(object sender, EventArgs e)
-		{
-			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingWeek());
-			changeSubMenuVisibility(pnlSchedulingSubMenu);
-			restoreButtonsBackColor();
-			moveNavigationPanel(btnScheduling);
-		}
+        private void btnSchedulingWeek_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmSchedulingWeek());
+            changeSubMenuVisibility(pnlSchedulingSubMenu);
+            restoreButtonsBackColor();
+            moveNavigationPanel(btnScheduling);
+        }
 
-		private void buttonSchedulingDisciplines_Click(object sender, EventArgs e)
-		{
-			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDiscipline());
-			changeSubMenuVisibility(pnlSchedulingSubMenu);
-			restoreButtonsBackColor();
-			moveNavigationPanel(btnScheduling);
-		}
+        private void buttonSchedulingDisciplines_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDiscipline());
+            changeSubMenuVisibility(pnlSchedulingSubMenu);
+            restoreButtonsBackColor();
+            moveNavigationPanel(btnScheduling);
+        }
 
 
-		private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -248,6 +255,5 @@ namespace University_Dasboard
             restoreButtonsBackColor();
             moveNavigationSubPanel(button5, pnlSchedulingSubMenu);
         }
-
     }
 }
