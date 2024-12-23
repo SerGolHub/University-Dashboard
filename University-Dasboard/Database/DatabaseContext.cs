@@ -36,7 +36,7 @@ namespace Database
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=zorg;Password=zorg");
+			optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=postgres;Password=postgres");
 		}
 	}
 }

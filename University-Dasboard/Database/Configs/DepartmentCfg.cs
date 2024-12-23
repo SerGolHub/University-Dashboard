@@ -19,6 +19,6 @@ public class DepartmentCfg : IEntityTypeConfiguration<Department>
         builder.
             HasMany(dep => dep.Teachers)
             .WithOne(t => t.Department)
-            .HasForeignKey(t => t.DeparatmentId);
+            .HasForeignKey(t => t.DepartmentId);
     }
 }

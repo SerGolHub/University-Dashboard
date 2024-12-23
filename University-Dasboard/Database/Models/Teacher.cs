@@ -20,7 +20,7 @@ namespace University_Dasboard.Database.Models
 
         public ICollection<Discipline> Subjects { get; set; } = new List<Discipline>();
 
-        public Guid DeparatmentId { get; set; }
+        public Guid DepartmentId { get; set; }
         public Department? Department { get; set; }
 
 		// Для составления расписания
