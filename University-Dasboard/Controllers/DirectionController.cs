@@ -15,7 +15,7 @@ namespace University_Dasboard.Controllers
             using var ctx = new DatabaseContext();
             var directions = ctx.Direction
             .Include(d => d.Department)
-            .ThenInclude(dep => dep.Faculty)
+            .ThenInclude(dep => dep!.Faculty)
             .Select(d => new DirectionViewModel
             {
                 Id = d.Id,
@@ -23,9 +23,9 @@ namespace University_Dasboard.Controllers
                 Code = d.Code,
                 MaxCourse = d.MaxCourse,
                 DepartmentId = d.DepartmentId,
-                DepartmentName = d.Department.Name,
+                DepartmentName = d.Department!.Name,
                 FacultyId = d.Department.FacultyId,
-                FacultyName = d.Department.Faculty.Name
+                FacultyName = d.Department.Faculty!.Name
             })
             .ToList();
             

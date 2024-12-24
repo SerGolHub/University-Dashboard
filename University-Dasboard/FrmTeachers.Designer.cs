@@ -35,11 +35,9 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            label6 = new Label();
             label7 = new Label();
             label8 = new Label();
             cbDegree = new ComboBox();
-            cbDirection = new ComboBox();
             tbPhoneNumber = new TextBox();
             tbEmail = new TextBox();
             comboBoxTeachers = new ComboBox();
@@ -54,8 +52,6 @@
             cbDepartment = new ComboBox();
             cbStatus = new ComboBox();
             label10 = new Label();
-            label11 = new Label();
-            tbNote = new ListBox();
             dateTimePickerStartTime = new DateTimePicker();
             dateTimePickerEndTime = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvTeacherList).BeginInit();
@@ -142,17 +138,6 @@
             label5.TabIndex = 19;
             label5.Text = "Дата приёма на работу:";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.FromArgb(158, 161, 178);
-            label6.Location = new Point(432, 29);
-            label6.Name = "label6";
-            label6.Size = new Size(128, 20);
-            label6.TabIndex = 19;
-            label6.Text = "Направление:";
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -188,21 +173,6 @@
             cbDegree.Name = "cbDegree";
             cbDegree.Size = new Size(118, 26);
             cbDegree.TabIndex = 22;
-            // 
-            // cbDirection
-            // 
-            cbDirection.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbDirection.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbDirection.BackColor = Color.FromArgb(158, 161, 178);
-            cbDirection.FlatStyle = FlatStyle.Flat;
-            cbDirection.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            cbDirection.ForeColor = Color.FromArgb(24, 30, 54);
-            cbDirection.FormattingEnabled = true;
-            cbDirection.Location = new Point(566, 27);
-            cbDirection.Name = "cbDirection";
-            cbDirection.Size = new Size(209, 26);
-            cbDirection.TabIndex = 22;
-            cbDirection.Text = "Выберите направление";
             // 
             // tbPhoneNumber
             // 
@@ -248,9 +218,9 @@
             dgvTeacherList.AllowUserToDeleteRows = false;
             dgvTeacherList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTeacherList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTeacherList.Location = new Point(12, 267);
+            dgvTeacherList.Location = new Point(12, 244);
             dgvTeacherList.Name = "dgvTeacherList";
-            dgvTeacherList.Size = new Size(515, 254);
+            dgvTeacherList.Size = new Size(648, 254);
             dgvTeacherList.TabIndex = 28;
             // 
             // btnDelete
@@ -350,6 +320,7 @@
             cbDepartment.Size = new Size(209, 26);
             cbDepartment.TabIndex = 35;
             cbDepartment.Text = "Выберите кафедру";
+            cbDepartment.SelectedIndexChanged += cbDepartment_SelectedIndexChanged;
             // 
             // cbStatus
             // 
@@ -377,26 +348,6 @@
             label10.TabIndex = 37;
             label10.Text = "Статус:";
             // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.FromArgb(158, 161, 178);
-            label11.Location = new Point(553, 501);
-            label11.Name = "label11";
-            label11.Size = new Size(110, 20);
-            label11.TabIndex = 39;
-            label11.Text = "Пожелания:";
-            // 
-            // tbNote
-            // 
-            tbNote.FormattingEnabled = true;
-            tbNote.ItemHeight = 15;
-            tbNote.Location = new Point(553, 532);
-            tbNote.Name = "tbNote";
-            tbNote.Size = new Size(180, 109);
-            tbNote.TabIndex = 40;
-            // 
             // dateTimePickerStartTime
             // 
             dateTimePickerStartTime.Location = new Point(701, 339);
@@ -417,8 +368,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(980, 653);
-            Controls.Add(tbNote);
-            Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(cbStatus);
             Controls.Add(cbDepartment);
@@ -432,7 +381,6 @@
             Controls.Add(btnSave);
             Controls.Add(lbDbSaveResult);
             Controls.Add(label9);
-            Controls.Add(cbDirection);
             Controls.Add(comboBoxTeachers);
             Controls.Add(cbDegree);
             Controls.Add(btnAdd);
@@ -445,7 +393,6 @@
             Controls.Add(label1);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(label6);
             Controls.Add(label2);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmTeachers";
@@ -464,11 +411,9 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private Label label6;
         private Label label7;
         private Label label8;
         private ComboBox cbDegree;
-        private ComboBox cbDirection;
         private TextBox tbPhoneNumber;
         private TextBox tbEmail;
         private ComboBox comboBoxTeachers;
@@ -483,8 +428,6 @@
         private ComboBox cbDepartment;
         private ComboBox cbStatus;
         private Label label10;
-        private Label label11;
-        private ListBox tbNote;
         private DateTimePicker dateTimePickerStartTime;
         private DateTimePicker dateTimePickerEndTime;
     }

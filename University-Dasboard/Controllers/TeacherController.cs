@@ -17,9 +17,7 @@ namespace University_Dasboard.Controllers
             using var ctx = new DatabaseContext();
             try
             {
-                var teachers = ctx.Teacher
-                    .Include(t => t.Department).ThenInclude(t => t!.Disciplines)
-                    .Include(t => t.Constraints)
+                var teachers = ctx.Teacher.Include(t => t.Department).Include(t => t.Constraints)
                     .Select(t => new TeacherViewModel
                     {
                         Id = t.Id,
@@ -29,15 +27,8 @@ namespace University_Dasboard.Controllers
                         HireDate = t.HireDate,
                         Degree = t.Degree,
                         Status = t.Status,
+                        DepartmentId = t.DepartmentId,
                         DepartmentName = t.Department!.Name,
-                        Constraints = t.Constraints.Select(c => new TeacherConstraintViewModel
-                        {
-                            Id = c.Id,
-                            DayOfWeek = c.DayOfWeek,
-                            StartTime = c.StartTime,
-                            EndTime = c.EndTime,
-                            Note = c.Note
-                        }).ToList()
                     }).ToList();
 
                 bindingList = new BindingList<TeacherViewModel>(teachers);

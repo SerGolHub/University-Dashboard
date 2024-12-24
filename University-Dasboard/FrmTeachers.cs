@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Enums;
@@ -79,7 +81,7 @@ namespace University_Dasboard
 
                 TeacherController.LoadTeachers(dgvTeacherList, ref teachers);
                 DataGridViewHelper.HideColumns(dgvTeacherList,
-                    ["Id", "DepartmentId", "FacultyId", "Groups"]);
+                    ["Id", "DepartmentId"]);
                 LoadComboboxData(ctx);
 
 
@@ -87,6 +89,12 @@ namespace University_Dasboard
 
                 // Загрузка значений перечисления Degree в ComboBox
                 cbDegree.DataSource = Enum.GetValues(typeof(DegreeTeachers));
+
+                cbStatus.DataSource = Enum.GetValues(typeof(StatusTeacher)).Cast<StatusTeacher>()
+                    .Select(e => new { Value = e, DisplayName = GetEnumDisplayName(e) }).ToList();
+
+                cbStatus.DisplayMember = "DisplayName";
+                cbStatus.ValueMember = "Value";
 
                 logger.Info("Список преподавателей успешно загружен.");
             }
@@ -99,22 +107,11 @@ namespace University_Dasboard
 
         private void LoadComboboxData(DatabaseContext ctx)
         {
-            var departments = ctx.Department
-                .Include(d => d.Faculty)
-                .ToList();
+            var departments = ctx.Department.ToList();
 
             ComboboxHelper.LoadCombobox(
                 departments,
                 comboBox: cbDepartment);
-
-            // Загрузка направлений
-            var directions = ctx.Direction
-                .Select(d => new { d.Id, d.Name })
-                .ToList();
-
-            ComboboxHelper.LoadCombobox(
-                directions,
-                comboBox: cbDirection);
 
             var teachers = ctx.Teacher
                 .Select(t => new { t.Id, t.Name })
@@ -169,6 +166,13 @@ namespace University_Dasboard
                 return;
             }
 
+            if (selectedDepartment == null)
+            {
+                logger.Warn("Попытка выбора кафедры не удалась.");
+                MessageBox.Show("Пользователь не выбрал кафедру");
+                return;
+            }
+
             var newTeacher = new TeacherViewModel
             {
                 Id = Guid.NewGuid(),
@@ -176,10 +180,10 @@ namespace University_Dasboard
                 PhoneNumber = tbPhoneNumber.Text,
                 Email = tbEmail.Text,
                 HireDate = dtpHireDate.Value,
-                Degree = cbDegree.ToString(),
+                Degree = cbDegree.Text,
                 Status = cbStatus.Text,
-                DepartmentId = selectedDepartment?.Id ?? Guid.Empty,
-                DepartmentName = selectedDepartment?.Name ?? string.Empty
+                DepartmentId = selectedDepartment!.Id,
+                DepartmentName = selectedDepartment.Name
             };
 
             newTeacherList.Add(newTeacher);
@@ -188,7 +192,7 @@ namespace University_Dasboard
             logger.Info("Преподаватель добавлен в список на сохранение.");
         }
 
-        private async void btnSave_Click(object sender, EventArgs e)
+        async private void btnSave_Click(object sender, EventArgs e)
         {
             lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
             lbDbSaveResult.Text = "Подождите. Данные сохраняются...";
@@ -300,6 +304,18 @@ namespace University_Dasboard
             {
                 checkedListBox.Items.Add(day);
             }
+        }
+
+        private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedDepartment = (Department?)cbDepartment.SelectedItem;
+        }
+
+        public static string GetEnumDisplayName<T>(T enumValue) where T : Enum
+        {
+            var fieldInfo = typeof(T).GetField(enumValue.ToString());
+            var displayAttribute = fieldInfo?.GetCustomAttribute<DisplayAttribute>();
+            return displayAttribute?.Name ?? enumValue.ToString();
         }
     }
 }
