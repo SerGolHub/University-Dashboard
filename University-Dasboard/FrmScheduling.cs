@@ -251,56 +251,5 @@ namespace University_Dasboard
 		{
 			Drawer.DrawNumbers(sender, e);
 		}
-
-		private void GenerateReport(object sender, EventArgs e)
-		{
-			string fileName = "";
-
-			using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
-			{
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					fileName = dialog.FileName.ToString();
-					MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				}
-			}
-
-			var config = new WordWithTableConfig
-			{
-				FilePath = fileName,
-				Header = "ГРАФИК УЧЕБНОГО ПРОЦЕССА",
-				Footer = "Создано ",
-				ColumnsRowsWidth = new List<(int, int)> { (0, 5), (0, 5), (0, 10), (0, 10), (0, 7), (0, 7), (0, 10), (0, 10), (0, 8) },
-				UseUnion = true,
-				ColumnsRowsDataCount = (8, 8),
-				Headers = new List<(int ColumnIndex, int RowIndex, string Header, string PropertyName)>	{
-				(0, 0, "Форма занятий:", ""),
-				(1, 0, "Недели:", ""),
-				(2, 0, "1", ""),
-				(3, 0, "2", ""),
-				(4, 0, "3", ""),
-				(5, 0, "4", ""),
-				(6, 0, "5", ""),
-				(7, 0, "6", ""),
-				(8, 0, "7", ""),
-				(9, 0, "8", ""),
-				(10, 0, "9", ""),
-				(11, 0, "10", ""),
-				(12, 0, "11", ""),
-				(13, 0, "12", ""),
-				(14, 0, "13", ""),
-				(15, 0, "14", ""),
-				(16, 0, "15", ""),
-				(17, 0, "16", ""),
-				(18, 0, "17", ""),
-				(19, 0, "18", ""),
-				(20, 0, "Σ", ""),
-				(21, 0, "Отчётность", ""),
-				}
-			};
-
-			var report = new WordWithTableReport(config);
-			report.GenerateReport(fileName);
-		}
 	}
 }

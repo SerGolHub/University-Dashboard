@@ -282,7 +282,6 @@
 			button1.TabIndex = 62;
 			button1.Text = "Создать отчёт";
 			button1.UseVisualStyleBackColor = false;
-			button1.Click += GenerateReport;
 			// 
 			// FrmSchedulingDiscipline
 			// 
