@@ -10,7 +10,7 @@ using static University_Dasboard.FrmTeachers;
 
 namespace University_Dasboard.Controllers
 {
-    public static class TeacherController
+    public class TeacherController
     {
         public static void LoadTeachers(DataGridView dgv, ref BindingList<TeacherViewModel> bindingList)
         {

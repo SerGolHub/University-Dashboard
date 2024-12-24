@@ -275,7 +275,6 @@ namespace University_Dasboard
             var selectedDays = checkedListBoxDays.CheckedItems.Cast<DayOfWeek>().ToList();
             var startTime = dateTimePickerStartTime.Value.TimeOfDay;
             var endTime = dateTimePickerEndTime.Value.TimeOfDay;
-            var note = tbNote.Text;
 
             foreach (var day in selectedDays)
             {
@@ -286,8 +285,7 @@ namespace University_Dasboard
                     Teacher = selectedTeacher,
                     DayOfWeek = day,
                     StartTime = startTime,
-                    EndTime = endTime,
-                    Note = note
+                    EndTime = endTime
                 };
 
                 var teacher = teachers.FirstOrDefault(t => t.Id == t.Id);
