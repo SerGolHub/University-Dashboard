@@ -11,13 +11,16 @@ namespace University_Dasboard.Database.Models
 		public Guid Id { get; set; }
 
 		public Guid TeacherId { get; set; }
-
 		public Teacher Teacher { get; set; } = null!;
 
-		// Ограничение по дням недели
-		public ICollection<DayConstraint> DayConstraints { get; set; } = new List<DayConstraint>();
+        // День недели, когда преподаватель может работать
+        public DayOfWeek DayOfWeek { get; set; }
 
-		// Комментарий или пожелание, если нужно уточнить ограничение
-		public string Note { get; set; } = string.Empty; // Опциональное поле для пояснения
+        // Диапазон времени
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+
+        // Комментарий или пожелание, если нужно уточнить ограничение
+        public string Note { get; set; } = string.Empty;
 	}
 }

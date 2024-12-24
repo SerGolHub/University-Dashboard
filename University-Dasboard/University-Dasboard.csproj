@@ -72,8 +72,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="FrmScheduling.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="FrmSchedulingWeek.cs">
 			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="FrmTeachers.cs">
+		  <SubType>Form</SubType>
 		</Compile>
 		<Compile Update="Properties\Resources.Designer.cs">
 		  <DesignTime>True</DesignTime>

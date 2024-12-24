@@ -11,7 +11,7 @@ public class TeacherCfg : IEntityTypeConfiguration<Teacher>
         builder.
             HasOne(t => t.Department)
             .WithMany(dep => dep.Teachers)
-            .HasForeignKey(t => t.DeparatmentId)
+            .HasForeignKey(t => t.DepartmentId)
 			.OnDelete(DeleteBehavior.Cascade);
 
 		builder.

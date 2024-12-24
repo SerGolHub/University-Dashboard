@@ -21,11 +21,6 @@ namespace University_Dasboard.Database.Configs
 				.HasForeignKey(tc => tc.TeacherId)
 				.OnDelete(DeleteBehavior.Cascade);
 
-			builder
-				.HasMany(tc => tc.DayConstraints)
-				.WithOne(dc => dc.TeacherConstraint)
-				.HasForeignKey(dc => dc.TeacherConstraintId)
-				.OnDelete(DeleteBehavior.Cascade);
 
 			builder.Property(tc => tc.Note)
 				.HasMaxLength(200); // Ограничиваем длину описания

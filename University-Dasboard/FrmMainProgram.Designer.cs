@@ -57,6 +57,7 @@
             button2 = new Button();
             panel3 = new Panel();
             pnlFormLoader = new Panel();
+            btnTeachers = new Button();
             panel1.SuspendLayout();
             pnlSchedulingSubMenu.SuspendLayout();
             pnlGradeRecordSubMenu.SuspendLayout();
@@ -243,6 +244,7 @@
             // 
             // pnlManageDataSubMenu
             // 
+            pnlManageDataSubMenu.Controls.Add(btnTeachers);
             pnlManageDataSubMenu.Controls.Add(btnStudents);
             pnlManageDataSubMenu.Controls.Add(btnGroups);
             pnlManageDataSubMenu.Controls.Add(btnDisciplines);
@@ -499,6 +501,26 @@
             pnlFormLoader.Size = new Size(996, 692);
             pnlFormLoader.TabIndex = 4;
             // 
+            // btnTeachers
+            // 
+            btnTeachers.BackColor = Color.FromArgb(24, 30, 54);
+            btnTeachers.Dock = DockStyle.Top;
+            btnTeachers.FlatAppearance.BorderSize = 0;
+            btnTeachers.FlatStyle = FlatStyle.Flat;
+            btnTeachers.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTeachers.ForeColor = Color.FromArgb(0, 126, 249);
+            btnTeachers.ImageAlign = ContentAlignment.MiddleRight;
+            btnTeachers.Location = new Point(0, 384);
+            btnTeachers.Name = "btnTeachers";
+            btnTeachers.Padding = new Padding(30, 0, 15, 0);
+            btnTeachers.Size = new Size(170, 64);
+            btnTeachers.TabIndex = 14;
+            btnTeachers.Text = "Преподаватели";
+            btnTeachers.TextAlign = ContentAlignment.MiddleLeft;
+            btnTeachers.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnTeachers.UseVisualStyleBackColor = false;
+            btnTeachers.Click +=  btnTeachers_Click;
+            // 
             // FrmMainProgram
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -553,5 +575,6 @@
         private Button btnDisciplines;
         private Button btnStudents;
         private Button btnGroups;
+        private Button btnTeachers;
     }
 }
