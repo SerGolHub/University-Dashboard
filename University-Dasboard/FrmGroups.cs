@@ -153,17 +153,12 @@ namespace University_Dasboard
 			selectedFaculty = (Faculty?)cbFaculty.SelectedItem;
 			if (selectedFaculty != null)
 			{
-				bool isDepartmentLoaded = ComboboxHelper.LoadComboboxData<Department>(
+				ComboboxHelper.LoadFacultyDepartments(
 					cbDepartment,
-					dep => dep.FacultyId == selectedFaculty!.Id);
-				if (!isDepartmentLoaded)
-				{
-					selectedDepartment = null;
-					cbDepartment.Text = string.Empty;
-					selectedDirection = null;
-					cbDirection.Text = string.Empty;
-					cbDirection.DataSource = null;
-				}
+					cbDirection,
+					selectedFaculty.Id,
+					selectedDepartment,
+					selectedDirection);
 			}
 		}
 
@@ -172,13 +167,10 @@ namespace University_Dasboard
 			selectedDepartment = (Department?)cbDepartment.SelectedItem;
 			if (selectedDepartment != null)
 			{
-				bool isDirectionLoaded = ComboboxHelper.LoadComboboxData<Direction>(
-				cbDirection,
-				dir => dir.DepartmentId == selectedDepartment!.Id);
-				if (!isDirectionLoaded)
-				{
-					selectedDirection = null;
-				}
+				ComboboxHelper.LoadDepartmentDirections(
+					cbDirection,
+					selectedDepartment.Id,
+					selectedDirection);
 			}
 		}
 
