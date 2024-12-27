@@ -311,7 +311,7 @@ namespace University_Dasboard
 
 		private void tbPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+			if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar) && e.KeyChar != '+')
 			{
 				e.Handled = true;
 			}
