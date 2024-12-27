@@ -184,6 +184,7 @@
 			tbPhoneNumber.Name = "tbPhoneNumber";
 			tbPhoneNumber.Size = new Size(185, 24);
 			tbPhoneNumber.TabIndex = 20;
+			tbPhoneNumber.KeyPress += tbPhoneNumber_KeyPress;
 			// 
 			// tbEmail
 			// 
