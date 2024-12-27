@@ -32,9 +32,9 @@
 			panel1 = new Panel();
 			pnlNavigation = new Panel();
 			pnlSchedulingSubMenu = new Panel();
-			button5 = new Button();
-			button4 = new Button();
-			button3 = new Button();
+			btnSchedulingTeachers = new Button();
+			btnSchedulingDisciplines = new Button();
+			btnAcademicHours = new Button();
 			btnScheduling = new Button();
 			pnlGradeRecordSubMenu = new Panel();
 			pnlNavigationSubmenu = new Panel();
@@ -54,8 +54,8 @@
 			panel4 = new Panel();
 			label2 = new Label();
 			lbUserName = new Label();
-			button1 = new Button();
-			button2 = new Button();
+			btnClose = new Button();
+			btnMinimize = new Button();
 			panel3 = new Panel();
 			pnlFormLoader = new Panel();
 			panel1.SuspendLayout();
@@ -96,9 +96,9 @@
 			// 
 			// pnlSchedulingSubMenu
 			// 
-			pnlSchedulingSubMenu.Controls.Add(button5);
-			pnlSchedulingSubMenu.Controls.Add(button4);
-			pnlSchedulingSubMenu.Controls.Add(button3);
+			pnlSchedulingSubMenu.Controls.Add(btnSchedulingTeachers);
+			pnlSchedulingSubMenu.Controls.Add(btnSchedulingDisciplines);
+			pnlSchedulingSubMenu.Controls.Add(btnAcademicHours);
 			pnlSchedulingSubMenu.Dock = DockStyle.Top;
 			pnlSchedulingSubMenu.Location = new Point(0, 880);
 			pnlSchedulingSubMenu.Name = "pnlSchedulingSubMenu";
@@ -106,62 +106,62 @@
 			pnlSchedulingSubMenu.TabIndex = 4;
 			pnlSchedulingSubMenu.Visible = false;
 			// 
-			// button5
+			// btnSchedulingTeachers
 			// 
-			button5.Dock = DockStyle.Top;
-			button5.FlatAppearance.BorderSize = 0;
-			button5.FlatStyle = FlatStyle.Flat;
-			button5.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button5.ForeColor = Color.FromArgb(0, 126, 249);
-			button5.ImageAlign = ContentAlignment.MiddleRight;
-			button5.Location = new Point(0, 128);
-			button5.Name = "button5";
-			button5.Padding = new Padding(20, 0, 15, 0);
-			button5.Size = new Size(170, 64);
-			button5.TabIndex = 4;
-			button5.Text = "По преподавателю";
-			button5.TextAlign = ContentAlignment.MiddleLeft;
-			button5.TextImageRelation = TextImageRelation.TextBeforeImage;
-			button5.UseVisualStyleBackColor = true;
-			button5.Click += button5_Click;
+			btnSchedulingTeachers.Dock = DockStyle.Top;
+			btnSchedulingTeachers.FlatAppearance.BorderSize = 0;
+			btnSchedulingTeachers.FlatStyle = FlatStyle.Flat;
+			btnSchedulingTeachers.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnSchedulingTeachers.ForeColor = Color.FromArgb(0, 126, 249);
+			btnSchedulingTeachers.ImageAlign = ContentAlignment.MiddleRight;
+			btnSchedulingTeachers.Location = new Point(0, 128);
+			btnSchedulingTeachers.Name = "btnSchedulingTeachers";
+			btnSchedulingTeachers.Padding = new Padding(20, 0, 15, 0);
+			btnSchedulingTeachers.Size = new Size(170, 64);
+			btnSchedulingTeachers.TabIndex = 4;
+			btnSchedulingTeachers.Text = "По преподавателю";
+			btnSchedulingTeachers.TextAlign = ContentAlignment.MiddleLeft;
+			btnSchedulingTeachers.TextImageRelation = TextImageRelation.TextBeforeImage;
+			btnSchedulingTeachers.UseVisualStyleBackColor = true;
+			btnSchedulingTeachers.Click += btnbtnSchedulingTeachers_Click;
 			// 
-			// button4
+			// btnSchedulingDisciplines
 			// 
-			button4.Dock = DockStyle.Top;
-			button4.FlatAppearance.BorderSize = 0;
-			button4.FlatStyle = FlatStyle.Flat;
-			button4.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button4.ForeColor = Color.FromArgb(0, 126, 249);
-			button4.ImageAlign = ContentAlignment.MiddleRight;
-			button4.Location = new Point(0, 64);
-			button4.Name = "button4";
-			button4.Padding = new Padding(20, 0, 15, 0);
-			button4.Size = new Size(170, 64);
-			button4.TabIndex = 3;
-			button4.Text = "По дисциплине";
-			button4.TextAlign = ContentAlignment.MiddleLeft;
-			button4.TextImageRelation = TextImageRelation.TextBeforeImage;
-			button4.UseVisualStyleBackColor = true;
-			button4.Click += buttonSchedulingDisciplines_Click;
+			btnSchedulingDisciplines.Dock = DockStyle.Top;
+			btnSchedulingDisciplines.FlatAppearance.BorderSize = 0;
+			btnSchedulingDisciplines.FlatStyle = FlatStyle.Flat;
+			btnSchedulingDisciplines.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnSchedulingDisciplines.ForeColor = Color.FromArgb(0, 126, 249);
+			btnSchedulingDisciplines.ImageAlign = ContentAlignment.MiddleRight;
+			btnSchedulingDisciplines.Location = new Point(0, 64);
+			btnSchedulingDisciplines.Name = "btnSchedulingDisciplines";
+			btnSchedulingDisciplines.Padding = new Padding(20, 0, 15, 0);
+			btnSchedulingDisciplines.Size = new Size(170, 64);
+			btnSchedulingDisciplines.TabIndex = 3;
+			btnSchedulingDisciplines.Text = "По дисциплине";
+			btnSchedulingDisciplines.TextAlign = ContentAlignment.MiddleLeft;
+			btnSchedulingDisciplines.TextImageRelation = TextImageRelation.TextBeforeImage;
+			btnSchedulingDisciplines.UseVisualStyleBackColor = true;
+			btnSchedulingDisciplines.Click += btnSchedulingDisciplines_Click;
 			// 
-			// button3
+			// btnAcademicHours
 			// 
-			button3.Dock = DockStyle.Top;
-			button3.FlatAppearance.BorderSize = 0;
-			button3.FlatStyle = FlatStyle.Flat;
-			button3.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button3.ForeColor = Color.FromArgb(0, 126, 249);
-			button3.ImageAlign = ContentAlignment.MiddleRight;
-			button3.Location = new Point(0, 0);
-			button3.Name = "button3";
-			button3.Padding = new Padding(20, 0, 15, 0);
-			button3.Size = new Size(170, 64);
-			button3.TabIndex = 2;
-			button3.Text = "Академические часы";
-			button3.TextAlign = ContentAlignment.MiddleLeft;
-			button3.TextImageRelation = TextImageRelation.TextBeforeImage;
-			button3.UseVisualStyleBackColor = true;
-			button3.Click += btnSchedulingWeek_Click;
+			btnAcademicHours.Dock = DockStyle.Top;
+			btnAcademicHours.FlatAppearance.BorderSize = 0;
+			btnAcademicHours.FlatStyle = FlatStyle.Flat;
+			btnAcademicHours.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAcademicHours.ForeColor = Color.FromArgb(0, 126, 249);
+			btnAcademicHours.ImageAlign = ContentAlignment.MiddleRight;
+			btnAcademicHours.Location = new Point(0, 0);
+			btnAcademicHours.Name = "btnAcademicHours";
+			btnAcademicHours.Padding = new Padding(20, 0, 15, 0);
+			btnAcademicHours.Size = new Size(170, 64);
+			btnAcademicHours.TabIndex = 2;
+			btnAcademicHours.Text = "Академические часы";
+			btnAcademicHours.TextAlign = ContentAlignment.MiddleLeft;
+			btnAcademicHours.TextImageRelation = TextImageRelation.TextBeforeImage;
+			btnAcademicHours.UseVisualStyleBackColor = true;
+			btnAcademicHours.Click += btnAcademicHours_Click;
 			// 
 			// btnScheduling
 			// 
@@ -472,40 +472,41 @@
 			lbUserName.Text = "Имя пользователя";
 			lbUserName.TextAlign = ContentAlignment.MiddleCenter;
 			// 
-			// button1
+			// btnClose
 			// 
-			button1.Dock = DockStyle.Right;
-			button1.FlatAppearance.BorderSize = 0;
-			button1.FlatStyle = FlatStyle.Flat;
-			button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button1.ForeColor = Color.FromArgb(0, 126, 249);
-			button1.Image = (Image)resources.GetObject("button1.Image");
-			button1.Location = new Point(956, 0);
-			button1.Name = "button1";
-			button1.Size = new Size(40, 40);
-			button1.TabIndex = 1;
-			button1.UseVisualStyleBackColor = true;
-			button1.Click += button1_Click;
+			btnClose.Dock = DockStyle.Right;
+			btnClose.FlatAppearance.BorderSize = 0;
+			btnClose.FlatStyle = FlatStyle.Flat;
+			btnClose.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnClose.ForeColor = Color.FromArgb(0, 126, 249);
+			btnClose.Image = (Image)resources.GetObject("btnClose.Image");
+			btnClose.Location = new Point(956, 0);
+			btnClose.Name = "btnClose";
+			btnClose.Size = new Size(40, 40);
+			btnClose.TabIndex = 1;
+			btnClose.UseVisualStyleBackColor = true;
+			btnClose.Click += btnClose_Click;
 			// 
-			// button2
+			// btnMinimize
 			// 
-			button2.Dock = DockStyle.Right;
-			button2.FlatAppearance.BorderSize = 0;
-			button2.FlatStyle = FlatStyle.Flat;
-			button2.Font = new Font("Microsoft Sans Serif", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			button2.ForeColor = Color.FromArgb(0, 126, 249);
-			button2.Location = new Point(916, 0);
-			button2.Name = "button2";
-			button2.Size = new Size(40, 40);
-			button2.TabIndex = 2;
-			button2.UseVisualStyleBackColor = true;
-			button2.Click += button2_Click;
+			btnMinimize.Dock = DockStyle.Right;
+			btnMinimize.FlatAppearance.BorderSize = 0;
+			btnMinimize.FlatStyle = FlatStyle.Flat;
+			btnMinimize.Font = new Font("Microsoft Sans Serif", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			btnMinimize.ForeColor = Color.FromArgb(0, 126, 249);
+			btnMinimize.Image = Properties.Resources.button_minimize;
+			btnMinimize.Location = new Point(916, 0);
+			btnMinimize.Name = "btnMinimize";
+			btnMinimize.Size = new Size(40, 40);
+			btnMinimize.TabIndex = 2;
+			btnMinimize.UseVisualStyleBackColor = true;
+			btnMinimize.Click += btnMinimize_Click;
 			// 
 			// panel3
 			// 
 			panel3.BackColor = Color.FromArgb(24, 30, 54);
-			panel3.Controls.Add(button2);
-			panel3.Controls.Add(button1);
+			panel3.Controls.Add(btnMinimize);
+			panel3.Controls.Add(btnClose);
 			panel3.Dock = DockStyle.Top;
 			panel3.Location = new Point(187, 0);
 			panel3.Name = "panel3";
@@ -555,17 +556,17 @@
         private Button btnGradeRecord;
         private Button btnScheduling;
         private Panel pnlNavigation;
-        private Button button1;
-        private Button button2;
+        private Button btnClose;
+        private Button btnMinimize;
         private Panel panel3;
         private Panel panel4;
         private Panel pnlFormLoader;
         private Panel pnlManageDataSubMenu;
         private Panel pnlGradeRecordSubMenu;
         private Panel pnlSchedulingSubMenu;
-        private Button button5;
-        private Button button4;
-        private Button button3;
+        private Button btnSchedulingTeachers;
+        private Button btnSchedulingDisciplines;
+        private Button btnAcademicHours;
         private Panel pnlNavigationSubmenu;
         private Button btnGrades;
         private Button btnManageData;
