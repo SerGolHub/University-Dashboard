@@ -57,7 +57,7 @@ namespace University_Dasboard.Controllers
             }
             var newDirections = newDirectionsList.Select(d => new Direction
             {
-                Id = Guid.NewGuid(),
+                Id = d.Id,
                 Name = d.Name,
                 Code = d.Code,
                 MaxCourse = d.MaxCourse,
