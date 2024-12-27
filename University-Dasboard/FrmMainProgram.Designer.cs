@@ -214,7 +214,7 @@
 			btnGrades.ImageAlign = ContentAlignment.MiddleRight;
 			btnGrades.Location = new Point(0, 0);
 			btnGrades.Name = "btnGrades";
-			btnGrades.Padding = new Padding(30, 0, 15, 0);
+			btnGrades.Padding = new Padding(20, 0, 15, 0);
 			btnGrades.Size = new Size(170, 64);
 			btnGrades.TabIndex = 5;
 			btnGrades.Text = "Оценки";
@@ -269,7 +269,7 @@
 			btnTeachers.ImageAlign = ContentAlignment.MiddleRight;
 			btnTeachers.Location = new Point(0, 384);
 			btnTeachers.Name = "btnTeachers";
-			btnTeachers.Padding = new Padding(30, 0, 15, 0);
+			btnTeachers.Padding = new Padding(20, 0, 15, 0);
 			btnTeachers.Size = new Size(170, 64);
 			btnTeachers.TabIndex = 14;
 			btnTeachers.Text = "Преподаватели";
@@ -289,7 +289,7 @@
 			btnStudents.ImageAlign = ContentAlignment.MiddleRight;
 			btnStudents.Location = new Point(0, 320);
 			btnStudents.Name = "btnStudents";
-			btnStudents.Padding = new Padding(30, 0, 15, 0);
+			btnStudents.Padding = new Padding(20, 0, 15, 0);
 			btnStudents.Size = new Size(170, 64);
 			btnStudents.TabIndex = 13;
 			btnStudents.Text = "Студенты";
@@ -309,7 +309,7 @@
 			btnGroups.ImageAlign = ContentAlignment.MiddleRight;
 			btnGroups.Location = new Point(0, 256);
 			btnGroups.Name = "btnGroups";
-			btnGroups.Padding = new Padding(30, 0, 15, 0);
+			btnGroups.Padding = new Padding(20, 0, 15, 0);
 			btnGroups.Size = new Size(170, 64);
 			btnGroups.TabIndex = 12;
 			btnGroups.Text = "Группы";
@@ -329,7 +329,7 @@
 			btnDisciplines.ImageAlign = ContentAlignment.MiddleRight;
 			btnDisciplines.Location = new Point(0, 192);
 			btnDisciplines.Name = "btnDisciplines";
-			btnDisciplines.Padding = new Padding(30, 0, 15, 0);
+			btnDisciplines.Padding = new Padding(20, 0, 15, 0);
 			btnDisciplines.Size = new Size(170, 64);
 			btnDisciplines.TabIndex = 10;
 			btnDisciplines.Text = "Дисциплины";
@@ -349,7 +349,7 @@
 			btnDirections.ImageAlign = ContentAlignment.MiddleRight;
 			btnDirections.Location = new Point(0, 128);
 			btnDirections.Name = "btnDirections";
-			btnDirections.Padding = new Padding(30, 0, 15, 0);
+			btnDirections.Padding = new Padding(20, 0, 15, 0);
 			btnDirections.Size = new Size(170, 64);
 			btnDirections.TabIndex = 8;
 			btnDirections.Text = "Направления";
@@ -369,7 +369,7 @@
 			btnDepartments.ImageAlign = ContentAlignment.MiddleRight;
 			btnDepartments.Location = new Point(0, 64);
 			btnDepartments.Name = "btnDepartments";
-			btnDepartments.Padding = new Padding(30, 0, 15, 0);
+			btnDepartments.Padding = new Padding(20, 0, 15, 0);
 			btnDepartments.Size = new Size(170, 64);
 			btnDepartments.TabIndex = 3;
 			btnDepartments.Text = "Кафедры";
@@ -389,7 +389,7 @@
 			btnFaculties.ImageAlign = ContentAlignment.MiddleRight;
 			btnFaculties.Location = new Point(0, 0);
 			btnFaculties.Name = "btnFaculties";
-			btnFaculties.Padding = new Padding(30, 0, 15, 0);
+			btnFaculties.Padding = new Padding(20, 0, 15, 0);
 			btnFaculties.Size = new Size(170, 64);
 			btnFaculties.TabIndex = 7;
 			btnFaculties.Text = "Факультеты";
