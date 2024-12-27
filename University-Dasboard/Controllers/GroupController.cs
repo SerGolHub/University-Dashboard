@@ -21,6 +21,7 @@ namespace University_Dasboard.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
+                MaxCourse = g.MaxCourse,
                 DirectionId = g.DirectionId,
                 DirectionName = g.Direction!.Name
             })
@@ -54,7 +55,7 @@ namespace University_Dasboard.Controllers
             }
             var newGroups = newGroupList.Select(g => new Group
             {
-                Id = Guid.NewGuid(),
+                Id = g.Id,
                 Name = g.Name,
                 MaxCourse = g.MaxCourse,
                 DirectionId = g.DirectionId

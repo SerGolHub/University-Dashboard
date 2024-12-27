@@ -74,7 +74,7 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
-			if (maxCourse == null)
+			if (tbMaxCourse.Text == String.Empty)
 			{
 				MessageBox.Show("Введите максимальный курс группы");
 				return;
@@ -84,7 +84,7 @@ namespace University_Dasboard
 				Id = Guid.NewGuid(),
 				Name = tbGroupName.Text,
 				MaxCourse = Convert.ToInt32(tbMaxCourse.Text),
-				DirectionId = selectedDepartment.Id,
+				DirectionId = selectedDirection.Id,
 				DirectionName = selectedDirection.Name
 			};
 			groups.Add(newGroup);
