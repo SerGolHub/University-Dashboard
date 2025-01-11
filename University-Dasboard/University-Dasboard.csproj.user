@@ -37,9 +37,6 @@
     <Compile Update="FrmSchedulingDiscipline.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FrmStudents.cs">
       <SubType>Form</SubType>
     </Compile>
