@@ -93,7 +93,7 @@ namespace University_Dasboard.Controllers
             {
                 return;
             }
-            var removedIds = removedGroups.Select(s => s.Id).ToList();
+            var removedIds = removedGroups.Select(g => g.Id).ToList();
             var groupsToRemove = await ctx.Group
                 .Where(g => removedIds.Contains(g.Id))
                 .ToListAsync();

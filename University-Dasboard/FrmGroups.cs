@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Models;
-using static University_Dasboard.FrmStudents;
 
 namespace University_Dasboard
 {
@@ -31,7 +30,7 @@ namespace University_Dasboard
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
-		private int? maxCourse;
+		private int? selectedMaxCourse;
 
 		private void LoadData()
 		{
@@ -74,16 +73,16 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
-			if (tbMaxCourse.Text == String.Empty)
+			if (selectedMaxCourse == null)
 			{
-				MessageBox.Show("Введите максимальный курс группы");
+				MessageBox.Show("Выберите максимальный курс группы");
 				return;
 			}
 			var newGroup = new GroupViewModel()
 			{
 				Id = Guid.NewGuid(),
 				Name = tbGroupName.Text,
-				MaxCourse = Convert.ToInt32(tbMaxCourse.Text),
+				MaxCourse = (int)selectedMaxCourse,
 				DirectionId = selectedDirection.Id,
 				DirectionName = selectedDirection.Name
 			};
@@ -177,14 +176,22 @@ namespace University_Dasboard
 		private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedDirection = (Direction?)cbDirection.SelectedItem;
+			if (selectedDirection != null)
+			{
+				using var ctx = new DatabaseContext();
+				var group = (Group)ctx.Group.Where(g => g.DirectionId == selectedDirection.Id);
+				List<int> coursesList = new();
+				for (int i = 1; i <= group.MaxCourse; i++)
+				{
+					coursesList.Add(i);
+				}
+				cbMaxCourse.DataSource = coursesList;
+			}
 		}
 
-		private void tbMaxCourse_KeyPress(object sender, KeyPressEventArgs e)
+		private void cbMaxCourse_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
-			{
-				e.Handled = true;
-			}
+			selectedMaxCourse = (int?)cbMaxCourse.SelectedItem;
 		}
 	}
 }

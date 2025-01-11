@@ -49,6 +49,8 @@
 			label4 = new Label();
 			label5 = new Label();
 			tbMaxCourse = new TextBox();
+			cbFaculty = new ComboBox();
+			label6 = new Label();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDirections).BeginInit();
@@ -62,7 +64,7 @@
 			tbNewDirectionName.BorderStyle = BorderStyle.FixedSingle;
 			tbNewDirectionName.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbNewDirectionName.ForeColor = Color.FromArgb(24, 30, 54);
-			tbNewDirectionName.Location = new Point(12, 34);
+			tbNewDirectionName.Location = new Point(277, 12);
 			tbNewDirectionName.Name = "tbNewDirectionName";
 			tbNewDirectionName.Size = new Size(369, 24);
 			tbNewDirectionName.TabIndex = 32;
@@ -72,7 +74,7 @@
 			label2.AutoSize = true;
 			label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.FromArgb(158, 161, 178);
-			label2.Location = new Point(12, 11);
+			label2.Location = new Point(12, 16);
 			label2.Name = "label2";
 			label2.Size = new Size(259, 20);
 			label2.TabIndex = 29;
@@ -139,7 +141,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(12, 151);
+			btnAdd.Location = new Point(17, 233);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(84, 41);
 			btnAdd.TabIndex = 35;
@@ -179,7 +181,7 @@
 			label3.AutoSize = true;
 			label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label3.ForeColor = Color.FromArgb(158, 161, 178);
-			label3.Location = new Point(12, 70);
+			label3.Location = new Point(12, 80);
 			label3.Name = "label3";
 			label3.Size = new Size(93, 20);
 			label3.TabIndex = 38;
@@ -192,9 +194,9 @@
 			cbDepartments.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			cbDepartments.ForeColor = Color.FromArgb(24, 30, 54);
 			cbDepartments.FormattingEnabled = true;
-			cbDepartments.Location = new Point(12, 93);
+			cbDepartments.Location = new Point(277, 74);
 			cbDepartments.Name = "cbDepartments";
-			cbDepartments.Size = new Size(369, 26);
+			cbDepartments.Size = new Size(264, 26);
 			cbDepartments.TabIndex = 40;
 			cbDepartments.SelectedValueChanged += cbDepartment_SelectedValueChanged;
 			// 
@@ -204,7 +206,7 @@
 			tbDirectionCode.BorderStyle = BorderStyle.FixedSingle;
 			tbDirectionCode.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbDirectionCode.ForeColor = Color.FromArgb(24, 30, 54);
-			tbDirectionCode.Location = new Point(413, 34);
+			tbDirectionCode.Location = new Point(277, 106);
 			tbDirectionCode.Name = "tbDirectionCode";
 			tbDirectionCode.Size = new Size(158, 24);
 			tbDirectionCode.TabIndex = 42;
@@ -214,7 +216,7 @@
 			label4.AutoSize = true;
 			label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label4.ForeColor = Color.FromArgb(158, 161, 178);
-			label4.Location = new Point(413, 11);
+			label4.Location = new Point(12, 110);
 			label4.Name = "label4";
 			label4.Size = new Size(158, 20);
 			label4.TabIndex = 41;
@@ -225,7 +227,7 @@
 			label5.AutoSize = true;
 			label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label5.ForeColor = Color.FromArgb(158, 161, 178);
-			label5.Location = new Point(413, 70);
+			label5.Location = new Point(12, 140);
 			label5.Name = "label5";
 			label5.Size = new Size(224, 20);
 			label5.TabIndex = 41;
@@ -237,11 +239,35 @@
 			tbMaxCourse.BorderStyle = BorderStyle.FixedSingle;
 			tbMaxCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbMaxCourse.ForeColor = Color.FromArgb(24, 30, 54);
-			tbMaxCourse.Location = new Point(413, 93);
+			tbMaxCourse.Location = new Point(277, 136);
 			tbMaxCourse.Name = "tbMaxCourse";
 			tbMaxCourse.Size = new Size(92, 24);
 			tbMaxCourse.TabIndex = 42;
 			tbMaxCourse.KeyPress += tbMaxCourse_KeyPress;
+			// 
+			// cbFaculty
+			// 
+			cbFaculty.BackColor = Color.FromArgb(158, 161, 178);
+			cbFaculty.FlatStyle = FlatStyle.Flat;
+			cbFaculty.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbFaculty.ForeColor = Color.FromArgb(24, 30, 54);
+			cbFaculty.FormattingEnabled = true;
+			cbFaculty.Location = new Point(277, 42);
+			cbFaculty.Name = "cbFaculty";
+			cbFaculty.Size = new Size(264, 26);
+			cbFaculty.TabIndex = 46;
+			cbFaculty.SelectedIndexChanged += cbFaculty_SelectedIndexChanged;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label6.ForeColor = Color.FromArgb(158, 161, 178);
+			label6.Location = new Point(12, 48);
+			label6.Name = "label6";
+			label6.Size = new Size(108, 20);
+			label6.TabIndex = 45;
+			label6.Text = "Факультет:";
 			// 
 			// FrmDirections
 			// 
@@ -249,6 +275,8 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
 			ClientSize = new Size(980, 653);
+			Controls.Add(cbFaculty);
+			Controls.Add(label6);
 			Controls.Add(tbMaxCourse);
 			Controls.Add(label5);
 			Controls.Add(tbDirectionCode);
@@ -298,5 +326,7 @@
         private Label label4;
         private Label label5;
         private TextBox tbMaxCourse;
-    }
+		private ComboBox cbFaculty;
+		private Label label6;
+	}
 }

@@ -43,6 +43,14 @@
 			btnAdd = new Button();
 			btnReset = new Button();
 			lbDbSaveResult = new Label();
+			cbDirection = new ComboBox();
+			cbDepartment = new ComboBox();
+			cbFaculty = new ComboBox();
+			label10 = new Label();
+			label5 = new Label();
+			label4 = new Label();
+			label3 = new Label();
+			cbTeacher = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDisciplines).BeginInit();
@@ -56,7 +64,7 @@
 			tbNewDisciplineName.BorderStyle = BorderStyle.FixedSingle;
 			tbNewDisciplineName.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbNewDisciplineName.ForeColor = Color.FromArgb(24, 30, 54);
-			tbNewDisciplineName.Location = new Point(12, 46);
+			tbNewDisciplineName.Location = new Point(273, 22);
 			tbNewDisciplineName.Name = "tbNewDisciplineName";
 			tbNewDisciplineName.Size = new Size(249, 24);
 			tbNewDisciplineName.TabIndex = 23;
@@ -66,11 +74,11 @@
 			label2.AutoSize = true;
 			label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.FromArgb(158, 161, 178);
-			label2.Location = new Point(12, 23);
+			label2.Location = new Point(12, 26);
 			label2.Name = "label2";
-			label2.Size = new Size(244, 20);
+			label2.Size = new Size(249, 20);
 			label2.TabIndex = 20;
-			label2.Text = "Введите новую дисциплину";
+			label2.Text = "Введите новую дисциплину:";
 			// 
 			// label1
 			// 
@@ -133,9 +141,9 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(267, 46);
+			btnAdd.Location = new Point(16, 211);
 			btnAdd.Name = "btnAdd";
-			btnAdd.Size = new Size(84, 24);
+			btnAdd.Size = new Size(104, 46);
 			btnAdd.TabIndex = 26;
 			btnAdd.Text = "Добавить";
 			btnAdd.UseVisualStyleBackColor = false;
@@ -168,12 +176,118 @@
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = false;
 			// 
+			// cbDirection
+			// 
+			cbDirection.BackColor = Color.FromArgb(158, 161, 178);
+			cbDirection.FlatStyle = FlatStyle.Flat;
+			cbDirection.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbDirection.ForeColor = Color.FromArgb(24, 30, 54);
+			cbDirection.FormattingEnabled = true;
+			cbDirection.Location = new Point(273, 116);
+			cbDirection.Name = "cbDirection";
+			cbDirection.Size = new Size(249, 26);
+			cbDirection.TabIndex = 52;
+			cbDirection.Text = "Выберите кафедру ↑";
+			cbDirection.SelectedIndexChanged += cbDirection_SelectedIndexChanged;
+			// 
+			// cbDepartment
+			// 
+			cbDepartment.BackColor = Color.FromArgb(158, 161, 178);
+			cbDepartment.FlatStyle = FlatStyle.Flat;
+			cbDepartment.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbDepartment.ForeColor = Color.FromArgb(24, 30, 54);
+			cbDepartment.FormattingEnabled = true;
+			cbDepartment.Location = new Point(273, 84);
+			cbDepartment.Name = "cbDepartment";
+			cbDepartment.Size = new Size(249, 26);
+			cbDepartment.TabIndex = 51;
+			cbDepartment.Text = "Выберите факультет ↑";
+			cbDepartment.SelectedIndexChanged += cbDepartment_SelectedIndexChanged;
+			// 
+			// cbFaculty
+			// 
+			cbFaculty.BackColor = Color.FromArgb(158, 161, 178);
+			cbFaculty.FlatStyle = FlatStyle.Flat;
+			cbFaculty.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbFaculty.ForeColor = Color.FromArgb(24, 30, 54);
+			cbFaculty.FormattingEnabled = true;
+			cbFaculty.Location = new Point(273, 52);
+			cbFaculty.Name = "cbFaculty";
+			cbFaculty.Size = new Size(249, 26);
+			cbFaculty.TabIndex = 50;
+			cbFaculty.SelectedIndexChanged += cbFaculty_SelectedIndexChanged;
+			// 
+			// label10
+			// 
+			label10.AutoSize = true;
+			label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label10.ForeColor = Color.FromArgb(158, 161, 178);
+			label10.Location = new Point(12, 122);
+			label10.Name = "label10";
+			label10.Size = new Size(128, 20);
+			label10.TabIndex = 49;
+			label10.Text = "Направление:";
+			// 
+			// label5
+			// 
+			label5.AutoSize = true;
+			label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label5.ForeColor = Color.FromArgb(158, 161, 178);
+			label5.Location = new Point(12, 90);
+			label5.Name = "label5";
+			label5.Size = new Size(93, 20);
+			label5.TabIndex = 48;
+			label5.Text = "Кафедра:";
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label4.ForeColor = Color.FromArgb(158, 161, 178);
+			label4.Location = new Point(12, 58);
+			label4.Name = "label4";
+			label4.Size = new Size(108, 20);
+			label4.TabIndex = 47;
+			label4.Text = "Факультет:";
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label3.ForeColor = Color.FromArgb(158, 161, 178);
+			label3.Location = new Point(12, 154);
+			label3.Name = "label3";
+			label3.Size = new Size(150, 20);
+			label3.TabIndex = 49;
+			label3.Text = "Преподаватель:";
+			// 
+			// cbTeacher
+			// 
+			cbTeacher.BackColor = Color.FromArgb(158, 161, 178);
+			cbTeacher.FlatStyle = FlatStyle.Flat;
+			cbTeacher.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbTeacher.ForeColor = Color.FromArgb(24, 30, 54);
+			cbTeacher.FormattingEnabled = true;
+			cbTeacher.Location = new Point(273, 148);
+			cbTeacher.Name = "cbTeacher";
+			cbTeacher.Size = new Size(249, 26);
+			cbTeacher.TabIndex = 52;
+			cbTeacher.SelectedIndexChanged += cbTeacher_SelectedIndexChanged;
+			// 
 			// FrmDisciplines
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
 			ClientSize = new Size(980, 653);
+			Controls.Add(cbTeacher);
+			Controls.Add(cbDirection);
+			Controls.Add(cbDepartment);
+			Controls.Add(cbFaculty);
+			Controls.Add(label3);
+			Controls.Add(label10);
+			Controls.Add(label5);
+			Controls.Add(label4);
 			Controls.Add(tbNewDisciplineName);
 			Controls.Add(label2);
 			Controls.Add(label1);
@@ -211,5 +325,13 @@
         private Button btnAdd;
         private Button btnReset;
         private Label lbDbSaveResult;
-    }
+		private ComboBox cbDirection;
+		private ComboBox cbDepartment;
+		private ComboBox cbFaculty;
+		private Label label10;
+		private Label label5;
+		private Label label4;
+		private Label label3;
+		private ComboBox cbTeacher;
+	}
 }

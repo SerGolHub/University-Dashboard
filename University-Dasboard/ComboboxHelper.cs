@@ -71,6 +71,22 @@ namespace University_Dasboard
 			}
 		}
 
+		public static void LoadFacultyDepartments(
+			ComboBox cbDepartment,
+			Guid selectedFacultyId,
+			Department? selectedDepartment)
+		{
+			bool isDepartmentLoaded = LoadComboboxData<Department>(
+					cbDepartment,
+					dep => dep.FacultyId == selectedFacultyId);
+			if (!isDepartmentLoaded)
+			{
+				selectedDepartment = null;
+				cbDepartment.Text = string.Empty;
+				cbDepartment.DataSource = null;
+			}
+		}
+
 		public static void LoadDepartmentDirections(
 			ComboBox cbDirection,
 			Guid selectedDepartmentId,
@@ -84,6 +100,22 @@ namespace University_Dasboard
 				selectedDirection = null;
 				cbDirection.Text = string.Empty;
 				cbDirection.DataSource = null;
+			}
+		}
+
+		public static void LoadDepartmentTeachers(
+			ComboBox cbTeachers,
+			Guid selectedDepartmentId,
+			Teacher? selectedTeacher)
+		{
+			bool isTeacherLoaded = LoadComboboxData<Teacher>(
+				cbTeachers,
+				t => t.DepartmentId == selectedDepartmentId);
+			if (!isTeacherLoaded)
+			{
+				selectedTeacher = null;
+				cbTeachers.Text = string.Empty;
+				cbTeachers.DataSource = null;
 			}
 		}
 	}
