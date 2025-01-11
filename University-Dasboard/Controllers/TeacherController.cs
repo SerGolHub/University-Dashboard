@@ -70,7 +70,7 @@ namespace University_Dasboard.Controllers
         {
             var newTeachers = newTeacherList.Select(t => new Teacher
             {
-                Id = Guid.NewGuid(),
+                Id = t.Id,
                 Name = t.Name,
                 PhoneNumber = t.PhoneNumber,
                 Email = t.Email,
