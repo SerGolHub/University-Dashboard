@@ -42,9 +42,7 @@
 			label10 = new Label();
 			label5 = new Label();
 			label4 = new Label();
-			label1 = new Label();
 			label2 = new Label();
-			cbMaxCourse = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)dgvGroupList).BeginInit();
 			SuspendLayout();
 			// 
@@ -177,7 +175,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(12, 177);
+			btnAdd.Location = new Point(12, 151);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(120, 44);
 			btnAdd.TabIndex = 41;
@@ -229,17 +227,6 @@
 			label4.TabIndex = 34;
 			label4.Text = "Факультет:";
 			// 
-			// label1
-			// 
-			label1.AutoSize = true;
-			label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label1.ForeColor = Color.FromArgb(158, 161, 178);
-			label1.Location = new Point(12, 137);
-			label1.Name = "label1";
-			label1.Size = new Size(182, 20);
-			label1.TabIndex = 32;
-			label1.Text = "Максимальный курс:";
-			// 
 			// label2
 			// 
 			label2.AutoSize = true;
@@ -250,20 +237,6 @@
 			label2.Size = new Size(159, 20);
 			label2.TabIndex = 29;
 			label2.Text = "Название группы:";
-			// 
-			// cbMaxCourse
-			// 
-			cbMaxCourse.BackColor = Color.FromArgb(158, 161, 178);
-			cbMaxCourse.FlatStyle = FlatStyle.Flat;
-			cbMaxCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-			cbMaxCourse.ForeColor = Color.FromArgb(24, 30, 54);
-			cbMaxCourse.FormattingEnabled = true;
-			cbMaxCourse.Location = new Point(250, 131);
-			cbMaxCourse.Name = "cbMaxCourse";
-			cbMaxCourse.Size = new Size(229, 26);
-			cbMaxCourse.TabIndex = 46;
-			cbMaxCourse.Text = "Выберите направление ↑";
-			cbMaxCourse.SelectedIndexChanged += cbMaxCourse_SelectedIndexChanged;
 			// 
 			// FrmGroups
 			// 
@@ -277,7 +250,6 @@
 			Controls.Add(btnSave);
 			Controls.Add(lbDbSaveResult);
 			Controls.Add(label9);
-			Controls.Add(cbMaxCourse);
 			Controls.Add(cbDirection);
 			Controls.Add(cbDepartment);
 			Controls.Add(cbFaculty);
@@ -286,7 +258,6 @@
 			Controls.Add(label10);
 			Controls.Add(label5);
 			Controls.Add(label4);
-			Controls.Add(label1);
 			Controls.Add(label2);
 			FormBorderStyle = FormBorderStyle.None;
 			Name = "FrmGroups";
@@ -312,8 +283,6 @@
         private Label label10;
         private Label label5;
         private Label label4;
-        private Label label1;
         private Label label2;
-		private ComboBox cbMaxCourse;
 	}
 }

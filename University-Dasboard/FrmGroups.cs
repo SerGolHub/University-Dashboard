@@ -176,22 +176,6 @@ namespace University_Dasboard
 		private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedDirection = (Direction?)cbDirection.SelectedItem;
-			if (selectedDirection != null)
-			{
-				using var ctx = new DatabaseContext();
-				var group = (Group)ctx.Group.Where(g => g.DirectionId == selectedDirection.Id);
-				List<int> coursesList = new();
-				for (int i = 1; i <= group.MaxCourse; i++)
-				{
-					coursesList.Add(i);
-				}
-				cbMaxCourse.DataSource = coursesList;
-			}
-		}
-
-		private void cbMaxCourse_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			selectedMaxCourse = (int?)cbMaxCourse.SelectedItem;
 		}
 	}
 }
