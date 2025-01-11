@@ -151,7 +151,7 @@ namespace University_Dasboard
 			}
 
 			// Проверка мобильного телефона
-			if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, "^(\\+7|8)[0-9]{10}$"))
+			if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, "^(\\+7 | 8)[0-9]{10}$"))
 			{
 				logger.Warn("Попытка добавить мобильный телефон не удалась.");
 				MessageBox.Show("Номер телефона введен неверно. Он должен начинаться с '+7' или '8' и содержать 11 цифр.");
