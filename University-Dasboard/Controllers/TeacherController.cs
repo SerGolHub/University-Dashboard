@@ -97,7 +97,7 @@ namespace University_Dasboard.Controllers
                 existingTeacher.Name = updatedTeacher.Name;
                 existingTeacher.PhoneNumber = updatedTeacher.PhoneNumber;
                 existingTeacher.Email = updatedTeacher.Email;
-                existingTeacher.HireDate = updatedTeacher.HireDate;
+                existingTeacher.HireDate = updatedTeacher.HireDate.ToUniversalTime();
                 existingTeacher.Degree = updatedTeacher.Degree;
                 existingTeacher.Status = updatedTeacher.Status;
                 existingTeacher.DepartmentId = updatedTeacher.DepartmentId;
