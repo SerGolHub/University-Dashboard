@@ -59,11 +59,11 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new Font("Microsoft Sans Serif", 21F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label1.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
 			label1.ForeColor = Color.FromArgb(158, 161, 178);
-			label1.Location = new Point(105, 9);
+			label1.Location = new Point(12, 267);
 			label1.Name = "label1";
-			label1.Size = new Size(565, 32);
+			label1.Size = new Size(500, 29);
 			label1.TabIndex = 1;
 			label1.Text = "Составление расписания (Расчасовка)";
 			// 
@@ -73,7 +73,7 @@
 			tbPracticeHours.BorderStyle = BorderStyle.FixedSingle;
 			tbPracticeHours.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbPracticeHours.ForeColor = Color.FromArgb(24, 30, 54);
-			tbPracticeHours.Location = new Point(730, 130);
+			tbPracticeHours.Location = new Point(243, 35);
 			tbPracticeHours.Name = "tbPracticeHours";
 			tbPracticeHours.Size = new Size(127, 24);
 			tbPracticeHours.TabIndex = 57;
@@ -84,7 +84,7 @@
 			tbLectionsHours.BorderStyle = BorderStyle.FixedSingle;
 			tbLectionsHours.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbLectionsHours.ForeColor = Color.FromArgb(24, 30, 54);
-			tbLectionsHours.Location = new Point(730, 190);
+			tbLectionsHours.Location = new Point(243, 65);
 			tbLectionsHours.Name = "tbLectionsHours";
 			tbLectionsHours.Size = new Size(127, 24);
 			tbLectionsHours.TabIndex = 56;
@@ -94,7 +94,7 @@
 			label4.AutoSize = true;
 			label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label4.ForeColor = Color.FromArgb(158, 161, 178);
-			label4.Location = new Point(730, 161);
+			label4.Location = new Point(12, 69);
 			label4.Name = "label4";
 			label4.Size = new Size(134, 20);
 			label4.TabIndex = 54;
@@ -105,7 +105,7 @@
 			label3.AutoSize = true;
 			label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label3.ForeColor = Color.FromArgb(158, 161, 178);
-			label3.Location = new Point(730, 98);
+			label3.Location = new Point(12, 39);
 			label3.Name = "label3";
 			label3.Size = new Size(153, 20);
 			label3.TabIndex = 52;
@@ -118,9 +118,9 @@
 			btnDelete.FlatStyle = FlatStyle.Flat;
 			btnDelete.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnDelete.ForeColor = Color.FromArgb(24, 30, 54);
-			btnDelete.Location = new Point(587, 420);
+			btnDelete.Location = new Point(881, 599);
 			btnDelete.Name = "btnDelete";
-			btnDelete.Size = new Size(104, 53);
+			btnDelete.Size = new Size(88, 42);
 			btnDelete.TabIndex = 48;
 			btnDelete.Text = "Удалить";
 			btnDelete.UseVisualStyleBackColor = false;
@@ -133,7 +133,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(842, 354);
+			btnAdd.Location = new Point(12, 152);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(112, 42);
 			btnAdd.TabIndex = 49;
@@ -148,9 +148,9 @@
 			btnReset.FlatStyle = FlatStyle.Flat;
 			btnReset.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnReset.ForeColor = Color.FromArgb(24, 30, 54);
-			btnReset.Location = new Point(730, 420);
+			btnReset.Location = new Point(881, 551);
 			btnReset.Name = "btnReset";
-			btnReset.Size = new Size(93, 53);
+			btnReset.Size = new Size(88, 42);
 			btnReset.TabIndex = 50;
 			btnReset.Text = "Сбросить изменения";
 			btnReset.UseVisualStyleBackColor = false;
@@ -161,7 +161,7 @@
 			lbDbSaveResult.AutoSize = true;
 			lbDbSaveResult.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
-			lbDbSaveResult.Location = new Point(12, 435);
+			lbDbSaveResult.Location = new Point(573, 272);
 			lbDbSaveResult.Name = "lbDbSaveResult";
 			lbDbSaveResult.Size = new Size(302, 20);
 			lbDbSaveResult.TabIndex = 45;
@@ -175,9 +175,9 @@
 			btnSave.FlatStyle = FlatStyle.Flat;
 			btnSave.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnSave.ForeColor = Color.FromArgb(24, 30, 54);
-			btnSave.Location = new Point(861, 420);
+			btnSave.Location = new Point(881, 299);
 			btnSave.Name = "btnSave";
-			btnSave.Size = new Size(93, 53);
+			btnSave.Size = new Size(88, 42);
 			btnSave.TabIndex = 47;
 			btnSave.Text = "Сохранить";
 			btnSave.UseVisualStyleBackColor = false;
@@ -189,9 +189,9 @@
 			dgvSchedules.AllowUserToDeleteRows = false;
 			dgvSchedules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvSchedules.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvSchedules.Location = new Point(12, 54);
+			dgvSchedules.Location = new Point(12, 299);
 			dgvSchedules.Name = "dgvSchedules";
-			dgvSchedules.Size = new Size(679, 342);
+			dgvSchedules.Size = new Size(863, 342);
 			dgvSchedules.TabIndex = 51;
 			dgvSchedules.CellValueChanged += dgvSchedules_CellValueChanged;
 			// 
@@ -200,7 +200,7 @@
 			label5.AutoSize = true;
 			label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label5.ForeColor = Color.FromArgb(158, 161, 178);
-			label5.Location = new Point(730, 228);
+			label5.Location = new Point(12, 99);
 			label5.Name = "label5";
 			label5.Size = new Size(197, 20);
 			label5.TabIndex = 55;
@@ -212,7 +212,7 @@
 			tbLaboratoryHours.BorderStyle = BorderStyle.FixedSingle;
 			tbLaboratoryHours.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbLaboratoryHours.ForeColor = Color.FromArgb(24, 30, 54);
-			tbLaboratoryHours.Location = new Point(730, 262);
+			tbLaboratoryHours.Location = new Point(243, 95);
 			tbLaboratoryHours.Name = "tbLaboratoryHours";
 			tbLaboratoryHours.Size = new Size(127, 24);
 			tbLaboratoryHours.TabIndex = 46;
@@ -222,7 +222,7 @@
 			label2.AutoSize = true;
 			label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.FromArgb(158, 161, 178);
-			label2.Location = new Point(730, 21);
+			label2.Location = new Point(12, 9);
 			label2.Name = "label2";
 			label2.Size = new Size(164, 20);
 			label2.TabIndex = 43;
@@ -234,7 +234,7 @@
 			tbWeek.BorderStyle = BorderStyle.FixedSingle;
 			tbWeek.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			tbWeek.ForeColor = Color.FromArgb(24, 30, 54);
-			tbWeek.Location = new Point(730, 54);
+			tbWeek.Location = new Point(243, 5);
 			tbWeek.Name = "tbWeek";
 			tbWeek.Size = new Size(127, 24);
 			tbWeek.TabIndex = 58;
