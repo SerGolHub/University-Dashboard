@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Enums;
 using University_Dasboard.Database.Models;
+using static University_Dasboard.FrmGroups;
 
 namespace University_Dasboard
 {
@@ -195,12 +196,15 @@ namespace University_Dasboard
 		async private void btnSave_Click(object sender, EventArgs e)
 		{
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
-			lbDbSaveResult.Text = "Подождите. Данные сохраняются...";
+			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = true;
 
 			try
 			{
-				await TeacherController.SaveTeachersAsync(newTeacherList, updatedTeacherList, removedTeacherList);
+				await TeacherController.SaveTeachersAsync(
+					newTeacherList,
+					updatedTeacherList,
+					removedTeacherList);
 				ClearTempLists();
 
 				lbDbSaveResult.ForeColor = Color.FromArgb(118, 241, 178);
@@ -244,13 +248,12 @@ namespace University_Dasboard
 
 		private void dgvTeacherList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex < 0 || dgvTeacherList.Rows[e.RowIndex].DataBoundItem is not TeacherViewModel editedTeacher)
-				return;
+			var editedRow = dgvTeacherList.Rows[e.RowIndex];
+			var id = (Guid)editedRow.Cells["Id"].Value;
+			TeacherViewModel updatedTeacher = teachers.First(t => t.Id == id);
+			updatedTeacherList.Add(updatedTeacher);
 
-			if (!updatedTeacherList.Contains(editedTeacher))
-				updatedTeacherList.Add(editedTeacher);
-
-			logger.Info($"Преподаватель с ID {editedTeacher.Id} добавлен в список на обновление.");
+			logger.Info($"Преподаватель с ID {updatedTeacher.Id} добавлен в список на обновление.");
 		}
 
 		private void dgvTeacherList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
