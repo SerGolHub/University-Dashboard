@@ -225,10 +225,6 @@ namespace University_Dasboard
 		{
 			selectedGroup = (Group?)cbGroup.SelectedItem;
 			cbCourse.Items.Clear();
-			for (int i = 1; i <= selectedGroup!.MaxCourse; i++)
-			{
-				cbCourse.Items.Add(i);
-			}
 		}
 
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)

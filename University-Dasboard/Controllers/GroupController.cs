@@ -21,7 +21,6 @@ namespace University_Dasboard.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
-                MaxCourse = g.MaxCourse,
                 DirectionId = g.DirectionId,
                 DirectionName = g.Direction!.Name
             })
@@ -57,7 +56,6 @@ namespace University_Dasboard.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
-                MaxCourse = g.MaxCourse,
                 DirectionId = g.DirectionId
             }).ToList();
 
@@ -81,7 +79,6 @@ namespace University_Dasboard.Controllers
             {
                 var updatedGroup = updatedGroups.First(g => g.Id == existingGroup.Id);
                 existingGroup.Name = updatedGroup.Name;
-                existingGroup.MaxCourse = updatedGroup.MaxCourse;
                 existingGroup.DirectionId = updatedGroup.DirectionId;
             }
         }
