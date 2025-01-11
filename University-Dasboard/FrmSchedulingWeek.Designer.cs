@@ -244,7 +244,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
-			ClientSize = new Size(981, 653);
+			ClientSize = new Size(980, 653);
 			Controls.Add(tbWeek);
 			Controls.Add(tbPracticeHours);
 			Controls.Add(tbLectionsHours);
