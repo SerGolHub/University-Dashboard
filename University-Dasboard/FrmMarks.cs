@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace University_Dasboard
 {
-    public partial class FrmGrades : Form
+    public partial class FrmMarks : Form
     {
-        public FrmGrades()
+        public FrmMarks()
         {
             InitializeComponent();
         }
