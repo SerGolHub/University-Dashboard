@@ -44,7 +44,7 @@
 			btnTeachers = new Button();
 			btnStudents = new Button();
 			btnGroups = new Button();
-			btnDisciplines = new Button();
+			btnSubjects = new Button();
 			btnDirections = new Button();
 			btnDepartments = new Button();
 			btnFaculties = new Button();
@@ -247,7 +247,7 @@
 			pnlManageDataSubMenu.Controls.Add(btnTeachers);
 			pnlManageDataSubMenu.Controls.Add(btnStudents);
 			pnlManageDataSubMenu.Controls.Add(btnGroups);
-			pnlManageDataSubMenu.Controls.Add(btnDisciplines);
+			pnlManageDataSubMenu.Controls.Add(btnSubjects);
 			pnlManageDataSubMenu.Controls.Add(btnDirections);
 			pnlManageDataSubMenu.Controls.Add(btnDepartments);
 			pnlManageDataSubMenu.Controls.Add(btnFaculties);
@@ -318,25 +318,25 @@
 			btnGroups.UseVisualStyleBackColor = false;
 			btnGroups.Click += btnGroups_Click;
 			// 
-			// btnDisciplines
+			// btnSubjects
 			// 
-			btnDisciplines.BackColor = Color.FromArgb(24, 30, 54);
-			btnDisciplines.Dock = DockStyle.Top;
-			btnDisciplines.FlatAppearance.BorderSize = 0;
-			btnDisciplines.FlatStyle = FlatStyle.Flat;
-			btnDisciplines.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnDisciplines.ForeColor = Color.FromArgb(0, 126, 249);
-			btnDisciplines.ImageAlign = ContentAlignment.MiddleRight;
-			btnDisciplines.Location = new Point(0, 192);
-			btnDisciplines.Name = "btnDisciplines";
-			btnDisciplines.Padding = new Padding(20, 0, 15, 0);
-			btnDisciplines.Size = new Size(170, 64);
-			btnDisciplines.TabIndex = 10;
-			btnDisciplines.Text = "Дисциплины";
-			btnDisciplines.TextAlign = ContentAlignment.MiddleLeft;
-			btnDisciplines.TextImageRelation = TextImageRelation.TextBeforeImage;
-			btnDisciplines.UseVisualStyleBackColor = false;
-			btnDisciplines.Click += btnDisciplines_Click;
+			btnSubjects.BackColor = Color.FromArgb(24, 30, 54);
+			btnSubjects.Dock = DockStyle.Top;
+			btnSubjects.FlatAppearance.BorderSize = 0;
+			btnSubjects.FlatStyle = FlatStyle.Flat;
+			btnSubjects.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnSubjects.ForeColor = Color.FromArgb(0, 126, 249);
+			btnSubjects.ImageAlign = ContentAlignment.MiddleRight;
+			btnSubjects.Location = new Point(0, 192);
+			btnSubjects.Name = "btnSubjects";
+			btnSubjects.Padding = new Padding(20, 0, 15, 0);
+			btnSubjects.Size = new Size(170, 64);
+			btnSubjects.TabIndex = 10;
+			btnSubjects.Text = "Дисциплины";
+			btnSubjects.TextAlign = ContentAlignment.MiddleLeft;
+			btnSubjects.TextImageRelation = TextImageRelation.TextBeforeImage;
+			btnSubjects.UseVisualStyleBackColor = false;
+			btnSubjects.Click += btnSubjects_Click;
 			// 
 			// btnDirections
 			// 
@@ -573,7 +573,7 @@
         private Button btnDirections;
         private Button btnFaculties;
         private Button btnDepartments;
-        private Button btnDisciplines;
+        private Button btnSubjects;
         private Button btnStudents;
         private Button btnGroups;
         private Button btnTeachers;

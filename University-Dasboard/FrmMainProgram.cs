@@ -81,7 +81,7 @@ namespace University_Dasboard
 			btnFaculties.BackColor = color;
 			btnDepartments.BackColor = color;
 			btnDirections.BackColor = color;
-			btnDisciplines.BackColor = color;
+			btnSubjects.BackColor = color;
 			btnGroups.BackColor = color;
 			btnStudents.BackColor = color;
 
@@ -140,11 +140,11 @@ namespace University_Dasboard
 			moveNavigationSubPanel(btnDirections, pnlManageDataSubMenu);
 		}
 
-		private void btnDisciplines_Click(object sender, EventArgs e)
+		private void btnSubjects_Click(object sender, EventArgs e)
 		{
-			FormLoader.loadForm(pnlFormLoader, new FrmDisciplines());
+			FormLoader.loadForm(pnlFormLoader, new FrmSubjects());
 			restoreButtonsBackColor();
-			moveNavigationSubPanel(btnDisciplines, pnlManageDataSubMenu);
+			moveNavigationSubPanel(btnSubjects, pnlManageDataSubMenu);
 		}
 
 		private void btnGroups_Click(object sender, EventArgs e)

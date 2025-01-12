@@ -1,4 +1,5 @@
 ﻿using Database;
+using System.Security.Cryptography.X509Certificates;
 using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
@@ -49,74 +50,114 @@ namespace University_Dasboard
 			}
 		}
 
-		public static void LoadFacultyDepartments(
+		public static void ClearComboboxes(params ComboBox[] cbs)
+		{
+			foreach(ComboBox cb in cbs)
+			{
+				cb.Text = string.Empty;
+				cb.DataSource = null;
+			}
+		}
+
+		public static bool LoadFacultyDepartments(
 			ComboBox cbDepartment,
 			ComboBox cbDirection,
 			Guid selectedFacultyId,
 			Department? selectedDepartment,
 			Direction? selectedDirection)
 		{
-			bool isDepartmentLoaded = LoadComboboxData<Department>(
+			return LoadComboboxData<Department>(
 					cbDepartment,
 					dep => dep.FacultyId == selectedFacultyId);
-			if (!isDepartmentLoaded)
-			{
-				selectedDepartment = null;
-				cbDepartment.Text = string.Empty;
-				cbDepartment.DataSource = null;
-
-				selectedDirection = null;
-				cbDirection.Text = string.Empty;
-				cbDirection.DataSource = null;
-			}
+			//if (!isDepartmentLoaded)
+			//{
+			//	selectedDepartment = null;
+			//	ClearComboboxes(cbDepartment);
+			//	//cbDepartment.Text = string.Empty;
+			//	//cbDepartment.DataSource = null;
+			//	ClearComboboxes(cbDirection);
+			//	selectedDirection = null;
+			//	//cbDirection.Text = string.Empty;
+			//	//cbDirection.DataSource = null;
+			//}
 		}
 
-		public static void LoadFacultyDepartments(
+		public static bool LoadFacultyDepartments(
 			ComboBox cbDepartment,
 			Guid selectedFacultyId,
 			Department? selectedDepartment)
 		{
-			bool isDepartmentLoaded = LoadComboboxData<Department>(
+			return LoadComboboxData<Department>(
 					cbDepartment,
 					dep => dep.FacultyId == selectedFacultyId);
-			if (!isDepartmentLoaded)
-			{
-				selectedDepartment = null;
-				cbDepartment.Text = string.Empty;
-				cbDepartment.DataSource = null;
-			}
+			//if (!isDepartmentLoaded)
+			//{
+			//	selectedDepartment = null;
+			//	ClearComboboxes(cbDepartment);
+			//	//cbDepartment.Text = string.Empty;
+			//	//cbDepartment.DataSource = null;
+			//}
 		}
 
-		public static void LoadDepartmentDirections(
+		public static bool LoadDepartmentDirections(
 			ComboBox cbDirection,
 			Guid selectedDepartmentId,
-			Direction? selectedDirection)
+			Direction? selectedDirection,
+			Group? selectedGroup = null,
+			ComboBox? cbGroup = null)
 		{
-			bool isDirectionLoaded = LoadComboboxData<Direction>(
+			return LoadComboboxData<Direction>(
 				cbDirection,
 				dir => dir.DepartmentId == selectedDepartmentId);
-			if (!isDirectionLoaded)
-			{
-				selectedDirection = null;
-				cbDirection.Text = string.Empty;
-				cbDirection.DataSource = null;
-			}
+			//if (!isDirectionLoaded)
+			//{
+			//	selectedDirection = null;
+			//	ClearComboboxes(cbDirection);
+			//	//cbDirection.Text = string.Empty;
+			//	//cbDirection.DataSource = null;
+
+			//	selectedGroup = null;
+			//	if (cbGroup != null)
+			//	{
+			//		ClearComboboxes(cbGroup);
+			//		//cbGroup.Text = string.Empty;
+			//		//cbGroup.DataSource = null;
+			//	}
+			//}
 		}
 
-		public static void LoadDepartmentTeachers(
+		public static bool LoadDepartmentTeachers(
 			ComboBox cbTeachers,
 			Guid selectedDepartmentId,
 			Teacher? selectedTeacher)
 		{
-			bool isTeacherLoaded = LoadComboboxData<Teacher>(
+			return LoadComboboxData<Teacher>(
 				cbTeachers,
 				t => t.DepartmentId == selectedDepartmentId);
-			if (!isTeacherLoaded)
-			{
-				selectedTeacher = null;
-				cbTeachers.Text = string.Empty;
-				cbTeachers.DataSource = null;
-			}
+			//if (!isTeacherLoaded)
+			//{
+			//	selectedTeacher = null;
+			//	ClearComboboxes(cbTeachers);
+			//	//cbTeachers.Text = string.Empty;
+			//	//cbTeachers.DataSource = null;
+			//}
+		}
+
+		public static bool LoadDepartmentSubjects(
+			ComboBox cbSubjects,
+			Guid selectedDepartmentId,
+			Subject? selectedSubject)
+		{
+			return LoadComboboxData<Subject>(
+				cbSubjects,
+				s => s.DepartmentId == selectedDepartmentId);
+			//if (!isSubjectLoaded)
+			//{
+			//	selectedSubject = null;
+			//	ClearComboboxes(cbSubjects);
+			//	//cbSubjects.Text = string.Empty;
+			//	//cbSubjects.DataSource = null;
+			//}
 		}
 	}
 }

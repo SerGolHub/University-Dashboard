@@ -43,7 +43,6 @@
 			cbFaculty = new ComboBox();
 			cbDepartment = new ComboBox();
 			tbEnrollmentNumber = new TextBox();
-			tbEnrollmentDate = new TextBox();
 			cbExcellentStudent = new ComboBox();
 			dgvStudentList = new DataGridView();
 			btnDelete = new Button();
@@ -53,6 +52,7 @@
 			label9 = new Label();
 			label10 = new Label();
 			cbDirection = new ComboBox();
+			dateTimePicker1 = new DateTimePicker();
 			((System.ComponentModel.ISupportInitialize)dgvStudentList).BeginInit();
 			SuspendLayout();
 			// 
@@ -243,17 +243,6 @@
 			tbEnrollmentNumber.Size = new Size(185, 24);
 			tbEnrollmentNumber.TabIndex = 20;
 			// 
-			// tbEnrollmentDate
-			// 
-			tbEnrollmentDate.BackColor = Color.FromArgb(158, 161, 178);
-			tbEnrollmentDate.BorderStyle = BorderStyle.FixedSingle;
-			tbEnrollmentDate.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-			tbEnrollmentDate.ForeColor = Color.FromArgb(24, 30, 54);
-			tbEnrollmentDate.Location = new Point(597, 63);
-			tbEnrollmentDate.Name = "tbEnrollmentDate";
-			tbEnrollmentDate.Size = new Size(185, 24);
-			tbEnrollmentDate.TabIndex = 20;
-			// 
 			// cbExcellentStudent
 			// 
 			cbExcellentStudent.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -378,12 +367,23 @@
 			cbDirection.Text = "Выберите кафедру";
 			cbDirection.SelectedIndexChanged += cbDirection_SelectedIndexChanged;
 			// 
+			// dateTimePicker1
+			// 
+			dateTimePicker1.CustomFormat = "MMMM yyyy";
+			dateTimePicker1.Format = DateTimePickerFormat.Custom;
+			dateTimePicker1.Location = new Point(597, 60);
+			dateTimePicker1.Name = "dateTimePicker1";
+			dateTimePicker1.ShowUpDown = true;
+			dateTimePicker1.Size = new Size(127, 23);
+			dateTimePicker1.TabIndex = 55;
+			// 
 			// FrmStudents
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
 			ClientSize = new Size(980, 653);
+			Controls.Add(dateTimePicker1);
 			Controls.Add(dgvStudentList);
 			Controls.Add(btnDelete);
 			Controls.Add(btnReset);
@@ -397,7 +397,6 @@
 			Controls.Add(cbExcellentStudent);
 			Controls.Add(cbCourse);
 			Controls.Add(btnAdd);
-			Controls.Add(tbEnrollmentDate);
 			Controls.Add(tbEnrollmentNumber);
 			Controls.Add(tbFullName);
 			Controls.Add(label10);
@@ -434,7 +433,6 @@
         private ComboBox cbFaculty;
         private ComboBox cbDepartment;
         private TextBox tbEnrollmentNumber;
-        private TextBox tbEnrollmentDate;
         private ComboBox cbExcellentStudent;
         private DataGridView dgvStudentList;
         private Button btnDelete;
@@ -444,5 +442,6 @@
         private Label label9;
         private Label label10;
         private ComboBox cbDirection;
-    }
+		private DateTimePicker dateTimePicker1;
+	}
 }

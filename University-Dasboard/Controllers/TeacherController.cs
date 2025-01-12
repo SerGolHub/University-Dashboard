@@ -74,7 +74,7 @@ namespace University_Dasboard.Controllers
                 Name = t.Name,
                 PhoneNumber = t.PhoneNumber,
                 Email = t.Email,
-                HireDate = t.HireDate.ToUniversalTime(),
+                HireDate = t.HireDate,
                 Degree = t.Degree,
                 Status = t.Status,
                 DepartmentId = t.DepartmentId,
