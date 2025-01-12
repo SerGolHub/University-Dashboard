@@ -1,5 +1,4 @@
 ﻿using Database;
-using System.Security.Cryptography.X509Certificates;
 using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
