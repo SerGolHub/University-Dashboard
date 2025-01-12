@@ -69,17 +69,6 @@ namespace University_Dasboard
 			return LoadComboboxData<Department>(
 					cbDepartment,
 					dep => dep.FacultyId == selectedFacultyId);
-			//if (!isDepartmentLoaded)
-			//{
-			//	selectedDepartment = null;
-			//	ClearComboboxes(cbDepartment);
-			//	//cbDepartment.Text = string.Empty;
-			//	//cbDepartment.DataSource = null;
-			//	ClearComboboxes(cbDirection);
-			//	selectedDirection = null;
-			//	//cbDirection.Text = string.Empty;
-			//	//cbDirection.DataSource = null;
-			//}
 		}
 
 		public static bool LoadFacultyDepartments(
@@ -90,13 +79,6 @@ namespace University_Dasboard
 			return LoadComboboxData<Department>(
 					cbDepartment,
 					dep => dep.FacultyId == selectedFacultyId);
-			//if (!isDepartmentLoaded)
-			//{
-			//	selectedDepartment = null;
-			//	ClearComboboxes(cbDepartment);
-			//	//cbDepartment.Text = string.Empty;
-			//	//cbDepartment.DataSource = null;
-			//}
 		}
 
 		public static bool LoadDepartmentDirections(
@@ -109,21 +91,6 @@ namespace University_Dasboard
 			return LoadComboboxData<Direction>(
 				cbDirection,
 				dir => dir.DepartmentId == selectedDepartmentId);
-			//if (!isDirectionLoaded)
-			//{
-			//	selectedDirection = null;
-			//	ClearComboboxes(cbDirection);
-			//	//cbDirection.Text = string.Empty;
-			//	//cbDirection.DataSource = null;
-
-			//	selectedGroup = null;
-			//	if (cbGroup != null)
-			//	{
-			//		ClearComboboxes(cbGroup);
-			//		//cbGroup.Text = string.Empty;
-			//		//cbGroup.DataSource = null;
-			//	}
-			//}
 		}
 
 		public static bool LoadDepartmentTeachers(
@@ -134,13 +101,6 @@ namespace University_Dasboard
 			return LoadComboboxData<Teacher>(
 				cbTeachers,
 				t => t.DepartmentId == selectedDepartmentId);
-			//if (!isTeacherLoaded)
-			//{
-			//	selectedTeacher = null;
-			//	ClearComboboxes(cbTeachers);
-			//	//cbTeachers.Text = string.Empty;
-			//	//cbTeachers.DataSource = null;
-			//}
 		}
 
 		public static bool LoadDepartmentSubjects(
@@ -151,13 +111,6 @@ namespace University_Dasboard
 			return LoadComboboxData<Subject>(
 				cbSubjects,
 				s => s.DepartmentId == selectedDepartmentId);
-			//if (!isSubjectLoaded)
-			//{
-			//	selectedSubject = null;
-			//	ClearComboboxes(cbSubjects);
-			//	//cbSubjects.Text = string.Empty;
-			//	//cbSubjects.DataSource = null;
-			//}
 		}
 	}
 }
