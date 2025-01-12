@@ -90,6 +90,7 @@ namespace University_Dasboard.Controllers
                 existingStudent.Name = updatedStudent.Name;
                 existingStudent.EnrollmentDate = updatedStudent.EnrollmentDate;
                 existingStudent.EnrollmentNumber = updatedStudent.EnrollmentNumber;
+                existingStudent.IsExcellentStudent = updatedStudent.IsExcellentStudent;
                 existingStudent.GroupId = updatedStudent.GroupId;
             }
         }

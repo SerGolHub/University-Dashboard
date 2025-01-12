@@ -7,11 +7,11 @@ using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
 {
-	public partial class FrmDisciplines : Form
+	public partial class FrmSubjects : Form
 	{
 		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-		public FrmDisciplines()
+		public FrmSubjects()
 		{
 			InitializeComponent();
 			LoadData();
@@ -43,7 +43,7 @@ namespace University_Dasboard
 		{
 			logger.Info("Начата загрузка дисциплин");
 			using var ctx = new DatabaseContext();
-			DisciplineController.LoadDisciplines(dgvDisciplines, ref disciplines);
+			SubjectController.LoadDisciplines(dgvDisciplines, ref disciplines);
 			DataGridViewHelper.HideColumns(dgvDisciplines,
 				["Id", "DepartmentId", "TeacherId"]);
 			var faculties = ctx.Faculty.ToList();
@@ -113,7 +113,7 @@ namespace University_Dasboard
 			try
 			{
 
-				await DisciplineController.SaveDisciplinesAsync(
+				await SubjectController.SaveDisciplinesAsync(
 					newDisciplinesList,
 					updatedDisciplinesList,
 					removedDisciplinesList);

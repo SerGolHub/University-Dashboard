@@ -2,18 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
-using static University_Dasboard.FrmDisciplines;
+using static University_Dasboard.FrmSubjects;
 
 namespace University_Dasboard.Controllers
 {
-	public class DisciplineController
+	public class SubjectController
     {
 		public static void LoadDisciplines(
 			DataGridView dgv,
 			ref BindingList<DisciplineViewModel> bindingList)
 		{
 			using var ctx = new DatabaseContext();
-			var disciplines = ctx.Discipline
+			var disciplines = ctx.Subject
 			.Include(dis => dis.Teacher)
 			.Include(dis => dis.Department)
 			.ThenInclude(dep => dep!.Faculty)
@@ -54,7 +54,7 @@ namespace University_Dasboard.Controllers
 			{
 				return;
 			}
-			var newDisciplines = newDisciplineList.Select(dis => new Discipline
+			var newDisciplines = newDisciplineList.Select(dis => new Subject
 			{
 				Id = dis.Id,
 				Name = dis.Name,
@@ -62,7 +62,7 @@ namespace University_Dasboard.Controllers
 				TeacherId = dis.TeacherId
 			}).ToList();
 
-			await ctx.Discipline.AddRangeAsync(newDisciplines);
+			await ctx.Subject.AddRangeAsync(newDisciplines);
 		}
 
 		private static async Task UpdateExistingDisciplinesAsync(
@@ -74,7 +74,7 @@ namespace University_Dasboard.Controllers
 				return;
 			}
 			var updatedIds = updatedDisciplines.Select(dis => dis.Id).ToList();
-			var existingDisciplines = await ctx.Discipline
+			var existingDisciplines = await ctx.Subject
 				.Where(dis => updatedIds.Contains(dis.Id))
 				.ToListAsync();
 
@@ -96,11 +96,11 @@ namespace University_Dasboard.Controllers
 				return;
 			}
 			var removedIds = removedDisciplines.Select(dis => dis.Id).ToList();
-			var disciplinesToRemove = await ctx.Discipline
+			var disciplinesToRemove = await ctx.Subject
 				.Where(dis => removedIds.Contains(dis.Id))
 				.ToListAsync();
 
-			ctx.Discipline.RemoveRange(disciplinesToRemove);
+			ctx.Subject.RemoveRange(disciplinesToRemove);
 		}
 	}
 }

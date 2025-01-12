@@ -12,7 +12,7 @@ namespace University_Dasboard.Database.Models
 		public Guid Id { get; set; }
 
 		public Guid DisciplineId { get; set; }
-		public Discipline? Discipline { get; set; }
+		public Subject? Discipline { get; set; }
 
 		public Guid FacultyId { get; set; }
         public Faculty? Faculty { get; set; }

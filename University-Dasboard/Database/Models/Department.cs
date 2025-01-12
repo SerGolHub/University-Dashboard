@@ -9,7 +9,7 @@ namespace University_Dasboard.Database.Models
         public Guid FacultyId { get; set; }
         public Faculty? Faculty { get; set; }
         public ICollection<Direction> Directions { get; set; } = [];
-        public ICollection<Discipline> Disciplines { get; set; } = [];
+        public ICollection<Subject> Disciplines { get; set; } = [];
         public ICollection<Teacher> Teachers { get; set; } = [];
     }
 }

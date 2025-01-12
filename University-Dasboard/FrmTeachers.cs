@@ -180,7 +180,7 @@ namespace University_Dasboard
 				Name = fullName,
 				PhoneNumber = tbPhoneNumber.Text,
 				Email = tbEmail.Text,
-				HireDate = dtpHireDate.Value,
+				HireDate = dtpHireDate.Value.ToUniversalTime(),
 				Degree = cbDegree.Text,
 				Status = cbStatus.Text,
 				DepartmentId = selectedDepartment!.Id,

@@ -18,7 +18,7 @@ namespace University_Dasboard.Database.Models
 
         public required string Status { get; set; }
 
-        public ICollection<Discipline> Subjects { get; set; } = new List<Discipline>();
+        public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
 
         public Guid DepartmentId { get; set; }
         public Department? Department { get; set; }

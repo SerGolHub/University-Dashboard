@@ -104,12 +104,6 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (tbEnrollmentDate == null)
-			{
-				MessageBox.Show("Введите дату зачисления");
-				return;
-			}
-
 			if (isExcelent == null)
 			{
 				isExcelent = false;
@@ -119,8 +113,9 @@ namespace University_Dasboard
 			{
 				Id = Guid.NewGuid(),
 				Name = tbFullName.Text,
-				EnrollmentDate = DateTime.ParseExact(tbEnrollmentDate.Text, "dd.mm.yyyy", new System.Globalization.CultureInfo("ru-RU")),
+				EnrollmentDate = dateTimePicker1.Value.Date.ToUniversalTime(),
 				EnrollmentNumber = tbEnrollmentNumber.Text,
+				IsExcellentStudent = (bool)isExcelent,
 				CourseNumber = (int)selectedCourse,
 				GroupId = selectedGroup.Id,
 				GroupName = selectedGroup.Name
@@ -218,13 +213,41 @@ namespace University_Dasboard
 		private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedDirection = (Direction?)cbDirection.SelectedItem;
-			ComboboxHelper.LoadComboboxData<Group>(cbGroup);
+			if (selectedDirection != null)
+			{
+				bool areGroupsLoaded = ComboboxHelper.LoadComboboxData<Group>(
+				cbGroup,
+				g => g.DirectionId == selectedDirection.Id);
+
+				if (areGroupsLoaded)
+				{
+					using var ctx = new DatabaseContext();
+					var maxCourse = ctx.Direction
+						.Where(dir => dir.Id == selectedDirection.Id)
+						.Select(dir => dir.MaxCourse)
+						.First();
+					List<int> coursesList = [];
+					for (int i = 1; i <= maxCourse; i++)
+					{
+						coursesList.Add(i);
+					}
+					cbCourse.DataSource = coursesList;
+					cbCourse.Update();
+				}
+				else
+				{
+					ComboboxHelper.ClearComboboxes(
+					cbGroup,
+					cbCourse);
+					selectedGroup = null;
+					selectedCourse = null;
+				}
+			}
 		}
 
 		private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedGroup = (Group?)cbGroup.SelectedItem;
-			cbCourse.Items.Clear();
 		}
 
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
@@ -234,7 +257,19 @@ namespace University_Dasboard
 
 		private void cbExcellentStudent_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			isExcelent = (bool?)cbExcellentStudent.SelectedItem;
+			string? answer = (string?)cbExcellentStudent.SelectedItem;
+			if (answer == null)
+			{
+				return;
+			}
+			if (answer == "Да")
+			{
+				isExcelent = true;
+			}
+			else
+			{
+				isExcelent = false;
+			}
 		}
 	}
 }

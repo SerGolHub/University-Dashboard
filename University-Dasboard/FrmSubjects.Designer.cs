@@ -1,6 +1,6 @@
 ﻿namespace University_Dasboard
 {
-    partial class FrmDisciplines
+    partial class FrmSubjects
     {
         /// <summary>
         /// Required designer variable.

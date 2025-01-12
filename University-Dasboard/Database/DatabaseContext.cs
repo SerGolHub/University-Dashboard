@@ -12,7 +12,7 @@ namespace Database
 		public DbSet<Group> Group { get; set; }
 		public DbSet<Marks> Marks { get; set; }
 		public DbSet<Student> Student { get; set; }
-		public DbSet<Discipline> Discipline { get; set; }
+		public DbSet<Subject> Subject { get; set; }
 		public DbSet<Teacher> Teacher { get; set; }
 		public DbSet<TeacherConstraint> TeacherConstraints { get; set; }
 		public DbSet<User> User { get; set; }

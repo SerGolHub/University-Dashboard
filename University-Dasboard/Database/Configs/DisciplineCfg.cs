@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using University_Dasboard.Database.Models;
 
-public class DisciplineCfg : IEntityTypeConfiguration<Discipline>
+public class DisciplineCfg : IEntityTypeConfiguration<Subject>
 {
-    public void Configure(EntityTypeBuilder<Discipline> builder)
+    public void Configure(EntityTypeBuilder<Subject> builder)
     {
         builder.HasKey(dis => dis.Id);
         builder.

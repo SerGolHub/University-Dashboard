@@ -2,7 +2,7 @@
 
 namespace University_Dasboard.Database.Models
 {
-    public class Discipline : IEntity
+    public class Subject : IEntity
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }

@@ -53,7 +53,7 @@ namespace University_Dasboard
 		private List<ScheduleDisciplineViewModel> updatedScheduleList = [];
 		private List<ScheduleDisciplineViewModel> removedScheduleList = [];
 
-		private Discipline? selectedDiscipline;
+		private Subject? selectedDiscipline;
 		private Faculty? selectedFaculty;
 		private Direction? selectedDirection;
 		private Group? selectedGroup;
