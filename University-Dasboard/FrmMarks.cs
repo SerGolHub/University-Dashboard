@@ -263,8 +263,15 @@ namespace University_Dasboard
 				.ToList();
 			}
 			marks = new BindingList<MarksViewModel>(marksList);
+<<<<<<< HEAD
 			dgvMarksList.DataSource = marks;
 			ClearTempLists();
+=======
+			ClearTempLists();
+			MarksController.LoadMarks(dgvMarksList, ref marks);
+			DataGridViewHelper.HideColumns(dgvMarksList,
+				["Id", "StudentId", "SubjectId"]);
+>>>>>>> c1be2d5f7cda272e99ee714820c094077b0c9468
 		}
 
 		private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
