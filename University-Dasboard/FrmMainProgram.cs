@@ -231,7 +231,7 @@ namespace University_Dasboard
 
 		private void btGrades_Click(object sender, EventArgs e)
 		{
-			FormLoader.loadForm(pnlFormLoader, new FrmGrades());
+			FormLoader.loadForm(pnlFormLoader, new FrmMarks());
 			restoreButtonsBackColor();
 			moveNavigationSubPanel(btnGrades, pnlGradeRecordSubMenu);
 		}

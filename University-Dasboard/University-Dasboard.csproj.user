@@ -16,7 +16,7 @@
     <Compile Update="FrmGradeRecords.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmGrades.cs">
+    <Compile Update="FrmMarks.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FrmGroups.cs">
