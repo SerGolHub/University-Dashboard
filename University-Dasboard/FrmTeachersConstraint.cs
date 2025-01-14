@@ -1,0 +1,166 @@
+﻿using Database;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Math;
+using Microsoft.EntityFrameworkCore;
+using NLog;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using University_Dasboard.Controllers;
+using University_Dasboard.Database.Enums;
+using University_Dasboard.Database.Models;
+using static University_Dasboard.FrmGroups;
+
+namespace University_Dasboard
+{
+	public partial class FrmTeachersConstraint : Form
+	{
+		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		// Вспомогательные ViewModel для отображения данных
+		public class TeacherConstraintViewModel
+		{
+			public Guid Id { get; set; }
+
+			public Guid TeacherId { get; set; }
+			public Teacher Teacher { get; set; } = null!;
+
+			public DayOfWeek DayOfWeek { get; set; }
+
+			public TimeSpan StartTime { get; set; }
+			public TimeSpan EndTime { get; set; }
+
+			public string Note { get; set; } = string.Empty;
+		}
+
+		public FrmTeachersConstraint()
+		{
+			InitializeComponent();
+			LoadData();
+		}
+
+		private BindingList<TeacherConstraintViewModel> teacherConstraints = [];
+		private List<TeacherConstraintViewModel> newTeacherConstraintList = [];
+		private List<TeacherConstraintViewModel> updatedTeacherConstraintList = [];
+		private List<TeacherConstraintViewModel> removedTeacherConstraintList = [];
+		private Teacher? selectedTeacher;
+
+
+        private void LoadData()
+        {
+            try
+            {
+                using var ctx = new DatabaseContext();
+
+                // Загрузка данных преподавателей
+                //TeacherConstraintController.LoadTeacherConstraint(dgvTeacherList, ref teacherConstraints);
+                //DataGridViewHelper.HideColumns(dgvTeacherList, new[] { "Id", "TeacherId" });
+
+                // Загрузка данных для ComboBox
+                LoadComboboxData(ctx);
+
+                logger.Info("Данные преподавателей успешно загружены.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}");
+                logger.Error(ex, "Ошибка при загрузке данных преподавателей.");
+            }
+        }
+
+        private void LoadComboboxData(DatabaseContext ctx)
+        {
+            var teachers = ctx.Teacher.ToList();
+            ComboboxHelper.LoadCombobox(teachers, comboBoxTeachers);
+        }
+
+        private void ClearTempLists()
+        {
+            newTeacherConstraintList.Clear();
+            updatedTeacherConstraintList.Clear();
+            removedTeacherConstraintList.Clear();
+            logger.Info("Временные списки очищены.");
+        }
+
+        private void btnAddConstraint_Click(object sender, EventArgs e)
+        {
+            if (selectedTeacher == null)
+            {
+                MessageBox.Show("Выберите преподавателя для добавления ограничения.");
+                logger.Warn("Попытка добавить ограничение без выбранного преподавателя.");
+                return;
+            }
+
+            var startTime = dateTimePickerStartTime.Value.TimeOfDay;
+            var endTime = dateTimePickerEndTime.Value.TimeOfDay;
+
+            if (startTime >= endTime)
+            {
+                MessageBox.Show("Время начала должно быть раньше времени окончания.");
+                return;
+            }
+
+            var constraint = new TeacherConstraintViewModel
+            {
+                Id = Guid.NewGuid(),
+                TeacherId = selectedTeacher.Id,
+                Teacher = selectedTeacher,
+                DayOfWeek = (DayOfWeek)cbDayOfWeek.SelectedItem!,
+                StartTime = startTime,
+                EndTime = endTime,
+                Note = tbNote.Text.Trim()
+            };
+
+            teacherConstraints.Add(constraint);
+            newTeacherConstraintList.Add(constraint);
+            logger.Info($"Добавлено новое ограничение для преподавателя {selectedTeacher.Name}.");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            lbDbSaveResult.ForeColor = System.Drawing.Color.Blue;
+            lbDbSaveResult.Text = "Сохранение данных...";
+            lbDbSaveResult.Visible = true;
+
+            try
+            {
+                /*TeacherConstraintController.SaveConstraints(
+                    newTeacherConstraintList,
+                    updatedTeacherConstraintList,
+                    removedTeacherConstraintList
+                );*/
+                ClearTempLists();
+                lbDbSaveResult.ForeColor = System.Drawing.Color.Green;
+                lbDbSaveResult.Text = "Данные успешно сохранены.";
+                logger.Info("Данные успешно сохранены.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сохранения данных: {ex.Message}");
+                logger.Error(ex, "Ошибка сохранения данных ограничений.");
+                lbDbSaveResult.ForeColor = System.Drawing.Color.Red;
+                lbDbSaveResult.Text = "Ошибка сохранения данных.";
+            }
+            finally
+            {
+                lbDbSaveResult.Visible = false;
+            }
+        }
+
+        public static string GetEnumDisplayName<T>(T enumValue) where T : Enum
+        {
+            var fieldInfo = typeof(T).GetField(enumValue.ToString());
+            var displayAttribute = fieldInfo?.GetCustomAttribute<DisplayAttribute>();
+            return displayAttribute?.Name ?? enumValue.ToString();
+        }
+
+        private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedTeacher = comboBoxTeachers.SelectedItem as Teacher;
+        }
+    }
+}
