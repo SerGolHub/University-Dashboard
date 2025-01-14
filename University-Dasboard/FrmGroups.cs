@@ -17,7 +17,6 @@ namespace University_Dasboard
 		{
 			public Guid Id { get; set; }
 			public string Name { get; set; } = string.Empty;
-			public int MaxCourse { get; set; }
 
 			public Guid DirectionId { get; set; }
 			public string DirectionName { get; set; } = string.Empty;
@@ -30,7 +29,6 @@ namespace University_Dasboard
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
-		private int? selectedMaxCourse;
 
 		private void LoadData()
 		{
@@ -73,16 +71,10 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
-			if (selectedMaxCourse == null)
-			{
-				MessageBox.Show("Выберите максимальный курс группы");
-				return;
-			}
 			var newGroup = new GroupViewModel()
 			{
 				Id = Guid.NewGuid(),
 				Name = tbGroupName.Text,
-				MaxCourse = (int)selectedMaxCourse,
 				DirectionId = selectedDirection.Id,
 				DirectionName = selectedDirection.Name
 			};
