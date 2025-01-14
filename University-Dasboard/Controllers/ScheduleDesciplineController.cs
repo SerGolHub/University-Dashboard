@@ -33,7 +33,10 @@ namespace University_Dasboard.Controllers
 					FacultyId = s.FacultyId,
 					FacultyName = s.Faculty!.Name,
 					ScheduleWeekId = s.ScheduleWeekId,
-					ScheduleWeek = s.ScheduleWeek!.Name
+					ScheduleWeek = s.ScheduleWeek!.Name,
+					LectureHours = s.ScheduleWeek!.LectureHours,
+					PracticalHours = s.ScheduleWeek!.PracticalHours,
+					LaboratoryHours = s.ScheduleWeek!.LaboratoryHours
 				}).ToList();
 
 			bindingList = new BindingList<ScheduleDisciplineViewModel>(schedules);

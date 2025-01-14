@@ -84,23 +84,11 @@ namespace University_Dasboard
                 faculties,
                 comboBox: comboBoxFaculties);
 
-			// Загрузка направлений
-			var directions = ctx.Direction.ToList();
-			ComboboxHelper.LoadCombobox(
-				directions,
-				comboBox: comboBoxDirection);
-
 			// Загрузка Предметов
             var subjects = ctx.Subject.ToList();
             ComboboxHelper.LoadCombobox(
                 subjects,
                 comboBox: comboBoxDiscipline);
-
-			// Загрузка групп
-			var groups = ctx.Group.Where(g => g.Direction == selectedDirection).ToList();
-			ComboboxHelper.LoadCombobox(
-				groups,
-				comboBox: comboBoxGroup);
 
             // Загрузка недель расписания
             var scheduleWeeks = ctx.ScheduleWeek.ToList();
@@ -246,11 +234,24 @@ namespace University_Dasboard
         private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFaculty = (Faculty?)comboBoxFaculties.SelectedItem;
+            if (comboBoxFaculties.SelectedValue is Guid selectedFacultyId)
+            {
+                ComboboxHelper.LoadFacultyDirectionGroups(
+                    comboBoxDirection,
+                    comboBoxGroup,
+                    selectedFacultyId);
+            }
         }
 
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDirection = (Direction?)comboBoxDirection.SelectedItem;
+            if (comboBoxDirection.SelectedValue is Guid selectedDirectionId)
+            {
+                ComboboxHelper.LoadComboboxData<Group>(
+                    comboBoxGroup,
+                    group => group.DirectionId == selectedDirectionId);
+            }
         }
 
         private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
