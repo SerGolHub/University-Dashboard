@@ -234,34 +234,47 @@ namespace University_Dasboard
         private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFaculty = (Faculty?)comboBoxFaculties.SelectedItem;
-            if (comboBoxFaculties.SelectedValue is Guid selectedFacultyId)
+            if (selectedFaculty != null)
             {
-                ComboboxHelper.LoadFacultyDirectionGroups(
+                // Загружаем департаменты и направления через факультет
+                var directionsLoaded = ComboboxHelper.LoadFacultyDirectionGroups(
                     comboBoxDirection,
                     comboBoxGroup,
-                    selectedFacultyId);
+                    selectedFaculty.Id,
+                    selectedDirection?.Id);
+
+                if (!directionsLoaded)
+                {
+                    MessageBox.Show("Нет доступных направлений.");
+                }
             }
         }
 
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDirection = (Direction?)comboBoxDirection.SelectedItem;
-            if (comboBoxDirection.SelectedValue is Guid selectedDirectionId)
+            if (selectedDirection != null)
             {
-                ComboboxHelper.LoadComboboxData<Group>(
-                    comboBoxGroup,
-                    group => group.DirectionId == selectedDirectionId);
-            }
-        }
+                // Загружаем группы через выбранное направление
+                var groupsLoaded = ComboboxHelper.LoadDirectionGroups(
+                    comboBoxDirection,
+                    selectedDirection.Id);
 
-        private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedSubject = (Subject?)comboBoxDiscipline.SelectedItem;
+                if (!groupsLoaded)
+                {
+                    comboBoxDirection.Text = "Группы не найдены";
+                }
+            }
         }
 
         private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedGroup = (Group?)comboBoxGroup.SelectedItem;
+        }
+
+        private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedSubject = (Subject?)comboBoxDiscipline.SelectedItem;
         }
 
         private void cbSchedule_SelectedIndexChanged(object sender, EventArgs e)

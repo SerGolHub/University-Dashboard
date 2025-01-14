@@ -124,28 +124,55 @@ namespace University_Dasboard
                     dep => dep.FacultyId == selectedFacultyId);
         }
 
-        public static bool LoadFacultyDirectionGroups(
-            ComboBox cbDirection, ComboBox cbGroup, Guid selectedFacultyId,
-            Guid? selectedDirectionId = null,
-            Direction? selectedDirection = null,
+        public static bool LoadFacultyDirections(
+            ComboBox cbDirection,
+            Guid selectedFacultyId)
+        {
+            // Загружаем направления для указанного факультета
+            return LoadComboboxData<Direction>(
+                cbDirection,
+                dir => dir.FacultyId == selectedFacultyId);
+        }
+
+        public static bool LoadDirectionGroups(
+            ComboBox cbGroup,
+            Guid selectedDirectionId,
             Group? selectedGroup = null)
+        {
+            // Загружаем группы для указанного направления
+            return LoadComboboxData<Group>(
+                cbGroup,
+                group => group.DirectionId == selectedDirectionId);
+        }
+
+        public static bool LoadFacultyDirectionGroups(
+            ComboBox cbDirection,
+            ComboBox cbGroup,
+            Guid selectedFacultyId,
+            Guid? selectedDirectionId = null)
         {
             // Загрузка направлений, связанных с выбранным факультетом
             var directionsLoaded = LoadComboboxData<Direction>(
                 cbDirection,
                 dir => dir.FacultyId == selectedFacultyId);
 
-            // Загрузка групп, связанных с выбранным направлением
-            var groupsLoaded = LoadComboboxData<Group>(
-                cbGroup,
-                group => group.DirectionId == selectedDirectionId);
-
-            if (!groupsLoaded)
+            // Если направление выбрано, загружаем группы
+            if (selectedDirectionId.HasValue)
             {
-                cbGroup.Text = "Группы не найдены";
+                var groupsLoaded = LoadDirectionGroups(
+                    cbGroup,
+                    selectedDirectionId.Value);
+
+                if (!groupsLoaded)
+                {
+                    cbGroup.Text = "Группы не найдены";
+                }
+
+                return directionsLoaded && groupsLoaded;
             }
 
-            return directionsLoaded && groupsLoaded;
+            return directionsLoaded;
         }
+
     }
 }
