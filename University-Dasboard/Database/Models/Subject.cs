@@ -16,6 +16,6 @@ namespace University_Dasboard.Database.Models
         public ICollection<Group> Groups { get; set; } = [];
         public ICollection<Marks> Marks { get; set; } = [];
 
-		public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; }
+        public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; } = null!;
 	}
 }

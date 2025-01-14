@@ -285,7 +285,7 @@ namespace University_Dasboard
 				{
 					Id = Guid.NewGuid(),
 					TeacherId = selectedTeacher?.Id ?? Guid.Empty,
-					Teacher = selectedTeacher,
+					Teacher = selectedTeacher!,
 					DayOfWeek = day,
 					StartTime = startTime,
 					EndTime = endTime

@@ -13,6 +13,6 @@ namespace University_Dasboard.Database.Models
         public ICollection<Student> Students { get; set; } = [];
         public ICollection<Subject> Disciplines { get; set; } = [];
 
-		public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; }
+        public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; } = null!;
 	}
 }
