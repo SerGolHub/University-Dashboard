@@ -64,13 +64,9 @@ namespace OfficePackage
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
-            
-
 
             SavePdf(info);
         }
-
-
 
 
         /// Создание pdf-файла
