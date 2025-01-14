@@ -1,7 +1,6 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
-using ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels;
-using DocumentFormat.OpenXml.Bibliography;
+﻿using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing.ChartDrawing;
+using OfficePackage.HelperModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

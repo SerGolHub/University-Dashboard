@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.Implements
+namespace OfficePackage.Implements
 {
     public class SaveToPdf : AbstractSaveToPdf
     {

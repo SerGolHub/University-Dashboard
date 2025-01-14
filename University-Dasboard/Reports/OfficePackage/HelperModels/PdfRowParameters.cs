@@ -1,4 +1,4 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
+﻿using OfficePackage.HelperEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

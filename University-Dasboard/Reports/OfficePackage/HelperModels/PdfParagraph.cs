@@ -1,11 +1,11 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
+﻿using OfficePackage.HelperEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
+namespace OfficePackage.HelperModels
 {
     // Информация по параграфу в Pdf документе
     public class PdfParagraph

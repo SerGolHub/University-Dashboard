@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums
+namespace OfficePackage.HelperEnums
 {
     public enum PdfParagraphAlignmentType
     {

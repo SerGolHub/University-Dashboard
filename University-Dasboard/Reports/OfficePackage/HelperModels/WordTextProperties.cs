@@ -1,11 +1,11 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
+﻿using OfficePackage.HelperEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
+namespace OfficePackage.HelperModels
 {
     // Модель свойств текста, которые нам нужны в word документе
     public class WordTextProperties
@@ -20,7 +20,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
 
         public bool Indentation { get; set; } = false;
 
-        public bool SpaceBeetween { get; set; } = false;
+        public bool SpaceBetween { get; set; } = false;
 
         // Выравнивание
         public WordJustificationType JustificationType { get; set; }

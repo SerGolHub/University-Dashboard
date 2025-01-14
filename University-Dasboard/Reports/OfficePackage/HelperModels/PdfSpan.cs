@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
+namespace OfficePackage.HelperModels
 {
     public class PdfSpan
     {

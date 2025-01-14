@@ -1,12 +1,10 @@
-﻿using ClassroomSchedulerContracts.ViewModels;
-using ClassroomSchedulerContracts.ViewModels.ReportModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
+namespace OfficePackage.HelperModels
 {
     public class PdfInfo
     {
@@ -34,10 +32,5 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
 
         public string GroupName { get; set; } = string.Empty;
 
-        //перечень заказов за указанный период для вывода/сохранения
-        public List<ScheduleTablePartViewModel> ReportCheckLesson { get; set; } = new();
-
-        //перечень заказов за указанный период для вывода/сохранения
-        ///public List<ReportClientViewModel> ReportDebiting { get; set; } = new();
     }
 }

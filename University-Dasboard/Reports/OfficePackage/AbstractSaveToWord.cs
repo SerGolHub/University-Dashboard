@@ -42,7 +42,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Факультет: {info.}",
+                    ($"Факультет: {info.FacultyName}",
                     new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
                 },
             });
@@ -53,7 +53,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Протокол проверки учебных занятий в {info.SemesterNumber} семестре",
+                    ($"Протокол проверки учебных занятий в  семестре",
                         new WordTextProperties { Bold = true, Size = "32", JustificationType = WordJustificationType.Center })
                 },
             });
@@ -82,26 +82,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
             CreateTableHeader(new List<string> { "№ ауд", "Пара", "Группа", "Дисциплина", "Ф.И.О. Преподавателя", "Роспись преподавателя" });
 
             // Данные таблицы
-            foreach (var report in info.ReportCheckLesson)
-            {
-                CreateRow(new WordRowParameters
-                {
-                    Texts = new List<string>
-                    {
-                        report.ClassroomNumber.ToString(),
-                        report.LectureNumber.ToString(),
-                        string.Join(", ", report.Groups ?? new List<string>()),
-                        report.SubjectNumber.ToString(),
-                        report.TeacherName.ToString(),
-                        report.EmptyColumn.ToString()
-                    },
-
-                    TextProperties = new WordTextProperties
-                    {
-                        JustificationType = WordJustificationType.Left
-                    }
-                });
-            }
+            
 
             // Пропуск
             CreateParagraph(new WordParagraph
@@ -176,7 +157,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Акт  проверки занятий в {info.SemesterNumber} семестре  {info.DateReport?.Year}-{info.DateReport?.Year+1} гг.", 
+                    ($"Акт  проверки занятий в  семестре  {info.DateReport?.Year}-{info.DateReport?.Year+1} гг.", 
                     new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Center, SpaceBeetween = true })
                 },
             });
@@ -186,26 +167,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
 
             // Дополнительно можно заполнить таблицу с данными, если они имеются
             // Пример заполнения (данные могут быть добавлены в info)
-            foreach (var item in info.ReportCheckLesson)
-            {
-                CreateRow(new WordRowParameters
-                {
-                    Texts = new List<string>
-                    {
-                        info.DateReport?.ToShortDateString()!,
-                        item.ClassroomNumber.ToString(),
-                        info.DateReport?.ToShortTimeString()!,
-                        string.Join(", ", item.Groups ?? new List<string>()),
-                        item.SubjectNumber.ToString(),
-                        item.TeacherName.ToString(),
-                        item.EmptyColumn.ToString()
-                    },
-                    TextProperties = new WordTextProperties
-                    {
-                        JustificationType = WordJustificationType.Left
-                    }
-                });
-
+            
                 // Пропуск
                 CreateParagraph(new WordParagraph
                 {
@@ -246,7 +208,6 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                     },
                     TextStyle = "Arial"
                 });
-            }
 
             SaveWord(info);
         }
