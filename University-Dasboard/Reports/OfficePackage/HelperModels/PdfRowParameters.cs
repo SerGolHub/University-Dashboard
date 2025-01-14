@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels
+namespace OfficePackage.HelperModels
 {
     // Информация по параметрам строк таблицы
     public class PdfRowParameters

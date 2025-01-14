@@ -1,7 +1,7 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
-using ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels;
-using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using OfficePackage.HelperEnums;
+using OfficePackage.HelperModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage
+namespace OfficePackage
 {
     public abstract class AbstractSaveToWord
     {
@@ -158,7 +158,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                 Texts = new List<(string, WordTextProperties)>
                 {
                     ($"Акт  проверки занятий в  семестре  {info.DateReport?.Year}-{info.DateReport?.Year+1} гг.", 
-                    new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Center, SpaceBeetween = true })
+                    new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Center, SpaceBetween = true })
                 },
             });
 
@@ -184,7 +184,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                     Texts = new List<(string, WordTextProperties)>
                     {
                         ("Объяснительные записки преподавателей с резолюцией декана просьба предоставить в отдел ОУП до   «___» ______________  20___г.",
-                        new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left, Indentation = true, SpaceBeetween = true })
+                        new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left, Indentation = true, SpaceBetween = true })
                     },
                     TextStyle = "Arial"
                 });

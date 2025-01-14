@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing.ChartDrawing;
+using OfficePackage.HelperEnums;
 using OfficePackage.HelperModels;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage
+namespace OfficePackage
 {
     public abstract class AbstractSaveToPdf
     {
@@ -46,25 +47,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
-            // Данные таблицы
-            foreach (var report in info.ReportCheckLesson)
-            {
-                CreateRow(new PdfRowParameters
-                {
-                    Texts = new List<string>
-                {
-                    report.ClassroomNumber.ToString(),
-                    report.LectureNumber.ToString(),
-                    string.Join(", ", report.Groups ?? new List<string>()),
-                    report.SubjectNumber.ToString(),
-                    report.TeacherName.ToString(),
-                    report.EmptyColumn.ToString()
-                },
-                    Style = "Normal",
-                    Font = "Times New Roman",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Left
-                });
-            }
+            
 
             // Итоговые абзацы
             CreateParagraph(new PdfParagraph
@@ -142,26 +125,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
-            // Дополнительно можно заполнить таблицу с данными, если они имеются
-            foreach (var item in info.ReportCheckLesson)
-            {
-                CreateRow(new PdfRowParameters
-                {
-                    Texts = new List<string>
-                    {
-                        {info.DateReport.ToShortDateString()},
-                        item.ClassroomNumber.ToString(),
-                        info.DateReport.ToShortTimeString(),
-                        string.Join(", ", item.Groups ?? new List<string>()),
-                        item.SubjectNumber.ToString(),
-                        item.TeacherName.ToString(),
-                        item.EmptyColumn.ToString()
-
-                    },
-                    Font = "Times New Roman",
-                    Style= "TableText",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Center
-                });
+           
 
                 // Объяснительная записка преподавателей
                 CreateParagraph(new PdfParagraph
@@ -177,7 +141,6 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
                     Style = "Normal",
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
-            }
 
             SavePdf(info);
         }

@@ -1,14 +1,14 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
-using ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels;
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MigraDoc.DocumentObjectModel.Shapes;
+using OfficePackage.HelperEnums;
+using OfficePackage.HelperModels;
 using PdfSharp.Drawing.BarCodes;
 using System;
 using System.Collections.Generic;
 
-namespace ClassroomSchedulerBusinessLogic.OfficePackage.Implements
+namespace OfficePackage.Implements
 {
     public class SaveToWord : AbstractSaveToWord
     {
@@ -82,7 +82,7 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage.Implements
                     runProperties.AppendChild(new Indentation { Left = "100" }); // Отступ слева для первой строки
                 }
 
-                if (properties.SpaceBeetween)
+                if (properties.SpaceBetween)
                 {
                     runProperties.AppendChild(new SpacingBetweenLines { Before = "480" });
                 }

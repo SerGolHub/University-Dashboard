@@ -1,9 +1,9 @@
-﻿using ClassroomSchedulerBusinessLogic.OfficePackage.HelperEnums;
-using ClassroomSchedulerBusinessLogic.OfficePackage.HelperModels;
-using MigraDoc.DocumentObjectModel;
+﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
+using OfficePackage.HelperEnums;
+using OfficePackage.HelperModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
