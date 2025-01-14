@@ -22,6 +22,37 @@ namespace ClassroomSchedulerBusinessLogic.OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
+                    ("РАСЧАСОВКА НА КАЖДУЮ ГРУППУ",
+                    new WordTextProperties { Size = "32", Bold = true, JustificationType = WordJustificationType.Center })
+                },
+            });
+
+            // Заголовок
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)>
+                {
+                    ("ГРАФИК УЧЕБНОГО ПРОЦЕССА",
+                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
+                },
+            });
+
+            // Заголовок
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)>
+                {
+                    ($"Факультет: {info.}",
+                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
+                },
+            });
+
+
+            // Заголовок
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)>
+                {
                     ($"Протокол проверки учебных занятий в {info.SemesterNumber} семестре",
                         new WordTextProperties { Bold = true, Size = "32", JustificationType = WordJustificationType.Center })
                 },
