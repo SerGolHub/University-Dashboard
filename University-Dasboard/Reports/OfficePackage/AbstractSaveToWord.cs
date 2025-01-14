@@ -42,7 +42,7 @@ namespace OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Факультет: {info.FacultyName}",
+                    ($"Факультет: {info.FacultyName}                                      Направление {info.DirectionName},                                     Группа: {info.GroupName}",
                     new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
                 },
             });
@@ -53,161 +53,18 @@ namespace OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Протокол проверки учебных занятий в  семестре",
+                    ($"Дисциплина: {info.SubjectName}                                   {info.SemesterName}                                                     {info.TeacherName} ",
                         new WordTextProperties { Bold = true, Size = "32", JustificationType = WordJustificationType.Center })
                 },
             });
 
-            // Дата
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ($"на «{info.DateReport?.Day}»   {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(info.DateReport!.Value.Month)}   {info.DateReport?.Year} г.",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-            });
-
-            // Пропуск
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-            });
-
             // Заголовки таблицы
-            CreateTableHeader(new List<string> { "№ ауд", "Пара", "Группа", "Дисциплина", "Ф.И.О. Преподавателя", "Роспись преподавателя" });
+            CreateTableHeader(new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "", "Отчётность" });
 
             // Данные таблицы
             
 
-            // Пропуск
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-            });
-
-            // Итоговые абзацы
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("Итого проверено занятий:      _____  ; из них:", new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left })
-                },
-                TextStyle = "Arial"
-            });
-
-
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("Количество присутствующих: _____", new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left })
-                },
-            });
-
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("Количество отсутствующих:    _____", new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left })
-                },
-            });
-
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("Лицо, проводящее проверку: ______________________________________",
-                    new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left })
-                },
-            });
-
-            // Разрыв страницы
-            CreatePageBreak();
-
-            // Добавление новой строки с "Декану"
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("Декану________________________", new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Right })
-                },
-            });
-
-            // Пропуск
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ("",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-            });
-
-            // Заголовок для новой таблицы
-            CreateParagraph(new WordParagraph
-            {
-                Texts = new List<(string, WordTextProperties)>
-                {
-                    ($"Акт  проверки занятий в  семестре  {info.DateReport?.Year}-{info.DateReport?.Year+1} гг.", 
-                    new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Center, SpaceBetween = true })
-                },
-            });
-
-            // Заголовки таблицы для новой таблицы
-            CreateTableHeader(new List<string> { "Дата", "№ ауд.", "Время", "Группа", "Дисциплина", "Ф.И.О. преподавателя", "Примечание" });
-
-            // Дополнительно можно заполнить таблицу с данными, если они имеются
-            // Пример заполнения (данные могут быть добавлены в info)
             
-                // Пропуск
-                CreateParagraph(new WordParagraph
-                {
-                    Texts = new List<(string, WordTextProperties)>
-                {
-                    ("",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-                });
-
-                // Объяснительная записка преподавателей
-                CreateParagraph(new WordParagraph
-                {
-                    Texts = new List<(string, WordTextProperties)>
-                    {
-                        ("Объяснительные записки преподавателей с резолюцией декана просьба предоставить в отдел ОУП до   «___» ______________  20___г.",
-                        new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Left, Indentation = true, SpaceBetween = true })
-                    },
-                    TextStyle = "Arial"
-                });
-
-                // Пропуск
-                CreateParagraph(new WordParagraph
-                {
-                    Texts = new List<(string, WordTextProperties)>
-                {
-                    ("",
-                    new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
-                },
-                });
-
-                CreateParagraph(new WordParagraph
-                {
-                    Texts = new List<(string, WordTextProperties)>
-                    {
-                        ("Начальник отдела ОУП                         			_____________________",
-                        new WordTextProperties { Size = "28", JustificationType = WordJustificationType.Right })
-                    },
-                    TextStyle = "Arial"
-                });
 
             SaveWord(info);
         }

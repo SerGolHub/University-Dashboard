@@ -12,25 +12,22 @@ namespace OfficePackage.HelperModels
 
         public string Title { get; set; } = string.Empty;
 
-        public int SemesterNumber { get; set; }
-
         public DateTime DateReport { get; set; }
 
         public DateTime DateCreate { get; set; }
 
         public TimeSpan TimeReport { get; set; }
 
-        public int ClassroomNumber { get; set; }
+        public string FacultyName { get; set; } = string.Empty;
 
-        public int JobStationNumber { get; set; }
-
-        public string ClassroomName { get; set; } = string.Empty;
-
-        public string HeadLaboratory { get; set; } = string.Empty;
-
-        public string HeadDepartment { get; set; } = string.Empty;
+        public string DirectionName { get; set; } = string.Empty;
 
         public string GroupName { get; set; } = string.Empty;
 
+        public string SubjectName { get; set; } = string.Empty;
+
+        public string SemesterName { get; set; } = string.Empty;
+
+        public string TeacherName { get; set; } = string.Empty;
     }
 }

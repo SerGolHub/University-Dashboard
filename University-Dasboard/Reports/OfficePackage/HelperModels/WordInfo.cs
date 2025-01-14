@@ -17,5 +17,15 @@ namespace OfficePackage.HelperModels
         public TimeSpan TimeReport { get; set; }
 
         public string FacultyName { get; set; } = string.Empty;
+
+        public string DirectionName { get; set; } = string.Empty;
+
+        public string GroupName { get; set; } = string.Empty;
+
+        public string SubjectName { get; set; } = string.Empty;
+
+        public string SemesterName { get; set;} = string.Empty;
+
+        public string TeacherName { get; set; } = string.Empty;
     }
 }
