@@ -30,6 +30,11 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainProgram));
 			panel1 = new Panel();
+			panel5 = new Panel();
+			button4 = new Button();
+			button2 = new Button();
+			button3 = new Button();
+			button1 = new Button();
 			pnlNavigation = new Panel();
 			pnlSchedulingSubMenu = new Panel();
 			btnSchedulingTeachers = new Button();
@@ -59,6 +64,7 @@
 			panel3 = new Panel();
 			pnlFormLoader = new Panel();
 			panel1.SuspendLayout();
+			panel5.SuspendLayout();
 			pnlSchedulingSubMenu.SuspendLayout();
 			pnlGradeRecordSubMenu.SuspendLayout();
 			pnlManageDataSubMenu.SuspendLayout();
@@ -71,6 +77,8 @@
 			// 
 			panel1.AutoScroll = true;
 			panel1.BackColor = Color.FromArgb(24, 30, 54);
+			panel1.Controls.Add(panel5);
+			panel1.Controls.Add(button1);
 			panel1.Controls.Add(pnlNavigation);
 			panel1.Controls.Add(pnlSchedulingSubMenu);
 			panel1.Controls.Add(btnScheduling);
@@ -82,8 +90,92 @@
 			panel1.Dock = DockStyle.Left;
 			panel1.Location = new Point(0, 0);
 			panel1.Name = "panel1";
-			panel1.Size = new Size(187, 730);
+			panel1.Size = new Size(187, 691);
 			panel1.TabIndex = 0;
+			// 
+			// panel5
+			// 
+			panel5.Controls.Add(button4);
+			panel5.Controls.Add(button2);
+			panel5.Controls.Add(button3);
+			panel5.Dock = DockStyle.Top;
+			panel5.Location = new Point(0, 1152);
+			panel5.Name = "panel5";
+			panel5.Size = new Size(170, 208);
+			panel5.TabIndex = 8;
+			panel5.Visible = false;
+			// 
+			// button4
+			// 
+			button4.Dock = DockStyle.Top;
+			button4.FlatAppearance.BorderSize = 0;
+			button4.FlatStyle = FlatStyle.Flat;
+			button4.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			button4.ForeColor = Color.FromArgb(0, 126, 249);
+			button4.ImageAlign = ContentAlignment.MiddleRight;
+			button4.Location = new Point(0, 128);
+			button4.Name = "button4";
+			button4.Padding = new Padding(20, 0, 15, 0);
+			button4.Size = new Size(170, 64);
+			button4.TabIndex = 4;
+			button4.Text = "Экспорт";
+			button4.TextAlign = ContentAlignment.MiddleLeft;
+			button4.TextImageRelation = TextImageRelation.TextBeforeImage;
+			button4.UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			button2.Dock = DockStyle.Top;
+			button2.FlatAppearance.BorderSize = 0;
+			button2.FlatStyle = FlatStyle.Flat;
+			button2.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			button2.ForeColor = Color.FromArgb(0, 126, 249);
+			button2.ImageAlign = ContentAlignment.MiddleRight;
+			button2.Location = new Point(0, 64);
+			button2.Name = "button2";
+			button2.Padding = new Padding(20, 0, 15, 0);
+			button2.Size = new Size(170, 64);
+			button2.TabIndex = 3;
+			button2.Text = "Карточка студента";
+			button2.TextAlign = ContentAlignment.MiddleLeft;
+			button2.TextImageRelation = TextImageRelation.TextBeforeImage;
+			button2.UseVisualStyleBackColor = true;
+			// 
+			// button3
+			// 
+			button3.Dock = DockStyle.Top;
+			button3.FlatAppearance.BorderSize = 0;
+			button3.FlatStyle = FlatStyle.Flat;
+			button3.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			button3.ForeColor = Color.FromArgb(0, 126, 249);
+			button3.ImageAlign = ContentAlignment.MiddleRight;
+			button3.Location = new Point(0, 0);
+			button3.Name = "button3";
+			button3.Padding = new Padding(20, 0, 15, 0);
+			button3.Size = new Size(170, 64);
+			button3.TabIndex = 2;
+			button3.Text = "Об успеваемости";
+			button3.TextAlign = ContentAlignment.MiddleLeft;
+			button3.TextImageRelation = TextImageRelation.TextBeforeImage;
+			button3.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			button1.Dock = DockStyle.Top;
+			button1.FlatAppearance.BorderSize = 0;
+			button1.FlatStyle = FlatStyle.Flat;
+			button1.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			button1.ForeColor = Color.FromArgb(0, 126, 249);
+			button1.ImageAlign = ContentAlignment.MiddleRight;
+			button1.Location = new Point(0, 1088);
+			button1.Name = "button1";
+			button1.Padding = new Padding(5, 0, 15, 0);
+			button1.Size = new Size(170, 64);
+			button1.TabIndex = 7;
+			button1.Text = "Отчёты";
+			button1.TextAlign = ContentAlignment.MiddleLeft;
+			button1.TextImageRelation = TextImageRelation.TextBeforeImage;
+			button1.UseVisualStyleBackColor = true;
 			// 
 			// pnlNavigation
 			// 
@@ -519,7 +611,7 @@
 			pnlFormLoader.Dock = DockStyle.Bottom;
 			pnlFormLoader.Location = new Point(187, 38);
 			pnlFormLoader.Name = "pnlFormLoader";
-			pnlFormLoader.Size = new Size(996, 692);
+			pnlFormLoader.Size = new Size(996, 653);
 			pnlFormLoader.TabIndex = 4;
 			// 
 			// FrmMainProgram
@@ -527,7 +619,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
-			ClientSize = new Size(1183, 730);
+			ClientSize = new Size(1183, 691);
 			Controls.Add(pnlFormLoader);
 			Controls.Add(panel3);
 			Controls.Add(panel1);
@@ -536,6 +628,7 @@
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Form1";
 			panel1.ResumeLayout(false);
+			panel5.ResumeLayout(false);
 			pnlSchedulingSubMenu.ResumeLayout(false);
 			pnlGradeRecordSubMenu.ResumeLayout(false);
 			pnlManageDataSubMenu.ResumeLayout(false);
@@ -577,5 +670,10 @@
         private Button btnStudents;
         private Button btnGroups;
         private Button btnTeachers;
-    }
+		private Button button1;
+		private Panel panel5;
+		private Button button4;
+		private Button button2;
+		private Button button3;
+	}
 }
