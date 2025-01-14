@@ -15,6 +15,7 @@ using NLog;
 using University_Dasboard.Reports.Models;
 using University_Dasboard.Reports;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace University_Dasboard
 {
@@ -32,12 +33,15 @@ namespace University_Dasboard
 		{
 			public Guid Id { get; set; }
 
-			public Guid DisciplineId { get; set; }
-			public string DisciplineName { get; set; } = string.Empty;
+			public Guid SubjectId { get; set; }
+			public string SubjectName { get; set; } = string.Empty;
+
 			public Guid FacultyId { get; set; }
 			public string FacultyName { get; set; } = string.Empty;
+
 			public Guid DirectionId { get; set; }
 			public string DirectionName { get; set; } = string.Empty;
+
 			public Guid GroupId { get; set; }
 			public string GroupName { get; set; } = string.Empty;
 
@@ -53,7 +57,7 @@ namespace University_Dasboard
 		private List<ScheduleDisciplineViewModel> updatedScheduleList = [];
 		private List<ScheduleDisciplineViewModel> removedScheduleList = [];
 
-		private Subject? selectedDiscipline;
+		private Subject? selectedSubject;
 		private Faculty? selectedFaculty;
 		private Direction? selectedDirection;
 		private Group? selectedGroup;
@@ -66,7 +70,7 @@ namespace University_Dasboard
 
 			ScheduleDesciplineController.LoadSchedules(dgvSchedules, ref schedules);
 			DataGridViewHelper.HideColumns(dgvSchedules,
-				["Id", "FacultyId", "DisciplineId", "DirectionId", "GroupId", "ScheduleWeekId"]);
+				["Id", "FacultyId", "DirectionId", "SubjectId", "GroupId", "ScheduleWeekId"]);
 			LoadComboboxData(ctx);
 
 			logger.Info("Данные расписания успешно загружены");
@@ -75,41 +79,36 @@ namespace University_Dasboard
 		private void LoadComboboxData(DatabaseContext ctx)
 		{
 			// Загрузка факультетов
-			var faculties = ctx.Faculty
-				.Select(f => new { f.Id, f.Name })
-				.ToList();
-
+            var faculties = ctx.Faculty.ToList();
             ComboboxHelper.LoadCombobox(
-				faculties,
-				comboBox: comboBoxFaculties);
+                faculties,
+                comboBox: comboBoxFaculties);
 
 			// Загрузка направлений
-			var directions = ctx.Direction
-				.Select(d => new { d.Id, d.Name })
-				.ToList();
-
-            ComboboxHelper.LoadCombobox(
+			var directions = ctx.Direction.ToList();
+			ComboboxHelper.LoadCombobox(
 				directions,
 				comboBox: comboBoxDirection);
 
-			// Загрузка групп
-			var groups = ctx.Group
-				.Select(g => new { g.Id, g.Name })
-				.ToList();
-
+			// Загрузка Предметов
+            var subjects = ctx.Subject.ToList();
             ComboboxHelper.LoadCombobox(
+                subjects,
+                comboBox: comboBoxDiscipline);
+
+			// Загрузка групп
+			var groups = ctx.Group.Where(g => g.Direction == selectedDirection).ToList();
+			ComboboxHelper.LoadCombobox(
 				groups,
 				comboBox: comboBoxGroup);
 
-			// Загрузка недель расписания
-			var scheduleWeeks = ctx.ScheduleWeek
-				.Select(sw => new { sw.Id, sw.Name })
-				.ToList();
+            // Загрузка недель расписания
+            var scheduleWeeks = ctx.ScheduleWeek.ToList();
 
             ComboboxHelper.LoadCombobox(
 				scheduleWeeks,
-				comboBox: comboBoxScheduleWeek);
-		}
+				comboBox: comboBoxScheduleWeek);         
+        }
 
 		private void ClearTempLists()
 		{
@@ -137,7 +136,7 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (selectedDiscipline == null)
+			if (selectedSubject == null)
 			{
 				MessageBox.Show("Для добавления расписания нужно выбрать существующую дисциплину");
 				logger.Warn("Пользователь не выбрал существующую дисциплину");
@@ -170,8 +169,8 @@ namespace University_Dasboard
 				Id = Guid.NewGuid(),
 				DirectionId = selectedDirection.Id,
 				DirectionName = selectedDirection.Name,
-				DisciplineId = selectedDiscipline.Id,
-				DisciplineName = selectedDiscipline.Name,
+				SubjectId = selectedSubject.Id,
+				SubjectName = selectedSubject.Name,
 				FacultyId = selectedFaculty.Id,
 				FacultyName = selectedFaculty.Name,
 				GroupId = selectedGroup.Id,
@@ -244,20 +243,32 @@ namespace University_Dasboard
 			}
 		}
 
-		private void dgvSchedules_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-			var editedRow = dgvSchedules.Rows[e.RowIndex];
-			var id = (Guid)editedRow.Cells["Id"].Value;
-			ScheduleDisciplineViewModel updatedSchedule = GetSchedule(id);
-			updatedScheduleList.Add(updatedSchedule);
-		}
+        private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedFaculty = (Faculty?)comboBoxFaculties.SelectedItem;
+        }
 
-		private void dgvSchedules_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-		{
-			Drawer.DrawNumbers(sender, e);
-		}
+        private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedDirection = (Direction?)comboBoxDirection.SelectedItem;
+        }
 
-		private void GenerateReport(object sender, EventArgs e)
+        private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedSubject = (Subject?)comboBoxDiscipline.SelectedItem;
+        }
+
+        private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedGroup = (Group?)comboBoxGroup.SelectedItem;
+        }
+
+        private void cbSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedScheduleWeek = (ScheduleWeek?)comboBoxScheduleWeek.SelectedItem;
+        }
+
+        private void GenerateReport(object sender, EventArgs e)
 		{
 			string fileName = "";
 

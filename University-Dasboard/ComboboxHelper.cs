@@ -111,5 +111,17 @@ namespace University_Dasboard
 				cbSubjects,
 				s => s.DepartmentId == selectedDepartmentId);
 		}
-	}
+
+        public static bool LoadFacultyDirectionSubject(
+            ComboBox cbDirection,
+            ComboBox cbSubject,
+            Guid selectedFacultyId,
+            Department? selectedDirection,
+            Direction? selectedSubject)
+        {
+            return LoadComboboxData<Direction>(
+                    cbDirection,
+                    dep => dep.FacultyId == selectedFacultyId);
+        }
+    }
 }

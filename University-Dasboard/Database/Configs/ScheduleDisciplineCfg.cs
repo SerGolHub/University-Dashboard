@@ -18,9 +18,9 @@ namespace University_Dasboard.Database.Configs
 
 			// Настройка отношения Discipline
 			builder
-				.HasOne(sd => sd.Discipline)
+				.HasOne(sd => sd.Subject)
 				.WithMany(d => d.ScheduleDisciplines)
-				.HasForeignKey(sd => sd.DisciplineId)
+				.HasForeignKey(sd => sd.SubjectId)
 				.OnDelete(DeleteBehavior.Cascade);
 
 			// Настройка отношения Group

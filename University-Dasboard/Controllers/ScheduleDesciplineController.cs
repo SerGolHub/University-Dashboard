@@ -18,7 +18,7 @@ namespace University_Dasboard.Controllers
 		public static void LoadSchedules(DataGridView dgv,	ref BindingList<ScheduleDisciplineViewModel> bindingList)
 		{
 			using var ctx = new DatabaseContext();
-			var schedules = ctx.ScheduleDisciplines.Include(s => s.Discipline).Include(s => s.Group!)
+			var schedules = ctx.ScheduleDisciplines.Include(s => s.Subject).Include(s => s.Group!)
 				.ThenInclude(s => s.Direction!).ThenInclude(s => s.Faculty)
 				.Include(s => s.ScheduleWeek)
 				.Select(s => new ScheduleDisciplineViewModel
@@ -26,8 +26,8 @@ namespace University_Dasboard.Controllers
 					Id = s.Id,
 					DirectionId = s.DirectionId,
 					DirectionName = s.Direction!.Name,
-					DisciplineId = s.DisciplineId,
-					DisciplineName = s.Discipline!.Name,
+					SubjectId = s.SubjectId,
+					SubjectName = s.Subject!.Name,
 					GroupId = s.GroupId,
 					GroupName = s.Group!.Name,
 					FacultyId = s.FacultyId,
@@ -64,7 +64,7 @@ namespace University_Dasboard.Controllers
 			var newEntities = newSchedules.Select(s => new ScheduleDiscipline
 			{
 				Id = Guid.NewGuid(),
-				DisciplineId = s.DisciplineId,
+				SubjectId = s.SubjectId,
 				FacultyId = s.FacultyId,
 				DirectionId = s.DirectionId,
 				GroupId = s.GroupId,
@@ -90,7 +90,7 @@ namespace University_Dasboard.Controllers
 				var updatedSchedule = updatedSchedules.First(s => s.Id == existingSchedule.Id);
 				existingSchedule.FacultyId = updatedSchedule.FacultyId;
 				existingSchedule.DirectionId = updatedSchedule.DirectionId;
-				existingSchedule.DisciplineId = updatedSchedule.DisciplineId;
+				existingSchedule.SubjectId = updatedSchedule.SubjectId;
 				existingSchedule.GroupId = updatedSchedule.GroupId;
 				existingSchedule.ScheduleWeekId = updatedSchedule.ScheduleWeekId;
 			}
