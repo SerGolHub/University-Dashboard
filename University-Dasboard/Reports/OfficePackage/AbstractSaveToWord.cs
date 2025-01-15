@@ -42,7 +42,7 @@ namespace OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Факультет: {info.FacultyName}                                      Направление {info.DirectionName},                                     Группа: {info.GroupName}",
+                    ($"Факультет: {info.FacultyName}             Направление {info.DirectionName},                Группа: {info.GroupName}",
                     new WordTextProperties { Size = "28", Bold = true, JustificationType = WordJustificationType.Center })
                 },
             });
@@ -53,18 +53,24 @@ namespace OfficePackage
             {
                 Texts = new List<(string, WordTextProperties)>
                 {
-                    ($"Дисциплина: {info.SubjectName}                                   {info.SemesterName}                                                     {info.TeacherName} ",
+                    ($"Дисциплина: {info.SubjectName}             {info.SemesterName}                            {info.TeacherName} ",
                         new WordTextProperties { Bold = true, Size = "32", JustificationType = WordJustificationType.Center })
                 },
             });
 
             // Заголовки таблицы
-            CreateTableHeader(new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "", "Отчётность" });
+            CreateTableHeader(new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "∑", "Отчётность" });
 
+            // Заполнение таблицы
+            CreateRow(new WordRowParameters
+            {
+                Texts = new List<string> { "1. Лекция", "аудит.", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "" },
+                TextProperties = new WordTextProperties { JustificationType = WordJustificationType.Center }
+            });
             // Данные таблицы
-            
 
-            
+
+
 
             SaveWord(info);
         }

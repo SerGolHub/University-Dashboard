@@ -12,6 +12,8 @@ namespace OfficePackage.HelperModels
 
         public string Title { get; set; } = string.Empty;
 
+        public bool IsLandscape { get; set; }
+
         public DateTime DateReport { get; set; }
 
         public DateTime DateCreate { get; set; }
@@ -30,6 +32,12 @@ namespace OfficePackage.HelperModels
 
         public string TeacherName { get; set; } = string.Empty;
 
-        public int ClassroomNumber { get; set; }
+        public string ClassroomNumber { get; set; } = string.Empty;
+
+        public string EmptyColumn { get; set; } = string.Empty;
+
+        public string GroupNameMerge { get; set; } = string.Empty;
+
+        public string Note { get; set; } = string.Empty;
     }
 }

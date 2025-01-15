@@ -61,8 +61,21 @@ namespace OfficePackage.Implements
             // Получение первой секции документа
             _section = _document.AddSection();
 
-            // Устанавливаем ориентацию страницы на альбомную
-            _section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
+            // Устанавливаем ориентацию страницы в зависимости от параметра
+            SetPageOrientation(_section, info.IsLandscape); // Используем условие для ориентации
+        }
+
+        // Метод для установки ориентации страницы
+        private void SetPageOrientation(Section section, bool isLandscape)
+        {
+            if (isLandscape)
+            {
+                section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
+            }
+            else
+            {
+                section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Portrait;
+            }
         }
 
         protected override void CreateParagraph(PdfParagraph pdfParagraph)

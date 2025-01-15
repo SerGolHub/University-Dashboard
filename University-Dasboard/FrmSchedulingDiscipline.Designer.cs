@@ -52,6 +52,14 @@
             label6 = new Label();
             comboBoxScheduleWeek = new ComboBox();
             button1 = new Button();
+            label7 = new Label();
+            tbClassroomNumber = new TextBox();
+            comboBoxTeacher = new ComboBox();
+            label8 = new Label();
+            comboBoxGroupMerge = new ComboBox();
+            label9 = new Label();
+            tbNote = new TextBox();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSchedules).BeginInit();
@@ -280,7 +288,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.FromArgb(24, 30, 54);
-            button1.Location = new Point(813, 12);
+            button1.Location = new Point(579, 46);
             button1.Name = "button1";
             button1.Size = new Size(156, 59);
             button1.TabIndex = 62;
@@ -288,12 +296,112 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += GenerateReport;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.FromArgb(158, 161, 178);
+            label7.Location = new Point(762, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(90, 18);
+            label7.TabIndex = 64;
+            label7.Text = "Аудитория";
+            // 
+            // tbClassroomNumber
+            // 
+            tbClassroomNumber.BackColor = Color.FromArgb(158, 161, 178);
+            tbClassroomNumber.BorderStyle = BorderStyle.FixedSingle;
+            tbClassroomNumber.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            tbClassroomNumber.ForeColor = Color.FromArgb(24, 30, 54);
+            tbClassroomNumber.Location = new Point(762, 30);
+            tbClassroomNumber.Name = "tbClassroomNumber";
+            tbClassroomNumber.Size = new Size(204, 24);
+            tbClassroomNumber.TabIndex = 63;
+            // 
+            // comboBoxTeacher
+            // 
+            comboBoxTeacher.BackColor = Color.FromArgb(158, 161, 178);
+            comboBoxTeacher.FlatStyle = FlatStyle.Flat;
+            comboBoxTeacher.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            comboBoxTeacher.ForeColor = Color.FromArgb(24, 30, 54);
+            comboBoxTeacher.FormattingEnabled = true;
+            comboBoxTeacher.Location = new Point(762, 87);
+            comboBoxTeacher.Name = "comboBoxTeacher";
+            comboBoxTeacher.Size = new Size(204, 26);
+            comboBoxTeacher.TabIndex = 65;
+            comboBoxTeacher.SelectedIndexChanged += cbTeacher_SelectedIndexChanged;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.FromArgb(158, 161, 178);
+            label8.Location = new Point(762, 63);
+            label8.Name = "label8";
+            label8.Size = new Size(130, 18);
+            label8.TabIndex = 66;
+            label8.Text = "Преподаватель";
+            // 
+            // comboBoxGroupMerge
+            // 
+            comboBoxGroupMerge.BackColor = Color.FromArgb(158, 161, 178);
+            comboBoxGroupMerge.FlatStyle = FlatStyle.Flat;
+            comboBoxGroupMerge.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            comboBoxGroupMerge.ForeColor = Color.FromArgb(24, 30, 54);
+            comboBoxGroupMerge.FormattingEnabled = true;
+            comboBoxGroupMerge.Location = new Point(762, 146);
+            comboBoxGroupMerge.Name = "comboBoxGroupMerge";
+            comboBoxGroupMerge.Size = new Size(203, 26);
+            comboBoxGroupMerge.TabIndex = 67;
+            comboBoxGroupMerge.SelectedIndexChanged += cbGroupMerge_SelectedIndexChanged;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.FromArgb(158, 161, 178);
+            label9.Location = new Point(762, 123);
+            label9.Name = "label9";
+            label9.Size = new Size(182, 18);
+            label9.TabIndex = 68;
+            label9.Text = "Группа (объединение)";
+            // 
+            // tbNote
+            // 
+            tbNote.BackColor = Color.FromArgb(158, 161, 178);
+            tbNote.BorderStyle = BorderStyle.FixedSingle;
+            tbNote.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            tbNote.ForeColor = Color.FromArgb(24, 30, 54);
+            tbNote.Location = new Point(602, 185);
+            tbNote.Name = "tbNote";
+            tbNote.Size = new Size(363, 24);
+            tbNote.TabIndex = 69;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.FromArgb(158, 161, 178);
+            label10.Location = new Point(602, 154);
+            label10.Name = "label10";
+            label10.Size = new Size(97, 18);
+            label10.TabIndex = 70;
+            label10.Text = "Пожелание";
+            // 
             // FrmSchedulingDiscipline
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(980, 653);
+            Controls.Add(label10);
+            Controls.Add(tbNote);
+            Controls.Add(label9);
+            Controls.Add(comboBoxGroupMerge);
+            Controls.Add(label8);
+            Controls.Add(comboBoxTeacher);
+            Controls.Add(label7);
+            Controls.Add(tbClassroomNumber);
             Controls.Add(button1);
             Controls.Add(comboBoxScheduleWeek);
             Controls.Add(label6);
@@ -349,5 +457,13 @@
 		private Label label6;
 		private ComboBox comboBoxScheduleWeek;
 		private Button button1;
-	}
+        private Label label7;
+        private TextBox tbClassroomNumber;
+        private ComboBox comboBoxTeacher;
+        private Label label8;
+        private ComboBox comboBoxGroupMerge;
+        private Label label9;
+        private TextBox tbNote;
+        private Label label10;
+    }
 }
