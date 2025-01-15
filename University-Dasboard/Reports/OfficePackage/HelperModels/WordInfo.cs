@@ -12,7 +12,11 @@ namespace OfficePackage.HelperModels
 
         public string Title { get; set; } = string.Empty;
 
+        public bool IsLandscape { get; set; }
+
         public DateTime? DateReport { get; set; }
+
+        public DateTime DateCreate { get; set; }
 
         public TimeSpan TimeReport { get; set; }
 
@@ -27,5 +31,11 @@ namespace OfficePackage.HelperModels
         public string SemesterName { get; set;} = string.Empty;
 
         public string TeacherName { get; set; } = string.Empty;
+
+        public string ClassroomNumber { get; set; } = string.Empty;
+
+        public string GroupNameMerge { get; set; } = string.Empty;
+
+        public string Note { get; set; } = string.Empty;
     }
 }

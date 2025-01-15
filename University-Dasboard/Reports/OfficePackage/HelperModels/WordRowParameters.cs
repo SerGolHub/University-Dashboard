@@ -23,5 +23,8 @@ namespace OfficePackage.HelperModels
 
         // Параметры выравнивания для всего текста
         public WordJustificationType JustificationType { get; set; }
+
+        // Список диапазонов ячеек для объединения (каждый кортеж - это начало и конец диапазона)
+        public List<Tuple<int, int>> MergedCells { get; set; } = new List<Tuple<int, int>>();
     }
 }

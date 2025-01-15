@@ -60,6 +60,7 @@
             label9 = new Label();
             tbNote = new TextBox();
             label10 = new Label();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSchedules).BeginInit();
@@ -288,13 +289,13 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.FromArgb(24, 30, 54);
-            button1.Location = new Point(579, 46);
+            button1.Location = new Point(585, 15);
             button1.Name = "button1";
-            button1.Size = new Size(156, 59);
+            button1.Size = new Size(123, 51);
             button1.TabIndex = 62;
-            button1.Text = "Создать отчёт";
+            button1.Text = "Создать отчёт Word";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += GenerateReport;
+            button1.Click += GenerateReportWord;
             // 
             // label7
             // 
@@ -388,12 +389,28 @@
             label10.TabIndex = 70;
             label10.Text = "Пожелание";
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(0, 126, 249);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.ForeColor = Color.FromArgb(24, 30, 54);
+            button2.Location = new Point(585, 90);
+            button2.Name = "button2";
+            button2.Size = new Size(123, 51);
+            button2.TabIndex = 71;
+            button2.Text = "Создать отчёт Pdf";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += GenerateReportPdf;
+            // 
             // FrmSchedulingDiscipline
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(980, 653);
+            Controls.Add(button2);
             Controls.Add(label10);
             Controls.Add(tbNote);
             Controls.Add(label9);
@@ -465,5 +482,6 @@
         private Label label9;
         private TextBox tbNote;
         private Label label10;
+        private Button button2;
     }
 }

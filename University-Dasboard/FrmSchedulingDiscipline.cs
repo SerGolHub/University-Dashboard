@@ -312,7 +312,7 @@ namespace University_Dasboard
    
         }
 
-        private void GenerateReport(object sender, EventArgs e)
+        private void GenerateReportPdf(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbClassroomNumber.Text))
             {
@@ -389,5 +389,81 @@ namespace University_Dasboard
             return string.Empty;
         }
 
+        private void GenerateReportWord(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbClassroomNumber.Text))
+            {
+                MessageBox.Show("Введите номер аудитории");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(tbNote.Text))
+            {
+                MessageBox.Show("Введите примечание");
+                return;
+            }
+
+            if (selectedTeacher == null)
+            {
+                MessageBox.Show("Выберите преподавателя");
+                return;
+            }
+
+            // Проверка на то, что ячейка в таблице выбрана
+            if (dgvSchedules.SelectedRows.Count > 0)
+            {
+                // Получаем ID выбранного расписания
+                var selectedScheduleId = (Guid)dgvSchedules.SelectedRows[0].Cells["Id"].Value;
+
+                // Загружаем расписание по ID
+                var selectedSchedule = ScheduleDesciplineController.LoadScheduleById(selectedScheduleId);
+
+                if (selectedSchedule != null)
+                {
+                    // Создание данных для отчета с использованием информации о выбранном расписании
+                    var wordInfo = new WordInfo
+                    {
+                        FacultyName = selectedSchedule.FacultyName,
+                        DirectionName = selectedSchedule.DirectionName,
+                        GroupName = selectedSchedule.GroupName,
+                        SubjectName = selectedSchedule.SubjectName,
+                        ClassroomNumber = tbClassroomNumber.Text,
+                        DateCreate = DateTime.Now,
+                        GroupNameMerge = selectedGroupMerge!.Name,
+                        SemesterName = "1 семестр",
+                        TeacherName = selectedTeacher.Name,
+                        Note = tbNote.Text,
+                        FileName = GetWordFileName()
+                    };
+
+                    // Создание и генерация отчета
+                    var reportGenerator = new SaveToWord();
+                    reportGenerator.CreateDoc(wordInfo);
+                    MessageBox.Show("Отчет создан успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Расписание не найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите расписание в таблице", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Метод для получения имени файла через диалоговое окно
+        private string GetWordFileName()
+        {
+            using (var dialog = new SaveFileDialog { Filter = "Word Document|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.FileName;
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }

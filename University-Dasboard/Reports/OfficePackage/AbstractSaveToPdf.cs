@@ -91,7 +91,7 @@ namespace OfficePackage
             // Данные таблицы
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "1. Практические занятий", "аудит.", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "" },
+                Texts = new List<string> { "2. Практические занятий", "аудит.", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "" },
                 Style = "TableHeader",
                 Font = "Times New Roman",
                 FontWeight = "Bold",
@@ -113,7 +113,7 @@ namespace OfficePackage
             // Данные таблицы
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "1. Лабораторные занятий", "аудит.", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "", "", "", "" },
+                Texts = new List<string> { "3. Лабораторные занятий", "аудит.", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "", "", "", "" },
                 Style = "TableHeader",
                 Font = "Times New Roman",
                 FontWeight = "Bold",
