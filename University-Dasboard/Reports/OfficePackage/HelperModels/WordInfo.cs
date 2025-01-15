@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University_Dasboard.Reports.Models;
 
 namespace OfficePackage.HelperModels
 {
@@ -37,5 +38,9 @@ namespace OfficePackage.HelperModels
         public string GroupNameMerge { get; set; } = string.Empty;
 
         public string Note { get; set; } = string.Empty;
+
+        public int SemesterNumber { get; set; }
+
+        public string EmptyColumn { get; set; } = string.Empty;
     }
 }

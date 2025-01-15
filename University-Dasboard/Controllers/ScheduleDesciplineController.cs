@@ -76,7 +76,7 @@ namespace University_Dasboard.Controllers
             }
             catch (Exception ex)
             {
-				throw new Exception("ОШИБКА", ex);
+				throw new Exception("Ошибка нахождения шемы", ex);
             }
         }
 

@@ -37,6 +37,8 @@
             btnReports = new Button();
             pnlNavigation = new Panel();
             pnlSchedulingSubMenu = new Panel();
+            btnReportCheckLesson = new Button();
+            btnTeacherConstraints = new Button();
             btnSchedulingTeachers = new Button();
             btnSchedulingDisciplines = new Button();
             btnAcademicHours = new Button();
@@ -46,6 +48,7 @@
             btnGrades = new Button();
             btnGradeRecord = new Button();
             pnlManageDataSubMenu = new Panel();
+            button1 = new Button();
             btnTeachers = new Button();
             btnStudents = new Button();
             btnGroups = new Button();
@@ -59,12 +62,10 @@
             panel4 = new Panel();
             label2 = new Label();
             lbUserName = new Label();
-            btnTeacherConstraints = new Button();
             btnClose = new Button();
             btnMinimize = new Button();
             panel3 = new Panel();
             pnlFormLoader = new Panel();
-            button1 = new Button();
             panel1.SuspendLayout();
             pnlReportsSubMenu.SuspendLayout();
             pnlSchedulingSubMenu.SuspendLayout();
@@ -195,6 +196,7 @@
             // pnlSchedulingSubMenu
             // 
             pnlSchedulingSubMenu.AutoScroll = true;
+            pnlSchedulingSubMenu.Controls.Add(btnReportCheckLesson);
             pnlSchedulingSubMenu.Controls.Add(btnTeacherConstraints);
             pnlSchedulingSubMenu.Controls.Add(btnSchedulingTeachers);
             pnlSchedulingSubMenu.Controls.Add(btnSchedulingDisciplines);
@@ -205,6 +207,46 @@
             pnlSchedulingSubMenu.Size = new Size(170, 208);
             pnlSchedulingSubMenu.TabIndex = 4;
             pnlSchedulingSubMenu.Visible = false;
+            // 
+            // btnReportCheckLesson
+            // 
+            btnReportCheckLesson.BackColor = Color.FromArgb(24, 30, 54);
+            btnReportCheckLesson.Dock = DockStyle.Top;
+            btnReportCheckLesson.FlatAppearance.BorderSize = 0;
+            btnReportCheckLesson.FlatStyle = FlatStyle.Flat;
+            btnReportCheckLesson.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReportCheckLesson.ForeColor = Color.FromArgb(0, 126, 249);
+            btnReportCheckLesson.ImageAlign = ContentAlignment.MiddleRight;
+            btnReportCheckLesson.Location = new Point(0, 256);
+            btnReportCheckLesson.Name = "btnReportCheckLesson";
+            btnReportCheckLesson.Padding = new Padding(20, 0, 15, 0);
+            btnReportCheckLesson.Size = new Size(153, 64);
+            btnReportCheckLesson.TabIndex = 15;
+            btnReportCheckLesson.Text = "Отчёт по проверкам";
+            btnReportCheckLesson.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportCheckLesson.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnReportCheckLesson.UseVisualStyleBackColor = false;
+            btnReportCheckLesson.Click += btnReportCheckLesson_Click;
+            // 
+            // btnTeacherConstraints
+            // 
+            btnTeacherConstraints.BackColor = Color.FromArgb(24, 30, 54);
+            btnTeacherConstraints.Dock = DockStyle.Top;
+            btnTeacherConstraints.FlatAppearance.BorderSize = 0;
+            btnTeacherConstraints.FlatStyle = FlatStyle.Flat;
+            btnTeacherConstraints.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTeacherConstraints.ForeColor = Color.FromArgb(0, 126, 249);
+            btnTeacherConstraints.ImageAlign = ContentAlignment.MiddleRight;
+            btnTeacherConstraints.Location = new Point(0, 192);
+            btnTeacherConstraints.Name = "btnTeacherConstraints";
+            btnTeacherConstraints.Padding = new Padding(20, 0, 15, 0);
+            btnTeacherConstraints.Size = new Size(153, 64);
+            btnTeacherConstraints.TabIndex = 15;
+            btnTeacherConstraints.Text = "Ограничения преподавателей";
+            btnTeacherConstraints.TextAlign = ContentAlignment.MiddleLeft;
+            btnTeacherConstraints.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnTeacherConstraints.UseVisualStyleBackColor = false;
+            btnTeacherConstraints.Click += btnTeacherConstraints_Click;
             // 
             // btnSchedulingTeachers
             // 
@@ -217,7 +259,7 @@
             btnSchedulingTeachers.Location = new Point(0, 128);
             btnSchedulingTeachers.Name = "btnSchedulingTeachers";
             btnSchedulingTeachers.Padding = new Padding(20, 0, 15, 0);
-            btnSchedulingTeachers.Size = new Size(170, 64);
+            btnSchedulingTeachers.Size = new Size(153, 64);
             btnSchedulingTeachers.TabIndex = 4;
             btnSchedulingTeachers.Text = "По преподавателю";
             btnSchedulingTeachers.TextAlign = ContentAlignment.MiddleLeft;
@@ -236,7 +278,7 @@
             btnSchedulingDisciplines.Location = new Point(0, 64);
             btnSchedulingDisciplines.Name = "btnSchedulingDisciplines";
             btnSchedulingDisciplines.Padding = new Padding(20, 0, 15, 0);
-            btnSchedulingDisciplines.Size = new Size(170, 64);
+            btnSchedulingDisciplines.Size = new Size(153, 64);
             btnSchedulingDisciplines.TabIndex = 3;
             btnSchedulingDisciplines.Text = "По дисциплине";
             btnSchedulingDisciplines.TextAlign = ContentAlignment.MiddleLeft;
@@ -255,7 +297,7 @@
             btnAcademicHours.Location = new Point(0, 0);
             btnAcademicHours.Name = "btnAcademicHours";
             btnAcademicHours.Padding = new Padding(20, 0, 15, 0);
-            btnAcademicHours.Size = new Size(170, 64);
+            btnAcademicHours.Size = new Size(153, 64);
             btnAcademicHours.TabIndex = 2;
             btnAcademicHours.Text = "Академические часы";
             btnAcademicHours.TextAlign = ContentAlignment.MiddleLeft;
@@ -281,26 +323,6 @@
             btnScheduling.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnScheduling.UseVisualStyleBackColor = true;
             btnScheduling.Click += btnSchedulingWeek_Click;
-            // 
-            // btnTeacherConstraints
-            // 
-            btnTeacherConstraints.BackColor = Color.FromArgb(24, 30, 54);
-            btnTeacherConstraints.Dock = DockStyle.Top;
-            btnTeacherConstraints.FlatAppearance.BorderSize = 0;
-            btnTeacherConstraints.FlatStyle = FlatStyle.Flat;
-            btnTeacherConstraints.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnTeacherConstraints.ForeColor = Color.FromArgb(0, 126, 249);
-            btnTeacherConstraints.ImageAlign = ContentAlignment.MiddleRight;
-            btnTeacherConstraints.Location = new Point(0, 128);
-            btnTeacherConstraints.Name = "btnTeacherConstraints";
-            btnTeacherConstraints.Padding = new Padding(20, 0, 15, 0);
-            btnTeacherConstraints.Size = new Size(170, 64);
-            btnTeacherConstraints.TabIndex = 15;
-            btnTeacherConstraints.Text = "Ограничения преподавателей";
-            btnTeacherConstraints.TextAlign = ContentAlignment.MiddleLeft;
-            btnTeacherConstraints.TextImageRelation = TextImageRelation.TextBeforeImage;
-            btnTeacherConstraints.UseVisualStyleBackColor = false;
-            btnTeacherConstraints.Click += btnTeacherConstraints_Click;
             // 
             // pnlGradeRecordSubMenu
             // 
@@ -378,6 +400,25 @@
             pnlManageDataSubMenu.Size = new Size(170, 463);
             pnlManageDataSubMenu.TabIndex = 5;
             pnlManageDataSubMenu.Visible = false;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(24, 30, 54);
+            button1.Dock = DockStyle.Top;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.FromArgb(0, 126, 249);
+            button1.ImageAlign = ContentAlignment.MiddleRight;
+            button1.Location = new Point(0, 448);
+            button1.Name = "button1";
+            button1.Padding = new Padding(20, 0, 15, 0);
+            button1.Size = new Size(170, 100);
+            button1.TabIndex = 15;
+            button1.Text = "Преподаватели";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            button1.TextImageRelation = TextImageRelation.TextBeforeImage;
+            button1.UseVisualStyleBackColor = false;
             // 
             // btnTeachers
             // 
@@ -643,25 +684,6 @@
             pnlFormLoader.Size = new Size(996, 653);
             pnlFormLoader.TabIndex = 4;
             // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(24, 30, 54);
-            button1.Dock = DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(0, 126, 249);
-            button1.ImageAlign = ContentAlignment.MiddleRight;
-            button1.Location = new Point(0, 448);
-            button1.Name = "button1";
-            button1.Padding = new Padding(20, 0, 15, 0);
-            button1.Size = new Size(170, 100);
-            button1.TabIndex = 15;
-            button1.Text = "Преподаватели";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button1.UseVisualStyleBackColor = false;
-            // 
             // FrmMainProgram
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -719,7 +741,8 @@
         private Button btnGroups;
         private Button btnTeachers;
         private Button btnTeacherConstraints;
-		private Button btnReports;
+        private Button btnReportCheckLesson;
+        private Button btnReports;
 		private Panel pnlReportsSubMenu;
 		private Button btnExport;
 		private Button btnStudentCard;

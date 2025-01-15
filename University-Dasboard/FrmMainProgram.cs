@@ -199,6 +199,14 @@ namespace University_Dasboard
             moveNavigationPanel(btnTeacherConstraints);
         }
 
+        private void btnReportCheckLesson_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDisciplineReport());
+            changeSubMenuVisibility(pnlSchedulingSubMenu);
+            restoreButtonsBackColor();
+            moveNavigationPanel(btnReportCheckLesson);
+        }
+
         private void btnSchedulingDisciplines_Click(object sender, EventArgs e)
 		{
 			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDiscipline());

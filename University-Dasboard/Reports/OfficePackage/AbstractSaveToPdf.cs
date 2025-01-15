@@ -1,5 +1,7 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿using Database;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing.ChartDrawing;
+using Microsoft.EntityFrameworkCore;
 using OfficePackage.HelperEnums;
 using OfficePackage.HelperModels;
 using System;
@@ -7,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University_Dasboard.Reports.Models;
 
 namespace OfficePackage
 {
@@ -201,33 +204,52 @@ namespace OfficePackage
             });
 
             // Заголовки таблицы
-            CreateTable(new List<string> { "2cm", "3cm", "3cm", "4cm", "3.5cm" });
+            CreateTable(new List<string> { "3cm", "3cm", "3cm", "4cm", "3.5cm" });
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "Пара", "Группа", "Дисциплина", "Ф.И.О. Преподавателя", "Роспись преподавателя" },
+                Texts = new List<string> { "Направление", "Группа", "Дисциплина", "Ф.И.О. Преподавателя", "Роспись преподавателя" },
                 Style = "TableHeader",
                 Font = "Times New Roman",
                 FontWeight = "Bold",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
+            // Загружаем все расписания
+            using var ctx = new DatabaseContext();
+            var schedules = ctx.ScheduleDisciplines.Include(s => s.Subject)
+                .Include(s => s.Group).ThenInclude(g => g.Direction).ThenInclude(d => d.Faculty)
+                .Include(s => s.ScheduleWeek)
+                .Select(s => new ReportShufflingViewModel
+                {
+                    Id = s.Id,
+                    DirectionName = s.Direction!.Name,
+                    SubjectName = s.Subject!.Name,
+                    GroupName = s.Group!.Name,
+                    FacultyName = s.Faculty!.Name,
+                    ScheduleWeek = s.ScheduleWeek!.Name,
+                    LectureHours = s.ScheduleWeek.LectureHours,
+                    PracticalHours = s.ScheduleWeek.PracticalHours,
+                    LaboratoryHours = s.ScheduleWeek.LaboratoryHours
+                }).ToList();
+
             // Данные таблицы
-           /* foreach (var report in info.ReportCheckLesson)
+            foreach (var schedule in schedules)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Texts = new List<string>
                 {
-                    report.GroupName.ToString()
-                    report.SubjectNumber.ToString(),
-                    report.TeacherName.ToString(),
-                    report.EmptyColumn.ToString()
+                    schedule.DirectionName.ToString(),
+                    schedule.GroupName.ToString(),
+                    schedule.SubjectName.ToString(),
+                    info.TeacherName.ToString(),
+                    schedule.EmptyColumn.ToString()
                 },
                     Style = "Normal",
                     Font = "Times New Roman",
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
-            }*/
+            }
 
             // Итоговые абзацы
             CreateParagraph(new PdfParagraph
@@ -306,40 +328,39 @@ namespace OfficePackage
             });
 
             // Дополнительно можно заполнить таблицу с данными, если они имеются
-           /* foreach (var item in info.ReportCheckLesson)
+            foreach (var schedule in schedules)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Texts = new List<string>
                     {
-                        {info.DateReport.ToShortDateString()},
-                        info.DateReport.ToShortTimeString(),
-                        info.GroupName.ToString()
-                        info.SubjectName.ToString(),
-                        info.TeacherName.ToString(),
-                        info.EmptyColumn.ToString()
-
+                        {schedule.DateReport.ToShortDateString()},
+                        schedule.DateReport.ToShortTimeString(),
+                        schedule.GroupName.ToString(),
+                        schedule.SubjectName.ToString(),
+                        schedule.TeacherName.ToString(),
+                        schedule.EmptyColumn.ToString()
                     },
                     Font = "Times New Roman",
                     Style = "TableText",
                     ParagraphAlignment = PdfParagraphAlignmentType.Center
                 });
+            }
 
-                // Объяснительная записка преподавателей
-                CreateParagraph(new PdfParagraph
-                {
-                    Text = "\n\n    Объяснительные записки преподавателей с резолюцией декана просьба предоставить в отдел ОУП до   «___» ______________  20___г.\n\n\n",
-                    Style = "Normal",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Left
-                });
+            // Объяснительная записка преподавателей
+            CreateParagraph(new PdfParagraph
+            {
+                Text = "\n\n    Объяснительные записки преподавателей с резолюцией декана просьба предоставить в отдел ОУП до   «___» ______________  20___г.\n\n\n",
+                Style = "Normal",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
 
-                CreateParagraph(new PdfParagraph
-                {
-                    Text = "Начальник отдела ОУП                          ___________________________",
-                    Style = "Normal",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Left
-                });
-            }*/
+            CreateParagraph(new PdfParagraph
+            {
+                Text = "Начальник отдела ОУП                          ___________________________",
+                Style = "Normal",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
 
             SavePdf(info);
         }
