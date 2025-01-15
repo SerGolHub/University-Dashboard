@@ -28,6 +28,7 @@ namespace University_Dasboard
 
 			public Guid TeacherId { get; set; }
 			public Teacher Teacher { get; set; } = null!;
+            public string TeacherName { get; set; } = string.Empty;
 
 			public DayOfWeek DayOfWeek { get; set; }
 
@@ -35,7 +36,7 @@ namespace University_Dasboard
 			public TimeSpan EndTime { get; set; }
 
 			public string Note { get; set; } = string.Empty;
-		}
+        }
 
 		public FrmTeachersConstraint()
 		{
@@ -57,8 +58,8 @@ namespace University_Dasboard
                 using var ctx = new DatabaseContext();
 
                 // Загрузка данных преподавателей
-                //TeacherConstraintController.LoadTeacherConstraint(dgvTeacherList, ref teacherConstraints);
-                //DataGridViewHelper.HideColumns(dgvTeacherList, new[] { "Id", "TeacherId" });
+                TeacherConstraintController.LoadTeacherConstraints(dgvTeacherConstraintList, ref teacherConstraints);
+                DataGridViewHelper.HideColumns(dgvTeacherConstraintList, [ "Id", "TeacherId" ]);
 
                 // Загрузка данных для ComboBox
                 LoadComboboxData(ctx);
@@ -128,11 +129,11 @@ namespace University_Dasboard
 
             try
             {
-                /*TeacherConstraintController.SaveConstraints(
+                TeacherConstraintController.SaveTeacherConstraintsAsync(
                     newTeacherConstraintList,
                     updatedTeacherConstraintList,
                     removedTeacherConstraintList
-                );*/
+                );
                 ClearTempLists();
                 lbDbSaveResult.ForeColor = System.Drawing.Color.Green;
                 lbDbSaveResult.Text = "Данные успешно сохранены.";
@@ -151,14 +152,7 @@ namespace University_Dasboard
             }
         }
 
-        public static string GetEnumDisplayName<T>(T enumValue) where T : Enum
-        {
-            var fieldInfo = typeof(T).GetField(enumValue.ToString());
-            var displayAttribute = fieldInfo?.GetCustomAttribute<DisplayAttribute>();
-            return displayAttribute?.Name ?? enumValue.ToString();
-        }
-
-        private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbTeacher_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedTeacher = comboBoxTeachers.SelectedItem as Teacher;
         }

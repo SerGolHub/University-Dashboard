@@ -50,6 +50,7 @@ namespace University_Dasboard
 
 			public Guid TeacherId { get; set; }
 			public Teacher Teacher { get; set; } = null!;
+			public string TeacherName { get; set; } = string.Empty;
 
 			public DayOfWeek DayOfWeek { get; set; }
 
@@ -62,7 +63,6 @@ namespace University_Dasboard
 		public FrmTeachers()
 		{
 			InitializeComponent();
-			PopulateCheckedListBoxWithDaysOfWeek(checkedListBoxDays);
 			LoadData();
 		}
 
@@ -265,46 +265,6 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
-		}
-
-		private void btnAddConstraint_Click(object sender, EventArgs e)
-		{
-			if (comboBoxTeachers.SelectedValue == null)
-			{
-				MessageBox.Show("Выберите преподавателя для добавления ограничения.");
-				return;
-			}
-
-			var selectedDays = checkedListBoxDays.CheckedItems.Cast<DayOfWeek>().ToList();
-			var startTime = dateTimePickerStartTime.Value.TimeOfDay;
-			var endTime = dateTimePickerEndTime.Value.TimeOfDay;
-
-			foreach (var day in selectedDays)
-			{
-				var constraint = new TeacherConstraintViewModel
-				{
-					Id = Guid.NewGuid(),
-					TeacherId = selectedTeacher?.Id ?? Guid.Empty,
-					Teacher = selectedTeacher!,
-					DayOfWeek = day,
-					StartTime = startTime,
-					EndTime = endTime
-				};
-
-				var teacher = teachers.FirstOrDefault(t => t.Id == t.Id);
-				teacher?.Constraints.Add(constraint);
-			}
-
-
-			logger.Info("Ограничения добавлены для выбранного преподавателя.");
-		}
-
-		private void PopulateCheckedListBoxWithDaysOfWeek(CheckedListBox checkedListBox)
-		{
-			foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
-			{
-				checkedListBox.Items.Add(day);
-			}
 		}
 
 		private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)

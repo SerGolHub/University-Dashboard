@@ -36,7 +36,7 @@
             label5 = new Label();
             tbNote = new TextBox();
             comboBoxTeachers = new ComboBox();
-            dgvTeacherList = new DataGridView();
+            dgvTeacherConstraintList = new DataGridView();
             btnDelete = new Button();
             btnReset = new Button();
             btnSave = new Button();
@@ -45,7 +45,7 @@
             dateTimePickerStartTime = new DateTimePicker();
             dateTimePickerEndTime = new DateTimePicker();
             cbDayOfWeek = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)dgvTeacherList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTeacherConstraintList).BeginInit();
             SuspendLayout();
             // 
             // btnAdd
@@ -143,17 +143,18 @@
             comboBoxTeachers.Size = new Size(234, 26);
             comboBoxTeachers.TabIndex = 22;
             comboBoxTeachers.Text = "Выберите преподавателя";
+            comboBoxTeachers.SelectedIndexChanged += cbTeacher_SelectedIndexChanged;
             // 
-            // dgvTeacherList
+            // dgvTeacherConstraintList
             // 
-            dgvTeacherList.AllowUserToAddRows = false;
-            dgvTeacherList.AllowUserToDeleteRows = false;
-            dgvTeacherList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvTeacherList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTeacherList.Location = new Point(12, 261);
-            dgvTeacherList.Name = "dgvTeacherList";
-            dgvTeacherList.Size = new Size(862, 380);
-            dgvTeacherList.TabIndex = 28;
+            dgvTeacherConstraintList.AllowUserToAddRows = false;
+            dgvTeacherConstraintList.AllowUserToDeleteRows = false;
+            dgvTeacherConstraintList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTeacherConstraintList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTeacherConstraintList.Location = new Point(12, 261);
+            dgvTeacherConstraintList.Name = "dgvTeacherConstraintList";
+            dgvTeacherConstraintList.Size = new Size(862, 380);
+            dgvTeacherConstraintList.TabIndex = 28;
             // 
             // btnDelete
             // 
@@ -260,7 +261,7 @@
             Controls.Add(cbDayOfWeek);
             Controls.Add(dateTimePickerEndTime);
             Controls.Add(dateTimePickerStartTime);
-            Controls.Add(dgvTeacherList);
+            Controls.Add(dgvTeacherConstraintList);
             Controls.Add(btnDelete);
             Controls.Add(btnReset);
             Controls.Add(btnSave);
@@ -277,7 +278,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmTeachersConstraint";
             Text = "frmStudentList";
-            ((System.ComponentModel.ISupportInitialize)dgvTeacherList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTeacherConstraintList).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -292,7 +293,7 @@
         private Label label5;
         private TextBox tbNote;
         private ComboBox comboBoxTeachers;
-        private DataGridView dgvTeacherList;
+        private DataGridView dgvTeacherConstraintList;
         private Button btnDelete;
         private Button btnReset;
         private Button btnSave;
