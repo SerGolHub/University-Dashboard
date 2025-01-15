@@ -51,6 +51,8 @@
 			label4 = new Label();
 			label3 = new Label();
 			cbTeacher = new ComboBox();
+			label6 = new Label();
+			tbSemesters = new TextBox();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDisciplines).BeginInit();
@@ -141,7 +143,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(16, 211);
+			btnAdd.Location = new Point(418, 219);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(104, 46);
 			btnAdd.TabIndex = 26;
@@ -255,7 +257,7 @@
 			label3.AutoSize = true;
 			label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label3.ForeColor = Color.FromArgb(158, 161, 178);
-			label3.Location = new Point(12, 154);
+			label3.Location = new Point(12, 184);
 			label3.Name = "label3";
 			label3.Size = new Size(150, 20);
 			label3.TabIndex = 49;
@@ -268,13 +270,36 @@
 			cbTeacher.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			cbTeacher.ForeColor = Color.FromArgb(24, 30, 54);
 			cbTeacher.FormattingEnabled = true;
-			cbTeacher.Location = new Point(273, 148);
+			cbTeacher.Location = new Point(273, 178);
 			cbTeacher.Name = "cbTeacher";
 			cbTeacher.Size = new Size(249, 26);
 			cbTeacher.TabIndex = 52;
 			cbTeacher.SelectedIndexChanged += cbTeacher_SelectedIndexChanged;
 			// 
-			// FrmDisciplines
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label6.ForeColor = Color.FromArgb(158, 161, 178);
+			label6.Location = new Point(12, 154);
+			label6.Name = "label6";
+			label6.Size = new Size(99, 20);
+			label6.TabIndex = 49;
+			label6.Text = "Семестры:";
+			// 
+			// tbSemesters
+			// 
+			tbSemesters.BackColor = Color.FromArgb(158, 161, 178);
+			tbSemesters.BorderStyle = BorderStyle.FixedSingle;
+			tbSemesters.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			tbSemesters.ForeColor = Color.FromArgb(24, 30, 54);
+			tbSemesters.Location = new Point(273, 148);
+			tbSemesters.Name = "tbSemesters";
+			tbSemesters.Size = new Size(249, 24);
+			tbSemesters.TabIndex = 23;
+			tbSemesters.KeyPress += tbSemesters_KeyPress;
+			// 
+			// FrmSubjects
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
@@ -283,11 +308,13 @@
 			Controls.Add(cbTeacher);
 			Controls.Add(cbDirection);
 			Controls.Add(cbDepartment);
+			Controls.Add(label6);
 			Controls.Add(cbFaculty);
 			Controls.Add(label3);
 			Controls.Add(label10);
 			Controls.Add(label5);
 			Controls.Add(label4);
+			Controls.Add(tbSemesters);
 			Controls.Add(tbNewDisciplineName);
 			Controls.Add(label2);
 			Controls.Add(label1);
@@ -298,7 +325,7 @@
 			Controls.Add(btnReset);
 			Controls.Add(lbDbSaveResult);
 			FormBorderStyle = FormBorderStyle.None;
-			Name = "FrmDisciplines";
+			Name = "FrmSubjects";
 			Text = "frmDisciplineList";
 			((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).EndInit();
@@ -333,5 +360,7 @@
 		private Label label4;
 		private Label label3;
 		private ComboBox cbTeacher;
+		private Label label6;
+		private TextBox tbSemesters;
 	}
 }

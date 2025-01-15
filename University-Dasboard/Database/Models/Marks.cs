@@ -6,6 +6,7 @@
         public int Mark { get; set; }
         public DateTime GradeDate { get; set; }
         public required string markType { get; set; }
+        public int Semester {  get; set; }
 
         public Guid StudentId { get; set; }
         public Student? Student { get; set; }

@@ -21,10 +21,12 @@ namespace University_Dasboard
 		{
 			public Guid Id { get; set; }
 			public string Name { get; set; } = string.Empty;
+			public string Semester { get; set; } = string.Empty;
 
 			public Guid DepartmentId { get; set; }
 			public string DepartmentName { get; set; } = string.Empty;
 
+			public Guid DirectionId { get; set; }
 			public Guid TeacherId { get; set; }
 			public string TeacherName { get; set; } = string.Empty;
 		}
@@ -45,7 +47,7 @@ namespace University_Dasboard
 			using var ctx = new DatabaseContext();
 			SubjectController.LoadDisciplines(dgvDisciplines, ref disciplines);
 			DataGridViewHelper.HideColumns(dgvDisciplines,
-				["Id", "DepartmentId", "TeacherId"]);
+				["Id", "DepartmentId", "TeacherId", "DirectionId"]);
 			var faculties = ctx.Faculty.ToList();
 			ComboboxHelper.LoadCombobox(
 				faculties,
@@ -88,12 +90,20 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
+			if (tbSemesters.Text == string.Empty)
+			{
+				MessageBox.Show("Введите семестры дисциплины через пробел");
+				return;
+			}
+
 			var discipline = new DisciplineViewModel()
 			{
 				Id = Guid.NewGuid(),
 				Name = newSubjectName,
+				Semester = tbSemesters.Text,
 				DepartmentId = selectedDepartment.Id,
 				DepartmentName = selectedDepartment.Name,
+				DirectionId = selectedDirection.Id,
 				TeacherId = selectedTeacher.Id,
 				TeacherName = selectedTeacher.Name,
 			};
@@ -210,6 +220,14 @@ namespace University_Dasboard
 		private void cbTeacher_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedTeacher = (Teacher?)cbTeacher.SelectedItem;
+		}
+
+		private void tbSemesters_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Space)
+			{
+				e.Handled = true;
+			}
 		}
 	}
 }

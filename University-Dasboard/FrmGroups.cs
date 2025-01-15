@@ -76,7 +76,7 @@ namespace University_Dasboard
 				Id = Guid.NewGuid(),
 				Name = tbGroupName.Text,
 				DirectionId = selectedDirection.Id,
-				DirectionName = selectedDirection.Name
+				DirectionName = selectedDirection.Name,
 			};
 			groups.Add(newGroup);
 			newGroupList.Add(newGroup);

@@ -17,8 +17,5 @@ public class GroupCfg : IEntityTypeConfiguration<Group>
             .WithOne(st => st.Group)
             .HasForeignKey(st => st.GroupId);
 
-        builder.
-            HasMany(g => g.Disciplines)
-            .WithMany(sub => sub.Groups);
     }
 }

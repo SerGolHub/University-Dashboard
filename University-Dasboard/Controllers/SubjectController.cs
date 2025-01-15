@@ -1,4 +1,5 @@
 ﻿using Database;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
@@ -21,8 +22,10 @@ namespace University_Dasboard.Controllers
 			{
 				Id = dis.Id,
 				Name = dis.Name,
+				Semester = dis.Semester,
 				DepartmentId = dis.DepartmentId,
 				DepartmentName = dis.Department!.Name,
+				DirectionId = dis.DirectionId,
 				TeacherId = dis.TeacherId,
 				TeacherName = dis.Teacher!.Name
 			})
@@ -58,7 +61,9 @@ namespace University_Dasboard.Controllers
 			{
 				Id = dis.Id,
 				Name = dis.Name,
+				Semester = dis.Semester,
 				DepartmentId = dis.DepartmentId,
+				DirectionId = dis.DirectionId,
 				TeacherId = dis.TeacherId
 			}).ToList();
 
@@ -82,7 +87,9 @@ namespace University_Dasboard.Controllers
 			{
 				var updatedDiscipline = updatedDisciplines.First(dis => dis.Id == existingDiscipline.Id);
 				existingDiscipline.Name = updatedDiscipline.Name;
+				existingDiscipline.Semester = updatedDiscipline.Semester;
 				existingDiscipline.DepartmentId = updatedDiscipline.DepartmentId;
+				existingDiscipline.DirectionId = updatedDiscipline.DirectionId;
 				existingDiscipline.TeacherId = updatedDiscipline.TeacherId;
 			}
 		}

@@ -22,7 +22,7 @@ namespace University_Dasboard.Controllers
                 Id = g.Id,
                 Name = g.Name,
                 DirectionId = g.DirectionId,
-                DirectionName = g.Direction!.Name
+                DirectionName = g.Direction!.Name,
             })
             .ToList();
 
@@ -52,11 +52,11 @@ namespace University_Dasboard.Controllers
             {
                 return;
             }
-            var newGroups = newGroupList.Select(g => new Group
+			var newGroups = newGroupList.Select(g => new Group
             {
                 Id = g.Id,
                 Name = g.Name,
-                DirectionId = g.DirectionId
+                DirectionId = g.DirectionId,
             }).ToList();
 
             await ctx.Group.AddRangeAsync(newGroups);

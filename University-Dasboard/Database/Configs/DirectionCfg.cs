@@ -16,5 +16,9 @@ public class DirectionCfg : IEntityTypeConfiguration<Direction>
             HasMany(dir => dir.Groups)
             .WithOne(g => g.Direction)
             .HasForeignKey(g => g.DirectionId);
+
+        builder.
+            HasMany(dir => dir.Subjects)
+            .WithOne(dis => dis.Direction);
     }
 }

@@ -19,6 +19,7 @@ namespace University_Dasboard
 			public int Mark { get; set; }
 			public DateTime GradeDate { get; set; }
 			public required string MarkType { get; set; }
+			public int Semester { get; set; }
 
 			public Guid StudentId { get; set; }
 			public string StudentName { get; set; } = string.Empty;
@@ -34,7 +35,7 @@ namespace University_Dasboard
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
-		private int? selectedCourse;
+		private int? selectedSemester;
 		private Group? selectedGroup;
 		private Subject? selectedSubject;
 		private Student? selectedStudent;
@@ -78,9 +79,9 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
-			if (selectedCourse == null)
+			if (selectedSemester == null)
 			{
-				MessageBox.Show("Выберите курс группы");
+				MessageBox.Show("Выберите семестр");
 				return;
 			}
 			if (selectedGroup == null)
@@ -114,6 +115,7 @@ namespace University_Dasboard
 				Mark = Convert.ToInt32(tbMark.Text),
 				GradeDate = dateTimePicker1.Value.Date.ToUniversalTime(),
 				MarkType = selectedMarkType,
+				Semester = (int)selectedSemester,
 				StudentId = selectedStudent.Id,
 				StudentName = selectedStudent.Name,
 				SubjectId = selectedSubject.Id,
@@ -203,9 +205,9 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
-			if (selectedCourse == null)
+			if (selectedSemester == null)
 			{
-				MessageBox.Show("Выберите курс группы");
+				MessageBox.Show("Выберите семестр");
 				return;
 			}
 			if (selectedGroup == null)
@@ -237,6 +239,7 @@ namespace University_Dasboard
 					Mark = m.Mark,
 					GradeDate = m.GradeDate,
 					MarkType = m.markType,
+					Semester = m.Semester,
 					StudentId = m.StudentId,
 					StudentName = m.Student!.Name,
 					SubjectId = m.SubjectId,
@@ -255,6 +258,7 @@ namespace University_Dasboard
 					Mark = m.Mark,
 					GradeDate = m.GradeDate,
 					MarkType = m.markType,
+					Semester = m.Semester,
 					StudentId = m.StudentId,
 					StudentName = m.Student!.Name,
 					SubjectId = m.SubjectId,
@@ -284,13 +288,13 @@ namespace University_Dasboard
 					cbDepartment,
 					cbDirection,
 					cbGroup,
-					cbCourse,
+					cbSemester,
 					cbSubject,
 					cbStudent);
 					selectedDepartment = null;
 					selectedDirection = null;
 					selectedGroup = null;
-					selectedCourse = null;
+					selectedSemester = null;
 					selectedSubject = null;
 					selectedStudent = null;
 				}
@@ -319,11 +323,11 @@ namespace University_Dasboard
 					ComboboxHelper.ClearComboboxes(
 					cbDirection,
 					cbGroup,
-					cbCourse,
+					cbSemester,
 					cbStudent);
 					selectedDirection = null;
 					selectedGroup = null;
-					selectedCourse = null;
+					selectedSemester = null;
 					selectedStudent = null;
 				}
 			}
@@ -342,30 +346,15 @@ namespace University_Dasboard
 				bool areGroupsLoaded = ComboboxHelper.LoadComboboxData<Group>(
 				cbGroup,
 				g => g.DirectionId == selectedDirection.Id);
-
-				if (areGroupsLoaded)
-				{
-					using var ctx = new DatabaseContext();
-					var maxCourse = ctx.Direction
-						.Where(dir => dir.Id == selectedDirection.Id)
-						.Select(dir => dir.MaxCourse)
-						.First();
-					List<int> coursesList = [];
-					for (int i = 1; i <= maxCourse; i++)
-					{
-						coursesList.Add(i);
-					}
-					cbCourse.DataSource = coursesList;
-				}
-				else
+				if (!areGroupsLoaded)
 				{
 					ComboboxHelper.ClearComboboxes(
 					cbGroup,
-					cbCourse,
+					cbSemester,
 					cbSubject,
 					cbStudent);
 					selectedGroup = null;
-					selectedCourse = null;
+					selectedSemester = null;
 					selectedSubject = null;
 					selectedStudent = null;
 				}
@@ -390,12 +379,32 @@ namespace University_Dasboard
 
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			selectedCourse = (int?)cbCourse.SelectedItem;
+			selectedSemester = (int?)cbSemester.SelectedItem;
 		}
 
 		private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			selectedSubject = (Subject?)cbSubject.SelectedItem;
+            selectedSubject = (Subject?)cbSubject.SelectedItem;
+			if (selectedSubject != null)
+			{
+				cbSemester.Items.Clear();
+				cbSemester.Text = "";
+				selectedSemester = null;
+				using var ctx = new DatabaseContext();
+				var semesters = ctx.Subject
+					.Where(s => s.Id == selectedSubject.Id)
+					.Select(s => s.Semester)
+					.AsEnumerable() // Переключаемся на выполнение в памяти
+					.SelectMany(item => item.Split()) // Разделяем строки на числа
+					.Distinct()
+					.Select(int.Parse) // Преобразуем строки в числа
+					.ToList();
+
+				foreach (var semester in semesters)
+				{
+					cbSemester.Items.Add(semester);
+				}
+			}
 		}
 
 		private void cbStudent_SelectedIndexChanged(object sender, EventArgs e)

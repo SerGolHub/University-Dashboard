@@ -64,16 +64,6 @@ namespace University_Dasboard
 			pnlNavigationSubmenu.Show();
 			button.BackColor = Color.FromArgb(46, 51, 73);
 		}
-		//private void loadFrmMainProgram(Form form)
-		//{
-		//	pnlFormLoader.Controls.Clear();
-		//	form.Dock = DockStyle.Fill;
-		//	form.FormBorderStyle = FormBorderStyle.None;
-		//	form.TopLevel = false;
-		//	form.TopMost = true;
-		//	pnlFormLoader.Controls.Add(form);
-		//	form.Show();
-		//}
 
 		private void restoreButtonsBackColor()
 		{
@@ -84,6 +74,7 @@ namespace University_Dasboard
 			btnSubjects.BackColor = color;
 			btnGroups.BackColor = color;
 			btnStudents.BackColor = color;
+			btnTeachers.BackColor = color;
 
 			btnGrades.BackColor = color;
 
@@ -197,6 +188,7 @@ namespace University_Dasboard
 			restoreButtonsBackColor();
 			moveNavigationSubPanel(btnSchedulingDisciplines, pnlSchedulingSubMenu);
 		}
+
 		private void btnReports_Click(object sender, EventArgs e)
 		{
 			changeSubMenuVisibility(pnlReportsSubMenu);

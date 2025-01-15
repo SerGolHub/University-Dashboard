@@ -38,7 +38,7 @@
 			cbDepartment = new ComboBox();
 			cbFaculty = new ComboBox();
 			cbGroup = new ComboBox();
-			cbCourse = new ComboBox();
+			cbSemester = new ComboBox();
 			btnShow = new Button();
 			label10 = new Label();
 			label5 = new Label();
@@ -193,18 +193,18 @@
 			cbGroup.TabIndex = 43;
 			cbGroup.SelectedIndexChanged += cbGroup_SelectedIndexChanged;
 			// 
-			// cbCourse
+			// cbSemester
 			// 
-			cbCourse.BackColor = Color.FromArgb(158, 161, 178);
-			cbCourse.FlatStyle = FlatStyle.Flat;
-			cbCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-			cbCourse.ForeColor = Color.FromArgb(24, 30, 54);
-			cbCourse.FormattingEnabled = true;
-			cbCourse.Location = new Point(306, 141);
-			cbCourse.Name = "cbCourse";
-			cbCourse.Size = new Size(70, 26);
-			cbCourse.TabIndex = 47;
-			cbCourse.SelectedIndexChanged += cbCourse_SelectedIndexChanged;
+			cbSemester.BackColor = Color.FromArgb(158, 161, 178);
+			cbSemester.FlatStyle = FlatStyle.Flat;
+			cbSemester.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbSemester.ForeColor = Color.FromArgb(24, 30, 54);
+			cbSemester.FormattingEnabled = true;
+			cbSemester.Location = new Point(306, 141);
+			cbSemester.Name = "cbSemester";
+			cbSemester.Size = new Size(70, 26);
+			cbSemester.TabIndex = 47;
+			cbSemester.SelectedIndexChanged += cbCourse_SelectedIndexChanged;
 			// 
 			// btnShow
 			// 
@@ -272,9 +272,9 @@
 			label1.ForeColor = Color.FromArgb(158, 161, 178);
 			label1.Location = new Point(12, 147);
 			label1.Name = "label1";
-			label1.Size = new Size(52, 20);
+			label1.Size = new Size(87, 20);
 			label1.TabIndex = 32;
-			label1.Text = "Курс:";
+			label1.Text = "Семестр:";
 			// 
 			// label6
 			// 
@@ -452,7 +452,7 @@
 			Controls.Add(cbMarkType);
 			Controls.Add(cbSubject);
 			Controls.Add(cbGroup);
-			Controls.Add(cbCourse);
+			Controls.Add(cbSemester);
 			Controls.Add(btnAdd);
 			Controls.Add(btnShow);
 			Controls.Add(label10);
@@ -485,7 +485,7 @@
         private ComboBox cbDepartment;
         private ComboBox cbFaculty;
         private ComboBox cbGroup;
-        private ComboBox cbCourse;
+        private ComboBox cbSemester;
         private Button btnShow;
         private Label label10;
         private Label label5;

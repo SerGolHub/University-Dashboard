@@ -25,6 +25,7 @@ namespace University_Dasboard.Controllers
 				Mark = m.Mark,
 				GradeDate = m.GradeDate,
 				MarkType = m.markType,
+				Semester = m.Semester,
 				StudentId = m.StudentId,
 				StudentName = m.Student!.Name,
 				SubjectId = m.SubjectId,
@@ -64,6 +65,7 @@ namespace University_Dasboard.Controllers
 				Mark = m.Mark,
 				GradeDate = m.GradeDate,
 				markType = m.MarkType,
+				Semester = m.Semester,
 				StudentId = m.StudentId,
 				SubjectId = m.SubjectId,
 			}).ToList();
@@ -90,6 +92,7 @@ namespace University_Dasboard.Controllers
 				existingMark.Mark = updatedMark.Mark;
 				existingMark.GradeDate = updatedMark.GradeDate;
 				existingMark.markType = updatedMark.MarkType;
+				existingMark.Semester = updatedMark.Semester;
 				existingMark.StudentId = updatedMark.StudentId;
 				existingMark.SubjectId = updatedMark.SubjectId;
 			}

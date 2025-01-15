@@ -27,7 +27,7 @@ namespace Database
 			modelBuilder.ApplyConfiguration(new GroupCfg());
 			modelBuilder.ApplyConfiguration(new MarksCfg());
 			modelBuilder.ApplyConfiguration(new StudentCfg());
-			modelBuilder.ApplyConfiguration(new DisciplineCfg());
+			modelBuilder.ApplyConfiguration(new SubjectCfg());
 			modelBuilder.ApplyConfiguration(new TeacherCfg());
 			modelBuilder.ApplyConfiguration(new TeacherCfg());
 			modelBuilder.ApplyConfiguration(new ScheduleWeekCfg());
@@ -37,7 +37,7 @@ namespace Database
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=postgres;Password=postgres");
+			optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=zorg;Password=zorg");
 		}
 	}
 }

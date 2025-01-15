@@ -57,7 +57,7 @@ namespace University_Dasboard
 		private List<ScheduleDisciplineViewModel> updatedScheduleList = [];
 		private List<ScheduleDisciplineViewModel> removedScheduleList = [];
 
-		private Subject? selectedSubject;
+		private Database.Models.Subject? selectedSubject;
 		private Faculty? selectedFaculty;
 		private Direction? selectedDirection;
 		private Group? selectedGroup;
@@ -85,18 +85,18 @@ namespace University_Dasboard
                 comboBox: comboBoxFaculties);
 
 			// Загрузка Предметов
-            var subjects = ctx.Subject.ToList();
-            ComboboxHelper.LoadCombobox(
-                subjects,
-                comboBox: comboBoxDiscipline);
+			var subjects = ctx.Subject.ToList();
+			ComboboxHelper.LoadCombobox(
+				subjects,
+				comboBox: comboBoxDiscipline);
 
-            // Загрузка недель расписания
-            var scheduleWeeks = ctx.ScheduleWeek.ToList();
+			// Загрузка недель расписания
+			var scheduleWeeks = ctx.ScheduleWeek.ToList();
 
-            ComboboxHelper.LoadCombobox(
+			ComboboxHelper.LoadCombobox(
 				scheduleWeeks,
-				comboBox: comboBoxScheduleWeek);         
-        }
+				comboBox: comboBoxScheduleWeek);
+		}
 
 		private void ClearTempLists()
 		{
@@ -243,7 +243,7 @@ namespace University_Dasboard
                     selectedFaculty.Id,
                     selectedDirection?.Id);
 
-                if (!directionsLoaded)
+				if (!directionsLoaded)
                 {
                     MessageBox.Show("Нет доступных направлений.");
                 }
@@ -274,7 +274,7 @@ namespace University_Dasboard
 
         private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedSubject = (Subject?)comboBoxDiscipline.SelectedItem;
+            selectedSubject = (Database.Models.Subject?)comboBoxDiscipline.SelectedItem;
         }
 
         private void cbSchedule_SelectedIndexChanged(object sender, EventArgs e)

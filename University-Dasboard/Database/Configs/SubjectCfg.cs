@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using University_Dasboard.Database.Models;
 
-public class DisciplineCfg : IEntityTypeConfiguration<Subject>
+public class SubjectCfg : IEntityTypeConfiguration<Subject>
 {
     public void Configure(EntityTypeBuilder<Subject> builder)
     {
@@ -18,7 +18,7 @@ public class DisciplineCfg : IEntityTypeConfiguration<Subject>
             .HasForeignKey(m => m.SubjectId);
 
         builder.
-            HasMany(dis => dis.Groups)
-            .WithMany(g => g.Disciplines);
+            HasOne(dis => dis.Direction)
+            .WithMany(dir => dir.Subjects);
     }
 }
