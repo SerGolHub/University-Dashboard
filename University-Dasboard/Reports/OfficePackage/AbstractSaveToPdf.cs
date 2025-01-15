@@ -32,14 +32,14 @@ namespace OfficePackage
                 Text = $"ГРАФИК УЧЕБНОГО ПРОЦЕССА\n\n",
                 Style = "Title",
                 Font = "Times New Roman",
-                FontWeight="Bold",
+                FontWeight = "Bold",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
             // Предтабличная информация о группе, преподавателе и тд.
             CreateParagraph(new PdfParagraph
             {
-                Text = $"Факультет: {info.FacultyName}                                      Направление {info.DirectionName},                                     Группа: {info.GroupName}\n\n\n",
+                Text = $"Факультет: {info.FacultyName},            Направление: {info.DirectionName},            Группа: {info.GroupName}\n\n",
                 Style = "Normal",
                 Font = "Times New Roman",
                 ParagraphAlignment = PdfParagraphAlignmentType.Justify
@@ -47,27 +47,135 @@ namespace OfficePackage
 
             CreateParagraph(new PdfParagraph
             {
-                Text = $"Дисциплина: {info.SubjectName}                                   {info.SemesterName}                                                     {info.TeacherName}\n\n",
+                Text = $"Дисциплина: {info.SubjectName},            {info.SemesterName},            Преподаватель: {info.TeacherName}\n\n",
                 Style = "Normal",
                 Font = "Times New Roman",
                 ParagraphAlignment = PdfParagraphAlignmentType.Justify
             });
 
             // Заголовки таблицы
-            CreateTable(new List<string> { "2cm", "2cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "2cm" });
+            CreateTable(new List<string> { "5cm", "2cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "0.7cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "1cm", "3.3cm" });
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "", "Отчётность" },
+                Texts = new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "∑", "Отчётность" },
                 Style = "TableHeader",
                 Font = "Times New Roman",
                 FontWeight = "Bold",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
 
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "1. Лекции занятий", "аудит.", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "", " " },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { " ", $"{info.ClassroomNumber}", $"{info.TeacherName}", "", "", "", "", "", "", "", $"{info.TeacherName}", "", "", "", "", "", "", "", "", "", "", " " },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                MergeColumns1 = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 }, // Объединение первой ячейки с соседними
+                MergeColumns2 = new List<int> { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "1. Практические занятий", "аудит.", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "Отчётность" },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "", $"{info.ClassroomNumber}", $"{info.TeacherName}", "", "", "", "", "", "", "", $"{info.TeacherName}", "", "", "", "", "", "", "", "", "", "", "Отчётность" },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                MergeColumns1 = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 }, // Объединение первой ячейки с соседними
+                MergeColumns2 = new List<int> { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "1. Практические занятий", "аудит.", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "", "", "", "Отчётность" },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Данные таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "", $"{info.ClassroomNumber}", $"1-я подгруппа {info.TeacherName}, 2-ая подгруппа {info.TeacherName}", "", "", "", "", "", "", "", $"1-я подгруппа {info.TeacherName}, 2-ая подгруппа {info.TeacherName}", "", "", "", "", "", "", "", "", "", "", "Отчётность" },
+                Style = "TableHeader",
+                Font = "Times New Roman",
+                MergeColumns1 = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 }, // Объединение первой ячейки с соседними
+                MergeColumns2 = new List<int> { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Подвал таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "Всего", "аудит.", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", " ", " ", "64", " " },
+                Style = "TableFooter",
+                Font = "Times New Roman",
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Center
+            });
+
+            // Подвал таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "Объединить с потоком", $"Лекции объединить с {info.GroupName}", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", " ", " ", "", "Зав. кафедрой" },
+                Style = "TableFooter",
+                Font = "Times New Roman",
+                MergeColumns1 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }, // Объединение первой ячейки с соседними
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Подвал таблицы
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "Пожелания с потоком", "Занятия планировать по пнд, вт, чтв, 2-5 пары.\r\nЛабораторные занятия ставить для подгруппы спаренные (две пары подряд)\r\n", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", " ", " ", "", " " },
+                Style = "TableFooter",
+                Font = "Times New Roman",
+                MergeColumns1 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }, // Объединение первой ячейки с соседними
+                FontWeight = "Bold",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+            // Информация на следующей странице
+            CreateParagraph(new PdfParagraph
+            {
+                Text = "Примечания:\n1. Пример примечания для расписания.\n2. Внесите сюда любые дополнительные данные.",
+                Style = "Normal",
+                Font = "Times New Roman",
+                ParagraphAlignment = PdfParagraphAlignmentType.Left
+            });
+
+
 
             SavePdf(info);
         }
-
+       
 
         /// Создание pdf-файла
         protected abstract void CreatePdf(PdfInfo info);

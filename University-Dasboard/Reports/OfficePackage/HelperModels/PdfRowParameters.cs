@@ -20,6 +20,14 @@ namespace OfficePackage.HelperModels
 
         public string FontWeight { get; set; } = string.Empty;
 
+        // Количество ячеек для объединения по горизонтали
+        public List<int> MergeColumns1 { get; set; } = null!;
+
+        public List<int> MergeColumns2 { get; set; } = null!;
+
+        // Количество ячеек для объединения по вертикали
+        public List<int> MergeRows { get; set; } = null!;
+
         // Новый список для задания поворота текста в каждой ячейке
         public List<int> Rotations { get; set; } = new List<int>();
 

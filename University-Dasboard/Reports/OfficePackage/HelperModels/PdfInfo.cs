@@ -29,5 +29,7 @@ namespace OfficePackage.HelperModels
         public string SemesterName { get; set; } = string.Empty;
 
         public string TeacherName { get; set; } = string.Empty;
+
+        public int ClassroomNumber { get; set; }
     }
 }

@@ -16,6 +16,8 @@ using University_Dasboard.Reports.Models;
 using University_Dasboard.Reports;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using DocumentFormat.OpenXml.Bibliography;
+using OfficePackage.HelperModels;
+using OfficePackage.Implements;
 
 namespace University_Dasboard
 {
@@ -286,15 +288,33 @@ namespace University_Dasboard
 		{
 			string fileName = "";
 
-			using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+			using (var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" })
 			{
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
 					fileName = dialog.FileName.ToString();
 					MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
+
+
 			}
 
-		}
+            // Настройка данных для отчёта
+            var pdfInfo = new PdfInfo
+            {
+                FacultyName = "Факультет Информационных систем и технологий",
+                DirectionName = "Информатика",
+                GroupName = "ИВТ-01",
+                SubjectName = "Программирование",
+                SemesterName = "1 семестр 2024-2025",
+                TeacherName = "Иванов И.И.",
+                FileName = fileName
+            };
+
+            // Создание и генерация отчёта
+            var reportGenerator = new SaveToPdf();
+            reportGenerator.CreateDoc(pdfInfo);
+
+        }
 	}
 }
