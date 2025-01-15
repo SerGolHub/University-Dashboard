@@ -27,7 +27,6 @@ namespace University_Dasboard
 			public Guid Id { get; set; }
 
 			public Guid TeacherId { get; set; }
-			public Teacher Teacher { get; set; } = null!;
             public string TeacherName { get; set; } = string.Empty;
 
 			public DayOfWeek DayOfWeek { get; set; }
@@ -77,6 +76,9 @@ namespace University_Dasboard
         {
             var teachers = ctx.Teacher.ToList();
             ComboboxHelper.LoadCombobox(teachers, comboBoxTeachers);
+
+            // Загружаем список дней недели в ComboBox
+            cbDayOfWeek.DataSource = Enum.GetValues(typeof(DayOfWeekEnum));
         }
 
         private void ClearTempLists()
@@ -105,12 +107,23 @@ namespace University_Dasboard
                 return;
             }
 
+            var selectedDay = cbDayOfWeek.SelectedItem as DayOfWeekEnum?;
+
+            if (selectedDay == null)
+            {
+                MessageBox.Show("Выберите день недели.");
+                return;
+            }
+
+            // Преобразуем DayOfWeekEnum в System.DayOfWeek
+            System.DayOfWeek systemDay = (System.DayOfWeek)(selectedDay.Value);
+
             var constraint = new TeacherConstraintViewModel
             {
                 Id = Guid.NewGuid(),
                 TeacherId = selectedTeacher.Id,
-                Teacher = selectedTeacher,
-                DayOfWeek = (DayOfWeek)cbDayOfWeek.SelectedItem!,
+
+                DayOfWeek = systemDay,
                 StartTime = startTime,
                 EndTime = endTime,
                 Note = tbNote.Text.Trim()
@@ -132,8 +145,8 @@ namespace University_Dasboard
                 TeacherConstraintController.SaveTeacherConstraintsAsync(
                     newTeacherConstraintList,
                     updatedTeacherConstraintList,
-                    removedTeacherConstraintList
-                );
+                    removedTeacherConstraintList);
+
                 ClearTempLists();
                 lbDbSaveResult.ForeColor = System.Drawing.Color.Green;
                 lbDbSaveResult.Text = "Данные успешно сохранены.";
@@ -156,5 +169,26 @@ namespace University_Dasboard
         {
             selectedTeacher = comboBoxTeachers.SelectedItem as Teacher;
         }
+
+        private void cbDayOfWeek_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Получаем выбранное значение DayOfWeekEnum из ComboBox
+            DayOfWeekEnum selectedDay = (DayOfWeekEnum)cbDayOfWeek.SelectedItem!;
+        }
+
+        // Для DataGridView, настройте обработчик события CellFormatting
+        private void dgvTeacherConstraintList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Проверяем, если это столбцы с временем
+            if (e.ColumnIndex == dgvTeacherConstraintList.Columns["StartTime"].Index && e.Value != null)
+            {
+                e.Value = ((TimeSpan)e.Value).ToString(@"hh\:mm");  // Форматируем в часы:минуты
+            }
+            else if (e.ColumnIndex == dgvTeacherConstraintList.Columns["EndTime"].Index && e.Value != null)
+            {
+                e.Value = ((TimeSpan)e.Value).ToString(@"hh\:mm");  // Форматируем в часы:минуты
+            }
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace University_Dasboard
+﻿using System.Windows.Forms;
+
+namespace University_Dasboard
 {
     partial class FrmTeachersConstraint
     {
@@ -61,6 +63,7 @@
             btnAdd.TabIndex = 21;
             btnAdd.Text = "Добавить";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAddConstraint_Click;
             // 
             // label2
             // 
@@ -155,6 +158,7 @@
             dgvTeacherConstraintList.Name = "dgvTeacherConstraintList";
             dgvTeacherConstraintList.Size = new Size(862, 380);
             dgvTeacherConstraintList.TabIndex = 28;
+            dgvTeacherConstraintList.CellFormatting += dgvTeacherConstraintList_CellFormatting;
             // 
             // btnDelete
             // 
@@ -224,15 +228,21 @@
             // 
             // dateTimePickerStartTime
             // 
+            dateTimePickerStartTime.Format = DateTimePickerFormat.Time;
             dateTimePickerStartTime.Location = new Point(199, 97);
             dateTimePickerStartTime.Name = "dateTimePickerStartTime";
+            dateTimePickerStartTime.ShowUpDown = true;
+            dateTimePickerStartTime.CustomFormat = "HH:mm";
             dateTimePickerStartTime.Size = new Size(203, 23);
             dateTimePickerStartTime.TabIndex = 31;
             // 
             // dateTimePickerEndTime
             // 
+            dateTimePickerEndTime.Format = DateTimePickerFormat.Time;
             dateTimePickerEndTime.Location = new Point(199, 135);
             dateTimePickerEndTime.Name = "dateTimePickerEndTime";
+            dateTimePickerEndTime.ShowUpDown = true;
+            dateTimePickerEndTime.CustomFormat = "HH:mm";
             dateTimePickerEndTime.Size = new Size(203, 23);
             dateTimePickerEndTime.TabIndex = 38;
             // 
@@ -251,6 +261,7 @@
             cbDayOfWeek.Size = new Size(234, 26);
             cbDayOfWeek.TabIndex = 39;
             cbDayOfWeek.Text = "Выберите день недели";
+            cbDayOfWeek.SelectedIndexChanged += cbDayOfWeek_SelectedIndexChanged;
             // 
             // FrmTeachersConstraint
             // 

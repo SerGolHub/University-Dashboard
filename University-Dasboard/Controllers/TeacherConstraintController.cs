@@ -22,7 +22,7 @@ namespace University_Dasboard.Controllers
                     {
                         Id = c.Id,
                         TeacherId = c.TeacherId,
-                        Teacher = c.Teacher,
+                        TeacherName = c.Teacher.Name,
                         DayOfWeek = c.DayOfWeek,
                         StartTime = c.StartTime,
                         EndTime = c.EndTime,
@@ -88,7 +88,6 @@ namespace University_Dasboard.Controllers
             {
                 var updatedConstraint = updatedTeacherConstraintList.First(c => c.Id == existingConstraint.Id);
                 existingConstraint.TeacherId = updatedConstraint.TeacherId;
-                existingConstraint.Teacher = updatedConstraint.Teacher;
                 existingConstraint.DayOfWeek = updatedConstraint.DayOfWeek;
                 existingConstraint.StartTime = updatedConstraint.StartTime;
                 existingConstraint.EndTime = updatedConstraint.EndTime;
