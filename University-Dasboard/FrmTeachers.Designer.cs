@@ -223,6 +223,7 @@
 			dgvTeacherList.Name = "dgvTeacherList";
 			dgvTeacherList.Size = new Size(862, 339);
 			dgvTeacherList.TabIndex = 28;
+			dgvTeacherList.CellValueChanged += dgvTeacherList_CellValueChanged;
 			// 
 			// btnDelete
 			// 
