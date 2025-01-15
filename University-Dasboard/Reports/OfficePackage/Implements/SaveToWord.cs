@@ -235,7 +235,7 @@ namespace OfficePackage.Implements
             _docBody!.AppendChild(_currentTable);
         }
 
-
+        // Реализация строк
         protected override void CreateRow(WordRowParameters rowParameters)
         {
             if (_currentTable == null) return;
@@ -294,9 +294,7 @@ namespace OfficePackage.Implements
             _currentTable.AppendChild(tableRow);
         }
 
-
-
-
+        // Реализация разрыва страницы
         protected override void CreatePageBreak()
         {
             if (_docBody == null) return;
