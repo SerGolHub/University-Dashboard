@@ -48,9 +48,9 @@
 			btnGenerate.FlatStyle = FlatStyle.Flat;
 			btnGenerate.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnGenerate.ForeColor = Color.FromArgb(24, 30, 54);
-			btnGenerate.Location = new Point(12, 169);
+			btnGenerate.Location = new Point(310, 124);
 			btnGenerate.Name = "btnGenerate";
-			btnGenerate.Size = new Size(127, 37);
+			btnGenerate.Size = new Size(127, 66);
 			btnGenerate.TabIndex = 42;
 			btnGenerate.Text = "Сформировать";
 			btnGenerate.UseVisualStyleBackColor = false;
@@ -174,7 +174,7 @@
 			button1.FlatStyle = FlatStyle.Flat;
 			button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			button1.ForeColor = Color.FromArgb(24, 30, 54);
-			button1.Location = new Point(857, 169);
+			button1.Location = new Point(570, 124);
 			button1.Name = "button1";
 			button1.Size = new Size(127, 66);
 			button1.TabIndex = 42;

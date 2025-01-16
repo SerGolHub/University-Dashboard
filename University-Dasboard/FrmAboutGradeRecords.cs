@@ -1,8 +1,6 @@
 ﻿
 using Database;
-using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
-using System.Windows.Forms;
 using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
@@ -16,8 +14,6 @@ namespace University_Dasboard
 			InitializeDataGridView();
 		}
 
-		//private string templateName = "DocTemplate.doc";
-		//private string newName = "DocTemplate-New.doc";
 		private Group? selectedGroup;
 		private int? selectedCourse;
 		private Student? selectedStudent;
@@ -124,7 +120,7 @@ namespace University_Dasboard
 						ThreeCount = st.Marks.Count(m => m.Mark == 3),
 						// Группировка после загрузки данных в память
 						MarksBySubjectAndSemester = st.Marks
-							.GroupBy(m => new 
+							.GroupBy(m => new
 							{
 								m.SubjectId,
 								Semester = m.Semester.ToString()
@@ -162,11 +158,69 @@ namespace University_Dasboard
 			}
 			else if (chbCourse.Checked)
 			{
+				if (selectedCourse == null)
+				{
+					MessageBox.Show("Выберите курс");
+					return;
+				}
 
-			}
-			else if (chbStudent.Checked)
-			{
+				// Находим все группы, которые соответствуют выбранному курсу
+				var groupsOnCourse = ctx.Group
+					.Where(g => g.CourseNumber == selectedCourse) // Фильтруем группы по курсу
+					.Include(g => g.Direction!.Subjects) // Подключаем направление и предметы
+					.ToList(); // Получаем группы в память
 
+				if (!groupsOnCourse.Any())
+				{
+					MessageBox.Show("Нет групп на выбранном курсе");
+					return;
+				}
+
+				// Получаем студентов, которые принадлежат этим группам
+				var studentData = ctx.Student
+					.Include(st => st.Marks) // Подключаем оценки
+					.Include(st => st.Group!.Direction!.Subjects) // Подключаем предметы направления
+					.ToList() // Загружаем всех студентов в память
+					.Where(st => groupsOnCourse.Any(g => g.Id == st.GroupId)) // Студенты, которые принадлежат группам на выбранном курсе
+					.Select(st => new
+					{
+						st.Name,
+						AverageMark = st.Marks.Any() ? st.Marks.Average(m => m.Mark) : 0,
+						ThreeCount = st.Marks.Count(m => m.Mark == 3),
+						MarksBySubjectAndSemester = st.Marks
+							.GroupBy(m => new
+							{
+								m.SubjectId,
+								Semester = m.Semester.ToString()
+							})
+							.ToList()
+					})
+					.ToList(); // Вычисляем данные после загрузки всех студентов в память
+
+				foreach (var student in studentData)
+				{
+					var row = new List<object>
+					{
+						student.Name,
+						student.AverageMark,
+						student.ThreeCount
+					};
+
+					// Добавляем оценки по предметам, которые есть в выбранных группах (направлениях)
+					foreach (var subject in groupsOnCourse.First().Direction!.Subjects) // Извлекаем предметы из первого направления
+					{
+						foreach (var semester in subject.Semester.Split(' ').Select(int.Parse).OrderBy(sem => sem).Distinct())
+						{
+							// Ищем оценки для каждого предмета и семестра
+							var markForSubjectSemester = student.MarksBySubjectAndSemester
+								.FirstOrDefault(group => group.Key.SubjectId == subject.Id && group.Key.Semester == semester.ToString());
+
+							row.Add(markForSubjectSemester?.Average(m => m.Mark));
+						}
+					}
+
+					dgvReportList.Rows.Add(row.ToArray());
+				}
 			}
 			else
 			{
@@ -232,11 +286,27 @@ namespace University_Dasboard
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedCourse = (int?)cbCourse.SelectedItem;
+			//if (selectedCourse == null)
+			//{
+			//	return;
+			//}
+			//using var ctx = new DatabaseContext();
+			//selectedCourse = ctx.Direction.
+			//			   .Include(g => g.Direction!.Subjects)
+			//			   .FirstOrDefault(g => g.Id == selectedGroup.Id);
 		}
 
 		private void cbStudent_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedStudent = (Student?)cbStudent.SelectedItem;
+			if (selectedStudent == null)
+			{
+				return;
+			}
+			using var ctx = new DatabaseContext();
+			selectedStudent = ctx.Student
+						   .Include(s => s.Group!.Direction!.Subjects)
+						   .FirstOrDefault(s => s.Id == selectedStudent.Id);
 		}
 
 		private void dgvStudentList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
