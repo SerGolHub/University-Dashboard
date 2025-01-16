@@ -208,9 +208,11 @@ namespace University_Dasboard
 			}
 			btnGenerate_Click(sender, e);
 			// Создание документа Word
-			string filePath = "!Student_card.docx";
+			string filePath = @"..\..\..\..\";
+			string fileName = "!Student_card.docx";
+			string fullFilePath = filePath + fileName;
 			CreateWordDocument(
-				filePath,
+				fullFilePath,
 				selectedStudent.Name,
 				selectedStudent.CourseNumber.ToString(),
 				selectedStudent.Group!.Name,
@@ -219,7 +221,7 @@ namespace University_Dasboard
 				selectedStudent.IsExcellentStudent,
 				dgvStudentInfo);
 
-			MessageBox.Show($"Документ сохранен!\n{filePath}");
+			MessageBox.Show($"Документ сохранен!\n{fileName}");
 		}
 	}
 }
