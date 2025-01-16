@@ -17,7 +17,5 @@ namespace University_Dasboard.Database.Models
 
         public DayOfWeekEnum DayOfWeek { get; set; }
 
-        // Коллекция расчётовок
-        public ICollection<ScheduleDiscipline> ScheduleDisciplines { get; set; } = new List<ScheduleDiscipline>();
     }
 }

@@ -12,7 +12,7 @@ namespace University_Dasboard
 			InitializeComponent();
 			logger.Info("Главная форма запущена");
 
-			//checkAuthorisation(fullName, login);
+			checkAuthorisation(fullName, login);
 
 		}
 		private void checkAuthorisation(string fullName = "", string login = "")
