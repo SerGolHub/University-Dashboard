@@ -9,7 +9,6 @@ namespace University_Dasboard.Database.Models
         public DateTime EnrollmentDate { get; set; }
         public required string EnrollmentNumber { get; set; }
         public bool IsExcellentStudent { get; set; }
-        public int CourseNumber { get; set; }
 
         public Guid GroupId { get; set; }
         public Group? Group { get; set; }
