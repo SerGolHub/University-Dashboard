@@ -43,7 +43,45 @@ namespace University_Dasboard.Controllers
 			dgv.DataSource = bindingList;
 		}
 
-		public static async Task SaveSchedulesAsync(
+        public static ScheduleDisciplineViewModel LoadScheduleById(Guid scheduleId)
+        {
+            using var ctx = new DatabaseContext();
+
+            try
+            {
+                // Загружаем расписание по ID с его связанными данными
+                var schedule = ctx.ScheduleDisciplines.Include(s => s.Subject)
+                    .Include(s => s.Group).ThenInclude(s => s.Direction).ThenInclude(s => s.Faculty)
+                    .Include(s => s.ScheduleWeek).Where(s => s.Id == scheduleId)
+                    .Select(s => new ScheduleDisciplineViewModel
+                    {
+                        Id = s.Id,
+                        DirectionId = s.DirectionId,
+                        DirectionName = s.Direction!.Name,
+                        SubjectId = s.SubjectId,
+                        SubjectName = s.Subject!.Name,
+                        GroupId = s.GroupId,
+                        GroupName = s.Group!.Name,
+                        FacultyId = s.FacultyId,
+                        FacultyName = s.Faculty!.Name,
+                        ScheduleWeekId = s.ScheduleWeekId,
+                        ScheduleWeek = s.ScheduleWeek!.Name,
+                        LectureHours = s.ScheduleWeek!.LectureHours,
+                        PracticalHours = s.ScheduleWeek!.PracticalHours,
+                        LaboratoryHours = s.ScheduleWeek!.LaboratoryHours
+                    })
+                    .FirstOrDefault(); // Возвращаем первый найденный элемент или null, если не найдено
+
+                return schedule!;
+            }
+            catch (Exception ex)
+            {
+				throw new Exception("Ошибка нахождения шемы", ex);
+            }
+        }
+
+
+        public static async Task SaveSchedulesAsync(
 			List<ScheduleDisciplineViewModel> newScheduleList,
 			List<ScheduleDisciplineViewModel> updatedScheduleList,
 			List<ScheduleDisciplineViewModel> removedScheduleList)

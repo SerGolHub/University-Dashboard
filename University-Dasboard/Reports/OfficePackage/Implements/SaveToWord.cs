@@ -4,7 +4,6 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using MigraDoc.DocumentObjectModel.Shapes;
 using OfficePackage.HelperEnums;
 using OfficePackage.HelperModels;
-using PdfSharp.Drawing.BarCodes;
 using System;
 using System.Collections.Generic;
 
@@ -28,10 +27,15 @@ namespace OfficePackage.Implements
             };
         }
 
-        private static SectionProperties CreateSectionProperties()
+        private static SectionProperties CreateSectionProperties(bool isLandscape)
         {
             var properties = new SectionProperties();
-            var pageSize = new PageSize { Orient = PageOrientationValues.Portrait };
+            var pageSize = new PageSize
+            {
+                Orient = isLandscape ? PageOrientationValues.Landscape : PageOrientationValues.Portrait,
+                Width = isLandscape ? (UInt32Value)16838U : (UInt32Value)11906U, // A4 Width
+                Height = isLandscape ? (UInt32Value)11906U : (UInt32Value)16838U  // A4 Height
+            };
             properties.AppendChild(pageSize);
             return properties;
         }
@@ -42,6 +46,10 @@ namespace OfficePackage.Implements
             var mainPart = _wordDocument.AddMainDocumentPart();
             mainPart.Document = new Document();
             _docBody = mainPart.Document.AppendChild(new Body());
+
+            // Установка ориентации страницы в зависимости от WordInfo
+            var sectionProperties = CreateSectionProperties(info.IsLandscape);
+            _docBody.AppendChild(sectionProperties);
         }
 
         protected override void CreateParagraph(WordParagraph paragraph)
@@ -102,9 +110,9 @@ namespace OfficePackage.Implements
         {
             _currentTable = new Table();
 
-            // Установка общих свойств таблицы
+            // Установка общих свойств таблицы с использованием 100% ширины
             var tableProperties = new TableProperties(
-                new TableWidth { Width = "150", Type = TableWidthUnitValues.Pct },
+                new TableWidth { Width = "100", Type = TableWidthUnitValues.Pct }, // Растягиваем таблицу на 100% ширины
                 new TableBorders(
                     new TopBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },
                     new LeftBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },
@@ -119,17 +127,22 @@ namespace OfficePackage.Implements
             // Создание строки заголовков
             var headerRow = new TableRow();
 
+            // Распределение ширины на ячейки таблицы
+            int columnCount = columnNames.Count;
+            int equalWidth = 100 / columnCount; // Равномерно распределяем ширину
+
             foreach (var column in columnNames)
             {
                 // Создание ячейки с текстом заголовка
                 var cell = new TableCell();
 
-                // Настройка отступов для ячейки
+                // Установка ширины для каждой ячейки (равномерное распределение)
                 var cellProperties = new TableCellProperties(
                     new TableCellMargin(
                         new LeftMargin { Width = "100", Type = TableWidthUnitValues.Dxa },
                         new RightMargin { Width = "100", Type = TableWidthUnitValues.Dxa }
-                    )
+                    ),
+                    new TableCellWidth { Width = equalWidth.ToString(), Type = TableWidthUnitValues.Pct } // Устанавливаем процентную ширину
                 );
                 cell.AppendChild(cellProperties);
 
@@ -156,14 +169,13 @@ namespace OfficePackage.Implements
             _docBody!.AppendChild(_currentTable);
         }
 
-
         protected override void CreateTableHeaderRotation(List<string> columnNames)
         {
             _currentTable = new Table();
 
-            // Установка общих свойств таблицы
+            // Установка общих свойств таблицы с растяжением на 100% ширины
             var tableProperties = new TableProperties(
-                new TableWidth { Width = "150", Type = TableWidthUnitValues.Pct },
+                new TableWidth { Width = "100", Type = TableWidthUnitValues.Pct }, // Растягиваем таблицу на всю ширину
                 new TableBorders(
                     new TopBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },
                     new LeftBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },
@@ -223,31 +235,66 @@ namespace OfficePackage.Implements
             _docBody!.AppendChild(_currentTable);
         }
 
+        // Реализация строк
         protected override void CreateRow(WordRowParameters rowParameters)
         {
             if (_currentTable == null) return;
 
             var tableRow = new TableRow();
-            foreach (var text in rowParameters.Texts)
+            int currentCellIndex = 0;
+
+            // Пройдем по всем ячейкам
+            while (currentCellIndex < rowParameters.Texts.Count)
             {
+                var text = rowParameters.Texts[currentCellIndex];
+
+                // Создаем параграф для текста
                 var paragraph = new Paragraph
                 {
                     ParagraphProperties = new ParagraphProperties
                     {
-                        Indentation = new Indentation { Left = "100" },
+                        Indentation = new Indentation { Left = "100" }
                     }
                 };
 
                 paragraph.AppendChild(new Run(new Text(text)));
 
-                var tableCell = new TableCell(new Paragraph(new Run(new Text(text))));
+                // Создаем ячейку с параграфом
+                var tableCell = new TableCell(paragraph);
 
-                tableRow.AppendChild(tableCell);
+                // Ищем диапазоны объединения ячеек
+                var mergeRange = rowParameters.MergedCells.FirstOrDefault(range => currentCellIndex >= range.Item1 && currentCellIndex <= range.Item2);
+
+                if (mergeRange != null)
+                {
+                    // Если ячейка входит в диапазон для объединения
+                    int span = mergeRange.Item2 - mergeRange.Item1 + 1; // Расчитываем количество объединяемых ячеек
+
+                    // Устанавливаем GridSpan для ячейки, которая будет объединена
+                    tableCell.TableCellProperties = new TableCellProperties
+                    {
+                        GridSpan = new GridSpan() { Val = new Int32Value(span) }
+                    };
+
+                    // Добавляем только первую ячейку из диапазона
+                    tableRow.AppendChild(tableCell);
+
+                    // Пропускаем остальные ячейки в этом диапазоне
+                    currentCellIndex = mergeRange.Item2 + 1;
+                }
+                else
+                {
+                    // Если ячейка не объединяется, просто добавляем её
+                    tableRow.AppendChild(tableCell);
+                    currentCellIndex++;
+                }
             }
 
+            // Добавляем строку в таблицу
             _currentTable.AppendChild(tableRow);
         }
 
+        // Реализация разрыва страницы
         protected override void CreatePageBreak()
         {
             if (_docBody == null) return;
@@ -307,7 +354,7 @@ namespace OfficePackage.Implements
         {
             if (_docBody == null || _wordDocument == null) return;
 
-            _docBody.AppendChild(CreateSectionProperties());
+            _docBody.AppendChild(CreateSectionProperties(info.IsLandscape));
             _wordDocument.MainDocumentPart!.Document.Save();
             _wordDocument.Dispose();
         }

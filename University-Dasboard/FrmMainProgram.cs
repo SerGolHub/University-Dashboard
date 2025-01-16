@@ -164,9 +164,9 @@ namespace University_Dasboard
 			restoreButtonsBackColor();
 			moveNavigationSubPanel(btnTeachers, pnlManageDataSubMenu);
 		}
-		#endregion
+        #endregion
 
-		private void btnGradeRecord_Click(object sender, EventArgs e)
+        private void btnGradeRecord_Click(object sender, EventArgs e)
 		{
 			FormLoader.loadForm(pnlFormLoader, new FrmGradeRecords());
 			changeSubMenuVisibility(pnlGradeRecordSubMenu);
@@ -182,7 +182,23 @@ namespace University_Dasboard
 			moveNavigationPanel(btnScheduling);
 		}
 
-		private void btnSchedulingDisciplines_Click(object sender, EventArgs e)
+        private void btnTeacherConstraints_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmTeachersConstraint());
+            changeSubMenuVisibility(pnlSchedulingSubMenu);
+            restoreButtonsBackColor();
+            moveNavigationPanel(btnTeacherConstraints);
+        }
+
+        private void btnReportCheckLesson_Click(object sender, EventArgs e)
+        {
+            FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDisciplineReport());
+            changeSubMenuVisibility(pnlSchedulingSubMenu);
+            restoreButtonsBackColor();
+            moveNavigationPanel(btnReportCheckLesson);
+        }
+
+        private void btnSchedulingDisciplines_Click(object sender, EventArgs e)
 		{
 			FormLoader.loadForm(pnlFormLoader, new FrmSchedulingDiscipline());
 			restoreButtonsBackColor();

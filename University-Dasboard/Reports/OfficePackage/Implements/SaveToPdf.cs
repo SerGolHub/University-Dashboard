@@ -60,6 +60,22 @@ namespace OfficePackage.Implements
 
             // Получение первой секции документа
             _section = _document.AddSection();
+
+            // Устанавливаем ориентацию страницы в зависимости от параметра
+            SetPageOrientation(_section, info.IsLandscape); // Используем условие для ориентации
+        }
+
+        // Метод для установки ориентации страницы
+        private void SetPageOrientation(Section section, bool isLandscape)
+        {
+            if (isLandscape)
+            {
+                section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
+            }
+            else
+            {
+                section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Portrait;
+            }
         }
 
         protected override void CreateParagraph(PdfParagraph pdfParagraph)
@@ -151,6 +167,17 @@ namespace OfficePackage.Implements
             // Добавляем новую строку
             var row = _table.AddRow();
 
+            // Инициализируем MergeColumns и MergeRows, если они равны null
+            if (rowParameters.MergeColumns1 == null) rowParameters.MergeColumns1 = new List<int>();
+
+            // Инициализируем MergeColumns и MergeRows, если они равны null
+            if (rowParameters.MergeColumns2 == null) rowParameters.MergeColumns2 = new List<int>();
+
+            if (rowParameters.MergeRows == null) rowParameters.MergeRows = new List<int>();
+
+            // Индикатор текущей ячейки для объединения
+            int mergeStartIndex = -1;
+
             for (int i = 0; i < rowParameters.Texts.Count; ++i)
             {
                 var cell = row.Cells[i];
@@ -203,6 +230,65 @@ namespace OfficePackage.Implements
                 // Устанавливаем выравнивание текста в ячейке
                 cell.Format.Alignment = GetParagraphAlignment(rowParameters.ParagraphAlignment);
                 cell.VerticalAlignment = VerticalAlignment.Center;
+
+                // Если текущий индекс находится в списке MergeColumns
+                if (rowParameters.MergeColumns1.Contains(i))
+                {
+                    // Если это первая ячейка для объединения, запоминаем её индекс
+                    if (mergeStartIndex == -1)
+                    {
+                        mergeStartIndex = i;
+                    }
+
+                    // Если следующая ячейка также в списке MergeColumns, продолжаем объединение
+                    if (i < rowParameters.Texts.Count - 1 && rowParameters.MergeColumns1.Contains(i + 1))
+                    {
+                        // Объединяем с правой ячейкой
+                        cell.MergeRight = 1;
+                    }
+                    else
+                    {
+                        // Если следующая ячейка не в списке MergeColumns, завершили объединение
+                        if (mergeStartIndex != -1 && i > mergeStartIndex)
+                        {
+                            // Объединяем все ячейки от mergeStartIndex до текущей ячейки
+                            row.Cells[mergeStartIndex].MergeRight = i - mergeStartIndex;
+                            mergeStartIndex = -1; // Сбрасываем индекс начала объединения
+                        }
+                    }
+                }
+
+                // Если текущий индекс находится в списке MergeColumns
+                if (rowParameters.MergeColumns2.Contains(i))
+                {
+                    // Если это первая ячейка для объединения, запоминаем её индекс
+                    if (mergeStartIndex == -1)
+                    {
+                        mergeStartIndex = i;
+                    }
+
+                    // Если следующая ячейка также в списке MergeColumns, продолжаем объединение
+                    if (i < rowParameters.Texts.Count - 1 && rowParameters.MergeColumns2.Contains(i + 1))
+                    {
+                        // Объединяем с правой ячейкой
+                        cell.MergeRight = 1;
+                    }
+                    else
+                    {
+                        // Если следующая ячейка не в списке MergeColumns, завершили объединение
+                        if (mergeStartIndex != -1 && i > mergeStartIndex)
+                        {
+                            // Объединяем все ячейки от mergeStartIndex до текущей ячейки
+                            row.Cells[mergeStartIndex].MergeRight = i - mergeStartIndex;
+                            mergeStartIndex = -1; // Сбрасываем индекс начала объединения
+                        }
+                    }
+                }
+
+                if (rowParameters.MergeRows.Count > i)
+                {
+                    cell.MergeDown = rowParameters.MergeRows[i];
+                }
             }
         }
 
@@ -225,6 +311,7 @@ namespace OfficePackage.Implements
             }
         }
 
+        
         protected override void SavePdf(PdfInfo info)
         {
             var renderer = new PdfDocumentRenderer(true)

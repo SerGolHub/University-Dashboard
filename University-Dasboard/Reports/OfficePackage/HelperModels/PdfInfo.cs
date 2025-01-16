@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University_Dasboard.Reports.Models;
 
 namespace OfficePackage.HelperModels
 {
@@ -11,6 +12,8 @@ namespace OfficePackage.HelperModels
         public string FileName { get; set; } = string.Empty;
 
         public string Title { get; set; } = string.Empty;
+
+        public bool IsLandscape { get; set; }
 
         public DateTime DateReport { get; set; }
 
@@ -29,5 +32,15 @@ namespace OfficePackage.HelperModels
         public string SemesterName { get; set; } = string.Empty;
 
         public string TeacherName { get; set; } = string.Empty;
+
+        public string ClassroomNumber { get; set; } = string.Empty;
+
+        public string EmptyColumn { get; set; } = string.Empty;
+
+        public string GroupNameMerge { get; set; } = string.Empty;
+
+        public string Note { get; set; } = string.Empty;
+
+        public List<ReportShufflingViewModel> ReportCheckLesson { get; set; } = null!; 
     }
 }

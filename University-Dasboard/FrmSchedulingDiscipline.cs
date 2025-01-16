@@ -16,6 +16,8 @@ using University_Dasboard.Reports.Models;
 using University_Dasboard.Reports;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using DocumentFormat.OpenXml.Bibliography;
+using OfficePackage.HelperModels;
+using OfficePackage.Implements;
 
 namespace University_Dasboard
 {
@@ -62,9 +64,11 @@ namespace University_Dasboard
 		private Direction? selectedDirection;
 		private Group? selectedGroup;
 		private ScheduleWeek? selectedScheduleWeek;
+		private Teacher? selectedTeacher;
+		private Group? selectedGroupMerge;
 
 
-		private void LoadData()
+        private void LoadData()
 		{
 			using var ctx = new DatabaseContext();
 
@@ -96,7 +100,12 @@ namespace University_Dasboard
 			ComboboxHelper.LoadCombobox(
 				scheduleWeeks,
 				comboBox: comboBoxScheduleWeek);
-		}
+
+			var teachers = ctx.Teacher.ToList();
+            ComboboxHelper.LoadCombobox(
+             teachers,
+             comboBox: comboBoxTeacher);
+        }
 
 		private void ClearTempLists()
 		{
@@ -264,6 +273,16 @@ namespace University_Dasboard
                 {
                     comboBoxDirection.Text = "Группы не найдены";
                 }
+
+                // Загружаем MergeGroup через выбранное направление
+                var mergeGroupsLoaded = ComboboxHelper.LoadDirectionGroups(
+                    comboBoxGroupMerge,
+                    selectedDirection.Id);
+
+                if (!mergeGroupsLoaded)
+                {
+                    comboBoxGroupMerge.Text = "Группы не найдены";
+                }
             }
         }
 
@@ -282,19 +301,169 @@ namespace University_Dasboard
             selectedScheduleWeek = (ScheduleWeek?)comboBoxScheduleWeek.SelectedItem;
         }
 
-        private void GenerateReport(object sender, EventArgs e)
-		{
-			string fileName = "";
+        private void cbTeacher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedTeacher = (Teacher?)comboBoxTeacher.SelectedItem;
+        }
 
-			using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
-			{
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					fileName = dialog.FileName.ToString();
-					MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				}
-			}
+        private void cbGroupMerge_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedGroupMerge = (Group?)comboBoxGroupMerge.SelectedItem;
+   
+        }
 
-		}
-	}
+        private void GenerateReportPdf(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbClassroomNumber.Text))
+            {
+                MessageBox.Show("Введите номер аудитории");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(tbNote.Text))
+            {
+                MessageBox.Show("Введите номер аудитории");
+                return;
+            }
+
+            if (selectedTeacher == null)
+            {
+                MessageBox.Show("Выберите преподавателя");
+                return;
+            }
+
+            // Проверка на то, что ячейка в таблице выбрана
+            if (dgvSchedules.SelectedRows.Count > 0)
+            {
+                // Получаем ID выбранного расписания
+                var selectedScheduleId = (Guid)dgvSchedules.SelectedRows[0].Cells["Id"].Value;
+
+                // Загружаем расписание по ID
+                var selectedSchedule = ScheduleDesciplineController.LoadScheduleById(selectedScheduleId);
+
+                if (selectedSchedule != null)
+                {
+                    // Создание данных для отчета с использованием информации о выбранном расписании
+                    var pdfInfo = new PdfInfo
+                    {
+                        FacultyName = selectedSchedule.FacultyName,
+                        DirectionName = selectedSchedule.DirectionName,
+                        GroupName = selectedSchedule.GroupName,
+                        SubjectName = selectedSchedule.SubjectName,
+						ClassroomNumber = tbClassroomNumber.Text,
+						DateCreate = DateTime.Now,
+						GroupNameMerge = selectedGroupMerge!.Name,
+                        SemesterName = "1 семестр",
+                        TeacherName = selectedTeacher.Name,
+						Note = tbNote.Text,
+                        FileName = GetPdfFileName()
+                    };
+
+                    // Создание и генерация отчета
+                    var reportGenerator = new SaveToPdf();
+                    reportGenerator.CreateDoc(pdfInfo);
+                    MessageBox.Show("Отчет создан успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Расписание не найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите расписание в таблице", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Метод для получения имени файла через диалоговое окно
+        private string GetPdfFileName()
+        {
+            using (var dialog = new SaveFileDialog { Filter = "PDF|*.pdf" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.FileName;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private void GenerateReportWord(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbClassroomNumber.Text))
+            {
+                MessageBox.Show("Введите номер аудитории");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(tbNote.Text))
+            {
+                MessageBox.Show("Введите примечание");
+                return;
+            }
+
+            if (selectedTeacher == null)
+            {
+                MessageBox.Show("Выберите преподавателя");
+                return;
+            }
+
+            // Проверка на то, что ячейка в таблице выбрана
+            if (dgvSchedules.SelectedRows.Count > 0)
+            {
+                // Получаем ID выбранного расписания
+                var selectedScheduleId = (Guid)dgvSchedules.SelectedRows[0].Cells["Id"].Value;
+
+                // Загружаем расписание по ID
+                var selectedSchedule = ScheduleDesciplineController.LoadScheduleById(selectedScheduleId);
+
+                if (selectedSchedule != null)
+                {
+                    // Создание данных для отчета с использованием информации о выбранном расписании
+                    var wordInfo = new WordInfo
+                    {
+                        FacultyName = selectedSchedule.FacultyName,
+                        DirectionName = selectedSchedule.DirectionName,
+                        GroupName = selectedSchedule.GroupName,
+                        SubjectName = selectedSchedule.SubjectName,
+                        ClassroomNumber = tbClassroomNumber.Text,
+                        DateCreate = DateTime.Now,
+                        GroupNameMerge = selectedGroupMerge!.Name,
+                        SemesterName = "1 семестр",
+                        TeacherName = selectedTeacher.Name,
+                        Note = tbNote.Text,
+                        FileName = GetWordFileName()
+                    };
+
+                    // Создание и генерация отчета
+                    var reportGenerator = new SaveToWord();
+                    reportGenerator.CreateDoc(wordInfo);
+                    MessageBox.Show("Отчет создан успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Расписание не найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите расписание в таблице", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Метод для получения имени файла через диалоговое окно
+        private string GetWordFileName()
+        {
+            using (var dialog = new SaveFileDialog { Filter = "Word Document|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.FileName;
+                }
+            }
+
+            return string.Empty;
+        }
+    }
 }

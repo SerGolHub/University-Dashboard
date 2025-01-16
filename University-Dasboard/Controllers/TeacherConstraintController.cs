@@ -2,61 +2,72 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using University_Dasboard.Database.Models;
-using static University_Dasboard.FrmTeachers;
+using static University_Dasboard.FrmTeachersConstraint;
 
 namespace University_Dasboard.Controllers
 {
     public static class TeacherConstraintController
     {
-        public static async Task<List<TeacherConstraintViewModel>> GetConstraintsByTeacherIdAsync(Guid teacherId)
+        public static void LoadTeacherConstraints(DataGridView dgv, ref BindingList<TeacherConstraintViewModel> bindingList)
         {
             using var ctx = new DatabaseContext();
-            return await ctx.TeacherConstraints
-                .Where(c => c.TeacherId == teacherId)
-                .Select(c => new TeacherConstraintViewModel
-                {
-                    Id = c.Id,
-                    DayOfWeek = c.DayOfWeek,
-                    StartTime = c.StartTime,
-                    EndTime = c.EndTime,
-                    Note = c.Note
-                })
-                .ToListAsync();
+            try
+            {
+                var teacherConstraints = ctx.TeacherConstraints.Include(c => c.Teacher)
+                    .Select(c => new TeacherConstraintViewModel
+                    {
+                        Id = c.Id,
+                        TeacherId = c.TeacherId,
+                        TeacherName = c.Teacher.Name,
+                        DayOfWeek = c.DayOfWeek,
+                        StartTime = c.StartTime,
+                        EndTime = c.EndTime,
+                        Note = c.Note
+                    }).ToList();
+
+                bindingList = new BindingList<TeacherConstraintViewModel>(teacherConstraints);
+                dgv.DataSource = bindingList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading teacher constraints: {ex.Message}");
+            }
         }
 
-        public static async Task AddConstraintsAsync(List<TeacherConstraintViewModel> newConstraints, Guid teacherId)
+        public static async Task SaveTeacherConstraintsAsync(List<TeacherConstraintViewModel> newTeacherConstraintList,
+            List<TeacherConstraintViewModel> updatedTeacherConstraintList, List<TeacherConstraintViewModel> removedTeacherConstraintList)
         {
             using var ctx = new DatabaseContext();
-            var constraints = newConstraints.Select(c => new TeacherConstraint
+            try
             {
-                Id = Guid.NewGuid(),
-                TeacherId = teacherId,
-                DayOfWeek = c.DayOfWeek,
-                StartTime = c.StartTime,
-                EndTime = c.EndTime,
-                Note = c.Note
-            }).ToList();
+                if (newTeacherConstraintList.Any())
+                    await AddNewTeacherConstraintsAsync(ctx, newTeacherConstraintList);
 
-            await ctx.TeacherConstraints.AddRangeAsync(constraints);
-            await ctx.SaveChangesAsync();
+                if (updatedTeacherConstraintList.Any())
+                    await UpdateExistingTeacherConstraintsAsync(ctx, updatedTeacherConstraintList);
+
+                if (removedTeacherConstraintList.Any())
+                    await RemoveTeacherConstraintsAsync(ctx, removedTeacherConstraintList);
+
+                await ctx.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving teacher constraints: {ex.Message}");
+                throw;
+            }
         }
 
-        public static async Task UpdateConstraintsAsync(List<TeacherConstraintViewModel> updatedConstraints, Guid teacherId)
+        private static async Task AddNewTeacherConstraintsAsync(DatabaseContext ctx, List<TeacherConstraintViewModel> newTeacherConstraintList)
         {
-            using var ctx = new DatabaseContext();
-            var existingConstraints = await ctx.TeacherConstraints
-                .Where(c => c.TeacherId == teacherId)
-                .ToListAsync();
-
-            ctx.TeacherConstraints.RemoveRange(existingConstraints);
-
-            var newConstraints = updatedConstraints.Select(c => new TeacherConstraint
+            var newConstraints = newTeacherConstraintList.Select(c => new TeacherConstraint
             {
                 Id = Guid.NewGuid(),
-                TeacherId = teacherId,
+                TeacherId = c.TeacherId,
                 DayOfWeek = c.DayOfWeek,
                 StartTime = c.StartTime,
                 EndTime = c.EndTime,
@@ -64,18 +75,33 @@ namespace University_Dasboard.Controllers
             }).ToList();
 
             await ctx.TeacherConstraints.AddRangeAsync(newConstraints);
-            await ctx.SaveChangesAsync();
         }
 
-        public static async Task RemoveConstraintsByTeacherIdAsync(Guid teacherId)
+        private static async Task UpdateExistingTeacherConstraintsAsync(DatabaseContext ctx, List<TeacherConstraintViewModel> updatedTeacherConstraintList)
         {
-            using var ctx = new DatabaseContext();
-            var constraintsToRemove = await ctx.TeacherConstraints
-                .Where(c => c.TeacherId == teacherId)
+            var constraintIds = updatedTeacherConstraintList.Select(c => c.Id).ToList();
+            var existingConstraints = await ctx.TeacherConstraints
+                .Where(c => constraintIds.Contains(c.Id))
                 .ToListAsync();
 
+            foreach (var existingConstraint in existingConstraints)
+            {
+                var updatedConstraint = updatedTeacherConstraintList.First(c => c.Id == existingConstraint.Id);
+                existingConstraint.TeacherId = updatedConstraint.TeacherId;
+                existingConstraint.DayOfWeek = updatedConstraint.DayOfWeek;
+                existingConstraint.StartTime = updatedConstraint.StartTime;
+                existingConstraint.EndTime = updatedConstraint.EndTime;
+                existingConstraint.Note = updatedConstraint.Note;
+            }
+        }
+
+        private static async Task RemoveTeacherConstraintsAsync(DatabaseContext ctx, List<TeacherConstraintViewModel> removedTeacherConstraintList)
+        {
+            var constraintIds = removedTeacherConstraintList.Select(c => c.Id).ToList();
+            var constraintsToRemove = await ctx.TeacherConstraints
+                .Where(c => constraintIds.Contains(c.Id)).ToListAsync();
+
             ctx.TeacherConstraints.RemoveRange(constraintsToRemove);
-            await ctx.SaveChangesAsync();
         }
     }
 }
