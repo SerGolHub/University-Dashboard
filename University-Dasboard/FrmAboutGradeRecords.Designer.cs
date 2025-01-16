@@ -37,7 +37,7 @@
 			chbGroup = new CheckBox();
 			chbCourse = new CheckBox();
 			chbStudent = new CheckBox();
-			button1 = new Button();
+			btnExportToExcel = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvReportList).BeginInit();
 			SuspendLayout();
 			// 
@@ -167,20 +167,20 @@
 			chbStudent.UseVisualStyleBackColor = true;
 			chbStudent.CheckedChanged += chbStudent_CheckedChanged;
 			// 
-			// button1
+			// btnExportToExcel
 			// 
-			button1.BackColor = Color.FromArgb(0, 126, 249);
-			button1.FlatAppearance.BorderSize = 0;
-			button1.FlatStyle = FlatStyle.Flat;
-			button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			button1.ForeColor = Color.FromArgb(24, 30, 54);
-			button1.Location = new Point(570, 124);
-			button1.Name = "button1";
-			button1.Size = new Size(127, 66);
-			button1.TabIndex = 42;
-			button1.Text = "Экспорт в Excel";
-			button1.UseVisualStyleBackColor = false;
-			button1.Click += btnGenerate_Click;
+			btnExportToExcel.BackColor = Color.FromArgb(0, 126, 249);
+			btnExportToExcel.FlatAppearance.BorderSize = 0;
+			btnExportToExcel.FlatStyle = FlatStyle.Flat;
+			btnExportToExcel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			btnExportToExcel.ForeColor = Color.FromArgb(24, 30, 54);
+			btnExportToExcel.Location = new Point(570, 124);
+			btnExportToExcel.Name = "btnExportToExcel";
+			btnExportToExcel.Size = new Size(127, 66);
+			btnExportToExcel.TabIndex = 42;
+			btnExportToExcel.Text = "Экспорт в Excel";
+			btnExportToExcel.UseVisualStyleBackColor = false;
+			btnExportToExcel.Click += btnExportToExcel_Click;
 			// 
 			// FrmAboutGradeRecords
 			// 
@@ -196,7 +196,7 @@
 			Controls.Add(cbCourse);
 			Controls.Add(dgvReportList);
 			Controls.Add(label9);
-			Controls.Add(button1);
+			Controls.Add(btnExportToExcel);
 			Controls.Add(btnGenerate);
 			FormBorderStyle = FormBorderStyle.None;
 			Name = "FrmAboutGradeRecords";
@@ -217,6 +217,6 @@
 		private CheckBox chbGroup;
 		private CheckBox chbCourse;
 		private CheckBox chbStudent;
-		private Button button1;
+		private Button btnExportToExcel;
 	}
 }

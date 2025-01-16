@@ -1,7 +1,10 @@
 ﻿
 using Database;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using University_Dasboard.Database.Models;
+using Group = University_Dasboard.Database.Models.Group;
 
 namespace University_Dasboard
 {
@@ -17,6 +20,66 @@ namespace University_Dasboard
 		private Group? selectedGroup;
 		private int? selectedCourse;
 		private Student? selectedStudent;
+
+		private void ExportToExcelUsingOpenXML(DataGridView dataGridView, string fileName)
+		{
+			// Создание нового файла Excel
+			using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook))
+			{
+				// Создание рабочей книги
+				WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
+				workbookPart.Workbook = new Workbook();
+
+				// Создание листа в книге
+				WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+				worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+				Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
+				Sheet sheet = new Sheet()
+				{
+					Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
+					SheetId = 1,
+					Name = "Report"
+				};
+				sheets.Append(sheet);
+
+				// Получение данных из DataGridView и запись их в Excel
+				SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+				// Добавление заголовков столбцов
+				Row headerRow = new Row();
+				foreach (DataGridViewColumn column in dataGridView.Columns)
+				{
+					headerRow.AppendChild(new Cell()
+					{
+						CellValue = new CellValue(column.HeaderText),
+						DataType = CellValues.String
+					});
+				}
+				sheetData.AppendChild(headerRow);
+
+				// Добавление строк данных
+				foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
+				{
+					if (!dataGridViewRow.IsNewRow) // Пропускаем последнюю пустую строку
+					{
+						Row row = new Row();
+						foreach (DataGridViewCell cell in dataGridViewRow.Cells)
+						{
+							row.AppendChild(new Cell()
+							{
+								CellValue = new CellValue(cell.Value?.ToString()),
+								DataType = CellValues.String
+							});
+						}
+						sheetData.AppendChild(row);
+					}
+				}
+
+				// Сохранение документа
+				workbookPart.Workbook.Save();
+			}
+		}
 
 		private void InitializeDataGridView()
 		{
@@ -222,6 +285,56 @@ namespace University_Dasboard
 					dgvReportList.Rows.Add(row.ToArray());
 				}
 			}
+			else if (chbStudent.Checked)
+			{
+				if (selectedStudent == null)
+				{
+					MessageBox.Show("Выберите студента");
+					return;
+				}
+				var studentData = ctx.Student
+					.Where(st => st.Id == selectedStudent.Id)
+					.Include(st => st.Marks)
+					.Include(st => st.Group!.Direction!.Subjects)
+					.ToList()
+					.Select(st => new
+					{
+						st.Name,
+						AverageMark = st.Marks.Any() ? st.Marks.Average(m => m.Mark) : 0,
+						ThreeCount = st.Marks.Count(m => m.Mark == 3),
+						MarksBySubjectAndSemester = st.Marks
+							.GroupBy(m => new
+							{
+								m.SubjectId,
+								Semester = m.Semester.ToString()
+							})
+							.ToList()
+					})
+					.FirstOrDefault();
+
+				if (studentData != null)
+				{
+					var row = new List<object>
+					{
+						studentData.Name,
+						studentData.AverageMark,
+						studentData.ThreeCount
+					};
+
+					foreach (var subject in selectedStudent.Group!.Direction!.Subjects)
+					{
+						foreach (var semester in subject.Semester.Split(' ').Select(int.Parse).OrderBy(sem => sem).Distinct())
+						{
+							var markForSubjectSemester = studentData.MarksBySubjectAndSemester
+								.FirstOrDefault(group => group.Key.SubjectId == subject.Id && group.Key.Semester == semester.ToString());
+
+							row.Add(markForSubjectSemester?.Average(m => m.Mark));
+						}
+					}
+
+					dgvReportList.Rows.Add(row.ToArray());
+				}
+			}
 			else
 			{
 				MessageBox.Show("Выберите один из пунктов");
@@ -286,14 +399,6 @@ namespace University_Dasboard
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedCourse = (int?)cbCourse.SelectedItem;
-			//if (selectedCourse == null)
-			//{
-			//	return;
-			//}
-			//using var ctx = new DatabaseContext();
-			//selectedCourse = ctx.Direction.
-			//			   .Include(g => g.Direction!.Subjects)
-			//			   .FirstOrDefault(g => g.Id == selectedGroup.Id);
 		}
 
 		private void cbStudent_SelectedIndexChanged(object sender, EventArgs e)
@@ -312,6 +417,18 @@ namespace University_Dasboard
 		private void dgvStudentList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
 		{
 			Drawer.DrawNumbers(sender, e);
+		}
+
+		private void btnExportToExcel_Click(object sender, EventArgs e)
+		{
+			btnGenerate_Click(sender, e);
+			string filePath = @"..\..\..\..\";
+			string fileName = "!Report.xlsx";
+			string fullFilePath = filePath + fileName;
+			// Экспортируем данные в Excel
+			ExportToExcelUsingOpenXML(dgvReportList, fullFilePath);
+			MessageBox.Show($"Файл {fileName} сохранен!");
+
 		}
 	}
 }
