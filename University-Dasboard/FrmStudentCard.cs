@@ -95,7 +95,17 @@ namespace University_Dasboard
 			TableRow headerRow = new TableRow();
 			foreach (DataGridViewColumn column in dataGridView.Columns)
 			{
-				TableCell headerCell = new TableCell(new Paragraph(new Run(new Text(column.HeaderText))));
+				TableCell headerCell = new TableCell(new Paragraph(new Run(new Text(column.HeaderText))))
+				{
+					// Добавление выравнивания по центру для ячейки заголовка
+					TableCellProperties = new TableCellProperties(
+						new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Center }
+					)
+				};
+
+				// Добавление выравнивания по центру для текста в ячейке заголовка
+				headerCell.AppendChild(new ParagraphProperties(new Justification() { Val = JustificationValues.Center }));
+
 				headerCell.AppendChild(new TableCellProperties(
 					new TableCellBorders(
 						new TopBorder { Val = BorderValues.Single, Size = 4, Space = 0 },
@@ -116,7 +126,17 @@ namespace University_Dasboard
 				TableRow tableRow = new TableRow();
 				foreach (DataGridViewCell cell in row.Cells)
 				{
-					TableCell tableCell = new TableCell(new Paragraph(new Run(new Text(cell.Value?.ToString() ?? ""))));
+					TableCell tableCell = new TableCell(new Paragraph(new Run(new Text(cell.Value?.ToString() ?? ""))))
+					{
+						// Добавление выравнивания по центру для ячейки данных
+						TableCellProperties = new TableCellProperties(
+							new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Center }
+						)
+					};
+
+					// Добавление выравнивания по центру для текста в ячейке данных
+					tableCell.AppendChild(new ParagraphProperties(new Justification() { Val = JustificationValues.Center }));
+
 					tableCell.AppendChild(new TableCellProperties(
 						new TableCellBorders(
 							new TopBorder { Val = BorderValues.Single, Size = 4, Space = 0 },
