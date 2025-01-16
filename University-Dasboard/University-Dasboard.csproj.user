@@ -10,9 +10,6 @@
     <Compile Update="FrmDirections.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmExport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FrmStudentCard.cs">
       <SubType>Form</SubType>
     </Compile>
