@@ -33,6 +33,7 @@
 			dgvStudentInfo = new DataGridView();
 			label9 = new Label();
 			btnGenerate = new Button();
+			btnExportToWord = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvStudentInfo).BeginInit();
 			SuspendLayout();
 			// 
@@ -101,12 +102,28 @@
 			btnGenerate.UseVisualStyleBackColor = false;
 			btnGenerate.Click += btnGenerate_Click;
 			// 
+			// btnExportToWord
+			// 
+			btnExportToWord.BackColor = Color.FromArgb(0, 126, 249);
+			btnExportToWord.FlatAppearance.BorderSize = 0;
+			btnExportToWord.FlatStyle = FlatStyle.Flat;
+			btnExportToWord.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			btnExportToWord.ForeColor = Color.FromArgb(24, 30, 54);
+			btnExportToWord.Location = new Point(857, 6);
+			btnExportToWord.Name = "btnExportToWord";
+			btnExportToWord.Size = new Size(127, 48);
+			btnExportToWord.TabIndex = 47;
+			btnExportToWord.Text = "Экспорт в Word";
+			btnExportToWord.UseVisualStyleBackColor = false;
+			btnExportToWord.Click += btnExportToWord_Click;
+			// 
 			// FrmStudentCard
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
 			ClientSize = new Size(996, 653);
+			Controls.Add(btnExportToWord);
 			Controls.Add(btnGenerate);
 			Controls.Add(dgvStudentInfo);
 			Controls.Add(label9);
@@ -127,5 +144,6 @@
 		private DataGridView dgvStudentInfo;
 		private Label label9;
 		private Button btnGenerate;
+		private Button btnExportToWord;
 	}
 }

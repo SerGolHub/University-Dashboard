@@ -85,7 +85,6 @@ namespace University_Dasboard
 			btnReports.BackColor = color;
 			btnAboutGradeRecords.BackColor = color;
 			btnStudentCard.BackColor = color;
-			btnExport.BackColor = color;
 		}
 
 		private void hideSubMenu()
@@ -224,13 +223,6 @@ namespace University_Dasboard
 			FormLoader.loadForm(pnlFormLoader, new FrmStudentCard());
 			restoreButtonsBackColor();
 			moveNavigationSubPanel(btnStudentCard, pnlReportsSubMenu);
-		}
-
-		private void btnExport_Click(object sender, EventArgs e)
-		{
-			FormLoader.loadForm(pnlFormLoader, new FrmExport());
-			restoreButtonsBackColor();
-			moveNavigationSubPanel(btnExport, pnlReportsSubMenu);
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)
