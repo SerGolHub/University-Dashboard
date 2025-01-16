@@ -35,7 +35,6 @@ namespace University_Dasboard
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
-		private int? selectedCourse;
 		private Group? selectedGroup;
 		private bool? isExcelent;
 
@@ -92,12 +91,6 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (selectedCourse == null)
-			{
-				MessageBox.Show("Выберите курс");
-				return;
-			}
-
 			if (tbEnrollmentNumber == null)
 			{
 				MessageBox.Show("Введите номер зачисления");
@@ -116,7 +109,7 @@ namespace University_Dasboard
 				EnrollmentDate = dateTimePicker1.Value.Date.ToUniversalTime(),
 				EnrollmentNumber = tbEnrollmentNumber.Text,
 				IsExcellentStudent = (bool)isExcelent,
-				CourseNumber = (int)selectedCourse,
+				CourseNumber = selectedGroup.CourseNumber,
 				GroupId = selectedGroup.Id,
 				GroupName = selectedGroup.Name
 			};
@@ -231,12 +224,6 @@ namespace University_Dasboard
 					{
 						coursesList.Add(i);
 					}
-				}
-				else
-				{
-					ComboboxHelper.ClearComboboxes(cbGroup);
-					selectedGroup = null;
-					selectedCourse = null;
 				}
 			}
 		}
