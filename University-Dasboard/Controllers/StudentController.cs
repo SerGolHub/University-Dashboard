@@ -25,7 +25,6 @@ namespace University_Dasboard.Controllers
                 EnrollmentDate = s.EnrollmentDate,
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
-                CourseNumber = s.CourseNumber,
                 GroupId = s.GroupId,
                 GroupName = s.Group!.Name
             })
@@ -64,7 +63,6 @@ namespace University_Dasboard.Controllers
                 EnrollmentDate = s.EnrollmentDate,
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
-                CourseNumber = s.CourseNumber,
                 GroupId = s.GroupId
             }).ToList();
 

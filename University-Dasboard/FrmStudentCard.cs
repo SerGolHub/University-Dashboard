@@ -214,7 +214,7 @@ namespace University_Dasboard
 			CreateWordDocument(
 				fullFilePath,
 				selectedStudent.Name,
-				selectedStudent.CourseNumber.ToString(),
+				selectedStudent.Group!.CourseNumber.ToString(),
 				selectedStudent.Group!.Name,
 				selectedStudent.Group.Direction!.Code,
 				selectedStudent.Group.Direction!.Name,

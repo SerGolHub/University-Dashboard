@@ -231,14 +231,10 @@ namespace University_Dasboard
 					{
 						coursesList.Add(i);
 					}
-					cbCourse.DataSource = coursesList;
-					cbCourse.Update();
 				}
 				else
 				{
-					ComboboxHelper.ClearComboboxes(
-					cbGroup,
-					cbCourse);
+					ComboboxHelper.ClearComboboxes(cbGroup);
 					selectedGroup = null;
 					selectedCourse = null;
 				}
@@ -248,11 +244,6 @@ namespace University_Dasboard
 		private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedGroup = (Group?)cbGroup.SelectedItem;
-		}
-
-		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			selectedCourse = (int?)cbCourse.SelectedItem;
 		}
 
 		private void cbExcellentStudent_SelectedIndexChanged(object sender, EventArgs e)
