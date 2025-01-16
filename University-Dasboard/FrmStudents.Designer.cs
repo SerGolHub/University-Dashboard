@@ -31,14 +31,12 @@
 			btnAdd = new Button();
 			tbFullName = new TextBox();
 			label2 = new Label();
-			label1 = new Label();
 			label3 = new Label();
 			label4 = new Label();
 			label5 = new Label();
 			label6 = new Label();
 			label7 = new Label();
 			label8 = new Label();
-			cbCourse = new ComboBox();
 			cbGroup = new ComboBox();
 			cbFaculty = new ComboBox();
 			cbDepartment = new ComboBox();
@@ -63,7 +61,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(418, 160);
+			btnAdd.Location = new Point(239, 200);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(116, 49);
 			btnAdd.TabIndex = 21;
@@ -92,17 +90,6 @@
 			label2.Size = new Size(55, 20);
 			label2.TabIndex = 19;
 			label2.Text = "ФИО:";
-			// 
-			// label1
-			// 
-			label1.AutoSize = true;
-			label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label1.ForeColor = Color.FromArgb(158, 161, 178);
-			label1.Location = new Point(12, 189);
-			label1.Name = "label1";
-			label1.Size = new Size(52, 20);
-			label1.TabIndex = 19;
-			label1.Text = "Курс:";
 			// 
 			// label3
 			// 
@@ -169,21 +156,6 @@
 			label8.Size = new Size(97, 20);
 			label8.TabIndex = 19;
 			label8.Text = "Отличник:";
-			// 
-			// cbCourse
-			// 
-			cbCourse.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			cbCourse.AutoCompleteSource = AutoCompleteSource.ListItems;
-			cbCourse.BackColor = Color.FromArgb(158, 161, 178);
-			cbCourse.FlatStyle = FlatStyle.Flat;
-			cbCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-			cbCourse.ForeColor = Color.FromArgb(24, 30, 54);
-			cbCourse.FormattingEnabled = true;
-			cbCourse.Location = new Point(285, 183);
-			cbCourse.Name = "cbCourse";
-			cbCourse.Size = new Size(70, 26);
-			cbCourse.TabIndex = 22;
-			cbCourse.SelectedIndexChanged += cbCourse_SelectedIndexChanged;
 			// 
 			// cbGroup
 			// 
@@ -395,7 +367,6 @@
 			Controls.Add(cbFaculty);
 			Controls.Add(cbGroup);
 			Controls.Add(cbExcellentStudent);
-			Controls.Add(cbCourse);
 			Controls.Add(btnAdd);
 			Controls.Add(tbEnrollmentNumber);
 			Controls.Add(tbFullName);
@@ -403,7 +374,6 @@
 			Controls.Add(label5);
 			Controls.Add(label4);
 			Controls.Add(label3);
-			Controls.Add(label1);
 			Controls.Add(label8);
 			Controls.Add(label7);
 			Controls.Add(label6);
@@ -421,14 +391,12 @@
 		private Button btnAdd;
         private TextBox tbFullName;
         private Label label2;
-        private Label label1;
         private Label label3;
         private Label label4;
         private Label label5;
         private Label label6;
         private Label label7;
         private Label label8;
-        private ComboBox cbCourse;
         private ComboBox cbGroup;
         private ComboBox cbFaculty;
         private ComboBox cbDepartment;

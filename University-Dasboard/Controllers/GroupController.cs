@@ -21,6 +21,7 @@ namespace University_Dasboard.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
+                CourseNumber = g.CourseNumber,
                 DirectionId = g.DirectionId,
                 DirectionName = g.Direction!.Name,
             })
@@ -56,7 +57,8 @@ namespace University_Dasboard.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
-                DirectionId = g.DirectionId,
+				CourseNumber = g.CourseNumber,
+				DirectionId = g.DirectionId,
             }).ToList();
 
             await ctx.Group.AddRangeAsync(newGroups);
@@ -80,6 +82,7 @@ namespace University_Dasboard.Controllers
                 var updatedGroup = updatedGroups.First(g => g.Id == existingGroup.Id);
                 existingGroup.Name = updatedGroup.Name;
                 existingGroup.DirectionId = updatedGroup.DirectionId;
+                existingGroup.CourseNumber = updatedGroup.CourseNumber;
             }
         }
 

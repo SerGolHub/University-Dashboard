@@ -43,6 +43,8 @@
 			label5 = new Label();
 			label4 = new Label();
 			label2 = new Label();
+			cbCourse = new ComboBox();
+			label1 = new Label();
 			((System.ComponentModel.ISupportInitialize)dgvGroupList).BeginInit();
 			SuspendLayout();
 			// 
@@ -175,7 +177,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(12, 151);
+			btnAdd.Location = new Point(12, 195);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(120, 44);
 			btnAdd.TabIndex = 41;
@@ -238,12 +240,40 @@
 			label2.TabIndex = 29;
 			label2.Text = "Название группы:";
 			// 
+			// cbCourse
+			// 
+			cbCourse.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cbCourse.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cbCourse.BackColor = Color.FromArgb(158, 161, 178);
+			cbCourse.FlatStyle = FlatStyle.Flat;
+			cbCourse.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+			cbCourse.ForeColor = Color.FromArgb(24, 30, 54);
+			cbCourse.FormattingEnabled = true;
+			cbCourse.Location = new Point(409, 131);
+			cbCourse.Name = "cbCourse";
+			cbCourse.Size = new Size(70, 26);
+			cbCourse.TabIndex = 55;
+			cbCourse.SelectedIndexChanged += cbCourse_SelectedIndexChanged;
+			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label1.ForeColor = Color.FromArgb(158, 161, 178);
+			label1.Location = new Point(12, 137);
+			label1.Name = "label1";
+			label1.Size = new Size(52, 20);
+			label1.TabIndex = 54;
+			label1.Text = "Курс:";
+			// 
 			// FrmGroups
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(46, 51, 73);
 			ClientSize = new Size(980, 653);
+			Controls.Add(cbCourse);
+			Controls.Add(label1);
 			Controls.Add(dgvGroupList);
 			Controls.Add(btnDelete);
 			Controls.Add(btnReset);
@@ -284,5 +314,7 @@
         private Label label5;
         private Label label4;
         private Label label2;
+		private ComboBox cbCourse;
+		private Label label1;
 	}
 }

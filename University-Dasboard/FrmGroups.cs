@@ -17,6 +17,7 @@ namespace University_Dasboard
 		{
 			public Guid Id { get; set; }
 			public string Name { get; set; } = string.Empty;
+			public int CourseNumber { get; set; }
 
 			public Guid DirectionId { get; set; }
 			public string DirectionName { get; set; } = string.Empty;
@@ -29,6 +30,7 @@ namespace University_Dasboard
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
+		private int? selectedCourseNumber;
 
 		private void LoadData()
 		{
@@ -71,10 +73,16 @@ namespace University_Dasboard
 				MessageBox.Show("Выберите направление");
 				return;
 			}
+			if (selectedCourseNumber == null)
+			{
+				MessageBox.Show("Выберите направление");
+				return;
+			}
 			var newGroup = new GroupViewModel()
 			{
 				Id = Guid.NewGuid(),
 				Name = tbGroupName.Text,
+				CourseNumber = (int)selectedCourseNumber,
 				DirectionId = selectedDirection.Id,
 				DirectionName = selectedDirection.Name,
 			};
@@ -168,6 +176,26 @@ namespace University_Dasboard
 		private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedDirection = (Direction?)cbDirection.SelectedItem;
+			if (selectedDirection != null)
+			{
+				using var ctx = new DatabaseContext();
+				var maxCourse = ctx.Direction
+					.Where(dir => dir.Id == selectedDirection.Id)
+					.Select(dir => dir.MaxCourse)
+					.First();
+				List<int> coursesList = [];
+				for (int i = 1; i <= maxCourse; i++)
+				{
+					coursesList.Add(i);
+				}
+				cbCourse.DataSource = coursesList;
+				cbCourse.Update();
+			}
+		}
+
+		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			selectedCourseNumber = (int?)cbCourse.SelectedItem;
 		}
 	}
 }
