@@ -48,11 +48,11 @@
 			btnGradeRecord = new Button();
 			pnlManageDataSubMenu = new Panel();
 			button1 = new Button();
-			btnTeachers = new Button();
 			btnStudents = new Button();
 			btnGroups = new Button();
 			btnSubjects = new Button();
 			btnDirections = new Button();
+			btnTeachers = new Button();
 			btnDepartments = new Button();
 			btnFaculties = new Button();
 			btnManageData = new Button();
@@ -366,10 +366,10 @@
 			// pnlManageDataSubMenu
 			// 
 			pnlManageDataSubMenu.Controls.Add(button1);
-			pnlManageDataSubMenu.Controls.Add(btnTeachers);
 			pnlManageDataSubMenu.Controls.Add(btnStudents);
 			pnlManageDataSubMenu.Controls.Add(btnGroups);
 			pnlManageDataSubMenu.Controls.Add(btnSubjects);
+			pnlManageDataSubMenu.Controls.Add(btnTeachers);
 			pnlManageDataSubMenu.Controls.Add(btnDirections);
 			pnlManageDataSubMenu.Controls.Add(btnDepartments);
 			pnlManageDataSubMenu.Controls.Add(btnFaculties);
