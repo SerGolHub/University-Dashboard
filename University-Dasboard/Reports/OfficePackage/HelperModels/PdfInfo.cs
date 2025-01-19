@@ -39,6 +39,12 @@ namespace OfficePackage.HelperModels
 
         public string GroupNameMerge { get; set; } = string.Empty;
 
+        public int LectureHours { get; set; }
+
+        public int PracticalHours { get; set; }
+
+        public int LaboratoryHours { get; set; }
+
         public string Note { get; set; } = string.Empty;
 
         public List<ReportShufflingViewModel> ReportCheckLesson { get; set; } = null!; 
