@@ -51,7 +51,7 @@ namespace University_Dasboard.Controllers
             {
                 // Загружаем расписание по ID с его связанными данными
                 var schedule = ctx.ScheduleDisciplines.Include(s => s.Subject)
-                    .Include(s => s.Group).ThenInclude(s => s.Direction).ThenInclude(s => s.Faculty)
+                    .Include(s => s.Group).ThenInclude(s => s!.Direction).ThenInclude(s => s!.Faculty)
                     .Include(s => s.ScheduleWeek).Where(s => s.Id == scheduleId)
                     .Select(s => new ScheduleDisciplineViewModel
                     {
@@ -146,8 +146,7 @@ namespace University_Dasboard.Controllers
 
 			var removedIds = removedSchedules.Select(s => s.Id).ToList();
 			var schedulesToRemove = await ctx.ScheduleDisciplines
-				.Where(s => removedIds.Contains(s.Id))
-				.ToListAsync();
+				.Where(s => removedIds.Contains(s.Id)).ToListAsync();
 
 			ctx.ScheduleDisciplines.RemoveRange(schedulesToRemove);
 		}
