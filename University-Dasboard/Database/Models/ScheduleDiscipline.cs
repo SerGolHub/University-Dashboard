@@ -25,9 +25,5 @@ namespace University_Dasboard.Database.Models
 
 		public Guid ScheduleWeekId { get; set; }
 		public ScheduleWeek? ScheduleWeek { get; set; }
-
-        // Внешний ключ к расписанию
-        public Guid ScheduleId { get; set; }
-        public Schedule? Schedule { get; set; }
     }
 }

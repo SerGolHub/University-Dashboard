@@ -13,15 +13,7 @@ namespace University_Dasboard.Database.Configs
     {
         public void Configure(EntityTypeBuilder<Schedule> builder)
         {
-            // Установка первичного ключа
-            builder.HasKey(s => s.Id);
-
-            // Настройка связи "один-ко-многим" между Schedule и ScheduleDiscipline
-            builder
-                .HasMany(s => s.ScheduleDisciplines) // Одно расписание может включать несколько расчётовок
-                .WithOne(sd => sd.Schedule) // Каждая расчётовка ссылается на одно расписание
-                .HasForeignKey(sd => sd.ScheduleId) // Внешний ключ в ScheduleDiscipline
-                .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление
+           
 
             // Ограничения для полей времени
             builder
