@@ -156,12 +156,7 @@ namespace University_Dasboard
 
 		private void dgvDepartments_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			DataGridViewCell cell = dgvDepartments.Rows[e.RowIndex].Cells[e.ColumnIndex];
-			if (cell is DataGridViewComboBoxCell)
-			{
-				dgvDepartments.BeginEdit(false);
-				((DataGridViewComboBoxEditingControl)dgvDepartments.EditingControl).DroppedDown = true;
-			}
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvDepartments, e);
 		}
 	}
 }
