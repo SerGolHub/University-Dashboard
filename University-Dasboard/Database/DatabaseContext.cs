@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using dotenv.net;
+using Microsoft.EntityFrameworkCore;
 using University_Dasboard.Database.Configs;
 using University_Dasboard.Database.Models;
 
@@ -37,7 +38,11 @@ namespace Database
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseNpgsql($"Host=localhost;Database=uni;Username=postgres;Password=postgres");
+			DotEnv.Load();
+			optionsBuilder.UseNpgsql($"Host={Environment.GetEnvironmentVariable("HOST")};" +
+				$"Database={Environment.GetEnvironmentVariable("DATABASE")};" +
+				$"Username={Environment.GetEnvironmentVariable("USER")};" +
+				$"Password={Environment.GetEnvironmentVariable("PASSWORD")}");
 		}
 	}
 }
