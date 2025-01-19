@@ -16,7 +16,7 @@ namespace University_Dasboard
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmMainProgram());
 
-            logger.Info("Приложение запущено");
+            logger.Info("РџСЂРѕРіСЂР°РјРјР° Р·Р°РїСѓС‰РµРЅР°");
         }
     }
 }
