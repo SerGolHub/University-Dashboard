@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
+using static University_Dasboard.FrmDepartments;
 
 namespace University_Dasboard.Controllers
 {
@@ -9,11 +10,16 @@ namespace University_Dasboard.Controllers
     {
 		public static void LoadDepartments(
 			DataGridView dgv,
+<<<<<<< HEAD
 			ref BindingList<Department> bindingList)
+=======
+			ref BindingList<DepartmentViewModel> bindingList)
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 		{
 			using var ctx = new DatabaseContext();
 			var departments = ctx.Department
 			.Include(d => d.Faculty)
+<<<<<<< HEAD
 			.Select(d => new Department
 			{
 				Id = d.Id,
@@ -23,6 +29,18 @@ namespace University_Dasboard.Controllers
 			.ToList();
 
 			bindingList = new BindingList<Department>(departments);
+=======
+			.Select(d => new DepartmentViewModel
+			{
+				Id = d.Id,
+				Name = d.Name,
+				FacultyId = d.FacultyId,
+				FacultyName = d.Faculty!.Name
+			})
+			.ToList();
+
+			bindingList = new BindingList<DepartmentViewModel>(departments);
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 			var faculties = ctx.Faculty.ToList();
 			var cbColumnFaculty = dgv.Columns["FacultyName"] as DataGridViewComboBoxColumn;
 			if (cbColumnFaculty != null)
@@ -36,9 +54,15 @@ namespace University_Dasboard.Controllers
 		}
 
 		public static async Task SaveDepartmentsAsync(
+<<<<<<< HEAD
 				List<Department> newDepartmentList,
 				List<Department> updatedDepartmentList,
 				List<Department> removedDepartmentList)
+=======
+				List<DepartmentViewModel> newDepartmentList,
+				List<DepartmentViewModel> updatedDepartmentList,
+				List<DepartmentViewModel> removedDepartmentList)
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 		{
 			using var ctx = new DatabaseContext();
 
@@ -51,7 +75,11 @@ namespace University_Dasboard.Controllers
 
 		private static async Task AddNewDepartmentsAsync(
 			DatabaseContext ctx,
+<<<<<<< HEAD
 			List<Department> newDepartmentsList)
+=======
+			List<DepartmentViewModel> newDepartmentsList)
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 		{
 			if (newDepartmentsList.Count < 1)
 			{
@@ -69,7 +97,11 @@ namespace University_Dasboard.Controllers
 
 		private static async Task UpdateExistingDepartmentsAsync(
 			DatabaseContext ctx,
+<<<<<<< HEAD
 			List<Department> updatedDepartments)
+=======
+			List<DepartmentViewModel> updatedDepartments)
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 		{
 			if (updatedDepartments.Count < 1)
 			{
@@ -89,7 +121,11 @@ namespace University_Dasboard.Controllers
 		}
 
 		private static async Task RemoveDepartmentsAsync(
+<<<<<<< HEAD
 			DatabaseContext ctx, List<Department> removedDepartments)
+=======
+			DatabaseContext ctx, List<DepartmentViewModel> removedDepartments)
+>>>>>>> 0bf24bda135f7866785731ef32cc36e3839cd807
 		{
 			if (removedDepartments.Count < 1)
 			{
