@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
-using static University_Dasboard.FrmDepartments;
 
 namespace University_Dasboard.Controllers
 {
