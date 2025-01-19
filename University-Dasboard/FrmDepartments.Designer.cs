@@ -35,6 +35,10 @@
 			userBindingSource = new BindingSource(components);
 			userBindingSource1 = new BindingSource(components);
 			dgvDepartments = new DataGridView();
+			Id = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			FacultyName = new DataGridViewComboBoxColumn();
 			departmentBindingSource3 = new BindingSource(components);
 			departmentBindingSource = new BindingSource(components);
 			departmentBindingSource1 = new BindingSource(components);
@@ -47,10 +51,6 @@
 			cbFaculties = new ComboBox();
 			label4 = new Label();
 			departmentBindingSource2 = new BindingSource(components);
-			Id = new DataGridViewTextBoxColumn();
-			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			FacultyName = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).BeginInit();
@@ -106,8 +106,34 @@
 			dgvDepartments.Name = "dgvDepartments";
 			dgvDepartments.Size = new Size(862, 337);
 			dgvDepartments.TabIndex = 19;
+			dgvDepartments.CellClick += dgvDepartments_CellClick;
 			dgvDepartments.CellValueChanged += dgvDepartments_CellValueChanged;
 			dgvDepartments.RowPostPaint += dgvDepartments_RowPostPaint;
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Кафедра";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// facultyIdDataGridViewTextBoxColumn
+			// 
+			facultyIdDataGridViewTextBoxColumn.DataPropertyName = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.HeaderText = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
+			facultyIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// FacultyName
+			// 
+			FacultyName.HeaderText = "Факультет";
+			FacultyName.Name = "FacultyName";
 			// 
 			// departmentBindingSource3
 			// 
@@ -212,31 +238,6 @@
 			// departmentBindingSource2
 			// 
 			departmentBindingSource2.DataSource = typeof(Database.Models.Department);
-			// 
-			// Id
-			// 
-			Id.DataPropertyName = "Id";
-			Id.HeaderText = "Id";
-			Id.Name = "Id";
-			Id.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// facultyIdDataGridViewTextBoxColumn
-			// 
-			facultyIdDataGridViewTextBoxColumn.DataPropertyName = "FacultyId";
-			facultyIdDataGridViewTextBoxColumn.HeaderText = "FacultyId";
-			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
-			facultyIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// FacultyName
-			// 
-			FacultyName.HeaderText = "Факультет";
-			FacultyName.Name = "FacultyName";
 			// 
 			// FrmDepartments
 			// 
