@@ -8,20 +8,12 @@ namespace University_Dasboard
 {
 	public partial class FrmDepartments : Form
 	{
-		public class DepartmentViewModel
-		{
-			public Guid Id { get; set; }
-			public required string Name { get; set; }
-			public Guid FacultyId { get; set; }
-			public string FacultyName { get; set; } = string.Empty;
-		}
-
 		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-		private BindingList<DepartmentViewModel> departments = [];
-		private List<DepartmentViewModel> newDepartmentsList = [];
-		private List<DepartmentViewModel> updatedDepartmentsList = [];
-		private List<DepartmentViewModel> removedDepartmentList = [];
+		private BindingList<Department> departments = [];
+		private List<Department> newDepartmentsList = [];
+		private List<Department> updatedDepartmentsList = [];
+		private List<Department> removedDepartmentList = [];
 		private Faculty? selectedFaculty;
 
 		public FrmDepartments()
@@ -69,12 +61,11 @@ namespace University_Dasboard
 				return;
 			}
 
-			var department = new DepartmentViewModel
+			var department = new Department
 			{
 				Id = Guid.NewGuid(),
 				Name = newDepartmentName,
 				FacultyId = selectedFaculty.Id,
-				FacultyName = selectedFaculty.Name
 			};
 			departments.Add(department);
 			newDepartmentsList.Add(department);
@@ -102,7 +93,7 @@ namespace University_Dasboard
 			logger.Info("Сохранение кафедры прошло успешно");
 		}
 
-		private DepartmentViewModel GetDepartment(Guid id)
+		private Department GetDepartment(Guid id)
 		{
 			return departments.First(d => d.Id == id);
 		}
@@ -117,7 +108,7 @@ namespace University_Dasboard
 			}
 
 			var id = (Guid)dgvDepartments.CurrentRow.Cells["Id"].Value;
-			DepartmentViewModel deletedDepartment = GetDepartment(id);
+			Department deletedDepartment = GetDepartment(id);
 			departments.Remove(deletedDepartment);
 			newDepartmentsList.Remove(deletedDepartment);
 			updatedDepartmentsList.Remove(deletedDepartment);
@@ -137,7 +128,7 @@ namespace University_Dasboard
 				var editedRow = dgvDepartments.Rows[e.RowIndex];
 				var id = (Guid)editedRow.Cells["Id"].Value;
 				var selectedFacultyId = (Guid)editedRow.Cells["FacultyName"].Value;
-				DepartmentViewModel updatedDepartment = GetDepartment(id);
+				Department updatedDepartment = GetDepartment(id);
 				updatedDepartment.FacultyId = selectedFacultyId;
 				updatedDepartmentsList.Add(updatedDepartment);
 			}
