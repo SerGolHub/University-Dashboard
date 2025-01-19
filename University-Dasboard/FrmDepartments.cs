@@ -26,8 +26,6 @@ namespace University_Dasboard
 		{
 			var ctx = new DatabaseContext();
 			DepartmentController.LoadDepartments(dgvDepartments, ref departments);
-			//DataGridViewHelper.HideColumns(dgvDepartments, 
-			//    ["Id", "FacultyId", "Faculty", "Directions", "Disciplines", "Teachers"]);
 
 			var faculties = ctx.Faculty.ToList();
 			ComboboxHelper.LoadCombobox(
