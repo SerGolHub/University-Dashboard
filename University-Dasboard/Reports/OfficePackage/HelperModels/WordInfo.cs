@@ -41,6 +41,12 @@ namespace OfficePackage.HelperModels
 
         public int SemesterNumber { get; set; }
 
+        public int LectureHours { get; set; }
+
+        public int PracticalHours { get; set; }
+
+        public int LaboratoryHours { get; set; }
+
         public string EmptyColumn { get; set; } = string.Empty;
     }
 }

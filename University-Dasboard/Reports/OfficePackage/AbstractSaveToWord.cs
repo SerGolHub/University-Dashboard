@@ -66,10 +66,62 @@ namespace OfficePackage
             // Заголовки таблицы
             CreateTableHeader(new List<string> { "Форма занятий", "Недели", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "∑", "Отчётность" });
 
+            // Данные таблицы
+            int lectureHours = info.LectureHours; // Общее количество часов
+            int hoursPerCell = 2; // Часы на каждую ячейку
+            int totalCells = lectureHours / hoursPerCell; // Количество ячеек
+
+            // Формируем список строк для лекций
+            var hoursList = new List<string> { "1. Лекции занятий", "аудит." }; // Первые фиксированные элементы
+
+            if (lectureHours < 19)
+            {
+                for (int i = 0; i < totalCells; i++)
+                {
+                    hoursList.Add(hoursPerCell.ToString()); // Часы в ячейке
+                    hoursList.Add(""); // Пропуск
+                }
+
+                if (hoursList.Count > 21)
+                {
+                    hoursList = hoursList.Take(22).ToList(); // Ограничиваем до 22 элементов
+                }
+                else
+                {
+                    for (int i = hoursList.Count; i < 21; i++)
+                    {
+                        hoursList.Add(""); // Дополняем до нужного размера
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < totalCells; i++)
+                {
+                    hoursList.Add(hoursPerCell.ToString());
+                }
+                for (int i = hoursList.Count; i < 21; i++)
+                {
+                    hoursList.Add(""); // Дополняем пустыми ячейками
+                }
+            }
+
+            // Вставляем общее количество часов в 21-ю ячейку
+            if (hoursList.Count >= 20)
+            {
+                hoursList.Insert(20, lectureHours.ToString());
+            }
+
+            // Убедимся, что список состоит ровно из 22 элементов
+            for (int i = hoursList.Count; i < 22; i++)
+            {
+                hoursList.Add("");
+            }
+
             // Заполнение таблицы
             CreateRow(new WordRowParameters
             {
-                Texts = new List<string> { "1. Лекции", "аудит.", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "", ""  },
+                Texts = hoursList,
                 TextProperties = new WordTextProperties { JustificationType = WordJustificationType.Center }
             });
 
@@ -85,10 +137,56 @@ namespace OfficePackage
                 }
             });
 
+            // Данные таблицы для практических занятий
+            int practicalHours = info.PracticalHours; // Общее количество часов
+            var hoursList2 = new List<string> { "2. Практические занятия", "аудит." };
+
+            if (practicalHours < 19)
+            {
+                for (int i = 0; i < practicalHours / hoursPerCell; i++)
+                {
+                    hoursList2.Add(hoursPerCell.ToString());
+                    hoursList2.Add(""); // Пропуск
+                }
+
+                if (hoursList2.Count > 21)
+                {
+                    hoursList2 = hoursList2.Take(22).ToList();
+                }
+                else
+                {
+                    for (int i = hoursList2.Count; i < 21; i++)
+                    {
+                        hoursList2.Add(""); // Дополняем
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < practicalHours / hoursPerCell; i++)
+                {
+                    hoursList2.Add(hoursPerCell.ToString());
+                }
+                for (int i = hoursList2.Count; i < 21; i++)
+                {
+                    hoursList2.Add("");
+                }
+            }
+
+            if (hoursList2.Count >= 20)
+            {
+                hoursList2.Insert(20, practicalHours.ToString());
+            }
+
+            for (int i = hoursList2.Count; i < 22; i++)
+            {
+                hoursList2.Add("");
+            }
+
             // Данные таблицы
             CreateRow(new WordRowParameters
             {
-                Texts = new List<string> { "2. Практические занятий", "аудит.", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "" },
+                Texts = hoursList2,
                 TextProperties = new WordTextProperties { JustificationType = WordJustificationType.Center }
             });
 
@@ -105,10 +203,56 @@ namespace OfficePackage
                 }
             });
 
+            // Аналогично формируем данные для лабораторных занятий
+            int laboratoryHours = info.LaboratoryHours;
+            var hoursList3 = new List<string> { "3. Лабораторные занятия", "аудит." };
+
+            if (laboratoryHours < 19)
+            {
+                for (int i = 0; i < laboratoryHours / hoursPerCell; i++)
+                {
+                    hoursList3.Add(hoursPerCell.ToString());
+                    hoursList3.Add(""); // Пропуск
+                }
+
+                if (hoursList3.Count > 21)
+                {
+                    hoursList3 = hoursList3.Take(22).ToList();
+                }
+                else
+                {
+                    for (int i = hoursList3.Count; i < 21; i++)
+                    {
+                        hoursList3.Add("");
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < laboratoryHours / hoursPerCell; i++)
+                {
+                    hoursList3.Add(hoursPerCell.ToString());
+                }
+                for (int i = hoursList3.Count; i < 21; i++)
+                {
+                    hoursList3.Add("");
+                }
+            }
+
+            if (hoursList3.Count >= 20)
+            {
+                hoursList3.Insert(20, laboratoryHours.ToString());
+            }
+
+            for (int i = hoursList3.Count; i < 22; i++)
+            {
+                hoursList3.Add("");
+            }
+
             // Данные таблицы
             CreateRow(new WordRowParameters
             {
-                Texts = new List<string> { "3. Лабораторные занятия", "аудит.", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "2", "", "", "", "", "" },
+                Texts = hoursList3,
                 TextProperties = new WordTextProperties { JustificationType = WordJustificationType.Center }
             });
 
@@ -125,10 +269,104 @@ namespace OfficePackage
                 }
             });
 
+            // Подвал таблицы
+            // Общее количество ячеек для всех типов (зависит от типа занятия)
+            int hoursPerCell4 = 2; // Часы на ячейку
+
+            // Формируем метод для добавления ячеек с учетом пропусков
+            List<string> GenerateSchedule(int hours, string type)
+            {
+                var list = new List<string> { type, "аудит." }; // Первые фиксированные элементы
+
+                // Рассчитываем количество ячеек
+                int totalCells = hours / hoursPerCell4;
+
+                if (hours < 19)
+                {
+                    // Добавляем часы в ячейки с пропусками (через одну ячейку)
+                    for (int i = 0; i < totalCells; i++)
+                    {
+                        list.Add(hoursPerCell4.ToString()); // Заполняем ячейку
+                        list.Add(""); // Добавляем пропуск
+                    }
+
+                    // Убираем лишний пропуск, если общее количество добавленных элементов превышает 21
+                    if (list.Count > 21)
+                    {
+                        list = list.Take(22).ToList(); // Обрезаем список до нужного размера
+                    }
+                    else
+                    {
+                        // Добавляем пустые строки для оставшихся ячеек
+                        for (int i = list.Count; i < 21; i++)
+                        {
+                            list.Add("");
+                        }
+                    }
+                }
+                else
+                {
+                    // Если количество часов больше 19, заполняем ячейки без пропусков
+                    for (int i = 0; i < totalCells; i++)
+                    {
+                        list.Add(hoursPerCell4.ToString());
+                    }
+
+                    // Добавляем пустые строки до 21 для выравнивания
+                    for (int i = list.Count; i < 21; i++)
+                    {
+                        list.Add("");
+                    }
+                }
+
+                // Добавляем общее количество часов в 21-ю ячейку
+                if (list.Count >= 20)
+                {
+                    list.Insert(20, hours.ToString());
+                }
+
+                // Убедимся, что список состоит ровно из 22 элементов
+                for (int i = list.Count; i < 22; i++)
+                {
+                    list.Add("");
+                }
+
+                return list;
+            }
+
+            // Создаем списки для каждого типа занятия
+            var lectureList = GenerateSchedule(lectureHours, "1. Лекции");
+            var practicalList = GenerateSchedule(practicalHours, "2. Практические занятия");
+            var laboratoryList = GenerateSchedule(laboratoryHours, "3. Лабораторные занятия");
+
+            // Создаем итоговую строку для суммирования значений по ячейкам
+            var totalRow = new List<string> { "Всего", "аудит." };
+
+            // Сложение по столбцам для каждого типа занятий
+            for (int i = 2; i < 20; i++) // Пропускаем первые 2 ячейки (тема и аудитория)
+            {
+                int lectureValue = string.IsNullOrEmpty(lectureList[i]) ? 0 : int.Parse(lectureList[i]);
+                int practicalValue = string.IsNullOrEmpty(practicalList[i]) ? 0 : int.Parse(practicalList[i]);
+                int laboratoryValue = string.IsNullOrEmpty(laboratoryList[i]) ? 0 : int.Parse(laboratoryList[i]);
+
+                // Суммируем значения
+                int totalValue = lectureValue + practicalValue + laboratoryValue;
+                totalRow.Add(totalValue.ToString());
+            }
+
+            // Добавляем итоговое количество часов в 21 ячейку
+            totalRow.Add((lectureHours + practicalHours + laboratoryHours).ToString());
+
+            // Добавляем пустую строку в последнюю ячейку (22-я ячейка)
+            totalRow.Add("");
+
+            // Убедимся, что список состоит ровно из 22 элементов (проверим на всякий случай)
+            while (totalRow.Count < 22) totalRow.Add("");
+
             // Данные таблицы
             CreateRow(new WordRowParameters
             {
-                Texts = new List<string> { "Всего", "аудит.", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", " ", " ", "64", " " },
+                Texts = totalRow,
                 TextProperties = new WordTextProperties { JustificationType = WordJustificationType.Center },
             });
 
@@ -153,7 +391,6 @@ namespace OfficePackage
                     new Tuple<int, int>(1, 20), // Объединение ячеек со второй по 19
                 }
             });
-
 
 
             SaveWord(info);
