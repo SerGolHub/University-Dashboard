@@ -45,11 +45,13 @@
 			lbDbSaveResult = new Label();
 			cbFaculties = new ComboBox();
 			label4 = new Label();
+			departmentBindingSource2 = new BindingSource(components);
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)departmentBindingSource2).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -194,6 +196,10 @@
 			label4.TabIndex = 23;
 			label4.Text = "Факультет:";
 			// 
+			// departmentBindingSource2
+			// 
+			departmentBindingSource2.DataSource = typeof(Database.Models.Department);
+			// 
 			// FrmDepartments
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -219,6 +225,7 @@
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).EndInit();
+			((System.ComponentModel.ISupportInitialize)departmentBindingSource2).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -241,5 +248,6 @@
         private Label lbDbSaveResult;
         private ComboBox cbFaculties;
         private Label label4;
-    }
+		private BindingSource departmentBindingSource2;
+	}
 }
