@@ -181,7 +181,8 @@ namespace University_Dasboard
 
 			schedules.Add(schedule);
 			newScheduleList.Add(schedule);
-		}
+            dgvSchedules.Refresh(); // Принудительное обновление DataGridView
+        }
 
 		async private void btnSave_Click(object sender, EventArgs e)
 		{
@@ -196,7 +197,11 @@ namespace University_Dasboard
 			  removedScheduleList);
 
 			ClearTempLists();
-			lbDbSaveResult.ForeColor = Color.FromArgb(118, 241, 178);
+
+            // Перезагрузка данных после сохранения
+            LoadData();
+
+            lbDbSaveResult.ForeColor = Color.FromArgb(118, 241, 178);
 			lbDbSaveResult.Text = "Данные успешно сохранены.";
 			await Task.Delay(3000);
 
@@ -350,6 +355,9 @@ namespace University_Dasboard
                         DirectionName = selectedSchedule.DirectionName,
                         GroupName = selectedSchedule.GroupName,
                         SubjectName = selectedSchedule.SubjectName,
+                        LectureHours = selectedSchedule.LectureHours,
+                        PracticalHours = selectedSchedule.PracticalHours,
+                        LaboratoryHours = selectedSchedule.LaboratoryHours,
 						ClassroomNumber = tbClassroomNumber.Text,
 						DateCreate = DateTime.Now,
 						GroupNameMerge = selectedGroupMerge!.Name,
