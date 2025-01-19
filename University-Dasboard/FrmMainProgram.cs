@@ -32,7 +32,9 @@ namespace University_Dasboard
 				try
 				{
 					using var ctx = new DatabaseContext();
+					// Ищем пользователя по логину
 					User user = ctx.User.First(u => u.Login == login);
+					// Выставляем имя пользователя
 					lbUserName.Text = user.FullName;
 				}
 				catch (Exception ex)
@@ -41,6 +43,7 @@ namespace University_Dasboard
 					return;
 				}
 			}
+			// Размещаем имя пользователя по середине боковой панели
 			int labelCenterPositionX = picProfile.Left + (picProfile.Width - lbUserName.Width) / 2;
 			lbUserName.Location = new Point(labelCenterPositionX, lbUserName.Location.Y);
 
