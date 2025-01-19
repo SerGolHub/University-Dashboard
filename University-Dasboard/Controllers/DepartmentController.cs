@@ -18,7 +18,7 @@ namespace University_Dasboard.Controllers
 			{
 				Id = d.Id,
 				Name = d.Name,
-				FacultyId = d.FacultyId,
+				FacultyId = d.FacultyId
 			})
 			.ToList();
 
