@@ -121,15 +121,16 @@ namespace University_Dasboard
 
 		private void dgvDepartments_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
 			{
-				var editedRow = dgvDepartments.Rows[e.RowIndex];
-				var id = (Guid)editedRow.Cells["Id"].Value;
-				var selectedFacultyId = (Guid)editedRow.Cells["FacultyName"].Value;
-				Department updatedDepartment = GetDepartment(id);
-				updatedDepartment.FacultyId = selectedFacultyId;
-				updatedDepartmentsList.Add(updatedDepartment);
+				return;
 			}
+			var editedRow = dgvDepartments.Rows[e.RowIndex];
+			var id = (Guid)editedRow.Cells["Id"].Value;
+			var selectedFacultyId = (Guid)editedRow.Cells["FacultyName"].Value;
+			Department updatedDepartment = GetDepartment(id);
+			updatedDepartment.FacultyId = selectedFacultyId;
+			updatedDepartmentsList.Add(updatedDepartment);
 
 		}
 
