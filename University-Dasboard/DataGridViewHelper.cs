@@ -15,6 +15,10 @@
 
 		public static void ExpandComboBoxOnEdit(DataGridView dgv, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			DataGridViewCell cell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
 			if (cell is DataGridViewComboBoxCell)
 			{
