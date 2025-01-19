@@ -8,12 +8,12 @@ namespace University_Dasboard.Controllers
 {
     public class DepartmentController
     {
-		public static void LoadDepartmentsAsync(
+		public static void LoadDepartments(
 			DataGridView dgv,
 			ref BindingList<DepartmentViewModel> bindingList)
 		{
 			using var ctx = new DatabaseContext();
-			var department = ctx.Department
+			var departments = ctx.Department
 			.Include(d => d.Faculty)
 			.Select(d => new DepartmentViewModel
 			{
@@ -24,7 +24,16 @@ namespace University_Dasboard.Controllers
 			})
 			.ToList();
 
-			bindingList = new BindingList<DepartmentViewModel>(department);
+			bindingList = new BindingList<DepartmentViewModel>(departments);
+			var faculties = ctx.Faculty.ToList();
+			var cbColumnFaculty = dgv.Columns["FacultyName"] as DataGridViewComboBoxColumn;
+			if (cbColumnFaculty != null)
+			{
+				cbColumnFaculty.DataSource = faculties;
+				cbColumnFaculty.DisplayMember = "Name"; // Отображаемое значение
+				cbColumnFaculty.ValueMember = "Id"; // Связь по идентификатору
+				cbColumnFaculty.DataPropertyName = "FacultyId"; // Связь с свойством BindingList
+			}
 			dgv.DataSource = bindingList;
 		}
 

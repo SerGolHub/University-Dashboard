@@ -32,15 +32,15 @@ namespace University_Dasboard
         private void LoadData()
         {
             var ctx = new DatabaseContext();
-            DepartmentController.LoadDepartmentsAsync(dgvDepartments, ref departments);
-            DataGridViewHelper.HideColumns(dgvDepartments, 
-                ["Id", "FacultyId", "Faculty", "Directions", "Disciplines", "Teachers"]);
+            DepartmentController.LoadDepartments(dgvDepartments, ref departments);
+            //DataGridViewHelper.HideColumns(dgvDepartments, 
+            //    ["Id", "FacultyId", "Faculty", "Directions", "Disciplines", "Teachers"]);
 
             var faculties = ctx.Faculty.ToList();
             ComboboxHelper.LoadCombobox(
                 faculties,
                 comboBox: cbFaculties);
-
+			
 			logger.Info("Загрузка всех кафедр произошла успешно");
 		}
 
@@ -85,7 +85,7 @@ namespace University_Dasboard
         {
             lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
             lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
-			logger.Info("Данные сохраняются...");
+			logger.Info("Данные сохраняются");
 			lbDbSaveResult.Visible = true;
 
             await DepartmentController.SaveDepartmentsAsync(
@@ -131,10 +131,16 @@ namespace University_Dasboard
 
         private void dgvDepartments_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var editedRow = dgvDepartments.Rows[e.RowIndex];
-            var id = (Guid)editedRow.Cells["Id"].Value;
-			DepartmentViewModel updatedDepartment = GetDepartment(id);
-            updatedDepartmentsList.Add(updatedDepartment);
+			if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+				var editedRow = dgvDepartments.Rows[e.RowIndex];
+				var id = (Guid)editedRow.Cells["Id"].Value;
+                var selectedFacultyId = (Guid)editedRow.Cells["FacultyName"].Value;
+				DepartmentViewModel updatedDepartment = GetDepartment(id);
+                updatedDepartment.FacultyId = selectedFacultyId;
+				updatedDepartmentsList.Add(updatedDepartment);
+			}
+			
         }
 
         private void dgvDepartments_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

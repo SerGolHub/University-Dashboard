@@ -35,6 +35,7 @@
 			userBindingSource = new BindingSource(components);
 			userBindingSource1 = new BindingSource(components);
 			dgvDepartments = new DataGridView();
+			departmentBindingSource3 = new BindingSource(components);
 			departmentBindingSource = new BindingSource(components);
 			departmentBindingSource1 = new BindingSource(components);
 			btnSave = new Button();
@@ -46,9 +47,14 @@
 			cbFaculties = new ComboBox();
 			label4 = new Label();
 			departmentBindingSource2 = new BindingSource(components);
+			Id = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			FacultyName = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).BeginInit();
+			((System.ComponentModel.ISupportInitialize)departmentBindingSource3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource2).BeginInit();
@@ -91,14 +97,21 @@
 			// 
 			dgvDepartments.AllowUserToAddRows = false;
 			dgvDepartments.AllowUserToDeleteRows = false;
+			dgvDepartments.AutoGenerateColumns = false;
 			dgvDepartments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvDepartments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvDepartments.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, facultyIdDataGridViewTextBoxColumn, FacultyName });
+			dgvDepartments.DataSource = departmentBindingSource3;
 			dgvDepartments.Location = new Point(12, 304);
 			dgvDepartments.Name = "dgvDepartments";
 			dgvDepartments.Size = new Size(862, 337);
 			dgvDepartments.TabIndex = 19;
 			dgvDepartments.CellValueChanged += dgvDepartments_CellValueChanged;
 			dgvDepartments.RowPostPaint += dgvDepartments_RowPostPaint;
+			// 
+			// departmentBindingSource3
+			// 
+			departmentBindingSource3.DataSource = typeof(Database.Models.Department);
 			// 
 			// btnSave
 			// 
@@ -200,6 +213,31 @@
 			// 
 			departmentBindingSource2.DataSource = typeof(Database.Models.Department);
 			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// facultyIdDataGridViewTextBoxColumn
+			// 
+			facultyIdDataGridViewTextBoxColumn.DataPropertyName = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.HeaderText = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
+			facultyIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// FacultyName
+			// 
+			FacultyName.HeaderText = "Факультет";
+			FacultyName.Name = "FacultyName";
+			// 
 			// FrmDepartments
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -223,6 +261,7 @@
 			((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).EndInit();
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).EndInit();
+			((System.ComponentModel.ISupportInitialize)departmentBindingSource3).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource2).EndInit();
@@ -249,5 +288,10 @@
         private ComboBox cbFaculties;
         private Label label4;
 		private BindingSource departmentBindingSource2;
+		private BindingSource departmentBindingSource3;
+		private DataGridViewTextBoxColumn Id;
+		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn facultyIdDataGridViewTextBoxColumn;
+		private DataGridViewComboBoxColumn FacultyName;
 	}
 }
