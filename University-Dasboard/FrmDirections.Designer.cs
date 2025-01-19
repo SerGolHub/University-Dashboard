@@ -35,6 +35,7 @@
 			userBindingSource = new BindingSource(components);
 			userBindingSource1 = new BindingSource(components);
 			dgvDirections = new DataGridView();
+			directionBindingSource = new BindingSource(components);
 			departmentBindingSource = new BindingSource(components);
 			departmentBindingSource1 = new BindingSource(components);
 			btnSave = new Button();
@@ -51,7 +52,6 @@
 			tbMaxCourse = new TextBox();
 			cbFaculty = new ComboBox();
 			label6 = new Label();
-			directionBindingSource = new BindingSource(components);
 			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -65,9 +65,9 @@
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDirections).BeginInit();
+			((System.ComponentModel.ISupportInitialize)directionBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
-			((System.ComponentModel.ISupportInitialize)directionBindingSource).BeginInit();
 			SuspendLayout();
 			// 
 			// tbNewDirectionName
@@ -118,6 +118,10 @@
 			dgvDirections.TabIndex = 37;
 			dgvDirections.CellValueChanged += dgvDirections_CellValueChanged;
 			dgvDirections.RowPostPaint += dgvDirections_RowPostPaint;
+			// 
+			// directionBindingSource
+			// 
+			directionBindingSource.DataSource = typeof(Database.Models.Direction);
 			// 
 			// btnSave
 			// 
@@ -284,10 +288,6 @@
 			label6.TabIndex = 45;
 			label6.Text = "Факультет:";
 			// 
-			// directionBindingSource
-			// 
-			directionBindingSource.DataSource = typeof(Database.Models.Direction);
-			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -325,6 +325,7 @@
 			facultyDataGridViewTextBoxColumn.DataPropertyName = "Faculty";
 			facultyDataGridViewTextBoxColumn.HeaderText = "Faculty";
 			facultyDataGridViewTextBoxColumn.Name = "facultyDataGridViewTextBoxColumn";
+			facultyDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// departmentIdDataGridViewTextBoxColumn
 			// 
@@ -338,6 +339,7 @@
 			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
 			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
 			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
+			departmentDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// groupsDataGridViewTextBoxColumn
 			// 
@@ -382,9 +384,9 @@
 			((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).EndInit();
 			((System.ComponentModel.ISupportInitialize)dgvDirections).EndInit();
+			((System.ComponentModel.ISupportInitialize)directionBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).EndInit();
-			((System.ComponentModel.ISupportInitialize)directionBindingSource).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
