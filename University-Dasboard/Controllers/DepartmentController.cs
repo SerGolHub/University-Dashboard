@@ -10,21 +10,20 @@ namespace University_Dasboard.Controllers
     {
 		public static void LoadDepartments(
 			DataGridView dgv,
-			ref BindingList<DepartmentViewModel> bindingList)
+			ref BindingList<Department> bindingList)
 		{
 			using var ctx = new DatabaseContext();
 			var departments = ctx.Department
 			.Include(d => d.Faculty)
-			.Select(d => new DepartmentViewModel
+			.Select(d => new Department
 			{
 				Id = d.Id,
 				Name = d.Name,
 				FacultyId = d.FacultyId,
-				FacultyName = d.Faculty!.Name
 			})
 			.ToList();
 
-			bindingList = new BindingList<DepartmentViewModel>(departments);
+			bindingList = new BindingList<Department>(departments);
 			var faculties = ctx.Faculty.ToList();
 			var cbColumnFaculty = dgv.Columns["FacultyName"] as DataGridViewComboBoxColumn;
 			if (cbColumnFaculty != null)
@@ -38,9 +37,9 @@ namespace University_Dasboard.Controllers
 		}
 
 		public static async Task SaveDepartmentsAsync(
-				List<DepartmentViewModel> newDepartmentList,
-				List<DepartmentViewModel> updatedDepartmentList,
-				List<DepartmentViewModel> removedDepartmentList)
+				List<Department> newDepartmentList,
+				List<Department> updatedDepartmentList,
+				List<Department> removedDepartmentList)
 		{
 			using var ctx = new DatabaseContext();
 
@@ -53,7 +52,7 @@ namespace University_Dasboard.Controllers
 
 		private static async Task AddNewDepartmentsAsync(
 			DatabaseContext ctx,
-			List<DepartmentViewModel> newDepartmentsList)
+			List<Department> newDepartmentsList)
 		{
 			if (newDepartmentsList.Count < 1)
 			{
@@ -71,7 +70,7 @@ namespace University_Dasboard.Controllers
 
 		private static async Task UpdateExistingDepartmentsAsync(
 			DatabaseContext ctx,
-			List<DepartmentViewModel> updatedDepartments)
+			List<Department> updatedDepartments)
 		{
 			if (updatedDepartments.Count < 1)
 			{
@@ -91,7 +90,7 @@ namespace University_Dasboard.Controllers
 		}
 
 		private static async Task RemoveDepartmentsAsync(
-			DatabaseContext ctx, List<DepartmentViewModel> removedDepartments)
+			DatabaseContext ctx, List<Department> removedDepartments)
 		{
 			if (removedDepartments.Count < 1)
 			{
