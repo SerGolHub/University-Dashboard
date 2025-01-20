@@ -53,10 +53,6 @@
 			cbFaculty = new ComboBox();
 			label6 = new Label();
 			Id = new DataGridViewTextBoxColumn();
-			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			maxCourseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -296,26 +292,6 @@
 			Id.HeaderText = "Id";
 			Id.Name = "Id";
 			Id.Visible = false;
-			// 
-			idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			idDataGridViewTextBoxColumn.HeaderText = "Id";
-			idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			idDataGridViewTextBoxColumn.Visible = false;
-			// 
-			idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			idDataGridViewTextBoxColumn.HeaderText = "Id";
-			idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			idDataGridViewTextBoxColumn.Visible = false;
-			// 
-			idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			idDataGridViewTextBoxColumn.HeaderText = "Id";
-			idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			idDataGridViewTextBoxColumn.Visible = false;
-			// 
-			idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			idDataGridViewTextBoxColumn.HeaderText = "Id";
-			idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			idDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
