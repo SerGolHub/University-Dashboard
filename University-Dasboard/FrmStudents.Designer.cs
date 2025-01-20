@@ -365,7 +365,6 @@
 			IsExcellentStudent.DataPropertyName = "IsExcellentStudent";
 			IsExcellentStudent.HeaderText = "Отличник";
 			IsExcellentStudent.Name = "IsExcellentStudent";
-			IsExcellentStudent.ReadOnly = true;
 			// 
 			// EnrollmentDate
 			// 
