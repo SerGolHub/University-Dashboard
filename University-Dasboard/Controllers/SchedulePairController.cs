@@ -25,6 +25,7 @@ namespace University_Dasboard.Controllers
                 {
                     Id = sp.Id,
                     Name = sp.Name, // Изменено для использования свойства Name
+                    DayOfWeek = sp.DayOfWeek,
                     StartTime = sp.StartTime,
                     EndTime = sp.EndTime,
                     ClassroomName = sp.ClassroomName, // Изменено для ClassroomName
@@ -45,7 +46,7 @@ namespace University_Dasboard.Controllers
 
             var schedulePair = ctx.SchedulePairs
                 .Include(sp => sp.ScheduleDiscipline)
-                .ThenInclude(sd => sd.Subject)
+                .ThenInclude(sd => sd!.Subject)
                 .Where(sp => sp.Id == pairId)
                 .Select(sp => new SchedulePairViewModel
                 {
@@ -82,16 +83,39 @@ namespace University_Dasboard.Controllers
             if (newPairs.Count < 1)
                 return;
 
-            var newEntities = newPairs.Select(p => new SchedulePair
+            var newEntities = new List<SchedulePair>();
+
+            foreach (var newPair in newPairs)
             {
-                Id = Guid.NewGuid(),
-                Name = p.Name, // Используем Name
-                StartTime = p.StartTime,
-                EndTime = p.EndTime,
-                ClassroomName = p.ClassroomName,
-                TeacherName = p.TeacherName,
-                SubjectName = p.ScheduleDiscipline!.Subject!.Name
-            }).ToList();
+                // Получаем временные ограничения для учителя
+                var teacherConstraints = await ctx.TeacherConstraints
+                    .Where(tc => tc.TeacherId == newPair.Teacher!.Id)
+                    .ToListAsync();
+
+                // Проверяем, пересекается ли время с существующими ограничениями
+                bool isConflict = teacherConstraints.Any(tc =>
+                    newPair.StartTime < tc.EndTime && newPair.EndTime > tc.StartTime);
+
+                bool isConflictDay = teacherConstraints.Any(tc =>
+                   newPair.DayOfWeek == tc.DayOfWeek);
+
+                if (isConflict)
+                {
+                    throw new InvalidOperationException(
+                        $"Не удалось добавить пару: время {newPair.StartTime} - {newPair.EndTime} пересекается с ограничением учителя {newPair.Teacher!.Name}.");
+                }
+
+                newEntities = newPairs.Select(p => new SchedulePair
+                {
+                    Id = Guid.NewGuid(),
+                    Name = p.Name, // Используем Name
+                    StartTime = p.StartTime,
+                    EndTime = p.EndTime,
+                    ClassroomName = p.ClassroomName,
+                    TeacherName = p.Teacher!.Name,
+                    SubjectName = p.ScheduleDiscipline!.Subject!.Name
+                }).ToList();
+            }
 
             await ctx.SchedulePairs.AddRangeAsync(newEntities);
         }
@@ -107,10 +131,39 @@ namespace University_Dasboard.Controllers
             foreach (var existingPair in existingPairs)
             {
                 var updatedPair = updatedPairs.First(p => p.Id == existingPair.Id);
+
+                // Получаем временные ограничения для учителя
+                var teacherConstraints = await ctx.TeacherConstraints
+                    .Where(tc => tc.TeacherId == updatedPair.Teacher!.Id)
+                    .ToListAsync();
+
+                // Проверяем, пересекается ли время с существующими ограничениями
+                bool isConflict = teacherConstraints.Any(tc =>
+                    updatedPair.StartTime < tc.EndTime && updatedPair.EndTime > tc.StartTime);
+
+                // Проверяем, совпадает ли день недели с ограничениями
+                bool isConflictDay = teacherConstraints.Any(tc =>
+                    updatedPair.DayOfWeek == tc.DayOfWeek);
+
+                if (isConflict)
+                {
+                    throw new InvalidOperationException(
+                        $"Не удалось обновить пару: время {updatedPair.StartTime} - {updatedPair.EndTime} пересекается с ограничением учителя {updatedPair.Teacher!.Name}.");
+                }
+
+                if (isConflictDay)
+                {
+                    throw new InvalidOperationException(
+                        $"Не удалось обновить пару: день недели {updatedPair.DayOfWeek} не совпадает с расписанием учителя {updatedPair.Teacher!.Name}.");
+                }
+
+                // Обновляем существующую пару
                 existingPair.Name = updatedPair.Name;
+                existingPair.DayOfWeek = updatedPair.DayOfWeek;
                 existingPair.StartTime = updatedPair.StartTime;
                 existingPair.EndTime = updatedPair.EndTime;
                 existingPair.ClassroomName = updatedPair.ClassroomName;
+                existingPair.TeacherId = updatedPair.TeacherId;
                 existingPair.TeacherName = updatedPair.TeacherName;
                 existingPair.ScheduleDisciplineId = updatedPair.ScheduleDisciplineId;
             }

@@ -217,7 +217,6 @@
             comboBoxFaculties.Name = "comboBoxFaculties";
             comboBoxFaculties.Size = new Size(290, 26);
             comboBoxFaculties.TabIndex = 56;
-            comboBoxFaculties.SelectedIndexChanged += cbFaculty_SelectedIndexChanged;
             // 
             // comboBoxGroup
             // 
@@ -243,7 +242,6 @@
             comboBoxDirection.Name = "comboBoxDirection";
             comboBoxDirection.Size = new Size(290, 26);
             comboBoxDirection.TabIndex = 58;
-            comboBoxDirection.SelectedIndexChanged += cbDirection_SelectedIndexChanged;
             // 
             // comboBoxDiscipline
             // 
@@ -280,7 +278,6 @@
             comboBoxScheduleWeek.Name = "comboBoxScheduleWeek";
             comboBoxScheduleWeek.Size = new Size(290, 26);
             comboBoxScheduleWeek.TabIndex = 61;
-            comboBoxScheduleWeek.SelectedIndexChanged += cbSchedule_SelectedIndexChanged;
             // 
             // button1
             // 

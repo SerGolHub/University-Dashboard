@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University_Dasboard.Database.Enums;
 using University_Dasboard.Interfaces;
 
 namespace University_Dasboard.Database.Models
@@ -12,6 +13,8 @@ namespace University_Dasboard.Database.Models
         public Guid Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
+
+        public DayOfWeek DayOfWeek { get; set; }
 
         public TimeSpan StartTime { get; set; } // Время начала пары
         public TimeSpan EndTime { get; set; } // Время окончания пары
