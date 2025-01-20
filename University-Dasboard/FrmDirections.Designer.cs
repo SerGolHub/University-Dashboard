@@ -35,6 +35,17 @@
 			userBindingSource = new BindingSource(components);
 			userBindingSource1 = new BindingSource(components);
 			dgvDirections = new DataGridView();
+			Id = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			maxCourseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			facultyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			departmentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			departmentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			groupsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Department = new DataGridViewComboBoxColumn();
 			directionBindingSource = new BindingSource(components);
 			departmentBindingSource = new BindingSource(components);
 			departmentBindingSource1 = new BindingSource(components);
@@ -52,17 +63,7 @@
 			tbMaxCourse = new TextBox();
 			cbFaculty = new ComboBox();
 			label6 = new Label();
-			Id = new DataGridViewTextBoxColumn();
-			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			maxCourseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			facultyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			departmentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			departmentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			groupsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			subjectsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			Department = new DataGridViewComboBoxColumn();
+			label7 = new Label();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDirections).BeginInit();
@@ -120,6 +121,78 @@
 			dgvDirections.CellClick += dgvDirections_CellClick;
 			dgvDirections.CellValueChanged += dgvDirections_CellValueChanged;
 			dgvDirections.RowPostPaint += dgvDirections_RowPostPaint;
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Направление";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// codeDataGridViewTextBoxColumn
+			// 
+			codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
+			codeDataGridViewTextBoxColumn.HeaderText = "Код";
+			codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+			// 
+			// maxCourseDataGridViewTextBoxColumn
+			// 
+			maxCourseDataGridViewTextBoxColumn.DataPropertyName = "MaxCourse";
+			maxCourseDataGridViewTextBoxColumn.HeaderText = "Максимальный курс";
+			maxCourseDataGridViewTextBoxColumn.Name = "maxCourseDataGridViewTextBoxColumn";
+			// 
+			// facultyIdDataGridViewTextBoxColumn
+			// 
+			facultyIdDataGridViewTextBoxColumn.DataPropertyName = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.HeaderText = "FacultyId";
+			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
+			facultyIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// facultyDataGridViewTextBoxColumn
+			// 
+			facultyDataGridViewTextBoxColumn.DataPropertyName = "Faculty";
+			facultyDataGridViewTextBoxColumn.HeaderText = "Faculty";
+			facultyDataGridViewTextBoxColumn.Name = "facultyDataGridViewTextBoxColumn";
+			facultyDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentIdDataGridViewTextBoxColumn
+			// 
+			departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
+			departmentIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentDataGridViewTextBoxColumn
+			// 
+			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
+			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
+			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
+			departmentDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// groupsDataGridViewTextBoxColumn
+			// 
+			groupsDataGridViewTextBoxColumn.DataPropertyName = "Groups";
+			groupsDataGridViewTextBoxColumn.HeaderText = "Groups";
+			groupsDataGridViewTextBoxColumn.Name = "groupsDataGridViewTextBoxColumn";
+			groupsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// subjectsDataGridViewTextBoxColumn
+			// 
+			subjectsDataGridViewTextBoxColumn.DataPropertyName = "Subjects";
+			subjectsDataGridViewTextBoxColumn.HeaderText = "Subjects";
+			subjectsDataGridViewTextBoxColumn.Name = "subjectsDataGridViewTextBoxColumn";
+			subjectsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// Department
+			// 
+			Department.HeaderText = "Кафедра";
+			Department.Name = "Department";
 			// 
 			// directionBindingSource
 			// 
@@ -286,77 +359,19 @@
 			label6.ForeColor = Color.FromArgb(158, 161, 178);
 			label6.Location = new Point(12, 48);
 			label6.Name = "label6";
-			// Id
+			label6.Size = new Size(0, 20);
+			label6.TabIndex = 47;
 			// 
-			Id.DataPropertyName = "Id";
-			Id.HeaderText = "Id";
-			Id.Name = "Id";
-			Id.Visible = false;
+			// label7
 			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			nameDataGridViewTextBoxColumn.HeaderText = "Направление";
-			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// codeDataGridViewTextBoxColumn
-			// 
-			codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-			codeDataGridViewTextBoxColumn.HeaderText = "Код";
-			codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-			// 
-			// maxCourseDataGridViewTextBoxColumn
-			// 
-			maxCourseDataGridViewTextBoxColumn.DataPropertyName = "MaxCourse";
-			maxCourseDataGridViewTextBoxColumn.HeaderText = "Максимальный курс";
-			maxCourseDataGridViewTextBoxColumn.Name = "maxCourseDataGridViewTextBoxColumn";
-			// 
-			// facultyIdDataGridViewTextBoxColumn
-			// 
-			facultyIdDataGridViewTextBoxColumn.DataPropertyName = "FacultyId";
-			facultyIdDataGridViewTextBoxColumn.HeaderText = "FacultyId";
-			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
-			facultyIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// facultyDataGridViewTextBoxColumn
-			// 
-			facultyDataGridViewTextBoxColumn.DataPropertyName = "Faculty";
-			facultyDataGridViewTextBoxColumn.HeaderText = "Faculty";
-			facultyDataGridViewTextBoxColumn.Name = "facultyDataGridViewTextBoxColumn";
-			facultyDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// departmentIdDataGridViewTextBoxColumn
-			// 
-			departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
-			departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
-			departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
-			departmentIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// departmentDataGridViewTextBoxColumn
-			// 
-			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
-			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
-			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
-			departmentDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// groupsDataGridViewTextBoxColumn
-			// 
-			groupsDataGridViewTextBoxColumn.DataPropertyName = "Groups";
-			groupsDataGridViewTextBoxColumn.HeaderText = "Groups";
-			groupsDataGridViewTextBoxColumn.Name = "groupsDataGridViewTextBoxColumn";
-			groupsDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// subjectsDataGridViewTextBoxColumn
-			// 
-			subjectsDataGridViewTextBoxColumn.DataPropertyName = "Subjects";
-			subjectsDataGridViewTextBoxColumn.HeaderText = "Subjects";
-			subjectsDataGridViewTextBoxColumn.Name = "subjectsDataGridViewTextBoxColumn";
-			subjectsDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// Department
-			// 
-			Department.HeaderText = "Кафедра";
-			Department.Name = "Department";
+			label7.AutoSize = true;
+			label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label7.ForeColor = Color.FromArgb(158, 161, 178);
+			label7.Location = new Point(12, 48);
+			label7.Name = "label7";
+			label7.Size = new Size(108, 20);
+			label7.TabIndex = 38;
+			label7.Text = "Факультет:";
 			// 
 			// FrmDirections
 			// 
@@ -371,6 +386,7 @@
 			Controls.Add(tbDirectionCode);
 			Controls.Add(label4);
 			Controls.Add(cbDepartments);
+			Controls.Add(label7);
 			Controls.Add(label3);
 			Controls.Add(tbNewDirectionName);
 			Controls.Add(label2);
@@ -430,5 +446,6 @@
 		private DataGridViewTextBoxColumn groupsDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn subjectsDataGridViewTextBoxColumn;
 		private DataGridViewComboBoxColumn Department;
+		private Label label7;
 	}
 }
