@@ -129,7 +129,11 @@ namespace University_Dasboard
 			{
 				Id = Guid.NewGuid(),
 				Name = tbFullName.Text,
-				EnrollmentDate = dateTimePicker1.Value.ToUniversalTime().Date,
+				EnrollmentDate = new DateTime(dateTimePicker1.Value.Year,
+				dateTimePicker1.Value.Month,
+				dateTimePicker1.Value.Day,
+				0, 0, 0,
+				DateTimeKind.Utc),
 				EnrollmentNumber = tbEnrollmentNumber.Text,
 				GroupId = selectedGroup.Id,
 			};

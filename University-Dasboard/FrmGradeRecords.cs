@@ -29,6 +29,8 @@ namespace University_Dasboard
 			{
 				return;
 			}
+			MessageBox.Show($"Value: {dtpPeriodFrom.Value}\n" +
+				$"Value.Date: {dtpPeriodFrom.Value.Date}");
 			var marks = ctx.Marks
 				.Where(m => m.GradeDate >= dtpPeriodFrom.Value.ToUniversalTime().Date // условие по дате
 				&& m.GradeDate <= dtpPeriodBy.Value.ToUniversalTime().Date // продолжение условия

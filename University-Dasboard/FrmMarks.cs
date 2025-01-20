@@ -130,7 +130,11 @@ namespace University_Dasboard
 			{
 				Id = Guid.NewGuid(),
 				Mark = Convert.ToInt32(tbMark.Text),
-				GradeDate = dateTimePicker1.Value.ToUniversalTime().Date,
+				GradeDate = new DateTime(dateTimePicker1.Value.Year,
+				dateTimePicker1.Value.Month,
+				dateTimePicker1.Value.Day,
+				0, 0, 0,
+				DateTimeKind.Utc),
 				MarkType = selectedMarkType,
 				Semester = (int)selectedSemester,
 				StudentId = selectedStudent.Id,

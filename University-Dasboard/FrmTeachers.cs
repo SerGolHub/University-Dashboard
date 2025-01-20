@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Enums;
 using University_Dasboard.Database.Models;
@@ -213,7 +214,11 @@ namespace University_Dasboard
 				Name = fullName,
 				PhoneNumber = tbPhoneNumber.Text,
 				Email = tbEmail.Text,
-				HireDate = dtpHireDate.Value.ToUniversalTime(),
+				HireDate = new DateTime(dtpHireDate.Value.Year,
+				dtpHireDate.Value.Month,
+				dtpHireDate.Value.Day,
+				0, 0, 0,
+				DateTimeKind.Utc),
 				Degree = cbDegree.Text,
 				Status = cbStatus.Text,
 				DepartmentId = selectedDepartment!.Id,
