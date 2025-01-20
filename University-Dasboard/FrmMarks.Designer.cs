@@ -30,6 +30,17 @@
 		{
 			components = new System.ComponentModel.Container();
 			dgvMarksList = new DataGridView();
+			Id = new DataGridViewTextBoxColumn();
+			Mark = new DataGridViewTextBoxColumn();
+			gradeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			markTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			semesterDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			studentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			studentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			dgvTbStudentName = new DataGridViewTextBoxColumn();
+			DgvTbSubjectName = new DataGridViewTextBoxColumn();
 			marksBindingSource = new BindingSource(components);
 			btnDelete = new Button();
 			btnReset = new Button();
@@ -59,17 +70,6 @@
 			label11 = new Label();
 			cbMarkType = new ComboBox();
 			checkBox1 = new CheckBox();
-			Id = new DataGridViewTextBoxColumn();
-			Mark = new DataGridViewTextBoxColumn();
-			gradeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			markTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			semesterDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			studentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			studentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			subjectIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			subjectDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			dgvTbStudentName = new DataGridViewTextBoxColumn();
-			DgvTbSubjectName = new DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvMarksList).BeginInit();
 			((System.ComponentModel.ISupportInitialize)marksBindingSource).BeginInit();
 			SuspendLayout();
@@ -90,6 +90,80 @@
 			dgvMarksList.CellValueChanged += dgvMarksList_CellValueChanged;
 			dgvMarksList.DataError += dgvMarksList_DataError;
 			dgvMarksList.RowPostPaint += dgvMarksList_RowPostPaint;
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// Mark
+			// 
+			Mark.DataPropertyName = "Mark";
+			Mark.HeaderText = "Оценка";
+			Mark.Name = "Mark";
+			// 
+			// gradeDateDataGridViewTextBoxColumn
+			// 
+			gradeDateDataGridViewTextBoxColumn.DataPropertyName = "GradeDate";
+			gradeDateDataGridViewTextBoxColumn.HeaderText = "Дата оценки";
+			gradeDateDataGridViewTextBoxColumn.Name = "gradeDateDataGridViewTextBoxColumn";
+			gradeDateDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// markTypeDataGridViewTextBoxColumn
+			// 
+			markTypeDataGridViewTextBoxColumn.DataPropertyName = "markType";
+			markTypeDataGridViewTextBoxColumn.HeaderText = "Тип оценки";
+			markTypeDataGridViewTextBoxColumn.Name = "markTypeDataGridViewTextBoxColumn";
+			markTypeDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// semesterDataGridViewTextBoxColumn
+			// 
+			semesterDataGridViewTextBoxColumn.DataPropertyName = "Semester";
+			semesterDataGridViewTextBoxColumn.HeaderText = "Семестр";
+			semesterDataGridViewTextBoxColumn.Name = "semesterDataGridViewTextBoxColumn";
+			semesterDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// studentIdDataGridViewTextBoxColumn
+			// 
+			studentIdDataGridViewTextBoxColumn.DataPropertyName = "StudentId";
+			studentIdDataGridViewTextBoxColumn.HeaderText = "StudentId";
+			studentIdDataGridViewTextBoxColumn.Name = "studentIdDataGridViewTextBoxColumn";
+			studentIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// studentDataGridViewTextBoxColumn
+			// 
+			studentDataGridViewTextBoxColumn.DataPropertyName = "Student";
+			studentDataGridViewTextBoxColumn.HeaderText = "Student";
+			studentDataGridViewTextBoxColumn.Name = "studentDataGridViewTextBoxColumn";
+			studentDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// subjectIdDataGridViewTextBoxColumn
+			// 
+			subjectIdDataGridViewTextBoxColumn.DataPropertyName = "SubjectId";
+			subjectIdDataGridViewTextBoxColumn.HeaderText = "SubjectId";
+			subjectIdDataGridViewTextBoxColumn.Name = "subjectIdDataGridViewTextBoxColumn";
+			subjectIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// subjectDataGridViewTextBoxColumn
+			// 
+			subjectDataGridViewTextBoxColumn.DataPropertyName = "Subject";
+			subjectDataGridViewTextBoxColumn.HeaderText = "Subject";
+			subjectDataGridViewTextBoxColumn.Name = "subjectDataGridViewTextBoxColumn";
+			subjectDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// dgvTbStudentName
+			// 
+			dgvTbStudentName.HeaderText = "Студент";
+			dgvTbStudentName.Name = "dgvTbStudentName";
+			dgvTbStudentName.ReadOnly = true;
+			// 
+			// DgvTbSubjectName
+			// 
+			DgvTbSubjectName.HeaderText = "Дисциплина";
+			DgvTbSubjectName.Name = "DgvTbSubjectName";
+			DgvTbSubjectName.ReadOnly = true;
 			// 
 			// marksBindingSource
 			// 
@@ -324,13 +398,13 @@
 			// 
 			// dateTimePicker1
 			// 
-			dateTimePicker1.CustomFormat = "MMMM yyyy";
+			dateTimePicker1.CustomFormat = "dd MMMM yyyy";
 			dateTimePicker1.Format = DateTimePickerFormat.Custom;
-			dateTimePicker1.Location = new Point(249, 205);
+			dateTimePicker1.Location = new Point(237, 205);
 			dateTimePicker1.Name = "dateTimePicker1";
 			dateTimePicker1.ShowCheckBox = true;
 			dateTimePicker1.ShowUpDown = true;
-			dateTimePicker1.Size = new Size(127, 23);
+			dateTimePicker1.Size = new Size(139, 23);
 			dateTimePicker1.TabIndex = 54;
 			// 
 			// label2
@@ -451,80 +525,6 @@
 			checkBox1.Text = "Добавить оценку";
 			checkBox1.UseVisualStyleBackColor = true;
 			checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-			// 
-			// Id
-			// 
-			Id.DataPropertyName = "Id";
-			Id.HeaderText = "Id";
-			Id.Name = "Id";
-			Id.Visible = false;
-			// 
-			// Mark
-			// 
-			Mark.DataPropertyName = "Mark";
-			Mark.HeaderText = "Оценка";
-			Mark.Name = "Mark";
-			// 
-			// gradeDateDataGridViewTextBoxColumn
-			// 
-			gradeDateDataGridViewTextBoxColumn.DataPropertyName = "GradeDate";
-			gradeDateDataGridViewTextBoxColumn.HeaderText = "Дата оценки";
-			gradeDateDataGridViewTextBoxColumn.Name = "gradeDateDataGridViewTextBoxColumn";
-			gradeDateDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// markTypeDataGridViewTextBoxColumn
-			// 
-			markTypeDataGridViewTextBoxColumn.DataPropertyName = "markType";
-			markTypeDataGridViewTextBoxColumn.HeaderText = "Тип оценки";
-			markTypeDataGridViewTextBoxColumn.Name = "markTypeDataGridViewTextBoxColumn";
-			markTypeDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// semesterDataGridViewTextBoxColumn
-			// 
-			semesterDataGridViewTextBoxColumn.DataPropertyName = "Semester";
-			semesterDataGridViewTextBoxColumn.HeaderText = "Семестр";
-			semesterDataGridViewTextBoxColumn.Name = "semesterDataGridViewTextBoxColumn";
-			semesterDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// studentIdDataGridViewTextBoxColumn
-			// 
-			studentIdDataGridViewTextBoxColumn.DataPropertyName = "StudentId";
-			studentIdDataGridViewTextBoxColumn.HeaderText = "StudentId";
-			studentIdDataGridViewTextBoxColumn.Name = "studentIdDataGridViewTextBoxColumn";
-			studentIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// studentDataGridViewTextBoxColumn
-			// 
-			studentDataGridViewTextBoxColumn.DataPropertyName = "Student";
-			studentDataGridViewTextBoxColumn.HeaderText = "Student";
-			studentDataGridViewTextBoxColumn.Name = "studentDataGridViewTextBoxColumn";
-			studentDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// subjectIdDataGridViewTextBoxColumn
-			// 
-			subjectIdDataGridViewTextBoxColumn.DataPropertyName = "SubjectId";
-			subjectIdDataGridViewTextBoxColumn.HeaderText = "SubjectId";
-			subjectIdDataGridViewTextBoxColumn.Name = "subjectIdDataGridViewTextBoxColumn";
-			subjectIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// subjectDataGridViewTextBoxColumn
-			// 
-			subjectDataGridViewTextBoxColumn.DataPropertyName = "Subject";
-			subjectDataGridViewTextBoxColumn.HeaderText = "Subject";
-			subjectDataGridViewTextBoxColumn.Name = "subjectDataGridViewTextBoxColumn";
-			subjectDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// dgvTbStudentName
-			// 
-			dgvTbStudentName.HeaderText = "Студент";
-			dgvTbStudentName.Name = "dgvTbStudentName";
-			dgvTbStudentName.ReadOnly = true;
-			// 
-			// DgvTbSubjectName
-			// 
-			DgvTbSubjectName.HeaderText = "Дисциплина";
-			DgvTbSubjectName.Name = "DgvTbSubjectName";
-			DgvTbSubjectName.ReadOnly = true;
 			// 
 			// FrmMarks
 			// 
