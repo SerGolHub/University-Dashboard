@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using DocumentFormat.OpenXml.Bibliography;
 using OfficePackage.HelperModels;
 using OfficePackage.Implements;
+using University_Dasboard.Database.Enums;
 
 namespace University_Dasboard
 {
@@ -36,6 +37,8 @@ namespace University_Dasboard
             public Guid Id { get; set; }
 
             public string Name { get; set; } = string.Empty;
+
+			public DayOfWeek DayOfWeek { get; set; }
 
             public TimeSpan StartTime { get; set; } // Время начала пары
             public TimeSpan EndTime { get; set; } // Время окончания пары
@@ -56,12 +59,10 @@ namespace University_Dasboard
 		private List<SchedulePairViewModel> updatedScheduleList = [];
 		private List<SchedulePairViewModel> removedScheduleList = [];
 
-		private Database.Models.Subject? selectedSubject;
-		private Faculty? selectedFaculty;
-		private Direction? selectedDirection;
-		private Group? selectedGroup;
-		private ScheduleWeek? selectedScheduleWeek;
+		private Subject? selectedSubject;
 		private Teacher? selectedTeacher;
+		private Group? selectedGroup;
+		private ScheduleWeek? selectedScheduleDiscipline;
 		private Group? selectedGroupMerge;
 
 
@@ -80,10 +81,10 @@ namespace University_Dasboard
 		private void LoadComboboxData(DatabaseContext ctx)
 		{
 			// Загрузка факультетов
-            var faculties = ctx.Faculty.ToList();
+            var teachers = ctx.Teacher.ToList();
             ComboboxHelper.LoadCombobox(
-                faculties,
-                comboBox: comboBoxFaculties);
+                teachers,
+                comboBox: comboBoxTeacher);
 
 			// Загрузка Предметов
 			var subjects = ctx.Subject.ToList();
@@ -94,14 +95,7 @@ namespace University_Dasboard
 			// Загрузка недель расписания
 			var scheduleWeeks = ctx.ScheduleWeek.ToList();
 
-			ComboboxHelper.LoadCombobox(
-				scheduleWeeks,
-				comboBox: comboBoxScheduleWeek);
-
-			var teachers = ctx.Teacher.ToList();
-            ComboboxHelper.LoadCombobox(
-             teachers,
-             comboBox: comboBoxTeacher);
+			
         }
 
 		private void ClearTempLists()
@@ -123,13 +117,6 @@ namespace University_Dasboard
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			if (selectedDirection == null)
-			{
-				MessageBox.Show("Для добавления расписания нужно выбрать существующее направление");
-				logger.Warn("Пользователь не выбрал существующее направление");
-				return;
-			}
-
 			if (selectedSubject == null)
 			{
 				MessageBox.Show("Для добавления расписания нужно выбрать существующую дисциплину");
@@ -137,24 +124,10 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (selectedFaculty == null)
-			{
-				MessageBox.Show("Для добавления расписания нужно выбрать существующий факультет");
-				logger.Warn("Пользователь не выбрал существующий факультет");
-				return;
-			}
-
 			if (selectedGroup == null)
 			{
 				MessageBox.Show("Для добавления расписания нужно выбрать существующею группу");
 				logger.Warn("Пользователь не выбрал существующую группу");
-				return;
-			}
-
-			if (selectedScheduleWeek == null)
-			{
-				MessageBox.Show("Для добавления расписания нужно выбрать существующее расписание академических часов");
-				logger.Info("Пользователь не выбрал расписание академических часов");
 				return;
 			}
 			
@@ -232,51 +205,7 @@ namespace University_Dasboard
 			}
 		}
 
-        private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedFaculty = (Faculty?)comboBoxFaculties.SelectedItem;
-            if (selectedFaculty != null)
-            {
-                // Загружаем департаменты и направления через факультет
-                var directionsLoaded = ComboboxHelper.LoadFacultyDirectionGroups(
-                    comboBoxDirection,
-                    comboBoxGroup,
-                    selectedFaculty.Id,
-                    selectedDirection?.Id);
-
-				if (!directionsLoaded)
-                {
-                    MessageBox.Show("Нет доступных направлений.");
-                }
-            }
-        }
-
-        private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedDirection = (Direction?)comboBoxDirection.SelectedItem;
-            if (selectedDirection != null)
-            {
-                // Загружаем группы через выбранное направление
-                var groupsLoaded = ComboboxHelper.LoadDirectionGroups(
-                    comboBoxDirection,
-                    selectedDirection.Id);
-
-                if (!groupsLoaded)
-                {
-                    comboBoxDirection.Text = "Группы не найдены";
-                }
-
-                // Загружаем MergeGroup через выбранное направление
-                var mergeGroupsLoaded = ComboboxHelper.LoadDirectionGroups(
-                    comboBoxGroupMerge,
-                    selectedDirection.Id);
-
-                if (!mergeGroupsLoaded)
-                {
-                    comboBoxGroupMerge.Text = "Группы не найдены";
-                }
-            }
-        }
+       
 
         private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -286,11 +215,6 @@ namespace University_Dasboard
         private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedSubject = (Database.Models.Subject?)comboBoxDiscipline.SelectedItem;
-        }
-
-        private void cbSchedule_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedScheduleWeek = (ScheduleWeek?)comboBoxScheduleWeek.SelectedItem;
         }
 
         private void cbTeacher_SelectedIndexChanged(object sender, EventArgs e)

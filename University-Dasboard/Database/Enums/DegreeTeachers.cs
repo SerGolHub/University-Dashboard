@@ -10,21 +10,21 @@ namespace University_Dasboard.Database.Enums
     public enum DegreeTeachers
     {
         [Display(Name = "Преподаватель")]
-        Преподаватель,
+        Преподаватель = 0,
 
         [Display(Name = "Ст. Преподаватель")]
-        СтПреподаватель,
+        СтПреподаватель = 1,
 
         [Display(Name = "Ассистент")]
-        Ассистент,
+        Ассистент = 2,
 
         [Display(Name = "Зав. Кафедрой")]
-        ЗавКафедрой,
+        ЗавКафедрой = 3,
 
         [Display(Name = "Доцент")]
-        Доцент,
+        Доцент = 4,
 
         [Display(Name = "Профессор")]
-        Профессор
+        Профессор = 5
     }
 }
