@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Models;
-using University_Dasboard.Migrations;
 
 namespace University_Dasboard
 {

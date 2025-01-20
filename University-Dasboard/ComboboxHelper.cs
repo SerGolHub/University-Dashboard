@@ -1,4 +1,5 @@
 ﻿using Database;
+using Microsoft.EntityFrameworkCore;
 using University_Dasboard.Database.Models;
 
 namespace University_Dasboard
@@ -107,9 +108,23 @@ namespace University_Dasboard
             Guid selectedDepartmentId,
             Subject? selectedSubject)
         {
-            return LoadComboboxData<Subject>(
-                cbSubjects,
-                s => s.Direction!.DepartmentId == selectedDepartmentId);
+			using var ctx = new DatabaseContext();
+			var filteredDataList = ctx.Subject
+                .Include(s => s.Direction)
+                .Where(s => s.Direction!.DepartmentId == selectedDepartmentId)
+                .ToList();
+			LoadCombobox(
+				filteredDataList,
+				comboBox: cbSubjects);
+
+			if (filteredDataList.Count < 1)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
         }
 
         public static bool LoadFacultyDirectionSubject(
