@@ -42,15 +42,6 @@
 			tbPhoneNumber = new TextBox();
 			tbEmail = new TextBox();
 			dgvTeacherList = new DataGridView();
-			teacherBindingSource = new BindingSource(components);
-			btnDelete = new Button();
-			btnReset = new Button();
-			btnSave = new Button();
-			lbDbSaveResult = new Label();
-			label9 = new Label();
-			dtpHireDate = new DateTimePicker();
-			cbDepartment = new ComboBox();
-			cbStatus = new ComboBox();
 			Id = new DataGridViewTextBoxColumn();
 			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			PhoneNumber = new DataGridViewTextBoxColumn();
@@ -64,6 +55,15 @@
 			schedulesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			constraintsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			DgvCbDepartment = new DataGridViewComboBoxColumn();
+			teacherBindingSource = new BindingSource(components);
+			btnDelete = new Button();
+			btnReset = new Button();
+			btnSave = new Button();
+			lbDbSaveResult = new Label();
+			label9 = new Label();
+			dtpHireDate = new DateTimePicker();
+			cbDepartment = new ComboBox();
+			cbStatus = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)dgvTeacherList).BeginInit();
 			((System.ComponentModel.ISupportInitialize)teacherBindingSource).BeginInit();
 			SuspendLayout();
@@ -134,9 +134,9 @@
 			label4.ForeColor = Color.FromArgb(158, 161, 178);
 			label4.Location = new Point(12, 117);
 			label4.Name = "label4";
-			label4.Size = new Size(86, 20);
+			label4.Size = new Size(109, 20);
 			label4.TabIndex = 19;
-			label4.Text = "Степень:";
+			label4.Text = "Должность:";
 			// 
 			// label5
 			// 
@@ -180,9 +180,9 @@
 			cbDegree.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
 			cbDegree.ForeColor = Color.FromArgb(24, 30, 54);
 			cbDegree.FormattingEnabled = true;
-			cbDegree.Location = new Point(262, 111);
+			cbDegree.Location = new Point(207, 111);
 			cbDegree.Name = "cbDegree";
-			cbDegree.Size = new Size(118, 26);
+			cbDegree.Size = new Size(173, 26);
 			cbDegree.TabIndex = 22;
 			// 
 			// tbPhoneNumber
@@ -223,6 +223,89 @@
 			dgvTeacherList.TabIndex = 28;
 			dgvTeacherList.CellClick += dgvTeacherList_CellClick;
 			dgvTeacherList.CellValueChanged += dgvTeacherList_CellValueChanged;
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "ФИО";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// PhoneNumber
+			// 
+			PhoneNumber.DataPropertyName = "PhoneNumber";
+			PhoneNumber.HeaderText = "Телефон";
+			PhoneNumber.Name = "PhoneNumber";
+			// 
+			// Email
+			// 
+			Email.DataPropertyName = "Email";
+			Email.HeaderText = "Почта";
+			Email.Name = "Email";
+			// 
+			// hireDateDataGridViewTextBoxColumn
+			// 
+			hireDateDataGridViewTextBoxColumn.DataPropertyName = "HireDate";
+			hireDateDataGridViewTextBoxColumn.HeaderText = "Дата найма";
+			hireDateDataGridViewTextBoxColumn.Name = "hireDateDataGridViewTextBoxColumn";
+			// 
+			// degreeDataGridViewTextBoxColumn
+			// 
+			degreeDataGridViewTextBoxColumn.DataPropertyName = "Degree";
+			degreeDataGridViewTextBoxColumn.HeaderText = "Должность";
+			degreeDataGridViewTextBoxColumn.Name = "degreeDataGridViewTextBoxColumn";
+			// 
+			// statusDataGridViewTextBoxColumn
+			// 
+			statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+			statusDataGridViewTextBoxColumn.HeaderText = "Статус";
+			statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+			// 
+			// subjectsDataGridViewTextBoxColumn
+			// 
+			subjectsDataGridViewTextBoxColumn.DataPropertyName = "Subjects";
+			subjectsDataGridViewTextBoxColumn.HeaderText = "Subjects";
+			subjectsDataGridViewTextBoxColumn.Name = "subjectsDataGridViewTextBoxColumn";
+			subjectsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentIdDataGridViewTextBoxColumn
+			// 
+			departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
+			departmentIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentDataGridViewTextBoxColumn
+			// 
+			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
+			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
+			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
+			departmentDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// schedulesDataGridViewTextBoxColumn
+			// 
+			schedulesDataGridViewTextBoxColumn.DataPropertyName = "Schedules";
+			schedulesDataGridViewTextBoxColumn.HeaderText = "Schedules";
+			schedulesDataGridViewTextBoxColumn.Name = "schedulesDataGridViewTextBoxColumn";
+			schedulesDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// constraintsDataGridViewTextBoxColumn
+			// 
+			constraintsDataGridViewTextBoxColumn.DataPropertyName = "Constraints";
+			constraintsDataGridViewTextBoxColumn.HeaderText = "Constraints";
+			constraintsDataGridViewTextBoxColumn.Name = "constraintsDataGridViewTextBoxColumn";
+			constraintsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// DgvCbDepartment
+			// 
+			DgvCbDepartment.HeaderText = "Кафедра";
+			DgvCbDepartment.Name = "DgvCbDepartment";
 			// 
 			// teacherBindingSource
 			// 
@@ -333,89 +416,6 @@
 			cbStatus.Size = new Size(209, 26);
 			cbStatus.TabIndex = 36;
 			cbStatus.Text = "Статус";
-			// 
-			// Id
-			// 
-			Id.DataPropertyName = "Id";
-			Id.HeaderText = "Id";
-			Id.Name = "Id";
-			Id.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			nameDataGridViewTextBoxColumn.HeaderText = "ФИО";
-			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// PhoneNumber
-			// 
-			PhoneNumber.DataPropertyName = "PhoneNumber";
-			PhoneNumber.HeaderText = "Телефон";
-			PhoneNumber.Name = "PhoneNumber";
-			// 
-			// Email
-			// 
-			Email.DataPropertyName = "Email";
-			Email.HeaderText = "Почта";
-			Email.Name = "Email";
-			// 
-			// hireDateDataGridViewTextBoxColumn
-			// 
-			hireDateDataGridViewTextBoxColumn.DataPropertyName = "HireDate";
-			hireDateDataGridViewTextBoxColumn.HeaderText = "Дата найма";
-			hireDateDataGridViewTextBoxColumn.Name = "hireDateDataGridViewTextBoxColumn";
-			// 
-			// degreeDataGridViewTextBoxColumn
-			// 
-			degreeDataGridViewTextBoxColumn.DataPropertyName = "Degree";
-			degreeDataGridViewTextBoxColumn.HeaderText = "Должность";
-			degreeDataGridViewTextBoxColumn.Name = "degreeDataGridViewTextBoxColumn";
-			// 
-			// statusDataGridViewTextBoxColumn
-			// 
-			statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-			statusDataGridViewTextBoxColumn.HeaderText = "Статус";
-			statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-			// 
-			// subjectsDataGridViewTextBoxColumn
-			// 
-			subjectsDataGridViewTextBoxColumn.DataPropertyName = "Subjects";
-			subjectsDataGridViewTextBoxColumn.HeaderText = "Subjects";
-			subjectsDataGridViewTextBoxColumn.Name = "subjectsDataGridViewTextBoxColumn";
-			subjectsDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// departmentIdDataGridViewTextBoxColumn
-			// 
-			departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
-			departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
-			departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
-			departmentIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// departmentDataGridViewTextBoxColumn
-			// 
-			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
-			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
-			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
-			departmentDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// schedulesDataGridViewTextBoxColumn
-			// 
-			schedulesDataGridViewTextBoxColumn.DataPropertyName = "Schedules";
-			schedulesDataGridViewTextBoxColumn.HeaderText = "Schedules";
-			schedulesDataGridViewTextBoxColumn.Name = "schedulesDataGridViewTextBoxColumn";
-			schedulesDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// constraintsDataGridViewTextBoxColumn
-			// 
-			constraintsDataGridViewTextBoxColumn.DataPropertyName = "Constraints";
-			constraintsDataGridViewTextBoxColumn.HeaderText = "Constraints";
-			constraintsDataGridViewTextBoxColumn.Name = "constraintsDataGridViewTextBoxColumn";
-			constraintsDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// DgvCbDepartment
-			// 
-			DgvCbDepartment.HeaderText = "Кафедра";
-			DgvCbDepartment.Name = "DgvCbDepartment";
 			// 
 			// FrmTeachers
 			// 
