@@ -83,6 +83,7 @@ namespace University_Dasboard
 
 		private void btnShow_Click(object sender, EventArgs e)
 		{
+			fpGradeAnalysis.Reset();
 			LoadGradeAnalysis();
 		}
 	}

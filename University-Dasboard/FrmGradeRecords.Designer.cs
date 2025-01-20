@@ -61,24 +61,24 @@
 			// 
 			// dtpPeriodFrom
 			// 
-			dtpPeriodFrom.CustomFormat = "MMMM yyyy";
+			dtpPeriodFrom.CustomFormat = "dd MMMM yyyy";
 			dtpPeriodFrom.Format = DateTimePickerFormat.Custom;
-			dtpPeriodFrom.Location = new Point(191, 73);
+			dtpPeriodFrom.Location = new Point(163, 73);
 			dtpPeriodFrom.Name = "dtpPeriodFrom";
 			dtpPeriodFrom.ShowCheckBox = true;
 			dtpPeriodFrom.ShowUpDown = true;
-			dtpPeriodFrom.Size = new Size(127, 23);
+			dtpPeriodFrom.Size = new Size(141, 23);
 			dtpPeriodFrom.TabIndex = 55;
 			// 
 			// dtpPeriodBy
 			// 
-			dtpPeriodBy.CustomFormat = "MMMM yyyy";
+			dtpPeriodBy.CustomFormat = "dd MMMM yyyy";
 			dtpPeriodBy.Format = DateTimePickerFormat.Custom;
-			dtpPeriodBy.Location = new Point(324, 73);
+			dtpPeriodBy.Location = new Point(310, 73);
 			dtpPeriodBy.Name = "dtpPeriodBy";
 			dtpPeriodBy.ShowCheckBox = true;
 			dtpPeriodBy.ShowUpDown = true;
-			dtpPeriodBy.Size = new Size(127, 23);
+			dtpPeriodBy.Size = new Size(141, 23);
 			dtpPeriodBy.TabIndex = 55;
 			// 
 			// label2
@@ -86,7 +86,7 @@
 			label2.AutoSize = true;
 			label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.FromArgb(158, 161, 178);
-			label2.Location = new Point(243, 50);
+			label2.Location = new Point(222, 50);
 			label2.Name = "label2";
 			label2.Size = new Size(26, 20);
 			label2.TabIndex = 56;
@@ -108,7 +108,7 @@
 			label3.AutoSize = true;
 			label3.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label3.ForeColor = Color.FromArgb(158, 161, 178);
-			label3.Location = new Point(191, 9);
+			label3.Location = new Point(176, 9);
 			label3.Name = "label3";
 			label3.Size = new Size(260, 31);
 			label3.TabIndex = 56;
