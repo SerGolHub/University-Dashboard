@@ -63,8 +63,8 @@
 			teacherDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			marksDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			scheduleDisciplinesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			Teacher = new DataGridViewComboBoxColumn();
-			Direction = new DataGridViewComboBoxColumn();
+			DgvCbTeacher = new DataGridViewComboBoxColumn();
+			DgvCbDirection = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDisciplines).BeginInit();
@@ -113,7 +113,7 @@
 			dgvDisciplines.AutoGenerateColumns = false;
 			dgvDisciplines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvDisciplines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvDisciplines.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, Semester, directionIdDataGridViewTextBoxColumn, directionDataGridViewTextBoxColumn, teacherIdDataGridViewTextBoxColumn, teacherDataGridViewTextBoxColumn, marksDataGridViewTextBoxColumn, scheduleDisciplinesDataGridViewTextBoxColumn, Teacher, Direction });
+			dgvDisciplines.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, Semester, directionIdDataGridViewTextBoxColumn, directionDataGridViewTextBoxColumn, teacherIdDataGridViewTextBoxColumn, teacherDataGridViewTextBoxColumn, marksDataGridViewTextBoxColumn, scheduleDisciplinesDataGridViewTextBoxColumn, DgvCbTeacher, DgvCbDirection });
 			dgvDisciplines.DataSource = subjectBindingSource;
 			dgvDisciplines.Location = new Point(12, 308);
 			dgvDisciplines.Name = "dgvDisciplines";
@@ -381,15 +381,15 @@
 			scheduleDisciplinesDataGridViewTextBoxColumn.Name = "scheduleDisciplinesDataGridViewTextBoxColumn";
 			scheduleDisciplinesDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// Teacher
+			// DgvCbTeacher
 			// 
-			Teacher.HeaderText = "Преподаватель";
-			Teacher.Name = "Teacher";
+			DgvCbTeacher.HeaderText = "Преподаватель";
+			DgvCbTeacher.Name = "DgvCbTeacher";
 			// 
-			// Direction
+			// DgvCbDirection
 			// 
-			Direction.HeaderText = "Направление";
-			Direction.Name = "Direction";
+			DgvCbDirection.HeaderText = "Направление";
+			DgvCbDirection.Name = "DgvCbDirection";
 			// 
 			// FrmSubjects
 			// 
@@ -467,7 +467,7 @@
 		private DataGridViewTextBoxColumn teacherDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn marksDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn scheduleDisciplinesDataGridViewTextBoxColumn;
-		private DataGridViewComboBoxColumn Teacher;
-		private DataGridViewComboBoxColumn Direction;
+		private DataGridViewComboBoxColumn DgvCbTeacher;
+		private DataGridViewComboBoxColumn DgvCbDirection;
 	}
 }

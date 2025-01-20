@@ -23,12 +23,13 @@ namespace University_Dasboard.Controllers
                 Name = g.Name,
                 CourseNumber = g.CourseNumber,
                 DirectionId = g.DirectionId,
-                DirectionName = g.Direction!.Name,
             })
             .ToList();
 
             bindingList = new BindingList<GroupViewModel>(groups);
             dgv.DataSource = bindingList;
+            DataGridViewHelper.LoadDirections(ctx, dgv);
+
         }
 
         public static async Task SaveGroupsAsync(

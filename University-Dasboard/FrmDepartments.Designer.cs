@@ -50,7 +50,7 @@
 			Id = new DataGridViewTextBoxColumn();
 			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			Faculty = new DataGridViewComboBoxColumn();
+			DgvCbFaculty = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDepartments).BeginInit();
@@ -100,7 +100,7 @@
 			dgvDepartments.AutoGenerateColumns = false;
 			dgvDepartments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvDepartments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvDepartments.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, facultyIdDataGridViewTextBoxColumn, Faculty });
+			dgvDepartments.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, facultyIdDataGridViewTextBoxColumn, DgvCbFaculty });
 			dgvDepartments.DataSource = departmentBindingSource3;
 			dgvDepartments.Location = new Point(12, 304);
 			dgvDepartments.Name = "dgvDepartments";
@@ -234,10 +234,10 @@
 			facultyIdDataGridViewTextBoxColumn.Name = "facultyIdDataGridViewTextBoxColumn";
 			facultyIdDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// Faculty
+			// DgvCbFaculty
 			// 
-			Faculty.HeaderText = "Факультет";
-			Faculty.Name = "Faculty";
+			DgvCbFaculty.HeaderText = "Факультет";
+			DgvCbFaculty.Name = "DgvCbFaculty";
 			// 
 			// FrmDepartments
 			// 
@@ -293,6 +293,6 @@
 		private DataGridViewTextBoxColumn Id;
 		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn facultyIdDataGridViewTextBoxColumn;
-		private DataGridViewComboBoxColumn Faculty;
+		private DataGridViewComboBoxColumn DgvCbFaculty;
 	}
 }

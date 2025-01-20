@@ -63,7 +63,7 @@
 			departmentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			schedulesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			constraintsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			Department = new DataGridViewComboBoxColumn();
+			DgvCbDepartment = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvTeacherList).BeginInit();
 			((System.ComponentModel.ISupportInitialize)teacherBindingSource).BeginInit();
 			SuspendLayout();
@@ -215,7 +215,7 @@
 			dgvTeacherList.AutoGenerateColumns = false;
 			dgvTeacherList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvTeacherList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvTeacherList.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, PhoneNumber, Email, hireDateDataGridViewTextBoxColumn, degreeDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, subjectsDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, schedulesDataGridViewTextBoxColumn, constraintsDataGridViewTextBoxColumn, Department });
+			dgvTeacherList.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, PhoneNumber, Email, hireDateDataGridViewTextBoxColumn, degreeDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, subjectsDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, schedulesDataGridViewTextBoxColumn, constraintsDataGridViewTextBoxColumn, DgvCbDepartment });
 			dgvTeacherList.DataSource = teacherBindingSource;
 			dgvTeacherList.Location = new Point(12, 302);
 			dgvTeacherList.Name = "dgvTeacherList";
@@ -412,10 +412,10 @@
 			constraintsDataGridViewTextBoxColumn.Name = "constraintsDataGridViewTextBoxColumn";
 			constraintsDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// Department
+			// DgvCbDepartment
 			// 
-			Department.HeaderText = "Кафедра";
-			Department.Name = "Department";
+			DgvCbDepartment.HeaderText = "Кафедра";
+			DgvCbDepartment.Name = "DgvCbDepartment";
 			// 
 			// FrmTeachers
 			// 
@@ -489,6 +489,6 @@
 		private DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn schedulesDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn constraintsDataGridViewTextBoxColumn;
-		private DataGridViewComboBoxColumn Department;
+		private DataGridViewComboBoxColumn DgvCbDepartment;
 	}
 }

@@ -20,7 +20,6 @@ namespace University_Dasboard
 			public int CourseNumber { get; set; }
 
 			public Guid DirectionId { get; set; }
-			public string DirectionName { get; set; } = string.Empty;
 		}
 
 		private BindingList<GroupViewModel> groups = [];
@@ -84,7 +83,6 @@ namespace University_Dasboard
 				Name = tbGroupName.Text,
 				CourseNumber = (int)selectedCourseNumber,
 				DirectionId = selectedDirection.Id,
-				DirectionName = selectedDirection.Name,
 			};
 			groups.Add(newGroup);
 			newGroupList.Add(newGroup);
@@ -136,6 +134,10 @@ namespace University_Dasboard
 
 		private void dgvGroupList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			var editedRow = dgvGroupList.Rows[e.RowIndex];
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			GroupViewModel updatedGroup = GetGroup(id);
@@ -196,6 +198,11 @@ namespace University_Dasboard
 		private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedCourseNumber = (int?)cbCourse.SelectedItem;
+		}
+
+		private void dgvGroupList_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvGroupList, e);
 		}
 	}
 }

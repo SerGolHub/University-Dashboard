@@ -34,7 +34,7 @@ namespace University_Dasboard
 		public static void LoadFaculties(DatabaseContext ctx, DataGridView dgv)
 		{
 			var faculties = ctx.Faculty.ToList();
-			var cbColumnFaculty = dgv.Columns["Faculty"] as DataGridViewComboBoxColumn;
+			var cbColumnFaculty = dgv.Columns["DgvCbFaculty"] as DataGridViewComboBoxColumn;
 			if (cbColumnFaculty != null)
 			{
 				cbColumnFaculty.DataSource = faculties;
@@ -47,7 +47,7 @@ namespace University_Dasboard
 		public static void LoadDepartments(DatabaseContext ctx, DataGridView dgv)
 		{
 			var departments = ctx.Department.ToList();
-			var cbColumnDepartment = dgv.Columns["Department"] as DataGridViewComboBoxColumn;
+			var cbColumnDepartment = dgv.Columns["DgvCbDepartment"] as DataGridViewComboBoxColumn;
 			if (cbColumnDepartment != null)
 			{
 				cbColumnDepartment.DataSource = departments;
@@ -60,7 +60,7 @@ namespace University_Dasboard
 		public static void LoadTeachers(DatabaseContext ctx, DataGridView dgv)
 		{
 			var teacher = ctx.Teacher.ToList();
-			var cbColumnTeacher = dgv.Columns["Teacher"] as DataGridViewComboBoxColumn;
+			var cbColumnTeacher = dgv.Columns["DgvCbTeacher"] as DataGridViewComboBoxColumn;
 			if (cbColumnTeacher != null)
 			{
 				cbColumnTeacher.DataSource = teacher;
@@ -73,7 +73,7 @@ namespace University_Dasboard
 		public static void LoadDirections(DatabaseContext ctx, DataGridView dgv)
 		{
 			var direction = ctx.Direction.ToList();
-			var cbColumnDirection = dgv.Columns["Direction"] as DataGridViewComboBoxColumn;
+			var cbColumnDirection = dgv.Columns["DgvCbDirection"] as DataGridViewComboBoxColumn;
 			if (cbColumnDirection != null)
 			{
 				cbColumnDirection.DataSource = direction;
