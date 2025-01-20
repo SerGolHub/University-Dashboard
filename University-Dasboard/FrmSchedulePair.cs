@@ -33,31 +33,28 @@ namespace University_Dasboard
 
 		public class SchedulePairViewModel
         {
-			public Guid Id { get; set; }
+            public Guid Id { get; set; }
 
-			public Guid SubjectId { get; set; }
-			public string SubjectName { get; set; } = string.Empty;
+            public string Name { get; set; } = string.Empty;
 
-			public Guid FacultyId { get; set; }
-			public string FacultyName { get; set; } = string.Empty;
+            public TimeSpan StartTime { get; set; } // Время начала пары
+            public TimeSpan EndTime { get; set; } // Время окончания пары
 
-			public Guid DirectionId { get; set; }
-			public string DirectionName { get; set; } = string.Empty;
+            public string SubjectName { get; set; } = null!; // Предмет
+            public string ClassroomName { get; set; } = null!; // Аудитория
+            public string TeacherName { get; set; } = null!; // Преподаватель
 
-			public Guid GroupId { get; set; }
-			public string GroupName { get; set; } = string.Empty;
+            public Guid TeacherId { get; set; }
+            public Teacher? Teacher { get; set; }
 
-			public Guid ScheduleWeekId { get; set; }
-			public string ScheduleWeek { get; set; } = string.Empty;
-			public int LectureHours { get; set; }
-			public int PracticalHours { get; set; }
-			public int LaboratoryHours { get; set; }
-		}
+            public Guid ScheduleDisciplineId { get; set; }
+            public ScheduleDiscipline? ScheduleDiscipline { get; set; }
+        }
 
-		private BindingList<ScheduleDisciplineViewModel> schedules = new();
-		private List<ScheduleDisciplineViewModel> newScheduleList = [];
-		private List<ScheduleDisciplineViewModel> updatedScheduleList = [];
-		private List<ScheduleDisciplineViewModel> removedScheduleList = [];
+		private BindingList<SchedulePairViewModel> schedules = new();
+		private List<SchedulePairViewModel> newScheduleList = [];
+		private List<SchedulePairViewModel> updatedScheduleList = [];
+		private List<SchedulePairViewModel> removedScheduleList = [];
 
 		private Database.Models.Subject? selectedSubject;
 		private Faculty? selectedFaculty;
@@ -72,7 +69,7 @@ namespace University_Dasboard
 		{
 			using var ctx = new DatabaseContext();
 
-			ScheduleDesciplineController.LoadSchedules(dgvSchedules, ref schedules);
+			SchedulePairController.LoadSchedulePairs(dgvSchedules, ref schedules);
 			DataGridViewHelper.HideColumns(dgvSchedules,
 				["Id", "FacultyId", "DirectionId", "SubjectId", "GroupId", "ScheduleWeekId"]);
 			LoadComboboxData(ctx);
@@ -161,22 +158,12 @@ namespace University_Dasboard
 				return;
 			}
 			
-			var schedule = new ScheduleDisciplineViewModel()
+			var schedule = new SchedulePairViewModel()
 			{
 				Id = Guid.NewGuid(),
-				DirectionId = selectedDirection.Id,
-				DirectionName = selectedDirection.Name,
-				SubjectId = selectedSubject.Id,
+
 				SubjectName = selectedSubject.Name,
-				FacultyId = selectedFaculty.Id,
-				FacultyName = selectedFaculty.Name,
-				GroupId = selectedGroup.Id,
-				GroupName = selectedGroup.Name,
-				ScheduleWeekId = selectedScheduleWeek.Id,
-				ScheduleWeek = selectedScheduleWeek.Name,
-				LectureHours = selectedScheduleWeek.LectureHours,
-				PracticalHours = selectedScheduleWeek.PracticalHours,
-				LaboratoryHours = selectedScheduleWeek.LaboratoryHours,
+
 			};
 
 			schedules.Add(schedule);
@@ -191,7 +178,7 @@ namespace University_Dasboard
 			logger.Info("Данные сохраняются");
 			lbDbSaveResult.Visible = true;
 
-			await ScheduleDesciplineController.SaveSchedulesAsync(
+			await SchedulePairController.SaveSchedulePairsAsync(
 			  newScheduleList,
 			  updatedScheduleList,
 			  removedScheduleList);
@@ -215,7 +202,7 @@ namespace University_Dasboard
 			LoadData();
 		}
 
-		private ScheduleDisciplineViewModel GetSchedule(Guid id)
+		private SchedulePairViewModel GetSchedule(Guid id)
 		{
 			return schedules.First(d => d.Id == id);
 		}
@@ -230,7 +217,7 @@ namespace University_Dasboard
 			}
 
 			var id = (Guid)dgvSchedules.CurrentRow.Cells["Id"].Value;
-			ScheduleDisciplineViewModel deletedSchedule = GetSchedule(id);
+			SchedulePairViewModel deletedSchedule = GetSchedule(id);
 			schedules.Remove(deletedSchedule);
 
 			if (newScheduleList.Contains(deletedSchedule))
@@ -317,164 +304,5 @@ namespace University_Dasboard
    
         }
 
-        private void GenerateReportPdf(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbClassroomNumber.Text))
-            {
-                MessageBox.Show("Введите номер аудитории");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(tbNote.Text))
-            {
-                MessageBox.Show("Введите номер аудитории");
-                return;
-            }
-
-            if (selectedTeacher == null)
-            {
-                MessageBox.Show("Выберите преподавателя");
-                return;
-            }
-
-            // Проверка на то, что ячейка в таблице выбрана
-            if (dgvSchedules.SelectedRows.Count > 0)
-            {
-                // Получаем ID выбранного расписания
-                var selectedScheduleId = (Guid)dgvSchedules.SelectedRows[0].Cells["Id"].Value;
-
-                // Загружаем расписание по ID
-                var selectedSchedule = ScheduleDesciplineController.LoadScheduleById(selectedScheduleId);
-
-                if (selectedSchedule != null)
-                {
-                    // Создание данных для отчета с использованием информации о выбранном расписании
-                    var pdfInfo = new PdfInfo
-                    {
-                        FacultyName = selectedSchedule.FacultyName,
-                        DirectionName = selectedSchedule.DirectionName,
-                        GroupName = selectedSchedule.GroupName,
-                        SubjectName = selectedSchedule.SubjectName,
-                        LectureHours = selectedSchedule.LectureHours,
-                        PracticalHours = selectedSchedule.PracticalHours,
-                        LaboratoryHours = selectedSchedule.LaboratoryHours,
-						ClassroomNumber = tbClassroomNumber.Text,
-						DateCreate = DateTime.Now,
-						GroupNameMerge = selectedGroupMerge!.Name,
-                        SemesterName = "1 семестр",
-                        TeacherName = selectedTeacher.Name,
-						Note = tbNote.Text,
-                        FileName = GetPdfFileName()
-                    };
-
-                    // Создание и генерация отчета
-                    var reportGenerator = new SaveToPdf();
-                    reportGenerator.CreateDoc(pdfInfo);
-                    MessageBox.Show("Отчет создан успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Расписание не найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите расписание в таблице", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Метод для получения имени файла через диалоговое окно
-        private string GetPdfFileName()
-        {
-            using (var dialog = new SaveFileDialog { Filter = "PDF|*.pdf" })
-            {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    return dialog.FileName;
-                }
-            }
-
-            return string.Empty;
-        }
-
-        private void GenerateReportWord(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbClassroomNumber.Text))
-            {
-                MessageBox.Show("Введите номер аудитории");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(tbNote.Text))
-            {
-                MessageBox.Show("Введите примечание");
-                return;
-            }
-
-            if (selectedTeacher == null)
-            {
-                MessageBox.Show("Выберите преподавателя");
-                return;
-            }
-
-            // Проверка на то, что ячейка в таблице выбрана
-            if (dgvSchedules.SelectedRows.Count > 0)
-            {
-                // Получаем ID выбранного расписания
-                var selectedScheduleId = (Guid)dgvSchedules.SelectedRows[0].Cells["Id"].Value;
-
-                // Загружаем расписание по ID
-                var selectedSchedule = ScheduleDesciplineController.LoadScheduleById(selectedScheduleId);
-
-                if (selectedSchedule != null)
-                {
-                    // Создание данных для отчета с использованием информации о выбранном расписании
-                    var wordInfo = new WordInfo
-                    {
-                        FacultyName = selectedSchedule.FacultyName,
-                        DirectionName = selectedSchedule.DirectionName,
-                        GroupName = selectedSchedule.GroupName,
-                        SubjectName = selectedSchedule.SubjectName,
-                        LectureHours = selectedSchedule.LectureHours,
-                        PracticalHours = selectedSchedule.PracticalHours,
-                        LaboratoryHours = selectedSchedule.LaboratoryHours,
-                        ClassroomNumber = tbClassroomNumber.Text,
-                        DateCreate = DateTime.Now,
-                        GroupNameMerge = selectedGroupMerge!.Name,
-                        SemesterName = "1 семестр",
-                        TeacherName = selectedTeacher.Name,
-                        Note = tbNote.Text,
-                        FileName = GetWordFileName()
-                    };
-
-                    // Создание и генерация отчета
-                    var reportGenerator = new SaveToWord();
-                    reportGenerator.CreateDoc(wordInfo);
-                    MessageBox.Show("Отчет создан успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Расписание не найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите расписание в таблице", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Метод для получения имени файла через диалоговое окно
-        private string GetWordFileName()
-        {
-            using (var dialog = new SaveFileDialog { Filter = "Word Document|*.docx" })
-            {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    return dialog.FileName;
-                }
-            }
-
-            return string.Empty;
-        }
     }
 }

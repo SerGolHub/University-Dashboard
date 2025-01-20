@@ -20,6 +20,9 @@ namespace University_Dasboard.Database.Models
         public string ClassroomName { get; set; } = null!; // Аудитория
         public string TeacherName { get; set; } = null!; // Преподаватель
 
+        public Guid TeacherId { get; set; }
+        public Teacher? Teacher { get; set; }
+
         public Guid ScheduleDisciplineId { get; set; }
         public ScheduleDiscipline? ScheduleDiscipline { get; set; }
     }

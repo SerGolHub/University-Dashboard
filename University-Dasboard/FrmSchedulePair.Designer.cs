@@ -295,7 +295,6 @@
             button1.TabIndex = 62;
             button1.Text = "Создать отчёт Word";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += GenerateReportWord;
             // 
             // label7
             // 
@@ -402,7 +401,6 @@
             button2.TabIndex = 71;
             button2.Text = "Создать отчёт Pdf";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += GenerateReportPdf;
             // 
             // FrmSchedulingDiscipline
             // 

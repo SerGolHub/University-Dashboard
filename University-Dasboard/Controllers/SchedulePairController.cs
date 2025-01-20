@@ -17,21 +17,21 @@ namespace University_Dasboard.Controllers
         {
             using var ctx = new DatabaseContext();
 
-            var schedulePairs = ctx.SchedulePairs
-                .Include(sp => sp.ScheduleDiscipline)
-                .ThenInclude(sd => sd!.Subject)
-                .Include(sp => sp.ScheduleDiscipline!.Group)
-                .Include(sp => sp.ScheduleDiscipline!.Subject)
+            var schedulePairs = ctx.SchedulePairs.Include(sp => sp.ScheduleDiscipline)
+                .ThenInclude(sd => sd!.Subject).Include(sp => sp.ScheduleDiscipline!.Faculty)
+                .Include(sp => sp.ScheduleDiscipline!.Direction).Include(sp => sp.ScheduleDiscipline!.Group)
+                .Include(sp => sp.ScheduleDiscipline!.ScheduleWeek).Include(t => t.Teacher)
                 .Select(sp => new SchedulePairViewModel
                 {
                     Id = sp.Id,
-                    PairNumber = sp.PairNumber,
+                    Name = sp.Name, // Изменено для использования свойства Name
                     StartTime = sp.StartTime,
                     EndTime = sp.EndTime,
-                    Classroom = sp.Classroom,
-                    Teacher = sp.Teacher,
+                    ClassroomName = sp.ClassroomName, // Изменено для ClassroomName
+                    TeacherName = sp.TeacherName, // Изменено для TeacherName
                     ScheduleDisciplineId = sp.ScheduleDisciplineId,
-                    ScheduleDisciplineName = sp.ScheduleDiscipline!.Subject!.Name
+                    SubjectName = sp.ScheduleDiscipline!.Subject!.Name
+                    
                 })
                 .ToList();
 
@@ -50,13 +50,13 @@ namespace University_Dasboard.Controllers
                 .Select(sp => new SchedulePairViewModel
                 {
                     Id = sp.Id,
-                    PairNumber = sp.PairNumber,
+                    Name = sp.Name,
                     StartTime = sp.StartTime,
                     EndTime = sp.EndTime,
-                    Classroom = sp.Classroom,
-                    Teacher = sp.Teacher,
+                    ClassroomName = sp.ClassroomName,
+                    TeacherName = sp.TeacherName,
                     ScheduleDisciplineId = sp.ScheduleDisciplineId,
-                    ScheduleDisciplineName = sp.ScheduleDiscipline!.Subject!.Name
+                    SubjectName = sp.ScheduleDiscipline!.Subject!.Name
                 })
                 .FirstOrDefault();
 
@@ -85,12 +85,12 @@ namespace University_Dasboard.Controllers
             var newEntities = newPairs.Select(p => new SchedulePair
             {
                 Id = Guid.NewGuid(),
-                PairNumber = p.PairNumber,
+                Name = p.Name, // Используем Name
                 StartTime = p.StartTime,
                 EndTime = p.EndTime,
-                Classroom = p.Classroom,
-                Teacher = p.Teacher,
-                ScheduleDisciplineId = p.ScheduleDisciplineId
+                ClassroomName = p.ClassroomName,
+                TeacherName = p.TeacherName,
+                SubjectName = p.ScheduleDiscipline!.Subject!.Name
             }).ToList();
 
             await ctx.SchedulePairs.AddRangeAsync(newEntities);
@@ -107,11 +107,11 @@ namespace University_Dasboard.Controllers
             foreach (var existingPair in existingPairs)
             {
                 var updatedPair = updatedPairs.First(p => p.Id == existingPair.Id);
-                existingPair.PairNumber = updatedPair.PairNumber;
+                existingPair.Name = updatedPair.Name;
                 existingPair.StartTime = updatedPair.StartTime;
                 existingPair.EndTime = updatedPair.EndTime;
-                existingPair.Classroom = updatedPair.Classroom;
-                existingPair.Teacher = updatedPair.Teacher;
+                existingPair.ClassroomName = updatedPair.ClassroomName;
+                existingPair.TeacherName = updatedPair.TeacherName;
                 existingPair.ScheduleDisciplineId = updatedPair.ScheduleDisciplineId;
             }
         }
