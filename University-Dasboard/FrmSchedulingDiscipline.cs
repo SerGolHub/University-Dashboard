@@ -314,7 +314,6 @@ namespace University_Dasboard
         private void cbGroupMerge_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedGroupMerge = (Group?)comboBoxGroupMerge.SelectedItem;
-   
         }
 
         private void GenerateReportPdf(object sender, EventArgs e)

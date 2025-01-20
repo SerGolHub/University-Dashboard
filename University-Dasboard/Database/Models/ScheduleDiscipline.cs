@@ -25,5 +25,7 @@ namespace University_Dasboard.Database.Models
 
 		public Guid ScheduleWeekId { get; set; }
 		public ScheduleWeek? ScheduleWeek { get; set; }
+
+        public ICollection<SchedulePair> SchedulePairs { get; set; } = null!;
     }
 }

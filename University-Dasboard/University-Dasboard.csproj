@@ -86,6 +86,9 @@
 		<Compile Update="FrmReportCheckLesson.cs">
 		  <SubType>Form</SubType>
 		</Compile>
+		<Compile Update="FrmSchedulePair.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="FrmSchedulingWeek.cs">
 			<SubType>Form</SubType>
 		</Compile>

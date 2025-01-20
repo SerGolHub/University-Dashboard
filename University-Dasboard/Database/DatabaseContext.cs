@@ -19,8 +19,9 @@ namespace Database
 		public DbSet<User> User { get; set; }
 		public DbSet<ScheduleWeek> ScheduleWeek { get; set; }
 		public DbSet<ScheduleDiscipline> ScheduleDisciplines { get; set; }
+        public DbSet<SchedulePair> SchedulePairs { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new DepartmentCfg());
 			modelBuilder.ApplyConfiguration(new DirectionCfg());
