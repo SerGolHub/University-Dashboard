@@ -1,7 +1,6 @@
 ﻿using Database;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Models;
 
@@ -16,12 +15,10 @@ namespace University_Dasboard
 			public DateTime EnrollmentDate { get; set; }
 			public string EnrollmentNumber { get; set; } = string.Empty;
 			public bool IsExcellentStudent { get; set; }
-			public int CourseNumber { get; set; }
 
 			public Guid GroupId { get; set; }
-			public string GroupName { get; set; } = String.Empty;
 		}
-		
+
 		public FrmStudents()
 		{
 			InitializeComponent();
@@ -37,6 +34,7 @@ namespace University_Dasboard
 		private Direction? selectedDirection;
 		private Group? selectedGroup;
 		private bool? isExcelent;
+		private bool canSaveChanges = true;
 
 		private void LoadData()
 		{
@@ -49,6 +47,29 @@ namespace University_Dasboard
 				faculties,
 				comboBox: cbFaculty);
 
+		}
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
+
+		private bool IsValidEnrollmentNumber(string number)
+		{
+			// Регулярное выражение для формата "xxxx", где x — цифра
+			string pattern = @"^\d{4}$";
+			return System.Text.RegularExpressions.Regex.IsMatch(number, pattern);
 		}
 
 		private void ClearTempLists()
@@ -91,35 +112,39 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (tbEnrollmentNumber == null)
+			if (tbEnrollmentNumber.Text == string.Empty)
 			{
 				MessageBox.Show("Введите номер зачисления");
 				return;
 			}
 
-			if (isExcelent == null)
+			if (!IsValidEnrollmentNumber(tbEnrollmentNumber.Text))
 			{
-				isExcelent = false;
+				MessageBox.Show("Введите номер зачисления в формате xxxx, где x - цифра");
+				return;
 			}
+
 
 			var newStudent = new StudentViewModel()
 			{
 				Id = Guid.NewGuid(),
 				Name = tbFullName.Text,
-				EnrollmentDate = dateTimePicker1.Value.Date.ToUniversalTime(),
+				EnrollmentDate = dateTimePicker1.Value.ToUniversalTime().Date,
 				EnrollmentNumber = tbEnrollmentNumber.Text,
-				IsExcellentStudent = (bool)isExcelent,
-				CourseNumber = selectedGroup.CourseNumber,
 				GroupId = selectedGroup.Id,
-				GroupName = selectedGroup.Name
 			};
-			
+
 			students.Add(newStudent);
 			newStudentList.Add(newStudent);
 		}
 
 		private async void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = true;
@@ -141,6 +166,7 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
+			CanSaveChanges(true);
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)
@@ -166,7 +192,43 @@ namespace University_Dasboard
 		}
 		private void dgvStudentList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			var editedRow = dgvStudentList.Rows[e.RowIndex];
+			string columnName = dgvStudentList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+			if (columnName == "EnrollmentDate")
+			{
+				string inputtedDate = (string)editedRow.Cells["EnrollmentDate"].Value;
+				// Попытка разобрать строку в формате "dd.MM.yyyy"
+				bool isValidDate = DateTime.TryParseExact(inputtedDate,
+													   "dd.MM.yyyy",
+													   CultureInfo.InvariantCulture,
+													   DateTimeStyles.None,
+													   out DateTime result);
+				if (!isValidDate)
+				{
+					MessageBox.Show("Введена некорректная дата. Введите дату в формате: дд.мм.гггг");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+			}
+			if (columnName == "EnrollmentNumber")
+			{
+				string inputtedEnrollmentNumber = (string)editedRow.Cells["EnrollmentNumber"].Value;
+				if (!IsValidEnrollmentNumber(inputtedEnrollmentNumber))
+				{
+					MessageBox.Show("Введите номер зачисления в формате xxxx, где x - цифра");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+			}
+			cell.Style.BackColor = Color.White;
+			CanSaveChanges(true);
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			StudentViewModel updatedStudent = GetStudent(id);
 			updatedStudentList.Add(updatedStudent);
@@ -233,20 +295,21 @@ namespace University_Dasboard
 			selectedGroup = (Group?)cbGroup.SelectedItem;
 		}
 
-		private void cbExcellentStudent_SelectedIndexChanged(object sender, EventArgs e)
+		private void dgvStudentList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			string? answer = (string?)cbExcellentStudent.SelectedItem;
-			if (answer == null)
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvStudentList, e);
+		}
+
+		private void dgvStudentList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			var editedRow = dgvStudentList.Rows[e.RowIndex];
+			string columnName = dgvStudentList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
+			if (columnName == "EnrollmentDate")
 			{
+				MessageBox.Show("Введите дату в формате дд.мм.гггг");
 				return;
-			}
-			if (answer == "Да")
-			{
-				isExcelent = true;
-			}
-			else
-			{
-				isExcelent = false;
 			}
 		}
 	}

@@ -30,6 +30,7 @@ namespace University_Dasboard
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
 		private int? selectedCourseNumber;
+		private bool canSaveChanges = true;
 
 		private void LoadData()
 		{
@@ -48,6 +49,22 @@ namespace University_Dasboard
 			newGroupList.Clear();
 			updatedGroupList.Clear();
 			removedGroupList.Clear();
+		}
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -90,6 +107,11 @@ namespace University_Dasboard
 
 		private async void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = true;
@@ -139,10 +161,52 @@ namespace University_Dasboard
 				return;
 			}
 			var editedRow = dgvGroupList.Rows[e.RowIndex];
+			string columnName = dgvGroupList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			GroupViewModel updatedGroup = GetGroup(id);
+
+			if (columnName == "CourseNumber")
+			{
+				int editedCourseNumber;
+				try
+				{
+					editedCourseNumber = Convert.ToInt32(editedRow.Cells["CourseNumber"].Value);
+				}
+				catch
+				{
+					MessageBox.Show("Введите цифру курса");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+				if (editedCourseNumber < 1)
+				{
+					MessageBox.Show("Курс не может быть меньше 1");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+				using var ctx = new DatabaseContext();
+				int maxCourseNumber = Convert.ToInt32(ctx.Group
+					.Where(g => g.Id == updatedGroup.Id)
+					.Select(g => g.Direction!.MaxCourse)
+					.First());
+				if (editedCourseNumber > maxCourseNumber)
+				{
+					MessageBox.Show($"Курс выбранной группы не может быть больше {maxCourseNumber}");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+			}
+			cell.Style.BackColor = Color.White;
+			CanSaveChanges(true);
 			updatedGroupList.Add(updatedGroup);
 		}
+
+
 
 		private void dgvGroupList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
 		{
@@ -203,6 +267,19 @@ namespace University_Dasboard
 		private void dgvGroupList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			DataGridViewHelper.ExpandComboBoxOnEdit(dgvGroupList, e);
+		}
+
+		private void dgvGroupList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			var editedRow = dgvGroupList.Rows[e.RowIndex];
+			string columnName = dgvGroupList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
+			if (columnName == "CourseNumber")
+			{
+				MessageBox.Show("Поле может содержать только цифру");
+				return;
+			}
 		}
 	}
 }

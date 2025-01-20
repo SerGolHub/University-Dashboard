@@ -166,6 +166,7 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
+			CanSaveChanges(true);
 		}
 		public bool CanSaveChanges(bool value)
 		{

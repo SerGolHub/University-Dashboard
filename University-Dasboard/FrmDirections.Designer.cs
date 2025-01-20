@@ -55,7 +55,7 @@
 			label7 = new Label();
 			Id = new DataGridViewTextBoxColumn();
 			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Code = new DataGridViewTextBoxColumn();
 			maxCourseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			facultyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			facultyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -112,7 +112,7 @@
 			dgvDirections.AutoGenerateColumns = false;
 			dgvDirections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvDirections.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvDirections.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn, maxCourseDataGridViewTextBoxColumn, facultyIdDataGridViewTextBoxColumn, facultyDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, groupsDataGridViewTextBoxColumn, subjectsDataGridViewTextBoxColumn, DgvCbDepartment });
+			dgvDirections.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, Code, maxCourseDataGridViewTextBoxColumn, facultyIdDataGridViewTextBoxColumn, facultyDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, groupsDataGridViewTextBoxColumn, subjectsDataGridViewTextBoxColumn, DgvCbDepartment });
 			dgvDirections.DataSource = directionBindingSource;
 			dgvDirections.Location = new Point(12, 312);
 			dgvDirections.Name = "dgvDirections";
@@ -314,11 +314,11 @@
 			nameDataGridViewTextBoxColumn.HeaderText = "Направление";
 			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
 			// 
-			// codeDataGridViewTextBoxColumn
+			// Code
 			// 
-			codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-			codeDataGridViewTextBoxColumn.HeaderText = "Код";
-			codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+			Code.DataPropertyName = "Code";
+			Code.HeaderText = "Код";
+			Code.Name = "Code";
 			// 
 			// maxCourseDataGridViewTextBoxColumn
 			// 
@@ -438,7 +438,7 @@
 		private Label label7;
 		private DataGridViewTextBoxColumn Id;
 		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Code;
 		private DataGridViewTextBoxColumn maxCourseDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn facultyIdDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn facultyDataGridViewTextBoxColumn;

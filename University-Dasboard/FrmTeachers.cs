@@ -320,10 +320,10 @@ namespace University_Dasboard
 				}
 			}
 			cell.Style.BackColor = Color.White;
+			CanSaveChanges(true);
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			TeacherViewModel updatedTeacher = teachers.First(t => t.Id == id);
 			updatedTeacherList.Add(updatedTeacher);
-			CanSaveChanges(true);
 			logger.Info($"Преподаватель с ID {updatedTeacher.Id} добавлен в список на обновление.");
 		}
 

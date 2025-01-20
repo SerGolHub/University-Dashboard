@@ -59,11 +59,11 @@ namespace University_Dasboard
 
 		public static void LoadTeachers(DatabaseContext ctx, DataGridView dgv)
 		{
-			var teacher = ctx.Teacher.ToList();
+			var teachers = ctx.Teacher.ToList();
 			var cbColumnTeacher = dgv.Columns["DgvCbTeacher"] as DataGridViewComboBoxColumn;
 			if (cbColumnTeacher != null)
 			{
-				cbColumnTeacher.DataSource = teacher;
+				cbColumnTeacher.DataSource = teachers;
 				cbColumnTeacher.DisplayMember = "Name"; // Отображаемое значение
 				cbColumnTeacher.ValueMember = "Id"; // Связь по идентификатору
 				cbColumnTeacher.DataPropertyName = "TeacherId"; // Связь с свойством BindingList
@@ -72,14 +72,27 @@ namespace University_Dasboard
 
 		public static void LoadDirections(DatabaseContext ctx, DataGridView dgv)
 		{
-			var direction = ctx.Direction.ToList();
+			var directions = ctx.Direction.ToList();
 			var cbColumnDirection = dgv.Columns["DgvCbDirection"] as DataGridViewComboBoxColumn;
 			if (cbColumnDirection != null)
 			{
-				cbColumnDirection.DataSource = direction;
+				cbColumnDirection.DataSource = directions;
 				cbColumnDirection.DisplayMember = "Name"; // Отображаемое значение
 				cbColumnDirection.ValueMember = "Id"; // Связь по идентификатору
 				cbColumnDirection.DataPropertyName = "DirectionId"; // Связь с свойством BindingList
+			}
+		}
+
+		public static void LoadGroup(DatabaseContext ctx, DataGridView dgv)
+		{
+			var groups = ctx.Group.ToList();
+			var cbColumnDGroup = dgv.Columns["DgvCbGroup"] as DataGridViewComboBoxColumn;
+			if (cbColumnDGroup != null)
+			{
+				cbColumnDGroup.DataSource = groups;
+				cbColumnDGroup.DisplayMember = "Name"; // Отображаемое значение
+				cbColumnDGroup.ValueMember = "Id"; // Связь по идентификатору
+				cbColumnDGroup.DataPropertyName = "GroupId"; // Связь с свойством BindingList
 			}
 		}
 	}

@@ -1,8 +1,10 @@
 ﻿using Database;
 using NLog;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Models;
+using University_Dasboard.Migrations;
 
 namespace University_Dasboard
 {
@@ -26,7 +28,7 @@ namespace University_Dasboard
 		private List<DirectionViewModel> removedDirectionList = [];
 		private Faculty? selectedFaculty;
 		private Department? selectedDepartment;
-
+		private bool canSaveChanges = true;
 
 		public FrmDirections()
 		{
@@ -49,6 +51,23 @@ namespace University_Dasboard
 			logger.Info("Направления были успешно загружены");
 		}
 
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
+
 		private void ClearTempLists()
 		{
 			newDirectionList.Clear();
@@ -58,6 +77,12 @@ namespace University_Dasboard
 			logger.Info("Очистка списка направлений");
 		}
 
+		private bool IsValidCode(string code)
+		{
+			// Регулярное выражение для формата "xx.xx.xx"
+			string pattern = @"^\d{2}\.\d{2}\.\d{2}$";
+			return Regex.IsMatch(code, pattern);
+		}
 		private void tbMaxCourse_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
@@ -93,10 +118,32 @@ namespace University_Dasboard
 				logger.Warn("Пользователь не ввёл нужный код направления для нового направления");
 				return;
 			}
+			if (!IsValidCode(tbDirectionCode.Text))
+			{
+				MessageBox.Show("Введите код направления в формате xx.xx.xx");
+				return;
+			}
+
 			if (tbMaxCourse.Text.Length == 0)
 			{
 				MessageBox.Show("Введите цифру последнего курса");
 				logger.Warn("Пользователь не ввёл последний курс для нового направления");
+				return;
+			}
+			int inputtedMaxCourse;
+			try
+			{
+				inputtedMaxCourse = Convert.ToInt32(tbMaxCourse.Text);
+			}
+			catch
+			{
+				MessageBox.Show("Введите цифру");
+				return;
+			}
+			if (inputtedMaxCourse < 1)
+			{
+				MessageBox.Show("Максимальный курс не может быть меньше 1");
+				logger.Warn("Пользователь ввёл неверные данные в поле максимального курса");
 				return;
 			}
 
@@ -118,6 +165,11 @@ namespace University_Dasboard
 
 		async private void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			logger.Info("Данные сохраняются...");
@@ -140,6 +192,7 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
+			CanSaveChanges(true);
 		}
 
 		private DirectionViewModel GetDirection(Guid id)
@@ -173,6 +226,23 @@ namespace University_Dasboard
 				return;
 			}
 			var editedRow = dgvDirections.Rows[e.RowIndex];
+			string columnName = dgvDirections.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
+			if (columnName == "Code")
+			{
+				string input = (string)editedRow.Cells["Code"].Value;
+				if (!IsValidCode(input))
+				{
+					MessageBox.Show("Введите код направления в формате xx.xx.xx");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+			}
+
+			cell.Style.BackColor = Color.White;
+			CanSaveChanges(true);
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			DirectionViewModel updatedDirection = GetDirection(id);
 			updatedDirectionList.Add(updatedDirection);

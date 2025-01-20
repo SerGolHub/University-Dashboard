@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			components = new System.ComponentModel.Container();
 			btnAdd = new Button();
 			tbFullName = new TextBox();
 			label2 = new Label();
@@ -36,13 +37,12 @@
 			label5 = new Label();
 			label6 = new Label();
 			label7 = new Label();
-			label8 = new Label();
 			cbGroup = new ComboBox();
 			cbFaculty = new ComboBox();
 			cbDepartment = new ComboBox();
 			tbEnrollmentNumber = new TextBox();
-			cbExcellentStudent = new ComboBox();
 			dgvStudentList = new DataGridView();
+			studentBindingSource = new BindingSource(components);
 			btnDelete = new Button();
 			btnReset = new Button();
 			btnSave = new Button();
@@ -51,7 +51,17 @@
 			label10 = new Label();
 			cbDirection = new ComboBox();
 			dateTimePicker1 = new DateTimePicker();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Id = new DataGridViewTextBoxColumn();
+			DgvCbGroup = new DataGridViewComboBoxColumn();
+			IsExcellentStudent = new DataGridViewCheckBoxColumn();
+			EnrollmentDate = new DataGridViewTextBoxColumn();
+			EnrollmentNumber = new DataGridViewTextBoxColumn();
+			groupIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Group = new DataGridViewTextBoxColumn();
+			marksDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvStudentList).BeginInit();
+			((System.ComponentModel.ISupportInitialize)studentBindingSource).BeginInit();
 			SuspendLayout();
 			// 
 			// btnAdd
@@ -146,17 +156,6 @@
 			label7.TabIndex = 19;
 			label7.Text = "Дата зачисления:";
 			// 
-			// label8
-			// 
-			label8.AutoSize = true;
-			label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label8.ForeColor = Color.FromArgb(158, 161, 178);
-			label8.Location = new Point(418, 99);
-			label8.Name = "label8";
-			label8.Size = new Size(97, 20);
-			label8.TabIndex = 19;
-			label8.Text = "Отличник:";
-			// 
 			// cbGroup
 			// 
 			cbGroup.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -215,34 +214,27 @@
 			tbEnrollmentNumber.Size = new Size(185, 24);
 			tbEnrollmentNumber.TabIndex = 20;
 			// 
-			// cbExcellentStudent
-			// 
-			cbExcellentStudent.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			cbExcellentStudent.AutoCompleteSource = AutoCompleteSource.ListItems;
-			cbExcellentStudent.BackColor = Color.FromArgb(158, 161, 178);
-			cbExcellentStudent.FlatStyle = FlatStyle.Flat;
-			cbExcellentStudent.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-			cbExcellentStudent.ForeColor = Color.FromArgb(24, 30, 54);
-			cbExcellentStudent.FormattingEnabled = true;
-			cbExcellentStudent.Items.AddRange(new object[] { "Да", "Нет" });
-			cbExcellentStudent.Location = new Point(597, 96);
-			cbExcellentStudent.Name = "cbExcellentStudent";
-			cbExcellentStudent.Size = new Size(70, 26);
-			cbExcellentStudent.TabIndex = 22;
-			cbExcellentStudent.SelectedIndexChanged += cbExcellentStudent_SelectedIndexChanged;
-			// 
 			// dgvStudentList
 			// 
 			dgvStudentList.AllowUserToAddRows = false;
 			dgvStudentList.AllowUserToDeleteRows = false;
+			dgvStudentList.AutoGenerateColumns = false;
 			dgvStudentList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvStudentList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvStudentList.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, Id, DgvCbGroup, IsExcellentStudent, EnrollmentDate, EnrollmentNumber, groupIdDataGridViewTextBoxColumn, Group, marksDataGridViewTextBoxColumn });
+			dgvStudentList.DataSource = studentBindingSource;
 			dgvStudentList.Location = new Point(12, 322);
 			dgvStudentList.Name = "dgvStudentList";
 			dgvStudentList.Size = new Size(820, 319);
 			dgvStudentList.TabIndex = 28;
+			dgvStudentList.CellClick += dgvStudentList_CellClick;
 			dgvStudentList.CellValueChanged += dgvStudentList_CellValueChanged;
+			dgvStudentList.DataError += dgvStudentList_DataError;
 			dgvStudentList.RowPostPaint += dgvStudentList_RowPostPaint;
+			// 
+			// studentBindingSource
+			// 
+			studentBindingSource.DataSource = typeof(Database.Models.Student);
 			// 
 			// btnDelete
 			// 
@@ -349,6 +341,65 @@
 			dateTimePicker1.Size = new Size(127, 23);
 			dateTimePicker1.TabIndex = 55;
 			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "ФИО";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// DgvCbGroup
+			// 
+			DgvCbGroup.HeaderText = "Группа";
+			DgvCbGroup.Name = "DgvCbGroup";
+			DgvCbGroup.Resizable = DataGridViewTriState.True;
+			// 
+			// IsExcellentStudent
+			// 
+			IsExcellentStudent.DataPropertyName = "IsExcellentStudent";
+			IsExcellentStudent.HeaderText = "Отличник";
+			IsExcellentStudent.Name = "IsExcellentStudent";
+			IsExcellentStudent.ReadOnly = true;
+			// 
+			// EnrollmentDate
+			// 
+			EnrollmentDate.DataPropertyName = "EnrollmentDate";
+			EnrollmentDate.HeaderText = "Дата зачисления";
+			EnrollmentDate.Name = "EnrollmentDate";
+			// 
+			// EnrollmentNumber
+			// 
+			EnrollmentNumber.DataPropertyName = "EnrollmentNumber";
+			EnrollmentNumber.HeaderText = "Номер зачисления";
+			EnrollmentNumber.Name = "EnrollmentNumber";
+			// 
+			// groupIdDataGridViewTextBoxColumn
+			// 
+			groupIdDataGridViewTextBoxColumn.DataPropertyName = "GroupId";
+			groupIdDataGridViewTextBoxColumn.HeaderText = "GroupId";
+			groupIdDataGridViewTextBoxColumn.Name = "groupIdDataGridViewTextBoxColumn";
+			groupIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// Group
+			// 
+			Group.DataPropertyName = "Group";
+			Group.HeaderText = "Group";
+			Group.Name = "Group";
+			Group.Visible = false;
+			// 
+			// marksDataGridViewTextBoxColumn
+			// 
+			marksDataGridViewTextBoxColumn.DataPropertyName = "Marks";
+			marksDataGridViewTextBoxColumn.HeaderText = "Marks";
+			marksDataGridViewTextBoxColumn.Name = "marksDataGridViewTextBoxColumn";
+			marksDataGridViewTextBoxColumn.Visible = false;
+			// 
 			// FrmStudents
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -366,7 +417,6 @@
 			Controls.Add(cbDepartment);
 			Controls.Add(cbFaculty);
 			Controls.Add(cbGroup);
-			Controls.Add(cbExcellentStudent);
 			Controls.Add(btnAdd);
 			Controls.Add(tbEnrollmentNumber);
 			Controls.Add(tbFullName);
@@ -374,7 +424,6 @@
 			Controls.Add(label5);
 			Controls.Add(label4);
 			Controls.Add(label3);
-			Controls.Add(label8);
 			Controls.Add(label7);
 			Controls.Add(label6);
 			Controls.Add(label2);
@@ -382,6 +431,7 @@
 			Name = "FrmStudents";
 			Text = "frmStudentList";
 			((System.ComponentModel.ISupportInitialize)dgvStudentList).EndInit();
+			((System.ComponentModel.ISupportInitialize)studentBindingSource).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -396,12 +446,10 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private Label label8;
         private ComboBox cbGroup;
         private ComboBox cbFaculty;
         private ComboBox cbDepartment;
         private TextBox tbEnrollmentNumber;
-        private ComboBox cbExcellentStudent;
         private DataGridView dgvStudentList;
         private Button btnDelete;
         private Button btnReset;
@@ -411,5 +459,15 @@
         private Label label10;
         private ComboBox cbDirection;
 		private DateTimePicker dateTimePicker1;
+		private BindingSource studentBindingSource;
+		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Id;
+		private DataGridViewComboBoxColumn DgvCbGroup;
+		private DataGridViewCheckBoxColumn IsExcellentStudent;
+		private DataGridViewTextBoxColumn EnrollmentDate;
+		private DataGridViewTextBoxColumn EnrollmentNumber;
+		private DataGridViewTextBoxColumn groupIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Group;
+		private DataGridViewTextBoxColumn marksDataGridViewTextBoxColumn;
 	}
 }

@@ -30,6 +30,14 @@
 		{
 			components = new System.ComponentModel.Container();
 			dgvGroupList = new DataGridView();
+			Id = new DataGridViewTextBoxColumn();
+			Direction = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			CourseNumber = new DataGridViewTextBoxColumn();
+			directionIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			DgvCbDirection = new DataGridViewComboBoxColumn();
+			studentsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			scheduleDisciplinesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			groupBindingSource = new BindingSource(components);
 			btnDelete = new Button();
 			btnReset = new Button();
@@ -48,14 +56,6 @@
 			cbCourse = new ComboBox();
 			label1 = new Label();
 			groupBindingSource1 = new BindingSource(components);
-			Id = new DataGridViewTextBoxColumn();
-			Direction = new DataGridViewTextBoxColumn();
-			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			courseNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			directionIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			DgvCbDirection = new DataGridViewComboBoxColumn();
-			studentsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-			scheduleDisciplinesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvGroupList).BeginInit();
 			((System.ComponentModel.ISupportInitialize)groupBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)groupBindingSource1).BeginInit();
@@ -68,7 +68,7 @@
 			dgvGroupList.AutoGenerateColumns = false;
 			dgvGroupList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvGroupList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvGroupList.Columns.AddRange(new DataGridViewColumn[] { Id, Direction, nameDataGridViewTextBoxColumn, courseNumberDataGridViewTextBoxColumn, directionIdDataGridViewTextBoxColumn, DgvCbDirection, studentsDataGridViewTextBoxColumn, scheduleDisciplinesDataGridViewTextBoxColumn });
+			dgvGroupList.Columns.AddRange(new DataGridViewColumn[] { Id, Direction, nameDataGridViewTextBoxColumn, CourseNumber, directionIdDataGridViewTextBoxColumn, DgvCbDirection, studentsDataGridViewTextBoxColumn, scheduleDisciplinesDataGridViewTextBoxColumn });
 			dgvGroupList.DataSource = groupBindingSource;
 			dgvGroupList.Location = new Point(12, 284);
 			dgvGroupList.Name = "dgvGroupList";
@@ -76,7 +76,62 @@
 			dgvGroupList.TabIndex = 53;
 			dgvGroupList.CellClick += dgvGroupList_CellClick;
 			dgvGroupList.CellValueChanged += dgvGroupList_CellValueChanged;
+			dgvGroupList.DataError += dgvGroupList_DataError;
 			dgvGroupList.RowPostPaint += dgvGroupList_RowPostPaint;
+			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// Direction
+			// 
+			Direction.DataPropertyName = "Direction";
+			Direction.HeaderText = "Direction";
+			Direction.Name = "Direction";
+			Direction.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Группа";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// CourseNumber
+			// 
+			CourseNumber.DataPropertyName = "CourseNumber";
+			CourseNumber.HeaderText = "Курс";
+			CourseNumber.Name = "CourseNumber";
+			// 
+			// directionIdDataGridViewTextBoxColumn
+			// 
+			directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
+			directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
+			directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
+			directionIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// DgvCbDirection
+			// 
+			DgvCbDirection.HeaderText = "Направление";
+			DgvCbDirection.Name = "DgvCbDirection";
+			DgvCbDirection.Resizable = DataGridViewTriState.True;
+			DgvCbDirection.SortMode = DataGridViewColumnSortMode.Automatic;
+			// 
+			// studentsDataGridViewTextBoxColumn
+			// 
+			studentsDataGridViewTextBoxColumn.DataPropertyName = "Students";
+			studentsDataGridViewTextBoxColumn.HeaderText = "Students";
+			studentsDataGridViewTextBoxColumn.Name = "studentsDataGridViewTextBoxColumn";
+			studentsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// scheduleDisciplinesDataGridViewTextBoxColumn
+			// 
+			scheduleDisciplinesDataGridViewTextBoxColumn.DataPropertyName = "ScheduleDisciplines";
+			scheduleDisciplinesDataGridViewTextBoxColumn.HeaderText = "ScheduleDisciplines";
+			scheduleDisciplinesDataGridViewTextBoxColumn.Name = "scheduleDisciplinesDataGridViewTextBoxColumn";
+			scheduleDisciplinesDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// groupBindingSource
 			// 
@@ -291,60 +346,6 @@
 			// 
 			groupBindingSource1.DataSource = typeof(Database.Models.Group);
 			// 
-			// Id
-			// 
-			Id.DataPropertyName = "Id";
-			Id.HeaderText = "Id";
-			Id.Name = "Id";
-			Id.Visible = false;
-			// 
-			// Direction
-			// 
-			Direction.DataPropertyName = "Direction";
-			Direction.HeaderText = "Direction";
-			Direction.Name = "Direction";
-			Direction.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			nameDataGridViewTextBoxColumn.HeaderText = "Группа";
-			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// courseNumberDataGridViewTextBoxColumn
-			// 
-			courseNumberDataGridViewTextBoxColumn.DataPropertyName = "CourseNumber";
-			courseNumberDataGridViewTextBoxColumn.HeaderText = "Курс";
-			courseNumberDataGridViewTextBoxColumn.Name = "courseNumberDataGridViewTextBoxColumn";
-			// 
-			// directionIdDataGridViewTextBoxColumn
-			// 
-			directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
-			directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
-			directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
-			directionIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// DgvCbDirection
-			// 
-			DgvCbDirection.HeaderText = "Направление";
-			DgvCbDirection.Name = "DgvCbDirection";
-			DgvCbDirection.Resizable = DataGridViewTriState.True;
-			DgvCbDirection.SortMode = DataGridViewColumnSortMode.Automatic;
-			// 
-			// studentsDataGridViewTextBoxColumn
-			// 
-			studentsDataGridViewTextBoxColumn.DataPropertyName = "Students";
-			studentsDataGridViewTextBoxColumn.HeaderText = "Students";
-			studentsDataGridViewTextBoxColumn.Name = "studentsDataGridViewTextBoxColumn";
-			studentsDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// scheduleDisciplinesDataGridViewTextBoxColumn
-			// 
-			scheduleDisciplinesDataGridViewTextBoxColumn.DataPropertyName = "ScheduleDisciplines";
-			scheduleDisciplinesDataGridViewTextBoxColumn.HeaderText = "ScheduleDisciplines";
-			scheduleDisciplinesDataGridViewTextBoxColumn.Name = "scheduleDisciplinesDataGridViewTextBoxColumn";
-			scheduleDisciplinesDataGridViewTextBoxColumn.Visible = false;
-			// 
 			// FrmGroups
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -402,7 +403,7 @@
 		private DataGridViewTextBoxColumn Id;
 		private DataGridViewTextBoxColumn Direction;
 		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private DataGridViewTextBoxColumn courseNumberDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn CourseNumber;
 		private DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
 		private DataGridViewComboBoxColumn DgvCbDirection;
 		private DataGridViewTextBoxColumn studentsDataGridViewTextBoxColumn;

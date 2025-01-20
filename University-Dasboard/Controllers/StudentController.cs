@@ -22,17 +22,18 @@ namespace University_Dasboard.Controllers
             {
                 Id = s.Id,
                 Name = s.Name,
-                EnrollmentDate = s.EnrollmentDate,
+                EnrollmentDate = s.EnrollmentDate.Date,
                 EnrollmentNumber = s.EnrollmentNumber,
                 IsExcellentStudent = s.IsExcellentStudent,
                 GroupId = s.GroupId,
-                GroupName = s.Group!.Name
             })
             .ToList();
             
             bindingList = new BindingList<StudentViewModel>(students);
             dgv.DataSource = bindingList;
-        }
+            DataGridViewHelper.LoadGroup(ctx, dgv);
+
+		}
 
         public static async Task SaveStudentsAsync(
                 List<StudentViewModel> newStudentList,
@@ -62,7 +63,6 @@ namespace University_Dasboard.Controllers
                 Name = s.Name,
                 EnrollmentDate = s.EnrollmentDate,
                 EnrollmentNumber = s.EnrollmentNumber,
-                IsExcellentStudent = s.IsExcellentStudent,
                 GroupId = s.GroupId
             }).ToList();
 
@@ -88,7 +88,6 @@ namespace University_Dasboard.Controllers
                 existingStudent.Name = updatedStudent.Name;
                 existingStudent.EnrollmentDate = updatedStudent.EnrollmentDate;
                 existingStudent.EnrollmentNumber = updatedStudent.EnrollmentNumber;
-                existingStudent.IsExcellentStudent = updatedStudent.IsExcellentStudent;
                 existingStudent.GroupId = updatedStudent.GroupId;
             }
         }
