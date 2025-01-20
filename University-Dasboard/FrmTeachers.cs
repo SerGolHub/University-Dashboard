@@ -106,9 +106,13 @@ namespace University_Dasboard
 				logger.Info("Направления были успешно загружены");
 
 				// Загрузка значений перечисления Degree в ComboBox
-				cbDegree.DataSource = Enum.GetValues(typeof(DegreeTeachers));
+				cbDegree.DataSource = Enum.GetValues(typeof(DegreeTeachers)).Cast<DegreeTeachers>()
+                    .Select(e => new { Value = e, DisplayName = GetEnumDisplayName(e) }).ToList();
 
-				cbStatus.DataSource = Enum.GetValues(typeof(StatusTeacher)).Cast<StatusTeacher>()
+                cbDegree.DisplayMember = "DisplayName";
+                cbDegree.ValueMember = "Value";
+
+                cbStatus.DataSource = Enum.GetValues(typeof(StatusTeacher)).Cast<StatusTeacher>()
 					.Select(e => new { Value = e, DisplayName = GetEnumDisplayName(e) }).ToList();
 
 				cbStatus.DisplayMember = "DisplayName";
