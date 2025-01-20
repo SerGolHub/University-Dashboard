@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			components = new System.ComponentModel.Container();
 			btnAdd = new Button();
 			tbFullName = new TextBox();
 			label2 = new Label();
@@ -41,6 +42,7 @@
 			tbPhoneNumber = new TextBox();
 			tbEmail = new TextBox();
 			dgvTeacherList = new DataGridView();
+			teacherBindingSource = new BindingSource(components);
 			btnDelete = new Button();
 			btnReset = new Button();
 			btnSave = new Button();
@@ -49,7 +51,21 @@
 			dtpHireDate = new DateTimePicker();
 			cbDepartment = new ComboBox();
 			cbStatus = new ComboBox();
+			Id = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			PhoneNumber = new DataGridViewTextBoxColumn();
+			Email = new DataGridViewTextBoxColumn();
+			hireDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			degreeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			departmentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			departmentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			schedulesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			constraintsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Department = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvTeacherList).BeginInit();
+			((System.ComponentModel.ISupportInitialize)teacherBindingSource).BeginInit();
 			SuspendLayout();
 			// 
 			// btnAdd
@@ -196,13 +212,21 @@
 			// 
 			dgvTeacherList.AllowUserToAddRows = false;
 			dgvTeacherList.AllowUserToDeleteRows = false;
+			dgvTeacherList.AutoGenerateColumns = false;
 			dgvTeacherList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvTeacherList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvTeacherList.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, PhoneNumber, Email, hireDateDataGridViewTextBoxColumn, degreeDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, subjectsDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, schedulesDataGridViewTextBoxColumn, constraintsDataGridViewTextBoxColumn, Department });
+			dgvTeacherList.DataSource = teacherBindingSource;
 			dgvTeacherList.Location = new Point(12, 302);
 			dgvTeacherList.Name = "dgvTeacherList";
 			dgvTeacherList.Size = new Size(862, 339);
 			dgvTeacherList.TabIndex = 28;
+			dgvTeacherList.CellClick += dgvTeacherList_CellClick;
 			dgvTeacherList.CellValueChanged += dgvTeacherList_CellValueChanged;
+			// 
+			// teacherBindingSource
+			// 
+			teacherBindingSource.DataSource = typeof(Database.Models.Teacher);
 			// 
 			// btnDelete
 			// 
@@ -310,6 +334,89 @@
 			cbStatus.TabIndex = 36;
 			cbStatus.Text = "Статус";
 			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "ФИО";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// PhoneNumber
+			// 
+			PhoneNumber.DataPropertyName = "PhoneNumber";
+			PhoneNumber.HeaderText = "Телефон";
+			PhoneNumber.Name = "PhoneNumber";
+			// 
+			// Email
+			// 
+			Email.DataPropertyName = "Email";
+			Email.HeaderText = "Почта";
+			Email.Name = "Email";
+			// 
+			// hireDateDataGridViewTextBoxColumn
+			// 
+			hireDateDataGridViewTextBoxColumn.DataPropertyName = "HireDate";
+			hireDateDataGridViewTextBoxColumn.HeaderText = "Дата найма";
+			hireDateDataGridViewTextBoxColumn.Name = "hireDateDataGridViewTextBoxColumn";
+			// 
+			// degreeDataGridViewTextBoxColumn
+			// 
+			degreeDataGridViewTextBoxColumn.DataPropertyName = "Degree";
+			degreeDataGridViewTextBoxColumn.HeaderText = "Должность";
+			degreeDataGridViewTextBoxColumn.Name = "degreeDataGridViewTextBoxColumn";
+			// 
+			// statusDataGridViewTextBoxColumn
+			// 
+			statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+			statusDataGridViewTextBoxColumn.HeaderText = "Статус";
+			statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+			// 
+			// subjectsDataGridViewTextBoxColumn
+			// 
+			subjectsDataGridViewTextBoxColumn.DataPropertyName = "Subjects";
+			subjectsDataGridViewTextBoxColumn.HeaderText = "Subjects";
+			subjectsDataGridViewTextBoxColumn.Name = "subjectsDataGridViewTextBoxColumn";
+			subjectsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentIdDataGridViewTextBoxColumn
+			// 
+			departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
+			departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
+			departmentIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// departmentDataGridViewTextBoxColumn
+			// 
+			departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
+			departmentDataGridViewTextBoxColumn.HeaderText = "Department";
+			departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
+			departmentDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// schedulesDataGridViewTextBoxColumn
+			// 
+			schedulesDataGridViewTextBoxColumn.DataPropertyName = "Schedules";
+			schedulesDataGridViewTextBoxColumn.HeaderText = "Schedules";
+			schedulesDataGridViewTextBoxColumn.Name = "schedulesDataGridViewTextBoxColumn";
+			schedulesDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// constraintsDataGridViewTextBoxColumn
+			// 
+			constraintsDataGridViewTextBoxColumn.DataPropertyName = "Constraints";
+			constraintsDataGridViewTextBoxColumn.HeaderText = "Constraints";
+			constraintsDataGridViewTextBoxColumn.Name = "constraintsDataGridViewTextBoxColumn";
+			constraintsDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// Department
+			// 
+			Department.HeaderText = "Кафедра";
+			Department.Name = "Department";
+			// 
 			// FrmTeachers
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -341,6 +448,7 @@
 			Name = "FrmTeachers";
 			Text = "frmStudentList";
 			((System.ComponentModel.ISupportInitialize)dgvTeacherList).EndInit();
+			((System.ComponentModel.ISupportInitialize)teacherBindingSource).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -368,5 +476,19 @@
         private DateTimePicker dtpHireDate;
         private ComboBox cbDepartment;
         private ComboBox cbStatus;
-    }
+		private BindingSource teacherBindingSource;
+		private DataGridViewTextBoxColumn Id;
+		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn PhoneNumber;
+		private DataGridViewTextBoxColumn Email;
+		private DataGridViewTextBoxColumn hireDateDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn degreeDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn subjectsDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn departmentIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn schedulesDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn constraintsDataGridViewTextBoxColumn;
+		private DataGridViewComboBoxColumn Department;
+	}
 }

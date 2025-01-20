@@ -33,6 +33,7 @@ namespace University_Dasboard.Controllers
 
                 bindingList = new BindingList<TeacherViewModel>(teachers);
                 dgv.DataSource = bindingList;
+                DataGridViewHelper.LoadDepartments(ctx, dgv);
             }
             catch (Exception ex)
             {

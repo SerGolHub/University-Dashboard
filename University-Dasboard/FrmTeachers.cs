@@ -72,7 +72,24 @@ namespace University_Dasboard
 		private List<TeacherViewModel> removedTeacherList = [];
 		private Department? selectedDepartment;
 		private Teacher? selectedTeacher;
+		private bool canSaveChanges = true;
 
+		private bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
 
 		private void LoadData()
 		{
@@ -130,6 +147,10 @@ namespace University_Dasboard
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
 			string fullName = tbFullName.Text;
 
 			string phoneNumber = tbPhoneNumber.Text;
@@ -195,6 +216,11 @@ namespace University_Dasboard
 
 		async private void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = true;
@@ -253,10 +279,33 @@ namespace University_Dasboard
 				return;
 			}
 			var editedRow = dgvTeacherList.Rows[e.RowIndex];
+
+			var cell = editedRow.Cells[e.ColumnIndex];
+			var phoneNumber = (string)editedRow.Cells["PhoneNumber"].Value;
+			// Проверка мобильного телефона
+			if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, "^(\\+7|8)[0-9]{10}$"))
+			{
+				logger.Warn("Осуществлено неверное изменение мобильного телефона.");
+				MessageBox.Show("Номер телефона введен неверно. Он должен начинаться с '+7' или '8' и содержать 11 цифр.");
+				CanSaveChanges(false);
+				cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+				return;
+			}
+			var email = (string)editedRow.Cells["Email"].Value;
+			// Проверка электронного адреса
+			if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+			{
+				logger.Warn("Осуществлено неверное изменение электронного адреса.");
+				MessageBox.Show("Электронный адрес введен неверно. Он должен быть в формате 'example@example.com'.");
+				CanSaveChanges(false);
+				cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+				return;
+			}
+			cell.Style.BackColor = Color.White;
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			TeacherViewModel updatedTeacher = teachers.First(t => t.Id == id);
 			updatedTeacherList.Add(updatedTeacher);
-
+			CanSaveChanges(true);
 			logger.Info($"Преподаватель с ID {updatedTeacher.Id} добавлен в список на обновление.");
 		}
 
@@ -269,6 +318,7 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
+			CanSaveChanges(true);
 		}
 
 		private void cbDepartment_SelectedIndexChanged(object sender, EventArgs e)
@@ -282,6 +332,11 @@ namespace University_Dasboard
 			{
 				e.Handled = true;
 			}
+		}
+
+		private void dgvTeacherList_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvTeacherList, e);
 		}
 
 		public static string GetEnumDisplayName<T>(T enumValue) where T : Enum
