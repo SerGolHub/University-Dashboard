@@ -17,9 +17,7 @@ namespace University_Dasboard
 			public string Code { get; set; } = string.Empty;
 			public int MaxCourse { get; set; }
 			public Guid FacultyId { get; set; }
-			public string FacultyName { get; set; } = string.Empty;
 			public Guid DepartmentId { get; set; }
-			public string DepartmentName { get; set; } = string.Empty;
 		}
 
 		private BindingList<DirectionViewModel> directions = [];
@@ -40,7 +38,7 @@ namespace University_Dasboard
 		{
 			using var ctx = new DatabaseContext();
 
-			DirectionController.LoadDirectionsAsync(dgvDirections, ref directions);
+			DirectionController.LoadDirections(dgvDirections, ref directions);
 			DataGridViewHelper.HideColumns(dgvDirections,
 				["Id", "DepartmentId", "FacultyId", "Groups"]);
 			var faculties = ctx.Faculty.ToList();
@@ -109,9 +107,7 @@ namespace University_Dasboard
 				Code = tbDirectionCode.Text,
 				MaxCourse = Convert.ToInt32(tbMaxCourse.Text),
 				FacultyId = selectedFaculty.Id,
-				FacultyName = selectedFaculty.Name,
 				DepartmentId = selectedDepartment.Id,
-				DepartmentName = selectedDepartment.Name
 			};
 
 			directions.Add(direction);
@@ -204,5 +200,9 @@ namespace University_Dasboard
 			selectedDepartment = (Department?)cbDepartments.SelectedItem;
 		}
 
+		private void dgvDirections_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvDirections, e);
+		}
 	}
 }

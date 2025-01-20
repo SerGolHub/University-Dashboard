@@ -8,7 +8,7 @@ namespace University_Dasboard.Controllers
 {
     public class DirectionController
     {
-        public static void LoadDirectionsAsync(
+        public static void LoadDirections(
             DataGridView dgv,
             ref BindingList<DirectionViewModel> bindingList)
         {
@@ -23,15 +23,14 @@ namespace University_Dasboard.Controllers
                 Code = d.Code,
                 MaxCourse = d.MaxCourse,
                 DepartmentId = d.DepartmentId,
-                DepartmentName = d.Department!.Name,
                 FacultyId = d.Department.FacultyId,
-                FacultyName = d.Department.Faculty!.Name
             })
             .ToList();
             
             bindingList = new BindingList<DirectionViewModel>(directions);
             dgv.DataSource = bindingList;
-        }
+			DataGridViewHelper.LoadDepartments(ctx, dgv);
+		}
 
         public static async Task SaveDirectionsAsync(
                 List<DirectionViewModel> newDirectionList,

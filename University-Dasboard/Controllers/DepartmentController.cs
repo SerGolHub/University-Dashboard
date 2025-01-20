@@ -24,16 +24,8 @@ namespace University_Dasboard.Controllers
 			.ToList();
 
 			bindingList = new BindingList<Department>(departments);
-			var faculties = ctx.Faculty.ToList();
-			var cbColumnFaculty = dgv.Columns["FacultyName"] as DataGridViewComboBoxColumn;
-			if (cbColumnFaculty != null)
-			{
-				cbColumnFaculty.DataSource = faculties;
-				cbColumnFaculty.DisplayMember = "Name"; // Отображаемое значение
-				cbColumnFaculty.ValueMember = "Id"; // Связь по идентификатору
-				cbColumnFaculty.DataPropertyName = "FacultyId"; // Связь с свойством BindingList
-			}
 			dgv.DataSource = bindingList;
+			DataGridViewHelper.LoadFaculties(ctx, dgv);
 		}
 
 		public static async Task SaveDepartmentsAsync(

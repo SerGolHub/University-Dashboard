@@ -182,6 +182,7 @@ namespace OfficePackage
                 {
                     hoursList2.Add(hoursPerCell2.ToString());
                 }
+
                 // Добавляем пустые строки для оставшихся ячеек (если их нужно выравнивать)
                 for (int i = hoursList2.Count; i < 21; i++) // Предполагаем, что всего в строке должно быть 22 элемента
                 {
@@ -438,6 +439,7 @@ namespace OfficePackage
 
             SavePdf(info);
         }
+
 
         public void CreateCheckLesson(PdfInfo info)
         {

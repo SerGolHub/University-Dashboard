@@ -127,9 +127,7 @@ namespace University_Dasboard
 			}
 			var editedRow = dgvDepartments.Rows[e.RowIndex];
 			var id = (Guid)editedRow.Cells["Id"].Value;
-			var selectedFacultyId = (Guid)editedRow.Cells["FacultyName"].Value;
 			Department updatedDepartment = GetDepartment(id);
-			updatedDepartment.FacultyId = selectedFacultyId;
 			updatedDepartmentsList.Add(updatedDepartment);
 
 		}

@@ -203,7 +203,7 @@ namespace University_Dasboard
 
             lbDbSaveResult.ForeColor = Color.FromArgb(118, 241, 178);
 			lbDbSaveResult.Text = "Данные успешно сохранены.";
-			await Task.Delay(3000);
+			await Task.Delay(2000);
 
 			lbDbSaveResult.Visible = false;
 			logger.Info("Данные добавлены. Сохранение прошло успешно");
@@ -435,6 +435,9 @@ namespace University_Dasboard
                         DirectionName = selectedSchedule.DirectionName,
                         GroupName = selectedSchedule.GroupName,
                         SubjectName = selectedSchedule.SubjectName,
+                        LectureHours = selectedSchedule.LectureHours,
+                        PracticalHours = selectedSchedule.PracticalHours,
+                        LaboratoryHours = selectedSchedule.LaboratoryHours,
                         ClassroomNumber = tbClassroomNumber.Text,
                         DateCreate = DateTime.Now,
                         GroupNameMerge = selectedGroupMerge!.Name,
