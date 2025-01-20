@@ -60,7 +60,7 @@
 			cbMarkType = new ComboBox();
 			checkBox1 = new CheckBox();
 			Id = new DataGridViewTextBoxColumn();
-			markDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Mark = new DataGridViewTextBoxColumn();
 			gradeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			markTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
 			semesterDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -81,13 +81,14 @@
 			dgvMarksList.AutoGenerateColumns = false;
 			dgvMarksList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvMarksList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvMarksList.Columns.AddRange(new DataGridViewColumn[] { Id, markDataGridViewTextBoxColumn, gradeDateDataGridViewTextBoxColumn, markTypeDataGridViewTextBoxColumn, semesterDataGridViewTextBoxColumn, studentIdDataGridViewTextBoxColumn, studentDataGridViewTextBoxColumn, subjectIdDataGridViewTextBoxColumn, subjectDataGridViewTextBoxColumn, dgvTbStudentName, DgvTbSubjectName });
+			dgvMarksList.Columns.AddRange(new DataGridViewColumn[] { Id, Mark, gradeDateDataGridViewTextBoxColumn, markTypeDataGridViewTextBoxColumn, semesterDataGridViewTextBoxColumn, studentIdDataGridViewTextBoxColumn, studentDataGridViewTextBoxColumn, subjectIdDataGridViewTextBoxColumn, subjectDataGridViewTextBoxColumn, dgvTbStudentName, DgvTbSubjectName });
 			dgvMarksList.DataSource = marksBindingSource;
 			dgvMarksList.Location = new Point(12, 315);
 			dgvMarksList.Name = "dgvMarksList";
 			dgvMarksList.Size = new Size(862, 319);
 			dgvMarksList.TabIndex = 53;
 			dgvMarksList.CellValueChanged += dgvMarksList_CellValueChanged;
+			dgvMarksList.DataError += dgvMarksList_DataError;
 			dgvMarksList.RowPostPaint += dgvMarksList_RowPostPaint;
 			// 
 			// marksBindingSource
@@ -458,11 +459,11 @@
 			Id.Name = "Id";
 			Id.Visible = false;
 			// 
-			// markDataGridViewTextBoxColumn
+			// Mark
 			// 
-			markDataGridViewTextBoxColumn.DataPropertyName = "Mark";
-			markDataGridViewTextBoxColumn.HeaderText = "Оценка";
-			markDataGridViewTextBoxColumn.Name = "markDataGridViewTextBoxColumn";
+			Mark.DataPropertyName = "Mark";
+			Mark.HeaderText = "Оценка";
+			Mark.Name = "Mark";
 			// 
 			// gradeDateDataGridViewTextBoxColumn
 			// 
@@ -602,7 +603,7 @@
 		private CheckBox checkBox1;
 		private BindingSource marksBindingSource;
 		private DataGridViewTextBoxColumn Id;
-		private DataGridViewTextBoxColumn markDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Mark;
 		private DataGridViewTextBoxColumn gradeDateDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn markTypeDataGridViewTextBoxColumn;
 		private DataGridViewTextBoxColumn semesterDataGridViewTextBoxColumn;

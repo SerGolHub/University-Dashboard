@@ -42,6 +42,7 @@ namespace University_Dasboard
 		private string studentMark = string.Empty;
 		private DateTime selectedDateTime;
 		private string? selectedMarkType = string.Empty;
+		private bool canSaveChanges = true;
 
 		private void LoadData()
 		{
@@ -62,6 +63,22 @@ namespace University_Dasboard
 			removedMarksList.Clear();
 		}
 
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
 			if (selectedFaculty == null)
@@ -127,6 +144,11 @@ namespace University_Dasboard
 
 		private async void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			lbDbSaveResult.Visible = true;
@@ -153,6 +175,7 @@ namespace University_Dasboard
 		{
 			ClearTempLists();
 			LoadData();
+			CanSaveChanges(true);
 		}
 
 		private MarksViewModel GetMark(Guid id)
@@ -182,6 +205,23 @@ namespace University_Dasboard
 				return;
 			}
 			var editedRow = dgvMarksList.Rows[e.RowIndex];
+			string columnName = dgvMarksList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
+			if (columnName == "Mark")
+			{
+				string? mark = editedRow.Cells["Mark"].Value.ToString();
+				if (mark != null && mark.Length > 1)
+				{
+					MessageBox.Show("Введите только одну цифру");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
+
+			}
+			cell.Style.BackColor = Color.White;
+			CanSaveChanges(true);
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			MarksViewModel updatedMark = GetMark(id);
 			updatedMarksList.Add(updatedMark);
@@ -388,7 +428,7 @@ namespace University_Dasboard
 
 		private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
 		{
-            selectedSubject = (Subject?)cbSubject.SelectedItem;
+			selectedSubject = (Subject?)cbSubject.SelectedItem;
 			if (selectedSubject != null)
 			{
 				cbSemester.Items.Clear();
@@ -450,6 +490,18 @@ namespace University_Dasboard
 				label11.Visible = false;
 				cbMarkType.Visible = false;
 				btnAdd.Visible = false;
+			}
+		}
+
+		private void dgvMarksList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			var editedRow = dgvMarksList.Rows[e.RowIndex];
+			string columnName = dgvMarksList.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+			if (columnName == "Mark")
+			{
+				MessageBox.Show("Введите одну цифру");
+				return;
 			}
 		}
 	}
