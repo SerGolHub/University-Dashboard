@@ -248,6 +248,10 @@ namespace University_Dasboard
 
 		private void dgvTeacherList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			var editedRow = dgvTeacherList.Rows[e.RowIndex];
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			TeacherViewModel updatedTeacher = teachers.First(t => t.Id == id);
