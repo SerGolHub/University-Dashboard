@@ -113,7 +113,7 @@ namespace University_Dasboard
 			{
 				Id = Guid.NewGuid(),
 				Mark = Convert.ToInt32(tbMark.Text),
-				GradeDate = dateTimePicker1.Value.Date.ToUniversalTime(),
+				GradeDate = dateTimePicker1.Value.ToUniversalTime().Date,
 				MarkType = selectedMarkType,
 				Semester = (int)selectedSemester,
 				StudentId = selectedStudent.Id,
@@ -177,6 +177,10 @@ namespace University_Dasboard
 
 		private void dgvMarksList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			var editedRow = dgvMarksList.Rows[e.RowIndex];
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			MarksViewModel updatedMark = GetMark(id);

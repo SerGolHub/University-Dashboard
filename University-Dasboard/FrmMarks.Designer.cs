@@ -28,7 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			components = new System.ComponentModel.Container();
 			dgvMarksList = new DataGridView();
+			marksBindingSource = new BindingSource(components);
 			btnDelete = new Button();
 			btnReset = new Button();
 			btnSave = new Button();
@@ -57,21 +59,40 @@
 			label11 = new Label();
 			cbMarkType = new ComboBox();
 			checkBox1 = new CheckBox();
+			Id = new DataGridViewTextBoxColumn();
+			markDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			gradeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			markTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			semesterDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			studentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			studentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			subjectDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			dgvTbStudentName = new DataGridViewTextBoxColumn();
+			DgvTbSubjectName = new DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)dgvMarksList).BeginInit();
+			((System.ComponentModel.ISupportInitialize)marksBindingSource).BeginInit();
 			SuspendLayout();
 			// 
 			// dgvMarksList
 			// 
 			dgvMarksList.AllowUserToAddRows = false;
 			dgvMarksList.AllowUserToDeleteRows = false;
+			dgvMarksList.AutoGenerateColumns = false;
 			dgvMarksList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvMarksList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvMarksList.Columns.AddRange(new DataGridViewColumn[] { Id, markDataGridViewTextBoxColumn, gradeDateDataGridViewTextBoxColumn, markTypeDataGridViewTextBoxColumn, semesterDataGridViewTextBoxColumn, studentIdDataGridViewTextBoxColumn, studentDataGridViewTextBoxColumn, subjectIdDataGridViewTextBoxColumn, subjectDataGridViewTextBoxColumn, dgvTbStudentName, DgvTbSubjectName });
+			dgvMarksList.DataSource = marksBindingSource;
 			dgvMarksList.Location = new Point(12, 315);
 			dgvMarksList.Name = "dgvMarksList";
 			dgvMarksList.Size = new Size(862, 319);
 			dgvMarksList.TabIndex = 53;
 			dgvMarksList.CellValueChanged += dgvMarksList_CellValueChanged;
 			dgvMarksList.RowPostPaint += dgvMarksList_RowPostPaint;
+			// 
+			// marksBindingSource
+			// 
+			marksBindingSource.DataSource = typeof(Database.Models.Marks);
 			// 
 			// btnDelete
 			// 
@@ -430,6 +451,80 @@
 			checkBox1.UseVisualStyleBackColor = true;
 			checkBox1.CheckedChanged += checkBox1_CheckedChanged;
 			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// markDataGridViewTextBoxColumn
+			// 
+			markDataGridViewTextBoxColumn.DataPropertyName = "Mark";
+			markDataGridViewTextBoxColumn.HeaderText = "Оценка";
+			markDataGridViewTextBoxColumn.Name = "markDataGridViewTextBoxColumn";
+			// 
+			// gradeDateDataGridViewTextBoxColumn
+			// 
+			gradeDateDataGridViewTextBoxColumn.DataPropertyName = "GradeDate";
+			gradeDateDataGridViewTextBoxColumn.HeaderText = "Дата оценки";
+			gradeDateDataGridViewTextBoxColumn.Name = "gradeDateDataGridViewTextBoxColumn";
+			gradeDateDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// markTypeDataGridViewTextBoxColumn
+			// 
+			markTypeDataGridViewTextBoxColumn.DataPropertyName = "markType";
+			markTypeDataGridViewTextBoxColumn.HeaderText = "Тип оценки";
+			markTypeDataGridViewTextBoxColumn.Name = "markTypeDataGridViewTextBoxColumn";
+			markTypeDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// semesterDataGridViewTextBoxColumn
+			// 
+			semesterDataGridViewTextBoxColumn.DataPropertyName = "Semester";
+			semesterDataGridViewTextBoxColumn.HeaderText = "Семестр";
+			semesterDataGridViewTextBoxColumn.Name = "semesterDataGridViewTextBoxColumn";
+			semesterDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// studentIdDataGridViewTextBoxColumn
+			// 
+			studentIdDataGridViewTextBoxColumn.DataPropertyName = "StudentId";
+			studentIdDataGridViewTextBoxColumn.HeaderText = "StudentId";
+			studentIdDataGridViewTextBoxColumn.Name = "studentIdDataGridViewTextBoxColumn";
+			studentIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// studentDataGridViewTextBoxColumn
+			// 
+			studentDataGridViewTextBoxColumn.DataPropertyName = "Student";
+			studentDataGridViewTextBoxColumn.HeaderText = "Student";
+			studentDataGridViewTextBoxColumn.Name = "studentDataGridViewTextBoxColumn";
+			studentDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// subjectIdDataGridViewTextBoxColumn
+			// 
+			subjectIdDataGridViewTextBoxColumn.DataPropertyName = "SubjectId";
+			subjectIdDataGridViewTextBoxColumn.HeaderText = "SubjectId";
+			subjectIdDataGridViewTextBoxColumn.Name = "subjectIdDataGridViewTextBoxColumn";
+			subjectIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// subjectDataGridViewTextBoxColumn
+			// 
+			subjectDataGridViewTextBoxColumn.DataPropertyName = "Subject";
+			subjectDataGridViewTextBoxColumn.HeaderText = "Subject";
+			subjectDataGridViewTextBoxColumn.Name = "subjectDataGridViewTextBoxColumn";
+			subjectDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// dgvTbStudentName
+			// 
+			dgvTbStudentName.HeaderText = "Студент";
+			dgvTbStudentName.Name = "dgvTbStudentName";
+			dgvTbStudentName.ReadOnly = true;
+			// 
+			// DgvTbSubjectName
+			// 
+			DgvTbSubjectName.HeaderText = "Дисциплина";
+			DgvTbSubjectName.Name = "DgvTbSubjectName";
+			DgvTbSubjectName.ReadOnly = true;
+			// 
 			// FrmMarks
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -469,6 +564,7 @@
 			Name = "FrmMarks";
 			Text = "FrmGrades";
 			((System.ComponentModel.ISupportInitialize)dgvMarksList).EndInit();
+			((System.ComponentModel.ISupportInitialize)marksBindingSource).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -504,5 +600,17 @@
 		private Label label11;
 		private ComboBox cbMarkType;
 		private CheckBox checkBox1;
+		private BindingSource marksBindingSource;
+		private DataGridViewTextBoxColumn Id;
+		private DataGridViewTextBoxColumn markDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn gradeDateDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn markTypeDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn semesterDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn studentIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn studentDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn subjectIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn subjectDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn dgvTbStudentName;
+		private DataGridViewTextBoxColumn DgvTbSubjectName;
 	}
 }

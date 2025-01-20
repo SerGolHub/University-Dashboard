@@ -23,7 +23,7 @@ namespace University_Dasboard.Controllers
 			{
 				Id = m.Id,
 				Mark = m.Mark,
-				GradeDate = m.GradeDate,
+				GradeDate = m.GradeDate.Date,
 				MarkType = m.markType,
 				Semester = m.Semester,
 				StudentId = m.StudentId,
@@ -35,6 +35,18 @@ namespace University_Dasboard.Controllers
 
 			bindingList = new BindingList<MarksViewModel>(marks);
 			dgv.DataSource = bindingList;
+			// Загрузка студентов в колонку Студент
+			var tbStudentName = dgv.Columns["DgvTbStudentName"] as DataGridViewTextBoxColumn;
+			if (tbStudentName != null)
+			{
+				tbStudentName.DataPropertyName = "StudentName"; // Привязка к свойству в модели
+			}
+			// Загрузка дисциплин в колонку Дисциплина
+			var tbDisciplineName = dgv.Columns["DgvTbSubjectName"] as DataGridViewTextBoxColumn;
+			if (tbDisciplineName != null)
+			{
+				tbDisciplineName.DataPropertyName = "SubjectName"; // Привязка к свойству в модели
+			}
 		}
 
 		public static async Task SaveMarksAsync(
