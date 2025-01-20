@@ -1,4 +1,6 @@
-﻿namespace University_Dasboard
+﻿using Database;
+
+namespace University_Dasboard
 {
     public class DataGridViewHelper
     {
@@ -24,6 +26,33 @@
 			{
 				dgv.BeginEdit(false);
 				((DataGridViewComboBoxEditingControl)dgv.EditingControl).DroppedDown = true;
+			}
+		}
+		// При открытии списка может ненадолго показаться выбранное значение из другого списка.
+		// Это визуальный баг. И вполне возможно, что не из-за кода.
+		public static void LoadFaculties(DatabaseContext ctx, DataGridView dgv)
+		{
+			var faculties = ctx.Faculty.ToList();
+			var cbColumnFaculty = dgv.Columns["Faculty"] as DataGridViewComboBoxColumn;
+			if (cbColumnFaculty != null)
+			{
+				cbColumnFaculty.DataSource = faculties;
+				cbColumnFaculty.DisplayMember = "Name"; // Отображаемое значение
+				cbColumnFaculty.ValueMember = "Id"; // Связь по идентификатору
+				cbColumnFaculty.DataPropertyName = "FacultyId"; // Связь с свойством BindingList
+			}
+		}
+
+		public static void LoadDepartments(DatabaseContext ctx, DataGridView dgv)
+		{
+			var departments = ctx.Department.ToList();
+			var cbColumnDepartment = dgv.Columns["Department"] as DataGridViewComboBoxColumn;
+			if (cbColumnDepartment != null)
+			{
+				cbColumnDepartment.DataSource = departments;
+				cbColumnDepartment.DisplayMember = "Name"; // Отображаемое значение
+				cbColumnDepartment.ValueMember = "Id"; // Связь по идентификатору
+				cbColumnDepartment.DataPropertyName = "DepartmentId"; // Связь с свойством BindingList
 			}
 		}
 	}
