@@ -94,8 +94,8 @@ namespace University_Dasboard
 				subjects,
 				comboBox: comboBoxDiscipline);
 
-			// Загрузка недель расписания
-			var scheduleWeeks = ctx.ScheduleWeek.ToList();
+            // Загрузка недель расписания
+            var scheduleWeeks = ctx.ScheduleWeek.ToList();
 
 			ComboboxHelper.LoadCombobox(
 				scheduleWeeks,
@@ -251,11 +251,10 @@ namespace University_Dasboard
             if (selectedFaculty != null)
             {
                 // Загружаем департаменты и направления через факультет
-                var directionsLoaded = ComboboxHelper.LoadFacultyDirectionGroups(
+                var directionsLoaded = ComboboxHelper.LoadFacultyDirections(
                     comboBoxDirection,
-                    comboBoxGroup,
-                    selectedFaculty.Id,
-                    selectedDirection?.Id);
+                    selectedFaculty.Id
+                    );
 
 				if (!directionsLoaded)
                 {

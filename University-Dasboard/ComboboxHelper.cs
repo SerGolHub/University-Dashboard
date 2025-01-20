@@ -159,35 +159,5 @@ namespace University_Dasboard
                 cbGroup,
                 group => group.DirectionId == selectedDirectionId);
         }
-
-        public static bool LoadFacultyDirectionGroups(
-            ComboBox cbDirection,
-            ComboBox cbGroup,
-            Guid selectedFacultyId,
-            Guid? selectedDirectionId = null)
-        {
-            // Загрузка направлений, связанных с выбранным факультетом
-            var directionsLoaded = LoadComboboxData<Direction>(
-                cbDirection,
-                dir => dir.FacultyId == selectedFacultyId);
-
-            // Если направление выбрано, загружаем группы
-            if (selectedDirectionId.HasValue)
-            {
-                var groupsLoaded = LoadDirectionGroups(
-                    cbGroup,
-                    selectedDirectionId.Value);
-
-                if (!groupsLoaded)
-                {
-                    cbGroup.Text = "Группы не найдены";
-                }
-
-                return directionsLoaded && groupsLoaded;
-            }
-
-            return directionsLoaded;
-        }
-
     }
 }
