@@ -30,9 +30,9 @@ namespace University_Dasboard
 				return;
 			}
 			var marks = ctx.Marks
-				.Where(m => m.GradeDate >= dtpPeriodFrom.Value.Date.ToUniversalTime() // условие по дате
-				&& m.GradeDate <= dtpPeriodBy.Value.Date.ToUniversalTime()) // продолжение условия
-				.Where(m => m.Student!.Group!.Direction!.FacultyId == selectedFaculty.Id) // где объект Оценка имеет id выбранного факультета
+				.Where(m => m.GradeDate >= dtpPeriodFrom.Value.Date.ToUniversalTime().Date // условие по дате
+				&& m.GradeDate <= dtpPeriodBy.Value.Date.ToUniversalTime().Date // продолжение условия
+				&& m.Student!.Group!.Direction!.FacultyId == selectedFaculty.Id) // где объект Оценка имеет id выбранного факультета
 				.ToList();
 
 			int mark5 = marks.Count(m => m.Mark == 5);
