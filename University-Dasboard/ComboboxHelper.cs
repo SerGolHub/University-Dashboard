@@ -109,7 +109,7 @@ namespace University_Dasboard
         {
             return LoadComboboxData<Subject>(
                 cbSubjects,
-                s => s.DepartmentId == selectedDepartmentId);
+                s => s.Direction!.DepartmentId == selectedDepartmentId);
         }
 
         public static bool LoadFacultyDirectionSubject(

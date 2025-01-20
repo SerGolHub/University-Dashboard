@@ -23,12 +23,8 @@ namespace University_Dasboard
 			public string Name { get; set; } = string.Empty;
 			public string Semester { get; set; } = string.Empty;
 
-			public Guid DepartmentId { get; set; }
-			public string DepartmentName { get; set; } = string.Empty;
-
 			public Guid DirectionId { get; set; }
 			public Guid TeacherId { get; set; }
-			public string TeacherName { get; set; } = string.Empty;
 		}
 
 
@@ -40,6 +36,7 @@ namespace University_Dasboard
 		private Department? selectedDepartment;
 		private Direction? selectedDirection;
 		private Teacher? selectedTeacher;
+		private bool canSaveChanges = true;
 
 		private void LoadData()
 		{
@@ -101,11 +98,8 @@ namespace University_Dasboard
 				Id = Guid.NewGuid(),
 				Name = newSubjectName,
 				Semester = tbSemesters.Text,
-				DepartmentId = selectedDepartment.Id,
-				DepartmentName = selectedDepartment.Name,
 				DirectionId = selectedDirection.Id,
 				TeacherId = selectedTeacher.Id,
-				TeacherName = selectedTeacher.Name,
 			};
 			disciplines.Add(discipline);
 			newDisciplinesList.Add(discipline);
@@ -115,6 +109,11 @@ namespace University_Dasboard
 
 		private async void btnSave_Click(object sender, EventArgs e)
 		{
+			if (!CanSaveChanges(canSaveChanges))
+			{
+				return;
+			}
+
 			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			logger.Info("Данные сохраняются....");
@@ -168,10 +167,51 @@ namespace University_Dasboard
 			ClearTempLists();
 			LoadData();
 		}
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
 
 		private void dgvSubjects_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+			{
+				return;
+			}
 			var editedRow = dgvDisciplines.Rows[e.RowIndex];
+			string columnName = dgvDisciplines.Columns[e.ColumnIndex].Name;
+			var cell = editedRow.Cells[e.ColumnIndex];
+
+			if (columnName == "Semester")
+			{
+				string semestersString = (string)editedRow.Cells["Semester"].Value;
+				// Посимвольная проверка на ввод только цифры или пробела
+				foreach (char c in semestersString)
+				{
+					// Если не цифра или не пробел, то выдаём ошибку
+					if (!Char.IsDigit(c) && c != (char)Keys.Space)
+					{
+						MessageBox.Show("В колонке Семестр можно вводить только цифры через пробел");
+						CanSaveChanges(false);
+						cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+						return;
+					}
+				}
+			}
+			CanSaveChanges(true);
+			cell.Style.BackColor = Color.White;
 			var id = (Guid)editedRow.Cells["Id"].Value;
 			DisciplineViewModel updatedSubject = GetDiscipline(id);
 			updatedDisciplinesList.Add(updatedSubject);
@@ -228,6 +268,11 @@ namespace University_Dasboard
 			{
 				e.Handled = true;
 			}
+		}
+
+		private void dgvDisciplines_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			DataGridViewHelper.ExpandComboBoxOnEdit(dgvDisciplines, e);
 		}
 	}
 }

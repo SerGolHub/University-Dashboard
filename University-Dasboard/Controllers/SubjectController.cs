@@ -1,5 +1,4 @@
 ﻿using Database;
-using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using University_Dasboard.Database.Models;
@@ -16,23 +15,22 @@ namespace University_Dasboard.Controllers
 			using var ctx = new DatabaseContext();
 			var disciplines = ctx.Subject
 			.Include(dis => dis.Teacher)
-			.Include(dis => dis.Department)
+			.Include(dis => dis.Direction!.Department)
 			.ThenInclude(dep => dep!.Faculty)
 			.Select(dis => new DisciplineViewModel
 			{
 				Id = dis.Id,
 				Name = dis.Name,
 				Semester = dis.Semester,
-				DepartmentId = dis.DepartmentId,
-				DepartmentName = dis.Department!.Name,
 				DirectionId = dis.DirectionId,
 				TeacherId = dis.TeacherId,
-				TeacherName = dis.Teacher!.Name
 			})
 			.ToList();
 
 			bindingList = new BindingList<DisciplineViewModel>(disciplines);
 			dgv.DataSource = bindingList;
+			DataGridViewHelper.LoadTeachers(ctx, dgv);
+			DataGridViewHelper.LoadDirections(ctx, dgv);
 		}
 
 		public static async Task SaveDisciplinesAsync(
@@ -62,7 +60,6 @@ namespace University_Dasboard.Controllers
 				Id = dis.Id,
 				Name = dis.Name,
 				Semester = dis.Semester,
-				DepartmentId = dis.DepartmentId,
 				DirectionId = dis.DirectionId,
 				TeacherId = dis.TeacherId
 			}).ToList();
@@ -88,7 +85,6 @@ namespace University_Dasboard.Controllers
 				var updatedDiscipline = updatedDisciplines.First(dis => dis.Id == existingDiscipline.Id);
 				existingDiscipline.Name = updatedDiscipline.Name;
 				existingDiscipline.Semester = updatedDiscipline.Semester;
-				existingDiscipline.DepartmentId = updatedDiscipline.DepartmentId;
 				existingDiscipline.DirectionId = updatedDiscipline.DirectionId;
 				existingDiscipline.TeacherId = updatedDiscipline.TeacherId;
 			}

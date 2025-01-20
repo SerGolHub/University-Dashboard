@@ -35,6 +35,7 @@
 			userBindingSource = new BindingSource(components);
 			userBindingSource1 = new BindingSource(components);
 			dgvDisciplines = new DataGridView();
+			subjectBindingSource = new BindingSource(components);
 			departmentBindingSource = new BindingSource(components);
 			departmentBindingSource1 = new BindingSource(components);
 			btnSave = new Button();
@@ -53,9 +54,21 @@
 			cbTeacher = new ComboBox();
 			label6 = new Label();
 			tbSemesters = new TextBox();
+			Id = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Semester = new DataGridViewTextBoxColumn();
+			directionIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			directionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			teacherIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			teacherDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			marksDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			scheduleDisciplinesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			Teacher = new DataGridViewComboBoxColumn();
+			Direction = new DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)dgvDisciplines).BeginInit();
+			((System.ComponentModel.ISupportInitialize)subjectBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
 			SuspendLayout();
@@ -97,14 +110,22 @@
 			// 
 			dgvDisciplines.AllowUserToAddRows = false;
 			dgvDisciplines.AllowUserToDeleteRows = false;
+			dgvDisciplines.AutoGenerateColumns = false;
 			dgvDisciplines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvDisciplines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvDisciplines.Columns.AddRange(new DataGridViewColumn[] { Id, nameDataGridViewTextBoxColumn, Semester, directionIdDataGridViewTextBoxColumn, directionDataGridViewTextBoxColumn, teacherIdDataGridViewTextBoxColumn, teacherDataGridViewTextBoxColumn, marksDataGridViewTextBoxColumn, scheduleDisciplinesDataGridViewTextBoxColumn, Teacher, Direction });
+			dgvDisciplines.DataSource = subjectBindingSource;
 			dgvDisciplines.Location = new Point(12, 308);
 			dgvDisciplines.Name = "dgvDisciplines";
 			dgvDisciplines.Size = new Size(862, 333);
 			dgvDisciplines.TabIndex = 28;
+			dgvDisciplines.CellClick += dgvDisciplines_CellClick;
 			dgvDisciplines.CellValueChanged += dgvSubjects_CellValueChanged;
 			dgvDisciplines.RowPostPaint += dgvSubjects_RowPostPaint;
+			// 
+			// subjectBindingSource
+			// 
+			subjectBindingSource.DataSource = typeof(Database.Models.Subject);
 			// 
 			// btnSave
 			// 
@@ -299,6 +320,77 @@
 			tbSemesters.TabIndex = 23;
 			tbSemesters.KeyPress += tbSemesters_KeyPress;
 			// 
+			// Id
+			// 
+			Id.DataPropertyName = "Id";
+			Id.HeaderText = "Id";
+			Id.Name = "Id";
+			Id.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Дисциплина";
+			nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// Semester
+			// 
+			Semester.DataPropertyName = "Semester";
+			Semester.HeaderText = "Семестр";
+			Semester.Name = "Semester";
+			// 
+			// directionIdDataGridViewTextBoxColumn
+			// 
+			directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
+			directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
+			directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
+			directionIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// directionDataGridViewTextBoxColumn
+			// 
+			directionDataGridViewTextBoxColumn.DataPropertyName = "Direction";
+			directionDataGridViewTextBoxColumn.HeaderText = "Direction";
+			directionDataGridViewTextBoxColumn.Name = "directionDataGridViewTextBoxColumn";
+			directionDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// teacherIdDataGridViewTextBoxColumn
+			// 
+			teacherIdDataGridViewTextBoxColumn.DataPropertyName = "TeacherId";
+			teacherIdDataGridViewTextBoxColumn.HeaderText = "TeacherId";
+			teacherIdDataGridViewTextBoxColumn.Name = "teacherIdDataGridViewTextBoxColumn";
+			teacherIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// teacherDataGridViewTextBoxColumn
+			// 
+			teacherDataGridViewTextBoxColumn.DataPropertyName = "Teacher";
+			teacherDataGridViewTextBoxColumn.HeaderText = "Teacher";
+			teacherDataGridViewTextBoxColumn.Name = "teacherDataGridViewTextBoxColumn";
+			teacherDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// marksDataGridViewTextBoxColumn
+			// 
+			marksDataGridViewTextBoxColumn.DataPropertyName = "Marks";
+			marksDataGridViewTextBoxColumn.HeaderText = "Marks";
+			marksDataGridViewTextBoxColumn.Name = "marksDataGridViewTextBoxColumn";
+			marksDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// scheduleDisciplinesDataGridViewTextBoxColumn
+			// 
+			scheduleDisciplinesDataGridViewTextBoxColumn.DataPropertyName = "ScheduleDisciplines";
+			scheduleDisciplinesDataGridViewTextBoxColumn.HeaderText = "ScheduleDisciplines";
+			scheduleDisciplinesDataGridViewTextBoxColumn.Name = "scheduleDisciplinesDataGridViewTextBoxColumn";
+			scheduleDisciplinesDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// Teacher
+			// 
+			Teacher.HeaderText = "Преподаватель";
+			Teacher.Name = "Teacher";
+			// 
+			// Direction
+			// 
+			Direction.HeaderText = "Направление";
+			Direction.Name = "Direction";
+			// 
 			// FrmSubjects
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -330,6 +422,7 @@
 			((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)userBindingSource1).EndInit();
 			((System.ComponentModel.ISupportInitialize)dgvDisciplines).EndInit();
+			((System.ComponentModel.ISupportInitialize)subjectBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
 			((System.ComponentModel.ISupportInitialize)departmentBindingSource1).EndInit();
 			ResumeLayout(false);
@@ -362,5 +455,19 @@
 		private ComboBox cbTeacher;
 		private Label label6;
 		private TextBox tbSemesters;
+		private BindingSource subjectBindingSource;
+		private DataGridViewTextBoxColumn departmentIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Id;
+		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn Semester;
+		private DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn directionDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn teacherIdDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn teacherDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn marksDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn scheduleDisciplinesDataGridViewTextBoxColumn;
+		private DataGridViewComboBoxColumn Teacher;
+		private DataGridViewComboBoxColumn Direction;
 	}
 }

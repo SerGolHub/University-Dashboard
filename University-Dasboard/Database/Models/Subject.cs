@@ -8,9 +8,6 @@ namespace University_Dasboard.Database.Models
 		public required string Name { get; set; }
 		public string Semester { get; set; } = string.Empty;
 
-		public Guid DepartmentId { get; set; }
-		public Department? Department { get; set; }
-
 		public Guid DirectionId { get; set; }
 		public Direction? Direction { get; set; }
 

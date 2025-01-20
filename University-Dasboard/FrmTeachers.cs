@@ -12,7 +12,6 @@ using System.Text.RegularExpressions;
 using University_Dasboard.Controllers;
 using University_Dasboard.Database.Enums;
 using University_Dasboard.Database.Models;
-using static University_Dasboard.FrmGroups;
 
 namespace University_Dasboard
 {
@@ -74,23 +73,6 @@ namespace University_Dasboard
 		private Teacher? selectedTeacher;
 		private bool canSaveChanges = true;
 
-		private bool CanSaveChanges(bool value)
-		{
-			if (value)
-			{
-				canSaveChanges = true;
-				lbDbSaveResult.Visible = false;
-			}
-			else
-			{
-				canSaveChanges = false;
-				lbDbSaveResult.Text = "Невозможно сохранить изменения";
-				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
-				lbDbSaveResult.Visible = true;
-			}
-			return canSaveChanges;
-		}
-
 		private void LoadData()
 		{
 			try
@@ -136,6 +118,23 @@ namespace University_Dasboard
 				.ToList();
 		}
 
+		public bool CanSaveChanges(bool value)
+		{
+			if (value)
+			{
+				canSaveChanges = true;
+				lbDbSaveResult.Visible = false;
+			}
+			else
+			{
+				canSaveChanges = false;
+				lbDbSaveResult.Text = "Невозможно сохранить изменения";
+				lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+				lbDbSaveResult.Visible = true;
+			}
+			return canSaveChanges;
+		}
+
 		private void ClearTempLists()
 		{
 			newTeacherList.Clear();
@@ -164,10 +163,6 @@ namespace University_Dasboard
 		}
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			if (!CanSaveChanges(canSaveChanges))
-			{
-				return;
-			}
 			string fullName = tbFullName.Text;
 
 			string phoneNumber = tbPhoneNumber.Text;

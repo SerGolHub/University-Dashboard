@@ -235,7 +235,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			btnAdd.ForeColor = Color.FromArgb(24, 30, 54);
-			btnAdd.Location = new Point(17, 233);
+			btnAdd.Location = new Point(277, 179);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(84, 41);
 			btnAdd.TabIndex = 35;
