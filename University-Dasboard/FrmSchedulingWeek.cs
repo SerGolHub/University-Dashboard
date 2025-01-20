@@ -81,23 +81,23 @@ namespace University_Dasboard
 				return;
 			}
 
-			if (tbLectionsHours.Text.Length == 0)
+			if (tbLectionsHours.Text.Length < 2 || tbLectionsHours.Text.Length >= 33)
 			{
-				MessageBox.Show("Для добавления расписания нужно ввести количество часов лекционных работ");
+				MessageBox.Show("Для добавления расписания нужно ввести количество часов лекционных работ (от 2 до 32)");
 				logger.Warn("Пользователь не ввёл количество часов лекций");
 				return;
 			}
 
-			if (tbLaboratoryHours.Text.Length == 0)
+			if (tbLaboratoryHours.Text.Length < 2 || tbLaboratoryHours.Text.Length >= 33)
 			{
-				MessageBox.Show("Для добавления расписания нужно ввести количество часов лабораторных работ");
+				MessageBox.Show("Для добавления расписания нужно ввести количество часов лабораторных работ (от 2 до 32)");
 				logger.Warn("Пользователь не ввёл количество часов лабораторных");
 				return;
 			}
 
-			if (tbPracticeHours.Text.Length == 0)
+			if (tbPracticeHours.Text.Length < 2 || tbPracticeHours.Text.Length >= 33)
 			{
-				MessageBox.Show("Для добавления расписания нужно ввести количество часов практических работ");
+				MessageBox.Show("Для добавления расписания нужно ввести количество часов практических работ (от 2 до 32)");
 				logger.Warn("Пользователь не ввёл количество часов практических");
 				return;
 			}
@@ -117,7 +117,28 @@ namespace University_Dasboard
 
 		async private void btnSave_Click(object sender, EventArgs e)
 		{
-			lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
+            if (tbLectionsHours.Text.Length < 2 || tbLectionsHours.Text.Length >= 33)
+            {
+                MessageBox.Show("Для добавления расписания нужно ввести количество часов лекционных работ (от 2 до 32)");
+                logger.Warn("Пользователь не ввёл количество часов лекций");
+                return;
+            }
+
+            if (tbLaboratoryHours.Text.Length < 2 || tbLaboratoryHours.Text.Length >= 33)
+            {
+                MessageBox.Show("Для добавления расписания нужно ввести количество часов лабораторных работ (от 2 до 32)");
+                logger.Warn("Пользователь не ввёл количество часов лабораторных");
+                return;
+            }
+
+            if (tbPracticeHours.Text.Length < 2 || tbPracticeHours.Text.Length >= 33)
+            {
+                MessageBox.Show("Для добавления расписания нужно ввести количество часов практических работ (от 2 до 32)");
+                logger.Warn("Пользователь не ввёл количество часов практических");
+                return;
+            }
+
+            lbDbSaveResult.ForeColor = Color.FromArgb(218, 141, 178);
 			lbDbSaveResult.Text = "Подождите. Данные сохраняются.";
 			logger.Info("Данные сохраняются...");
 			lbDbSaveResult.Visible = true;
@@ -184,5 +205,5 @@ namespace University_Dasboard
 		{
 			Drawer.DrawNumbers(sender, e);
 		}
-	}
+    }
 }
