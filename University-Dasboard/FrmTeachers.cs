@@ -145,6 +145,23 @@ namespace University_Dasboard
 			logger.Info("Временные списки очищены.");
 		}
 
+		private bool IsValidPhoneNumber(string phoneNumber)
+		{
+			if (Regex.IsMatch(phoneNumber, "^(\\+7|8)[0-9]{10}$"))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		private bool IsValidEMail(string email)
+		{
+			if (Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+			{
+				return true;
+			}
+			return false;
+		}
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
 			if (!CanSaveChanges(canSaveChanges))
@@ -173,7 +190,7 @@ namespace University_Dasboard
 			}
 
 			// Проверка мобильного телефона
-			if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, "^(\\+7|8)[0-9]{10}$"))
+			if (string.IsNullOrEmpty(phoneNumber) || !IsValidPhoneNumber(phoneNumber))
 			{
 				logger.Warn("Попытка добавить мобильный телефон не удалась.");
 				MessageBox.Show("Номер телефона введен неверно. Он должен начинаться с '+7' или '8' и содержать 11 цифр.");
@@ -181,7 +198,7 @@ namespace University_Dasboard
 			}
 
 			// Проверка электронного адреса
-			if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+			if (string.IsNullOrEmpty(email) || !IsValidEMail(email))
 			{
 				logger.Warn("Попытка добавить почту не удалась.");
 				MessageBox.Show("Электронный адрес введен неверно. Он должен быть в формате 'example@example.com'.");
@@ -279,27 +296,33 @@ namespace University_Dasboard
 				return;
 			}
 			var editedRow = dgvTeacherList.Rows[e.RowIndex];
-
+			string columnName = dgvTeacherList.Columns[e.ColumnIndex].Name;
 			var cell = editedRow.Cells[e.ColumnIndex];
-			var phoneNumber = (string)editedRow.Cells["PhoneNumber"].Value;
-			// Проверка мобильного телефона
-			if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, "^(\\+7|8)[0-9]{10}$"))
+			if (columnName == "PhoneNumber")
 			{
-				logger.Warn("Осуществлено неверное изменение мобильного телефона.");
-				MessageBox.Show("Номер телефона введен неверно. Он должен начинаться с '+7' или '8' и содержать 11 цифр.");
-				CanSaveChanges(false);
-				cell.Style.BackColor = Color.FromArgb(218, 141, 178);
-				return;
+				string phoneNumber = (string)editedRow.Cells["PhoneNumber"].Value;
+				// Проверка мобильного телефона
+				if (string.IsNullOrWhiteSpace(phoneNumber) || !IsValidPhoneNumber(phoneNumber))
+				{
+					logger.Warn("Осуществлено неверное изменение мобильного телефона.");
+					MessageBox.Show("Номер телефона введен неверно. Он должен начинаться с '+7' или '8' и содержать 11 цифр.");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
 			}
-			var email = (string)editedRow.Cells["Email"].Value;
-			// Проверка электронного адреса
-			if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+			if (columnName == "Email")
 			{
-				logger.Warn("Осуществлено неверное изменение электронного адреса.");
-				MessageBox.Show("Электронный адрес введен неверно. Он должен быть в формате 'example@example.com'.");
-				CanSaveChanges(false);
-				cell.Style.BackColor = Color.FromArgb(218, 141, 178);
-				return;
+				string email = (string)editedRow.Cells["Email"].Value;
+				// Проверка электронного адреса
+				if (string.IsNullOrWhiteSpace(email) || !IsValidEMail(email))
+				{
+					logger.Warn("Осуществлено неверное изменение электронного адреса.");
+					MessageBox.Show("Электронный адрес введен неверно. Он должен быть в формате 'example@example.com'.");
+					CanSaveChanges(false);
+					cell.Style.BackColor = Color.FromArgb(218, 141, 178);
+					return;
+				}
 			}
 			cell.Style.BackColor = Color.White;
 			var id = (Guid)editedRow.Cells["Id"].Value;
