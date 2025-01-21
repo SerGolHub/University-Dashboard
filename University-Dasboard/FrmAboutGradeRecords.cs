@@ -1,9 +1,12 @@
 ﻿
 using Database;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using University_Dasboard.Database.Models;
+using Color = DocumentFormat.OpenXml.Spreadsheet.Color;
+using Font = DocumentFormat.OpenXml.Spreadsheet.Font;
 using Group = University_Dasboard.Database.Models.Group;
 
 namespace University_Dasboard
@@ -23,63 +26,89 @@ namespace University_Dasboard
 
 		private void ExportToExcelUsingOpenXML(DataGridView dataGridView, string fileName)
 		{
-			// Создание нового файла Excel
-			using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook))
+			using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
 			{
 				// Создание рабочей книги
 				WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
 				workbookPart.Workbook = new Workbook();
 
-				// Создание листа в книге
+				// Создание листа
 				WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
 				worksheetPart.Worksheet = new Worksheet(new SheetData());
 
 				Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
-				Sheet sheet = new Sheet()
+				Sheet sheet = new Sheet
 				{
 					Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
 					SheetId = 1,
-					Name = "Report"
+					Name = "Sheet1"
 				};
 				sheets.Append(sheet);
 
-				// Получение данных из DataGridView и запись их в Excel
+				// Получение ссылки на SheetData
 				SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
 
-				// Добавление заголовков столбцов
+				// Добавление заголовков
 				Row headerRow = new Row();
 				foreach (DataGridViewColumn column in dataGridView.Columns)
 				{
-					headerRow.AppendChild(new Cell()
-					{
-						CellValue = new CellValue(column.HeaderText),
-						DataType = CellValues.String
-					});
+					string headerText = column.HeaderText ?? string.Empty;
+					headerRow.AppendChild(CreateTextCell(headerText));
 				}
 				sheetData.AppendChild(headerRow);
 
 				// Добавление строк данных
-				foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
+				foreach (DataGridViewRow gridViewRow in dataGridView.Rows)
 				{
-					if (!dataGridViewRow.IsNewRow) // Пропускаем последнюю пустую строку
+					if (!gridViewRow.IsNewRow)
 					{
 						Row row = new Row();
-						foreach (DataGridViewCell cell in dataGridViewRow.Cells)
+						foreach (DataGridViewCell cell in gridViewRow.Cells)
 						{
-							row.AppendChild(new Cell()
-							{
-								CellValue = new CellValue(cell.Value?.ToString()),
-								DataType = CellValues.String
-							});
+							string cellValue = cell.Value?.ToString() ?? string.Empty;
+							row.AppendChild(CreateTextCell(cellValue));
 						}
 						sheetData.AppendChild(row);
 					}
 				}
 
+				// Добавление итогов (при необходимости)
+				Row totalRow = new Row();
+				totalRow.AppendChild(CreateTextCell("Итого:"));
+
+				for (int i = 1; i < dataGridView.Columns.Count; i++) // Пропускаем первый столбец
+				{
+					double total = 0;
+					foreach (DataGridViewRow row in dataGridView.Rows)
+					{
+						if (!row.IsNewRow && double.TryParse(row.Cells[i].Value?.ToString(), out double value))
+						{
+							total += value;
+						}
+					}
+					totalRow.AppendChild(CreateTextCell(total.ToString()));
+				}
+				sheetData.AppendChild(totalRow);
+
 				// Сохранение документа
 				workbookPart.Workbook.Save();
 			}
 		}
+
+		// Метод для создания текстовой ячейки
+		private Cell CreateTextCell(string value)
+		{
+			return new Cell
+			{
+				DataType = CellValues.String,
+				CellValue = new CellValue(value)
+			};
+		}
+
+
+
+
+
 
 		private void InitializeDataGridView()
 		{
