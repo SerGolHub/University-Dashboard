@@ -26,7 +26,10 @@ namespace University_Dasboard.Database.Models
 		// Для составления расписания
 		public ICollection<ScheduleDiscipline> Schedules { get; set; } = null!;
 
-		// Ограничения преподавателя
-		public ICollection<TeacherConstraint> Constraints { get; set; } = new List<TeacherConstraint>();
+        // Для составления расписания
+        public ICollection<SchedulePair> SchedulePairs { get; set; } = null!;
+
+        // Ограничения преподавателя
+        public ICollection<TeacherConstraint> Constraints { get; set; } = new List<TeacherConstraint>();
 	}
 }

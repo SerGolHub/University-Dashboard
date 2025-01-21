@@ -88,8 +88,8 @@ namespace University_Dasboard
                 faculties,
                 comboBox: comboBoxFaculties);
 
-			// Загрузка Предметов
-			var subjects = ctx.Subject.ToList();
+            // Загрузка Предметов
+            var subjects = ctx.Subject.ToList();
 			ComboboxHelper.LoadCombobox(
 				subjects,
 				comboBox: comboBoxDiscipline);
@@ -248,45 +248,34 @@ namespace University_Dasboard
         private void cbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFaculty = (Faculty?)comboBoxFaculties.SelectedItem;
+
             if (selectedFaculty != null)
             {
-                // Загружаем департаменты и направления через факультет
-                var directionsLoaded = ComboboxHelper.LoadFacultyDirections(
+                ComboboxHelper.LoadFacultyDirections(
                     comboBoxDirection,
-                    selectedFaculty.Id
-                    );
-
-				if (!directionsLoaded)
-                {
-                    MessageBox.Show("Нет доступных направлений.");
-                }
+                    selectedFaculty.Id,
+                    selectedDirection);
             }
         }
 
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDirection = (Direction?)comboBoxDirection.SelectedItem;
+
             if (selectedDirection != null)
             {
-                // Загружаем группы через выбранное направление
-                var groupsLoaded = ComboboxHelper.LoadDirectionGroups(
-                    comboBoxDirection,
-                    selectedDirection.Id);
+                ComboboxHelper.LoadDirectionGroups(
+                    comboBoxGroup,
+                    selectedDirection.Id,
+                    selectedGroup);
+            }
 
-                if (!groupsLoaded)
-                {
-                    comboBoxDirection.Text = "Группы не найдены";
-                }
-
-                // Загружаем MergeGroup через выбранное направление
-                var mergeGroupsLoaded = ComboboxHelper.LoadDirectionGroups(
+            if (selectedDirection != null)
+            {
+                ComboboxHelper.LoadDirectionGroups(
                     comboBoxGroupMerge,
-                    selectedDirection.Id);
-
-                if (!mergeGroupsLoaded)
-                {
-                    comboBoxGroupMerge.Text = "Группы не найдены";
-                }
+                    selectedDirection.Id,
+                    selectedGroupMerge);
             }
         }
 
