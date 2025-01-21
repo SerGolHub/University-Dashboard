@@ -24,7 +24,7 @@ namespace University_Dasboard.Controllers
                 .Select(sp => new SchedulePairViewModel
                 {
                     Id = sp.Id,
-                    Name = sp.Name, // Изменено для использования свойства Name
+                    NumberPair = sp.NumberPair, // Изменено для использования свойства Name
                     DayOfWeek = sp.DayOfWeek,
                     StartTime = sp.StartTime,
                     EndTime = sp.EndTime,
@@ -51,13 +51,14 @@ namespace University_Dasboard.Controllers
                 .Select(sp => new SchedulePairViewModel
                 {
                     Id = sp.Id,
-                    Name = sp.Name,
+                    NumberPair = sp.NumberPair,
                     StartTime = sp.StartTime,
                     EndTime = sp.EndTime,
                     ClassroomName = sp.ClassroomName,
                     TeacherName = sp.TeacherName,
                     ScheduleDisciplineId = sp.ScheduleDisciplineId,
-                    SubjectName = sp.ScheduleDiscipline!.Subject!.Name
+                    SubjectName = sp.ScheduleDiscipline!.Subject!.Name,
+                    GroupName = sp.ScheduleDiscipline!.Group!.Name
                 })
                 .FirstOrDefault();
 
@@ -87,9 +88,15 @@ namespace University_Dasboard.Controllers
 
             foreach (var newPair in newPairs)
             {
-                // Получаем временные ограничения для учителя
+                /*if (newPair.TeacherId == Guid.Empty)
+                {
+                    throw new InvalidOperationException("Teacher or Teacher.Id is null.");
+                }
+
+                var teacherId = newPair.Teacher!.Id;
+
                 var teacherConstraints = await ctx.TeacherConstraints
-                    .Where(tc => tc.TeacherId == newPair.Teacher!.Id)
+                    .Where(tc => tc.TeacherId == teacherId)
                     .ToListAsync();
 
                 // Проверяем, пересекается ли время с существующими ограничениями
@@ -103,12 +110,12 @@ namespace University_Dasboard.Controllers
                 {
                     throw new InvalidOperationException(
                         $"Не удалось добавить пару: время {newPair.StartTime} - {newPair.EndTime} пересекается с ограничением учителя {newPair.Teacher!.Name}.");
-                }
+                }*/
 
                 newEntities = newPairs.Select(p => new SchedulePair
                 {
                     Id = Guid.NewGuid(),
-                    Name = p.Name, // Используем Name
+                    NumberPair = p.NumberPair, // Используем Name
                     StartTime = p.StartTime,
                     EndTime = p.EndTime,
                     ClassroomName = p.ClassroomName,
@@ -158,7 +165,7 @@ namespace University_Dasboard.Controllers
                 }
 
                 // Обновляем существующую пару
-                existingPair.Name = updatedPair.Name;
+                existingPair.NumberPair = updatedPair.NumberPair;
                 existingPair.DayOfWeek = updatedPair.DayOfWeek;
                 existingPair.StartTime = updatedPair.StartTime;
                 existingPair.EndTime = updatedPair.EndTime;

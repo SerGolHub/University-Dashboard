@@ -43,24 +43,18 @@
             dgvSchedules = new DataGridView();
             userBindingSource1 = new BindingSource(components);
             userBindingSource = new BindingSource(components);
-            label5 = new Label();
             label2 = new Label();
-            comboBoxFaculties = new ComboBox();
-            comboBoxGroup = new ComboBox();
-            comboBoxDirection = new ComboBox();
-            comboBoxDiscipline = new ComboBox();
+            comboBoxDayOfWeek = new ComboBox();
             label6 = new Label();
-            comboBoxScheduleWeek = new ComboBox();
-            button1 = new Button();
+            comboBoxSchedule = new ComboBox();
             label7 = new Label();
             tbClassroomNumber = new TextBox();
             comboBoxTeacher = new ComboBox();
-            label8 = new Label();
-            comboBoxGroupMerge = new ComboBox();
-            label9 = new Label();
-            tbNote = new TextBox();
-            label10 = new Label();
-            button2 = new Button();
+            tbNumberPair = new TextBox();
+            dateTimePickerEndTime = new DateTimePicker();
+            dateTimePickerStartTime = new DateTimePicker();
+            label5 = new Label();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSchedules).BeginInit();
@@ -86,9 +80,9 @@
             label4.ForeColor = Color.FromArgb(158, 161, 178);
             label4.Location = new Point(12, 18);
             label4.Name = "label4";
-            label4.Size = new Size(108, 20);
+            label4.Size = new Size(116, 20);
             label4.TabIndex = 54;
-            label4.Text = "Факультет:";
+            label4.Text = "Номер пары:";
             // 
             // label3
             // 
@@ -97,9 +91,9 @@
             label3.ForeColor = Color.FromArgb(158, 161, 178);
             label3.Location = new Point(12, 46);
             label3.Name = "label3";
-            label3.Size = new Size(128, 20);
+            label3.Size = new Size(150, 20);
             label3.TabIndex = 52;
-            label3.Text = "Направление:";
+            label3.Text = "Преподаватель:";
             // 
             // btnDelete
             // 
@@ -183,122 +177,62 @@
             dgvSchedules.Name = "dgvSchedules";
             dgvSchedules.Size = new Size(859, 351);
             dgvSchedules.TabIndex = 51;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.FromArgb(158, 161, 178);
-            label5.Location = new Point(12, 114);
-            label5.Name = "label5";
-            label5.Size = new Size(72, 20);
-            label5.TabIndex = 55;
-            label5.Text = "Группа:";
+            dgvSchedules.CellFormatting += dgvTeacherConstraintList_CellFormatting;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(158, 161, 178);
-            label2.Location = new Point(12, 82);
+            label2.Location = new Point(12, 78);
             label2.Name = "label2";
-            label2.Size = new Size(117, 20);
+            label2.Size = new Size(112, 20);
             label2.TabIndex = 43;
-            label2.Text = "Дисциплина:";
+            label2.Text = "Расчасовка:";
             // 
-            // comboBoxFaculties
+            // comboBoxDayOfWeek
             // 
-            comboBoxFaculties.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxFaculties.FlatStyle = FlatStyle.Flat;
-            comboBoxFaculties.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxFaculties.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxFaculties.FormattingEnabled = true;
-            comboBoxFaculties.Location = new Point(201, 12);
-            comboBoxFaculties.Name = "comboBoxFaculties";
-            comboBoxFaculties.Size = new Size(290, 26);
-            comboBoxFaculties.TabIndex = 56;
-            // 
-            // comboBoxGroup
-            // 
-            comboBoxGroup.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxGroup.FlatStyle = FlatStyle.Flat;
-            comboBoxGroup.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxGroup.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxGroup.FormattingEnabled = true;
-            comboBoxGroup.Location = new Point(201, 108);
-            comboBoxGroup.Name = "comboBoxGroup";
-            comboBoxGroup.Size = new Size(290, 26);
-            comboBoxGroup.TabIndex = 57;
-            comboBoxGroup.SelectedIndexChanged += cbGroup_SelectedIndexChanged;
-            // 
-            // comboBoxDirection
-            // 
-            comboBoxDirection.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxDirection.FlatStyle = FlatStyle.Flat;
-            comboBoxDirection.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxDirection.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxDirection.FormattingEnabled = true;
-            comboBoxDirection.Location = new Point(201, 44);
-            comboBoxDirection.Name = "comboBoxDirection";
-            comboBoxDirection.Size = new Size(290, 26);
-            comboBoxDirection.TabIndex = 58;
-            // 
-            // comboBoxDiscipline
-            // 
-            comboBoxDiscipline.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxDiscipline.FlatStyle = FlatStyle.Flat;
-            comboBoxDiscipline.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxDiscipline.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxDiscipline.FormattingEnabled = true;
-            comboBoxDiscipline.Location = new Point(201, 76);
-            comboBoxDiscipline.Name = "comboBoxDiscipline";
-            comboBoxDiscipline.Size = new Size(290, 26);
-            comboBoxDiscipline.TabIndex = 59;
-            comboBoxDiscipline.SelectedIndexChanged += cbSubject_SelectedIndexChanged;
+            comboBoxDayOfWeek.BackColor = Color.FromArgb(158, 161, 178);
+            comboBoxDayOfWeek.FlatStyle = FlatStyle.Flat;
+            comboBoxDayOfWeek.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            comboBoxDayOfWeek.ForeColor = Color.FromArgb(24, 30, 54);
+            comboBoxDayOfWeek.FormattingEnabled = true;
+            comboBoxDayOfWeek.Location = new Point(201, 112);
+            comboBoxDayOfWeek.Name = "comboBoxDayOfWeek";
+            comboBoxDayOfWeek.Size = new Size(290, 26);
+            comboBoxDayOfWeek.TabIndex = 58;
+            comboBoxDayOfWeek.SelectedIndexChanged += cbDayOfWeek_SelectedIndexChanged;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.FromArgb(158, 161, 178);
-            label6.Location = new Point(12, 146);
+            label6.Location = new Point(8, 114);
             label6.Name = "label6";
-            label6.Size = new Size(112, 20);
+            label6.Size = new Size(125, 20);
             label6.TabIndex = 60;
-            label6.Text = "Расчасовка:";
+            label6.Text = "День недели:";
             // 
-            // comboBoxScheduleWeek
+            // comboBoxSchedule
             // 
-            comboBoxScheduleWeek.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxScheduleWeek.FlatStyle = FlatStyle.Flat;
-            comboBoxScheduleWeek.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxScheduleWeek.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxScheduleWeek.FormattingEnabled = true;
-            comboBoxScheduleWeek.Location = new Point(201, 140);
-            comboBoxScheduleWeek.Name = "comboBoxScheduleWeek";
-            comboBoxScheduleWeek.Size = new Size(290, 26);
-            comboBoxScheduleWeek.TabIndex = 61;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(0, 126, 249);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(24, 30, 54);
-            button1.Location = new Point(585, 15);
-            button1.Name = "button1";
-            button1.Size = new Size(123, 51);
-            button1.TabIndex = 62;
-            button1.Text = "Создать отчёт Word";
-            button1.UseVisualStyleBackColor = false;
+            comboBoxSchedule.BackColor = Color.FromArgb(158, 161, 178);
+            comboBoxSchedule.FlatStyle = FlatStyle.Flat;
+            comboBoxSchedule.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            comboBoxSchedule.ForeColor = Color.FromArgb(24, 30, 54);
+            comboBoxSchedule.FormattingEnabled = true;
+            comboBoxSchedule.Location = new Point(201, 78);
+            comboBoxSchedule.Name = "comboBoxSchedule";
+            comboBoxSchedule.Size = new Size(290, 26);
+            comboBoxSchedule.TabIndex = 61;
+            comboBoxSchedule.SelectedIndexChanged += cbScheduleDiscipline_SelectedIndexChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.FromArgb(158, 161, 178);
-            label7.Location = new Point(762, 9);
+            label7.Location = new Point(575, 36);
             label7.Name = "label7";
             label7.Size = new Size(90, 18);
             label7.TabIndex = 64;
@@ -322,105 +256,82 @@
             comboBoxTeacher.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             comboBoxTeacher.ForeColor = Color.FromArgb(24, 30, 54);
             comboBoxTeacher.FormattingEnabled = true;
-            comboBoxTeacher.Location = new Point(762, 87);
+            comboBoxTeacher.Location = new Point(201, 44);
             comboBoxTeacher.Name = "comboBoxTeacher";
-            comboBoxTeacher.Size = new Size(204, 26);
+            comboBoxTeacher.Size = new Size(290, 26);
             comboBoxTeacher.TabIndex = 65;
             comboBoxTeacher.SelectedIndexChanged += cbTeacher_SelectedIndexChanged;
             // 
-            // label8
+            // tbNumberPair
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.FromArgb(158, 161, 178);
-            label8.Location = new Point(762, 63);
-            label8.Name = "label8";
-            label8.Size = new Size(130, 18);
-            label8.TabIndex = 66;
-            label8.Text = "Преподаватель";
+            tbNumberPair.BackColor = Color.FromArgb(158, 161, 178);
+            tbNumberPair.BorderStyle = BorderStyle.FixedSingle;
+            tbNumberPair.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            tbNumberPair.ForeColor = Color.FromArgb(24, 30, 54);
+            tbNumberPair.Location = new Point(201, 14);
+            tbNumberPair.Name = "tbNumberPair";
+            tbNumberPair.Size = new Size(290, 24);
+            tbNumberPair.TabIndex = 71;
             // 
-            // comboBoxGroupMerge
+            // dateTimePickerEndTime
             // 
-            comboBoxGroupMerge.BackColor = Color.FromArgb(158, 161, 178);
-            comboBoxGroupMerge.FlatStyle = FlatStyle.Flat;
-            comboBoxGroupMerge.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            comboBoxGroupMerge.ForeColor = Color.FromArgb(24, 30, 54);
-            comboBoxGroupMerge.FormattingEnabled = true;
-            comboBoxGroupMerge.Location = new Point(762, 146);
-            comboBoxGroupMerge.Name = "comboBoxGroupMerge";
-            comboBoxGroupMerge.Size = new Size(203, 26);
-            comboBoxGroupMerge.TabIndex = 67;
-            comboBoxGroupMerge.SelectedIndexChanged += cbGroupMerge_SelectedIndexChanged;
+            dateTimePickerEndTime.CustomFormat = "HH:mm";
+            dateTimePickerEndTime.Format = DateTimePickerFormat.Time;
+            dateTimePickerEndTime.Location = new Point(762, 113);
+            dateTimePickerEndTime.Name = "dateTimePickerEndTime";
+            dateTimePickerEndTime.ShowUpDown = true;
+            dateTimePickerEndTime.Size = new Size(203, 23);
+            dateTimePickerEndTime.TabIndex = 75;
             // 
-            // label9
+            // dateTimePickerStartTime
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.FromArgb(158, 161, 178);
-            label9.Location = new Point(762, 123);
-            label9.Name = "label9";
-            label9.Size = new Size(182, 18);
-            label9.TabIndex = 68;
-            label9.Text = "Группа (объединение)";
+            dateTimePickerStartTime.CustomFormat = "HH:mm";
+            dateTimePickerStartTime.Format = DateTimePickerFormat.Time;
+            dateTimePickerStartTime.Location = new Point(762, 75);
+            dateTimePickerStartTime.Name = "dateTimePickerStartTime";
+            dateTimePickerStartTime.ShowUpDown = true;
+            dateTimePickerStartTime.Size = new Size(203, 23);
+            dateTimePickerStartTime.TabIndex = 74;
             // 
-            // tbNote
+            // label5
             // 
-            tbNote.BackColor = Color.FromArgb(158, 161, 178);
-            tbNote.BorderStyle = BorderStyle.FixedSingle;
-            tbNote.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            tbNote.ForeColor = Color.FromArgb(24, 30, 54);
-            tbNote.Location = new Point(602, 185);
-            tbNote.Name = "tbNote";
-            tbNote.Size = new Size(363, 24);
-            tbNote.TabIndex = 69;
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(158, 161, 178);
+            label5.Location = new Point(575, 113);
+            label5.Name = "label5";
+            label5.Size = new Size(153, 20);
+            label5.TabIndex = 72;
+            label5.Text = "Окончание пары:";
             // 
-            // label10
+            // label11
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.FromArgb(158, 161, 178);
-            label10.Location = new Point(602, 154);
-            label10.Name = "label10";
-            label10.Size = new Size(97, 18);
-            label10.TabIndex = 70;
-            label10.Text = "Пожелание";
+            label11.AutoSize = true;
+            label11.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.FromArgb(158, 161, 178);
+            label11.Location = new Point(575, 78);
+            label11.Name = "label11";
+            label11.Size = new Size(125, 20);
+            label11.TabIndex = 73;
+            label11.Text = "Начало пары:";
             // 
-            // button2
-            // 
-            button2.BackColor = Color.FromArgb(0, 126, 249);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.FromArgb(24, 30, 54);
-            button2.Location = new Point(585, 90);
-            button2.Name = "button2";
-            button2.Size = new Size(123, 51);
-            button2.TabIndex = 71;
-            button2.Text = "Создать отчёт Pdf";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // FrmSchedulingDiscipline
+            // FrmSchedulePair
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(980, 653);
-            Controls.Add(button2);
-            Controls.Add(label10);
-            Controls.Add(tbNote);
-            Controls.Add(label9);
-            Controls.Add(comboBoxGroupMerge);
-            Controls.Add(label8);
+            Controls.Add(dateTimePickerEndTime);
+            Controls.Add(dateTimePickerStartTime);
+            Controls.Add(label5);
+            Controls.Add(label11);
+            Controls.Add(tbNumberPair);
             Controls.Add(comboBoxTeacher);
             Controls.Add(label7);
             Controls.Add(tbClassroomNumber);
-            Controls.Add(button1);
-            Controls.Add(comboBoxScheduleWeek);
+            Controls.Add(comboBoxSchedule);
             Controls.Add(label6);
-            Controls.Add(comboBoxDiscipline);
-            Controls.Add(comboBoxDirection);
-            Controls.Add(comboBoxGroup);
-            Controls.Add(comboBoxFaculties);
+            Controls.Add(comboBoxDayOfWeek);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(btnDelete);
@@ -429,11 +340,10 @@
             Controls.Add(lbDbSaveResult);
             Controls.Add(btnSave);
             Controls.Add(dgvSchedules);
-            Controls.Add(label5);
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "FrmSchedulingDiscipline";
+            Name = "FrmSchedulePair";
             Text = "frmScheduling";
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
@@ -460,23 +370,17 @@
 		private DataGridView dgvSchedules;
 		private BindingSource userBindingSource1;
 		private BindingSource userBindingSource;
-		private Label label5;
 		private Label label2;
-		private ComboBox comboBoxFaculties;
-		private ComboBox comboBoxGroup;
-		private ComboBox comboBoxDirection;
-		private ComboBox comboBoxDiscipline;
+		private ComboBox comboBoxDayOfWeek;
 		private Label label6;
-		private ComboBox comboBoxScheduleWeek;
-		private Button button1;
+		private ComboBox comboBoxSchedule;
         private Label label7;
         private TextBox tbClassroomNumber;
         private ComboBox comboBoxTeacher;
-        private Label label8;
-        private ComboBox comboBoxGroupMerge;
-        private Label label9;
-        private TextBox tbNote;
-        private Label label10;
-        private Button button2;
+        private TextBox tbNumberPair;
+        private DateTimePicker dateTimePickerEndTime;
+        private DateTimePicker dateTimePickerStartTime;
+        private Label label5;
+        private Label label11;
     }
 }

@@ -83,7 +83,7 @@ namespace University_Dasboard
 
 			btnAcademicHours.BackColor = color;
 			btnSchedulingDisciplines.BackColor = color;
-			btnSchedulingTeachers.BackColor = color;
+            btnSchedulePair.BackColor = color;
 
 			btnReports.BackColor = color;
 			btnAboutGradeRecords.BackColor = color;
@@ -271,11 +271,12 @@ namespace University_Dasboard
 			moveNavigationSubPanel(btnGrades, pnlGradeRecordSubMenu);
 		}
 
-		private void btnbtnSchedulingTeachers_Click(object sender, EventArgs e)
+		private void btnScheduling_Click(object sender, EventArgs e)
 		{
-			restoreButtonsBackColor();
-			moveNavigationSubPanel(btnSchedulingTeachers, pnlSchedulingSubMenu);
-		}
+            FormLoader.loadForm(pnlFormLoader, new FrmSchedulePair());
+            restoreButtonsBackColor();
+            moveNavigationSubPanel(btnSchedulePair, pnlSchedulingSubMenu);
+        }
 
 		private void btnAcademicHours_Click(object sender, EventArgs e)
 		{

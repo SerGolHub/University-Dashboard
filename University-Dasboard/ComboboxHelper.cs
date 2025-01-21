@@ -141,7 +141,8 @@ namespace University_Dasboard
 
         public static bool LoadFacultyDirections(
             ComboBox cbDirection,
-            Guid selectedFacultyId)
+            Guid selectedFacultyId,
+            Direction? selectedDirection = null)
         {
             // Загружаем направления для указанного факультета
             return LoadComboboxData<Direction>(

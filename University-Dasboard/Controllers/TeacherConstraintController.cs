@@ -38,6 +38,16 @@ namespace University_Dasboard.Controllers
             }
         }
 
+        public static List<TeacherConstraint> GetTeacherConstraints(Guid teacherId)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.TeacherConstraints
+                    .Where(tc => tc.TeacherId == teacherId)
+                    .ToList();
+            }
+        }
+
         public static async Task SaveTeacherConstraintsAsync(List<TeacherConstraintViewModel> newTeacherConstraintList,
             List<TeacherConstraintViewModel> updatedTeacherConstraintList, List<TeacherConstraintViewModel> removedTeacherConstraintList)
         {

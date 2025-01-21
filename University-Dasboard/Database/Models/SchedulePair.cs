@@ -8,11 +8,11 @@ using University_Dasboard.Interfaces;
 
 namespace University_Dasboard.Database.Models
 {
-    public class SchedulePair : IEntity
+    public class SchedulePair
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public int NumberPair { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
 
