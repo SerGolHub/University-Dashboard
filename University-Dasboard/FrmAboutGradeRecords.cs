@@ -28,11 +28,9 @@ namespace University_Dasboard
 		{
 			using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
 			{
-				// Создание рабочей книги
 				WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
 				workbookPart.Workbook = new Workbook();
 
-				// Создание листа
 				WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
 				worksheetPart.Worksheet = new Worksheet(new SheetData());
 
@@ -45,15 +43,19 @@ namespace University_Dasboard
 				};
 				sheets.Append(sheet);
 
-				// Получение ссылки на SheetData
 				SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+				// Создание стилей
+				WorkbookStylesPart stylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
+				stylesPart.Stylesheet = CreateStylesheet();
+				stylesPart.Stylesheet.Save();
 
 				// Добавление заголовков
 				Row headerRow = new Row();
 				foreach (DataGridViewColumn column in dataGridView.Columns)
 				{
 					string headerText = column.HeaderText ?? string.Empty;
-					headerRow.AppendChild(CreateTextCell(headerText));
+					headerRow.AppendChild(CreateTextCell(headerText, 2)); // Стиль заголовка
 				}
 				sheetData.AppendChild(headerRow);
 
@@ -66,44 +68,123 @@ namespace University_Dasboard
 						foreach (DataGridViewCell cell in gridViewRow.Cells)
 						{
 							string cellValue = cell.Value?.ToString() ?? string.Empty;
-							row.AppendChild(CreateTextCell(cellValue));
+							if (double.TryParse(cellValue, out double numericValue))
+							{
+								// Округление числа
+								cellValue = Math.Round(numericValue, 2).ToString();
+								row.AppendChild(CreateNumberCell(cellValue, 1)); // Стиль с границей
+							}
+							else
+							{
+								row.AppendChild(CreateTextCell(cellValue, 1)); // Стиль с границей
+							}
 						}
 						sheetData.AppendChild(row);
 					}
 				}
 
-				// Добавление итогов (при необходимости)
-				Row totalRow = new Row();
-				totalRow.AppendChild(CreateTextCell("Итого:"));
-
-				for (int i = 1; i < dataGridView.Columns.Count; i++) // Пропускаем первый столбец
+				// Установка ширины столбцов под заголовки
+				Columns columns = new Columns();
+				foreach (DataGridViewColumn column in dataGridView.Columns)
 				{
-					double total = 0;
-					foreach (DataGridViewRow row in dataGridView.Rows)
+					// Получаем максимальную длину заголовка
+					double headerLength = column.HeaderText.Length;
+					columns.Append(new Column
 					{
-						if (!row.IsNewRow && double.TryParse(row.Cells[i].Value?.ToString(), out double value))
-						{
-							total += value;
-						}
-					}
-					totalRow.AppendChild(CreateTextCell(total.ToString()));
+						Min = (uint)column.Index + 1,
+						Max = (uint)column.Index + 1,
+						Width = headerLength + 2, // Устанавливаем ширину столбца на основе длины заголовка
+						CustomWidth = true
+					});
 				}
-				sheetData.AppendChild(totalRow);
 
-				// Сохранение документа
+				worksheetPart.Worksheet.InsertAt(columns, 0);
 				workbookPart.Workbook.Save();
 			}
 		}
 
-		// Метод для создания текстовой ячейки
-		private Cell CreateTextCell(string value)
+
+		// Метод для создания текстовой ячейки с применением стиля
+		private Cell CreateTextCell(string value, uint styleIndex)
 		{
 			return new Cell
 			{
 				DataType = CellValues.String,
-				CellValue = new CellValue(value)
+				CellValue = new CellValue(value),
+				StyleIndex = styleIndex
 			};
 		}
+
+		// Метод для создания числовой ячейки с применением стиля
+		private Cell CreateNumberCell(string value, uint styleIndex)
+		{
+			return new Cell
+			{
+				DataType = CellValues.Number,
+				CellValue = new CellValue(value),
+				StyleIndex = styleIndex
+			};
+		}
+
+		// Метод для создания стилей, включая окантовку
+		private Stylesheet CreateStylesheet()
+		{
+			return new Stylesheet(
+				new Fonts(
+					new Font() // Стандартный шрифт
+				),
+				new Fills(
+					new Fill(new PatternFill { PatternType = PatternValues.None }), // Нет заливки
+					new Fill(new PatternFill { PatternType = PatternValues.Gray125 }) // Стандартная заливка
+				),
+				new Borders(
+					new Border( // Без границ
+						new LeftBorder(),
+						new RightBorder(),
+						new TopBorder(),
+						new BottomBorder(),
+						new DiagonalBorder()
+					),
+					new Border( // С границами
+						new LeftBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin },
+						new RightBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin },
+						new TopBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin },
+						new BottomBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin },
+						new DiagonalBorder()
+					)
+				),
+				new CellFormats(
+					new CellFormat(), // Стандартный стиль
+					new CellFormat
+					{
+						BorderId = 1,
+						ApplyBorder = true,
+						Alignment = new Alignment
+						{
+							Horizontal = HorizontalAlignmentValues.Center,
+							Vertical = VerticalAlignmentValues.Center
+						}
+					}, // Стиль с границами и выравниванием
+					new CellFormat
+					{
+						FontId = 0,
+						ApplyFont = true,
+						BorderId = 1,
+						Alignment = new Alignment
+						{
+							Horizontal = HorizontalAlignmentValues.Center,
+							Vertical = VerticalAlignmentValues.Center
+						}
+					}, // Стиль заголовков с границами
+					new CellFormat
+					{
+						BorderId = 1,
+						ApplyBorder = true
+					} // Стиль с границами
+				)
+			);
+		}
+
 
 
 
