@@ -15,6 +15,7 @@ namespace University_Dasboard
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmMainProgram());
-        }
-    }
+			//Application.Run(new FrmAuthorization());
+		}
+	}
 }
