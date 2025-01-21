@@ -60,11 +60,13 @@ namespace University_Dasboard
 				sheetData.AppendChild(headerRow);
 
 				// Добавление строк данных
+				List<List<string>> rows = new List<List<string>>();
 				foreach (DataGridViewRow gridViewRow in dataGridView.Rows)
 				{
 					if (!gridViewRow.IsNewRow)
 					{
 						Row row = new Row();
+						List<string> rowData = new List<string>();
 						foreach (DataGridViewCell cell in gridViewRow.Cells)
 						{
 							string cellValue = cell.Value?.ToString() ?? string.Empty;
@@ -78,10 +80,29 @@ namespace University_Dasboard
 							{
 								row.AppendChild(CreateTextCell(cellValue, 1)); // Стиль с границей
 							}
+							rowData.Add(cellValue); // Сохраняем значения для подсчета суммы
 						}
+						rows.Add(rowData); // Добавляем строку в список для дальнейшего подсчета
 						sheetData.AppendChild(row);
 					}
 				}
+
+				// Добавление строки "Итого"
+				Row totalRow = new Row();
+				totalRow.AppendChild(CreateTextCell("Итого", 2)); // Стиль для ячейки "Итого"
+				for (int i = 1; i < dataGridView.Columns.Count; i++)
+				{
+					double sum = 0;
+					foreach (var rowData in rows)
+					{
+						if (double.TryParse(rowData[i], out double value))
+						{
+							sum += value;
+						}
+					}
+					totalRow.AppendChild(CreateNumberCell(sum.ToString("F2"), 1)); // Добавление суммы
+				}
+				sheetData.AppendChild(totalRow);
 
 				// Установка ширины столбцов под заголовки
 				Columns columns = new Columns();
